@@ -107,8 +107,11 @@ void SerialTest::setMagCorner(int yawValue,int rollValue)
         command += roll;
     }
 
+
     command += yaw;
     command += "000000";
+
+    std::cout<<" value" + command.toStdString()<<std::endl;
 
     sendto(command);
 
@@ -216,6 +219,12 @@ QString SerialTest::receivenumber()//响应receivenumberChanged()消息
 QString SerialTest::receiveMagCorner()//
 {
     return mag_cornerStr;
+}
+
+void SerialTest::setMagCornerStr(QString cornerStr)//
+{
+    mag_cornerStr = cornerStr;
+    emit receiveMagCornerChanged();
 }
 
 

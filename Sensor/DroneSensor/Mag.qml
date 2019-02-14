@@ -92,7 +92,7 @@ Page {
     Button {
         id: button1
         x: 164
-        y: 270
+        y: 239
         text: qsTr("简介")
         MouseArea{
             id:mouseArea
@@ -110,7 +110,7 @@ Page {
     Button {
         id: button3
         x: 164
-        y: 376
+        y: 327
         text: qsTr("流程图")
 
         MouseArea{
@@ -128,7 +128,7 @@ Page {
     Button {
         id: button4
         x: 164
-        y: 487
+        y: 416
         text: qsTr("视频教学")
 
         MouseArea{
@@ -139,6 +139,23 @@ Page {
                 page13.stack = stack;
                 stack.push(page13);
 //                mySystemOpenReg.openProject()
+            }
+        }
+    }
+
+    Button {
+        id: button5
+        x: 164
+        y: 513
+        text: qsTr("校准视频")
+
+        MouseArea{
+            id:mouseVideo1Area
+            anchors.fill: parent
+            onPressed: {
+                page14.visible = true;
+                page14.stack = stack;
+                stack.push(page14);
             }
         }
     }
@@ -194,7 +211,7 @@ Page {
         width: 80
         height: 40
         text: myclassExposeByRegType.receiveMagCorner
-        font.pixelSize: 17
+        font.pixelSize: 34
     }
 
     Button {
@@ -206,13 +223,14 @@ Page {
             id:mouseVerifyArea
             anchors.fill: parent
             onPressed: {
+
                 myclassExposeByRegType.sendto("ff5580808080080002000000000000000000");
             }
         }
     }
 
     Button {
-        id: button5
+        id: button10
         x: 632
         y: 598
         text: qsTr("复位")
@@ -221,6 +239,8 @@ Page {
             id:mouseResetArea
             anchors.fill: parent
             onPressed: {
+                slider.value = 0;
+                slider1.value = 0;
                 myclassExposeByRegType.sendto("ff5580808080080027000000000000000000");
             }
         }
@@ -274,7 +294,9 @@ Page {
 
 
     Component.onCompleted: {
-         myclassExposeByRegType.getPortInfo();
+
+        myclassExposeByRegType.setMagCornerStr("0° 北")
+        myclassExposeByRegType.getPortInfo();
         comboModel.setComboList(myclassExposeByRegType.receivePort());
 
     }
@@ -293,6 +315,12 @@ Page {
 
     VideoPlayer {
         id: page13
+        visible: false
+        stack: stack
+    }
+
+    VideoPlayerTest{
+        id: page14
         visible: false
         stack: stack
     }

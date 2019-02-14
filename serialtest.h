@@ -17,7 +17,7 @@ class SerialTest : public QSerialPort
     Q_PROPERTY(QString sendnumber READ sendnumber WRITE setsendnumber NOTIFY sendnumberChanged)//发送的数据字节统计
     Q_PROPERTY(QString receivenumber READ receivenumber WRITE setreceivenumber NOTIFY receivenumberChanged)//接收的数据字节统计
     Q_PROPERTY(QStringList m_portInfo  READ receivePort)//接收的数据字节统计
-    Q_PROPERTY(QString receiveMagCorner  READ receiveMagCorner NOTIFY receiveMagCornerChanged)//接收的数据字节统计
+    Q_PROPERTY(QString receiveMagCorner  READ receiveMagCorner WRITE setMagCornerStr NOTIFY receiveMagCornerChanged)//接收的数据字节统计
 public:
     struct Settings {//端口设定结构体
         QString name;
@@ -42,6 +42,7 @@ public:
     void setreceivenumber(QString receivenumber);
 
     QString receiveMagCorner();
+    Q_INVOKABLE void setMagCornerStr(QString cornerStr);
 
     Q_INVOKABLE void openAndSetPort(QString PortName,int BaudRateIndex,int DatabitsIndex,int ParityIndex,int StopbitsIndex,int FlowcontrolIndex);//打开并设定端口;
     Q_INVOKABLE void closePort();//关闭端口;

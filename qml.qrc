@@ -130,5 +130,6 @@
         <file>Sensor/DroneSensor/PresentPage/MagFlow.qml</file>
         <file>Sensor/DroneSensor/images/flow.PNG</file>
         <file>Component/VideoPlayer.qml</file>
+        <file>Component/VideoPlayerTest.qml</file>
     </qresource>
 </RCC>
