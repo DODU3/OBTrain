@@ -49,7 +49,7 @@ Page {
                 id:player
 //                source: fd.fileUrl
                 //source: "file:///C:/Users/admin/Desktop/video.MP4"
-                source: "file:///D:/QTDev/OBTrainDev/OBTrain/VisionVoice/OB_Train_Source/7.avi"
+                source: "file:///E:/project/OBTrain/VisionVoice/OB_Train_Source/7.avi"
                 autoPlay: false
                 volume: 1.0
             }

@@ -136,5 +136,16 @@
         <file>VisionVoice/PresentPage/FacePresent.qml</file>
         <file>VisionVoice/PresentPage/PersonPresent.qml</file>
         <file>Component/VideoPlayerDBW.qml</file>
+        <file>VisionVoice/images/AI_ML.jpg</file>
+        <file>VisionVoice/images/AlphaGo.jpg</file>
+        <file>VisionVoice/images/brain.jpeg</file>
+        <file>VisionVoice/images/CNN.jpg</file>
+        <file>VisionVoice/images/detection_tracking.gif</file>
+        <file>VisionVoice/images/face.jpg</file>
+        <file>VisionVoice/images/feature_hand.jpg</file>
+        <file>VisionVoice/images/framework.jpg</file>
+        <file>VisionVoice/images/ML.jpg</file>
+        <file>VisionVoice/images/ML_Human.jpg</file>
+        <file>VisionVoice/Detection/Introduction.qml</file>
     </qresource>
 </RCC>
