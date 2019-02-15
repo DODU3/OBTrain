@@ -131,5 +131,9 @@
         <file>Sensor/DroneSensor/images/flow.PNG</file>
         <file>Component/VideoPlayer.qml</file>
         <file>Component/VideoPlayerTest.qml</file>
+        <file>VisionVoice/images/face1.jpg</file>
+        <file>VisionVoice/images/face2.jpg</file>
+        <file>VisionVoice/PresentPage/FacePresent.qml</file>
+        <file>VisionVoice/PresentPage/PersonPresent.qml</file>
     </qresource>
 </RCC>
