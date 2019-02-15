@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import ".."
 import "./PresentPage"
+import "../Component"
 
 Page {
 
@@ -54,11 +55,26 @@ Page {
         y: 350
         text: qsTr("连接")
     }
-
     Button {
         id: button2
         x: 64
         y: 446
+        text: qsTr("视频")
+
+        MouseArea{
+            id:mouseVideo1Area
+            anchors.fill: parent
+            onPressed: {
+                page2.visible = true;
+                page2.stack = stack;
+                stack.push(page2);
+            }
+        }
+    }
+    Button {
+        id: button3
+        x: 64
+        y: 542
         text: qsTr("识别 ")
     }
 
@@ -73,7 +89,11 @@ Page {
         visible: false
         stack: stack
     }
-
+    VideoPlayerDBW {
+        id: page2
+        visible: false
+        stack: stack
+    }
 
 }
 

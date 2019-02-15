@@ -135,5 +135,6 @@
         <file>VisionVoice/images/face2.jpg</file>
         <file>VisionVoice/PresentPage/FacePresent.qml</file>
         <file>VisionVoice/PresentPage/PersonPresent.qml</file>
+        <file>Component/VideoPlayerDBW.qml</file>
     </qresource>
 </RCC>
