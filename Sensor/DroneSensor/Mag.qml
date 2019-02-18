@@ -6,6 +6,7 @@ import QtMultimedia 5.4
 import ".."
 import "../../Component"
 import "./PresentPage"
+import "./MagPage"
 
 
 import RegisterMyType 1.0
@@ -30,22 +31,11 @@ Page {
         onClicked: stack.pop()
     }
 
-    Label{
-        id: label
-        text: qsTr("磁力计")
-        anchors.verticalCenterOffset: -252
-        anchors.horizontalCenterOffset: 0
-        height: 80
-        width: 240
-        anchors.centerIn: parent
-        font.pixelSize: 20
-    }
-
     ComboBox {
         id: comboBox
         objectName: "portComboBox"
-        x: 144
-        y: 166
+        x: 110
+        y: 78
 
         model:comboModel.comboList
 
@@ -55,7 +45,7 @@ Page {
         id: qmlToggleButton
         anchors.centerIn: parent
         height: 26
-        anchors.verticalCenterOffset: -184
+        anchors.verticalCenterOffset: -272
         anchors.horizontalCenterOffset: -274
         width: 80
         leftString: qsTr("打开")
@@ -66,41 +56,47 @@ Page {
 
     }
 
-    TextEdit {
-        id: textEdit
-        x: 749
-        y: 166
-        width: 441
-        height: 40
-        text:myclassExposeByRegType.receivedata
-        font.pixelSize: 12
+    Button {
+        id: button7
+        x: 544
+        y: 78
+        text: qsTr("配置无线地址")
 
+        MouseArea{
+            id:mouseSetArea
+            anchors.fill: parent
+            onPressed: {
+                rfsetpage.show();
+            }
+        }
     }
+
 
     MyClassType
     {
         id:myclassExposeByRegType
     }
 
-    MySystemOpen
-    {
-        id:mySystemOpenReg
-    }
+//    MySystemOpen
+//    {
+//        id:mySystemOpenReg
+//    }
 
 
 
     Button {
         id: button1
         x: 164
-        y: 239
-        text: qsTr("简介")
+        y: 196
+        text: qsTr("教学资料")
         MouseArea{
             id:mouseArea
             anchors.fill: parent
             onPressed: {
-                page11.visible = true;
-                page11.stack = stack;
-                stack.push(page11);
+                maginfopage.show();
+//                page11.visible = true;
+//                page11.stack = stack;
+//                stack.push(page11);
             }
         }
     }
@@ -110,16 +106,17 @@ Page {
     Button {
         id: button3
         x: 164
-        y: 327
-        text: qsTr("流程图")
+        y: 277
+        text: qsTr("实时数据")
 
         MouseArea{
             id:mouseFlowArea
             anchors.fill: parent
             onPressed: {
-                page12.visible = true;
-                page12.stack = stack;
-                stack.push(page12);
+                magdatapage.show();
+//                page12.visible = true;
+//                page12.stack = stack;
+//                stack.push(page12);
 
             }
         }
@@ -128,16 +125,17 @@ Page {
     Button {
         id: button4
         x: 164
-        y: 416
-        text: qsTr("视频教学")
+        y: 350
+        text: qsTr("数据保存与应用")
 
         MouseArea{
             id:mouseVideoArea
             anchors.fill: parent
             onPressed: {
-                page13.visible = true;
-                page13.stack = stack;
-                stack.push(page13);
+                magdataapplicatepage.show();
+//                page13.visible = true;
+//                page13.stack = stack;
+//                stack.push(page13);
 //                mySystemOpenReg.openProject()
             }
         }
@@ -146,16 +144,35 @@ Page {
     Button {
         id: button5
         x: 164
-        y: 513
-        text: qsTr("校准视频")
+        y: 431
+        text: qsTr("基本收发")
 
         MouseArea{
             id:mouseVideo1Area
             anchors.fill: parent
             onPressed: {
-                page14.visible = true;
-                page14.stack = stack;
-                stack.push(page14);
+                magbasicrecandsendpage.show();
+//                page14.visible = true;
+//                page14.stack = stack;
+//                stack.push(page14);
+            }
+        }
+    }
+
+    Button {
+        id: button6
+        x: 164
+        y: 510
+        text: qsTr("实验操作")
+
+        MouseArea{
+            id:mousecontrolArea
+            anchors.fill: parent
+            onPressed: {
+                magcongrolPage.show();
+//                page14.visible = true;
+//                page14.stack = stack;
+//                stack.push(page14);
             }
         }
     }
@@ -204,124 +221,67 @@ Page {
         }
     }
 
-    Text {
-        id: element
-        x: 475
-        y: 166
-        width: 80
-        height: 40
-        text: myclassExposeByRegType.receiveMagCorner
-        font.pixelSize: 34
-    }
 
-    Button {
-        id: button
-        x: 387
-        y: 598
-        text: qsTr("校准")
-        MouseArea{
-            id:mouseVerifyArea
-            anchors.fill: parent
-            onPressed: {
 
-                myclassExposeByRegType.sendto("ff5580808080080002000000000000000000");
-            }
-        }
-    }
 
-    Button {
-        id: button10
-        x: 632
-        y: 598
-        text: qsTr("复位")
 
-        MouseArea{
-            id:mouseResetArea
-            anchors.fill: parent
-            onPressed: {
-                slider.value = 0;
-                slider1.value = 0;
-                myclassExposeByRegType.sendto("ff5580808080080027000000000000000000");
-            }
-        }
-    }
-
-    Slider {
-        id: slider
-        x: 337
-        y: 487
-        stepSize: 1
-        to: 360
-        value: 0.0
-        onValueChanged: {
-            myclassExposeByRegType.setMagCorner(value,slider1.value);
-        }
-    }
-
-    Slider {
-        id: slider1
-        x: 582
-        y: 487
-        stepSize: 1
-        to: 90
-        from: -90
-        value: 0.0
-        onValueChanged: {
-            myclassExposeByRegType.setMagCorner(slider.value,value);
-
-        }
-    }
-
-    Text {
-        id: element2
-        x: 346
-        y: 463
-        width: 60
-        height: 18
-        text: qsTr("Z轴控制")
-        font.pixelSize: 12
-    }
-
-    Text {
-        id: element3
-        x: 582
-        y: 463
-        width: 57
-        height: 18
-        text: qsTr("X轴控制")
-        font.pixelSize: 12
-    }
 
 
     Component.onCompleted: {
 
-        myclassExposeByRegType.setMagCornerStr("0° 北")
+//        myclassExposeByRegType.setMagCornerStr("0° 北")
         myclassExposeByRegType.getPortInfo();
         comboModel.setComboList(myclassExposeByRegType.receivePort());
 
     }
 
-    MagPresent {
-        id: page11
-        visible: false
-        stack: stack
+    MagControlPage{
+        id:magcongrolPage
     }
 
-    MagFlow{
-        id: page12
-        visible: false
-        stack: stack
+    MagBasicRecAndSendPage{
+        id:magbasicrecandsendpage
     }
 
-    VideoPlayer {
-        id: page13
-        visible: false
-        stack: stack
+    MagDataApplicatePage{
+        id:magdataapplicatepage
     }
 
-    VideoPlayerTest{
-        id: page14
-        visible: false
-        stack: stack
+    MagDataPage{
+        id:magdatapage
     }
+
+    MagInfoPage{
+        id:maginfopage
+    }
+
+
+
+    RFSetPage{
+        id:rfsetpage
+    }
+
+//    MagPresent {
+//        id: page11
+//        visible: false
+//        stack: stack
+//    }
+
+//    MagFlow{
+//        id: page12
+//        visible: false
+//        stack: stack
+//    }
+
+//    VideoPlayer {
+//        id: page13
+//        visible: false
+//        stack: stack
+//    }
+
+//    VideoPlayerTest{
+//        id: page14
+//        visible: false
+//        stack: stack
+//    }
 }

@@ -147,5 +147,11 @@
         <file>VisionVoice/images/ML.jpg</file>
         <file>VisionVoice/images/ML_Human.jpg</file>
         <file>VisionVoice/Detection/Introduction.qml</file>
+        <file>Sensor/DroneSensor/MagPage/MagControlPage.qml</file>
+        <file>Sensor/DroneSensor/MagPage/MagBasicRecAndSendPage.qml</file>
+        <file>Sensor/DroneSensor/MagPage/MagDataApplicatePage.qml</file>
+        <file>Sensor/DroneSensor/MagPage/MagDataPage.qml</file>
+        <file>Sensor/DroneSensor/MagPage/MagInfoPage.qml</file>
+        <file>Component/RFSetPage.qml</file>
     </qresource>
 </RCC>
