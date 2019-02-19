@@ -153,5 +153,18 @@
         <file>Sensor/DroneSensor/MagPage/MagDataPage.qml</file>
         <file>Sensor/DroneSensor/MagPage/MagInfoPage.qml</file>
         <file>Component/RFSetPage.qml</file>
+        <file>VisionVoice/PresentPage/UseGuide.qml</file>
+        <file>VisionVoice/PresentPage/FaceDetect.qml</file>
+        <file>VisionVoice/PresentPage/OBVideo.qml</file>
+        <file>VisionVoice/images/battery.jpg</file>
+        <file>VisionVoice/images/videoModule.jpg</file>
+        <file>VisionVoice/images/intro3.jpg</file>
+        <file>VisionVoice/images/intro4.jpg</file>
+        <file>VisionVoice/images/intro5.jpg</file>
+        <file>VisionVoice/images/intro6.jpg</file>
+        <file>VisionVoice/images/intro1.gif</file>
+        <file>VisionVoice/images/intro2.gif</file>
+        <file>VisionVoice/images/intro7.gif</file>
+        <file>VisionVoice/images/intro8.gif</file>
     </qresource>
 </RCC>
