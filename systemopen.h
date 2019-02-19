@@ -11,6 +11,7 @@ public:
     Q_INVOKABLE void openProject();
     Q_INVOKABLE void openMagPresent();
     Q_INVOKABLE void openMagFlow();
+    Q_INVOKABLE void openFaceDBW();
 };
 
 #endif // SYSTEMOPEN_H
