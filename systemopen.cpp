@@ -22,3 +22,8 @@ void systemOpen::openMagFlow()
     system("C:/Users/admin/Desktop/magFlow.ppt");
 }
 
+void systemOpen::openFaceDBW()
+{
+    system("D:/QTDev/OBTrainDev/OBTrain/VisionVoice/OB_Face/FaceRec.py");
+}
+

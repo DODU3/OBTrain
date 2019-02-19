@@ -1,8 +1,13 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+
+import QtMultimedia 5.4
 import ".."
 import "./PresentPage"
 import "../Component"
+
+import RegisterMyType 1.0
+import RegisterSystemOpen 1.0
 
 Page {
 
@@ -30,6 +35,16 @@ Page {
         width: 240
         anchors.centerIn: parent
         font.pixelSize: 20
+    }
+
+    MyClassType
+    {
+        id:myclassExposeByRegType
+    }
+
+    MySystemOpen
+    {
+        id:mySystemOpenReg
     }
 
     Button {
@@ -76,6 +91,13 @@ Page {
         x: 64
         y: 542
         text: qsTr("识别 ")
+        MouseArea{
+            id:mouseProjectArea
+            anchors.fill: parent
+            onPressed: {
+                mySystemOpenReg.openFaceDBW()
+            }
+        }
     }
 
     ComboBox {
