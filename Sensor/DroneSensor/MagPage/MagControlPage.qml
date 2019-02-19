@@ -69,6 +69,21 @@ ApplicationWindow {
         x: 458
         y: 189
         text: qsTr("倾角补偿")
+
+        checkState: allChildrenChecked ? Qt.Checked :
+                       anyChildChecked ? Qt.PartiallyChecked : Qt.Unchecked
+
+        nextCheckState: function() {
+            if (checkState == Qt.Checked){
+                myclassExposeByRegType.sendto("ff5580808080080002b00000000000000000");
+                return Qt.Unchecked
+            }
+            else{
+                myclassExposeByRegType.sendto("ff5580808080080002b01000000000000000");
+                return Qt.Checked
+            }
+        }
+
     }
 
     Label {
