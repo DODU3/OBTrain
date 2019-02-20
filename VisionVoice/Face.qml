@@ -67,17 +67,23 @@ Page {
     Button {
         id: button1
         x: 64
-        y: 350
+        y: 400
+        width: 100
+        height: 43
         text: qsTr("连接")
     }
     Button {
         id: button2
         x: 64
-        y: 446
+        y: 400
         text: qsTr("视频")
 
         MouseArea{
             id:mouseVideo1Area
+            anchors.rightMargin: 0
+            anchors.bottomMargin: 19
+            anchors.leftMargin: 0
+            anchors.topMargin: -19
             anchors.fill: parent
             onPressed: {
                 page2.visible = true;
@@ -89,8 +95,8 @@ Page {
     Button {
         id: button3
         x: 64
-        y: 542
-        text: qsTr("识别 ")
+        y: 500
+        text: qsTr("人脸识别 ")
         MouseArea{
             id:mouseProjectArea
             anchors.fill: parent
@@ -103,7 +109,9 @@ Page {
     ComboBox {
         id: comboBox
         x: 64
-        y: 272
+        y: 320
+        width: 100
+        height: 40
     }
 
     FacePresent {
@@ -115,6 +123,34 @@ Page {
         id: page2
         visible: false
         stack: stack
+    }
+    UseGuide {
+        id: page3
+        visible: false
+        stack: stack
+    }
+
+    Button {
+        id: button4
+        x: 64
+        y: 250
+        text: qsTr("使用教程")
+        MouseArea{
+            id:mouseAreaUseGuide
+            anchors.fill: parent
+            onPressed: {
+                page3.visible = true;
+                page3.stack = stack;
+                stack.push(page3);
+            }
+        }
+    }
+
+    Button {
+        id: button5
+        x: 64
+        y: 450
+        text: qsTr("人脸检测")
     }
 
 }

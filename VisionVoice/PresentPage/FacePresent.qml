@@ -113,11 +113,26 @@ Page {
             }
 
 
+            AnimatedImage {
+                   id: intro1;
+                   x: 73
+                   y: 250
+                   source: "../images/intro1.gif";
 
-            Label {
-                id: label
-                text: qsTr("Label")
-            }
+                   onCurrentFrameChanged: {
+                       info.text = "%1/%2".arg(intro1.currentFrame).arg(intro1.frameCount);
+                   }
+               }
+            AnimatedImage {
+                   id: intro2;
+                   x: 600
+                   y: 250
+                   source: "../images/intro2.gif";
+
+                   onCurrentFrameChanged: {
+                       info.text = "%1/%2".arg(intro2.currentFrame).arg(intro2.frameCount);
+                   }
+               }
 
             Text {
 
