@@ -50,8 +50,8 @@ Page {
         width: 80
         leftString: qsTr("打开")
         rightString: qsTr("关闭")
-        onToggleLeft: label.text = qmlToggleButton.leftString
-        onToggleRight: label.text = qmlToggleButton.rightString
+//        onToggleLeft: label.text = qmlToggleButton.leftString
+//        onToggleRight: label.text = qmlToggleButton.rightString
 
 
     }
@@ -103,6 +103,15 @@ Page {
         }
     }
 
+    Text {
+        id: element
+        x: 475
+        y: 166
+        width: 80
+        height: 40
+        text: myclassExposeByRegType.receiveMagCorner
+        font.pixelSize: 34
+    }
 
 
     Button {

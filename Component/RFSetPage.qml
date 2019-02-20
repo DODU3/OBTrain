@@ -14,10 +14,10 @@ ApplicationWindow {
 
     title: "配置无线地址"
 
-    MyClassType
-    {
-        id:myclassExposeByRegType
-    }
+//    MyClassType
+//    {
+//        id:myclassExposeByRegType
+//    }
 
     Label {
         id: label

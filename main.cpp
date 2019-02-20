@@ -8,7 +8,7 @@
 #include "serialtest.h"
 #include "portmodel.h"
 #include "systemopen.h"
-
+#include "datafresh.h"
 
 int main(int argc, char *argv[])
 {
@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<systemOpen>("RegisterSystemOpen", 1, 0, "MySystemOpen");
 
+    qmlRegisterType<dataFresh>("RegisterDataFresh", 1, 0, "MyDataFresh");
 
 
     QQmlApplicationEngine engine;

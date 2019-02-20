@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 
 import QtSensors 5.1
+import RegisterMyType 1.0
 
 import "../../../Component"
 
@@ -48,35 +49,35 @@ ApplicationWindow {
         }
     }
 
-//    Magnetometer {
-//        id: mag
-//        dataRate: 5
-//        active:true
+    Magnetometer {
+        id: mag
+        dataRate: 5
+        active:true
 
-//        onReadingChanged: {
-//            console.log("Mag:", mag.reading.x, ",", mag.reading.y, ",", mag.reading.z);
-//            console.log("Accel:", accel.reading.x, ",", accel.reading.y, ",", accel.reading.z);
+        onReadingChanged: {
+            console.log("Mag:", mag.reading.x, ",", mag.reading.y, ",", mag.reading.z);
+            console.log("Accel:", accel.reading.x, ",", accel.reading.y, ",", accel.reading.z);
 
-//            var accelVec = [accel.reading.x, accel.reading.y, accel.reading.z]
-//            var magEast = crossProduct([mag.reading.x, mag.reading.y, mag.reading.z], accelVec)
-//            var magNorth = crossProduct(accelVec, magEast)
+            var accelVec = [accel.reading.x, accel.reading.y, accel.reading.z]
+            var magEast = crossProduct([mag.reading.x, mag.reading.y, mag.reading.z], accelVec)
+            var magNorth = crossProduct(accelVec, magEast)
 
-//            magEast = normVec(magEast)
-//            magNorth = normVec(magNorth)
+            magEast = normVec(magEast)
+            magNorth = normVec(magNorth)
 
-//            var deviceHeading = [0., 1., -1.] //This is for portrait orientation on android
-//            deviceHeading = normVec(deviceHeading)
+            var deviceHeading = [0., 1., -1.] //This is for portrait orientation on android
+            deviceHeading = normVec(deviceHeading)
 
-//            var dotWithEast = dotProduct(deviceHeading, magEast)
-//            var dotWithNorth = dotProduct(deviceHeading, magNorth)
-//            var bearingRad = Math.atan2(dotWithEast, dotWithNorth)
-//            var bearingDeg = bearingRad * 180. / Math.PI
-//            console.log("bearingDeg:", bearingDeg);
+            var dotWithEast = dotProduct(deviceHeading, magEast)
+            var dotWithNorth = dotProduct(deviceHeading, magNorth)
+            var bearingRad = Math.atan2(dotWithEast, dotWithNorth)
+            var bearingDeg = bearingRad * 180. / Math.PI
+            console.log("bearingDeg:", bearingDeg);
 
-//            compassui.setBearing(bearingDeg)
-//            realCompass = 1
-//        }
-//    }
+            compassui.setBearing(bearingDeg)
+            realCompass = 1
+        }
+    }
 
     Accelerometer
     {
@@ -123,5 +124,9 @@ ApplicationWindow {
     {
         id: compassui
     }
+
+
+
+
 
 }

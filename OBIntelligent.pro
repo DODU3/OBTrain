@@ -5,7 +5,7 @@ CONFIG += c++11
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Refer to the documentation for the
 # deprecated API to know how to port your code away from it.
-DEFINES += QT_DEPRECATED_WARNINGS QT_DLL QWT_DLL
+DEFINES += QT_DEPRECATED_WARNINGS
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -16,7 +16,8 @@ SOURCES += \
         main.cpp \
     serialtest.cpp \
     portmodel.cpp \
-    systemopen.cpp
+    systemopen.cpp \
+    datafresh.cpp
 
 RESOURCES += qml.qrc
 
@@ -35,6 +36,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     serialtest.h \
     portmodel.h \
-    systemopen.h
+    systemopen.h \
+    datafresh.h
 
 FORMS +=

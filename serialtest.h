@@ -38,6 +38,7 @@ public:
     void setreceivedata(QString receivedata);
 
 
+
     QString sendnumber();
     void setsendnumber(QString sendnumber);
 
@@ -54,9 +55,19 @@ public:
     Q_INVOKABLE void clearnumber();//数据统计清零;
     Q_INVOKABLE void getPortInfo();
 
+
     Q_INVOKABLE void setMagCorner(int yawValue,int rollValue);
     Q_INVOKABLE void DroneFrame_MakeAndSerialSend(quint8 Realdata[4],quint8 Realstatus[2],quint8 Command,quint8 CommandData[8],quint8 Heartbeat);//构建和发送无人机串口通信发送帧
     Q_INVOKABLE void setRFaddr(QString addr1,QString addr2,QString addr3,QString channel);
+
+
+    Q_INVOKABLE QString getSerialDataAll(void);
+    Q_INVOKABLE void addSerialDataAll(QString receivedata);
+    Q_INVOKABLE void clearSerialDataAll(void);
+
+    Q_INVOKABLE QString getserialSaveAndApp(void);
+    Q_INVOKABLE void addserialSaveAndApp(QString receivedata);
+    Q_INVOKABLE void clearserialSaveAndApp(void);
 
 signals:
     void receivedataChanged();
@@ -73,8 +84,7 @@ private:
     QString m_receivedata;
     QString m_sendnumber,m_receivenumber;
     QStringList   m_portInfo;
-    qint64 mag_corner;
-    QString mag_cornerStr;
+
 //    quint8 m_data_send[18]={0,0,0};
 //    quint8 m_data_send=0;
 };

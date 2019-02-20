@@ -61,7 +61,7 @@ ApplicationWindow {
             anchors.fill: parent
             onPressed: {
 
-//                myclassExposeByRegType.sendto("ff5580808080080002000000000000000000");
+                myclassExposeByRegType.sendto("ff5580808080080002000000000000000000");
             }
         }
     }
@@ -136,10 +136,10 @@ ApplicationWindow {
         }
     }
 
-    MyClassType
-    {
-        id:myclassExposeByRegType
-    }
+//    MyClassType
+//    {
+//        id:myclassExposeByRegType
+//    }
 
 
 }

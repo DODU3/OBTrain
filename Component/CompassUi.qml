@@ -1,4 +1,7 @@
 import QtQuick 2.0
+import QtQuick.Controls 2.2
+
+import RegisterMyType 1.0
 
 Item {
     id : compassui
@@ -30,5 +33,15 @@ Item {
             }
         }
 
+    }
+
+    Label {
+        id: label
+        x: 64
+        y: 39
+        width: 102
+        height: 34
+        font.pixelSize: 34
+        text: qsTr("text")
     }
 }

@@ -2,18 +2,28 @@
 #include<iostream>
 #include <QSerialPortInfo>
 #include <QQmlComponent>
-
+#include <QDebug>
+#include <string>
+#include <QDateTime>
 
 
 SerialTest::Settings currentsetting;//定义设定值结构体的结构体变量
 QSerialPort serialtest;
+QString m_serialdataall("");
+qint64 mag_corner(0);
+QString mag_cornerStr("0° 北");
 
+QString m_serialSaveAndApp("");
 
 qint64 c_sendnumber,c_receivenumber;
 
 
 
-SerialTest::SerialTest(QSerialPort *parent):QSerialPort (parent),m_receivedata("Receive Label"),m_receivenumber("0"),m_sendnumber("0")
+SerialTest::SerialTest(QSerialPort *parent):
+    QSerialPort (parent),
+    m_receivedata("Receive Label"),
+    m_receivenumber("0"),
+    m_sendnumber("0")
 {
     QObject::connect(&serialtest, SIGNAL(readyRead()),this, SLOT(receivefrom()));//将端口收到数据产生的信号绑定receivefrom()函数;
 }
@@ -256,6 +266,26 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
         if(receivedata.mid(28,2) == "01"){
             bool ok = false;
             qint64 corner = (receivedata.mid(4,2).toInt(&ok, 16) * 256 + receivedata.mid(6,2).toInt(&ok, 16))/10;
+            int x = (receivedata.mid(8,4).toInt(&ok, 16));
+            if(x >= 32768){
+                x -= 65536;
+            }
+            int y = (receivedata.mid(12,4).toInt(&ok, 16));
+            if(y >= 32768){
+                y -= 65536;
+            }
+            int z = (receivedata.mid(16,4).toInt(&ok, 16));
+            if(z >= 32768){
+                z -= 65536;
+            }
+            QDateTime currentTime = QDateTime::currentDateTime();
+            QString qs_currenttime = currentTime.toString("hh:mm:ss.zzz");
+            addserialSaveAndApp(qs_currenttime + ":  " +
+                                QString::number(corner) + ";  " +
+                                QString::number(x) + ";  " +
+                                QString::number(y) + ";  " +
+                                QString::number(z) + ";  ");
+           // qDebug() << corner << "  " << x << "  " << y << "  " << z << "  ";
             if(ok && corner != mag_corner){
                 mag_corner = corner;
                 if(mag_corner <= 21 || mag_corner >= 338 ){
@@ -275,13 +305,15 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
                 }else if (mag_corner >= 292 && mag_corner <= 337) {
                     mag_cornerStr = QString::number(mag_corner) + "° 西北";
                 }
+                std::cout<<" mag_cornerStr:" + mag_cornerStr.toStdString()<<std::endl;
                 emit receiveMagCornerChanged();
             }
 
         }
 //        std::cout<<" receivedata" + receivedata.toStdString()<<std::endl;
         m_receivedata= receivedata;//将某次收到的数据进行累加，因为如果不累加的话每次有readyread就会触发此函数，会重置m_receivedata，覆盖之前收到的数据
-        emit receivedataChanged();//发送消息触发receivedata()，更新当前收到的数据显示receivedata
+        addSerialDataAll("Rx:" + receivedata);
+        //emit receivedataChanged();//发送消息触发receivedata()，更新当前收到的数据显示receivedata
 
         qint64 testreadnumber=data.length();//接收数据字节数统计
 
@@ -309,6 +341,7 @@ QString SerialTest::receivenumber()//响应receivenumberChanged()消息
 
 QString SerialTest::receiveMagCorner()//
 {
+    std::cout<<"corner str:" + mag_cornerStr.toStdString()<<std::endl;
     return mag_cornerStr;
 }
 
@@ -329,7 +362,36 @@ void SerialTest::setreceivedata(QString receivedata)//其任务已被receive fro
     emit receivedataChanged();
 }
 
+QString SerialTest::getSerialDataAll()
+{
+    //std::cout<<"123:" + m_serialdataall.toStdString()<<std::endl;
 
+    return m_serialdataall;
+}
+void SerialTest::addSerialDataAll(QString data)
+{
+    m_serialdataall.append(data + '\n');
+
+    //emit receivedataChanged();
+}
+void SerialTest::clearSerialDataAll(void)
+{
+    m_serialdataall.clear();
+}
+
+QString SerialTest::getserialSaveAndApp()
+{
+    return m_serialSaveAndApp;
+}
+void SerialTest::addserialSaveAndApp(QString data)
+{
+    m_serialSaveAndApp.append(data + '\n');
+    //emit receivedataChanged();
+}
+void SerialTest::clearserialSaveAndApp(void)
+{
+    m_serialSaveAndApp.clear();
+}
 
 ////////////////////5.关闭端口//////////////////////////////
 void SerialTest::closePort()//由按钮出发
