@@ -175,5 +175,6 @@
         <file>VisionVoice/images/tracking_teaching2.png</file>
         <file>VisionVoice/images/videoModule.jpg</file>
         <file>VisionVoice/images/Posture.png</file>
+        <file>Sensor/DroneSensor/MagPage/MagProjectDevelopPage.qml</file>
     </qresource>
 </RCC>

@@ -96,6 +96,97 @@ void SerialTest::getPortInfo()
 
 }
 
+//构建和发送无人机串口通信发送帧
+void SerialTest::DroneFrame_MakeAndSerialSend(quint8 Realdata[4],quint8 Realstatus[2],quint8 Command,quint8 CommandData[8],quint8 Heartbeat)
+{
+    quint8 temp_uint8;
+
+    //常整形转换为Qstring形
+//    long a =63;
+//    QString str=QString::number(a,16); //str="3f";
+//    QString str=QString::number(a,16).toUpper(); //str="3F";
+
+    QString StrDroneFrame;//无人机串口通信发送帧
+    QString StrFramehead = "ff55";//帧头
+
+
+    QString StrRealdata;
+    for(temp_uint8=0;temp_uint8<4;temp_uint8++)
+    {
+        StrRealdata+=QString::number(Realdata[temp_uint8],16);//实时数据
+    }
+
+    QString StrRealstatus;
+    for(temp_uint8=0;temp_uint8<2;temp_uint8++)
+    {
+        StrRealstatus+=QString::number(Realstatus[temp_uint8],16);//实时状态
+    }
+
+    QString StrCommand=QString::number(Command,16); //功能字
+
+    QString StrCommandData;
+    for(temp_uint8=0;temp_uint8<8;temp_uint8++)
+    {
+        StrCommandData+=QString::number(CommandData[temp_uint8],16);//功能字数据
+    }
+
+    QString StrHeartbeat=QString::number(Heartbeat,16); //心跳包
+
+    StrDroneFrame=StrFramehead+StrRealdata+StrRealstatus+StrCommand+StrCommandData+StrHeartbeat;
+
+    std::cout<<" StrDroneFrame:" + StrDroneFrame.toStdString()<<std::endl;
+
+//    sendto(StrDroneFrame);
+
+}
+
+void SerialTest::setRFaddr(QString addr1,QString addr2,QString addr3,QString channel)
+{
+
+//    QString straddr1 = QString("%1").arg(addr1, 2, 16, QLatin1Char( '0' ));
+//    QString straddr2 = QString("%1").arg(addr2, 2, 16, QLatin1Char( '0' ));
+//    QString straddr3 = QString("%1").arg(addr3, 2, 16, QLatin1Char( '0' ));
+//    QString strchannel = QString("%1").arg(channel, 2, 16, QLatin1Char( '0' ));
+//    command += straddr1;
+//    command += straddr2;
+//    command += straddr3;
+//    command += straddr1;
+//    command += straddr2;
+//    command += straddr3;
+//    command += strchannel;
+//        command += "0000";
+
+    QString command = "ff5500000000000029";
+    QString straddr1 ;
+    QString straddr2 ;
+    QString straddr3 ;
+    QString strchannel;
+    bool ok;
+    quint8 dec;
+    dec=addr1.toInt(&ok,10); //dec=255 ; ok=rue
+    straddr1 = QString("%1").arg(dec, 2, 16, QLatin1Char( '0' ));
+    dec=addr2.toInt(&ok,10); //dec=255 ; ok=rue
+    straddr2 = QString("%1").arg(dec, 2, 16, QLatin1Char( '0' ));
+    dec=addr3.toInt(&ok,10); //dec=255 ; ok=rue
+    straddr3 = QString("%1").arg(dec, 2, 16, QLatin1Char( '0' ));
+    dec=channel.toInt(&ok,10); //dec=255 ; ok=rue
+    strchannel = QString("%1").arg(dec, 2, 16, QLatin1Char( '0' ));
+    command += straddr1;
+    command += straddr2;
+    command += straddr3;
+    command += straddr1;
+    command += straddr2;
+    command += straddr3;
+    command += strchannel;
+
+    command += "0000";
+
+    std::cout<<" value" + command.toStdString()<<std::endl;
+
+    sendto(command);
+
+}
+
 void SerialTest::setMagCorner(int yawValue,int rollValue)
 {
     QString yaw = QString("%1").arg(yawValue, 4, 16, QLatin1Char( '0' ));

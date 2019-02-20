@@ -6,7 +6,8 @@ import RegisterMyType 1.0
 
 ApplicationWindow {
     id: magCongrolPage
-
+    x: 350
+    y: 325
     width: 640
     height: 320
 

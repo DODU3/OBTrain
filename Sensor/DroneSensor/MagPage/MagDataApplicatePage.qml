@@ -3,7 +3,8 @@ import QtQuick.Controls 2.2
 
 ApplicationWindow {
     id: magDataApplicatePage
-
+    x: 350
+    y: 275
     width: 640
     height: 320
 

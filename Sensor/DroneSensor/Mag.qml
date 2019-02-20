@@ -66,6 +66,8 @@ Page {
             id:mouseSetArea
             anchors.fill: parent
             onPressed: {
+//                rfsetpage.setX(350);
+//                rfsetpage.setY(200);
                 rfsetpage.show();
             }
         }
@@ -187,7 +189,11 @@ Page {
             id:mouseProjectArea
             anchors.fill: parent
             onPressed: {
-                mySystemOpenReg.openProject()
+//                mySystemOpenReg.openProject()
+
+                magprojectdeveloppage.active;
+                magprojectdeveloppage.show();
+                //magprojectdeveloppage.x;
             }
         }
     }
@@ -255,33 +261,11 @@ Page {
         id:maginfopage
     }
 
-
-
     RFSetPage{
         id:rfsetpage
     }
 
-//    MagPresent {
-//        id: page11
-//        visible: false
-//        stack: stack
-//    }
-
-//    MagFlow{
-//        id: page12
-//        visible: false
-//        stack: stack
-//    }
-
-//    VideoPlayer {
-//        id: page13
-//        visible: false
-//        stack: stack
-//    }
-
-//    VideoPlayerTest{
-//        id: page14
-//        visible: false
-//        stack: stack
-//    }
+    MagProjectDevelopPage{
+        id:magprojectdeveloppage
+    }
 }

@@ -18,6 +18,9 @@ class SerialTest : public QSerialPort
     Q_PROPERTY(QString receivenumber READ receivenumber WRITE setreceivenumber NOTIFY receivenumberChanged)//接收的数据字节统计
     Q_PROPERTY(QStringList m_portInfo  READ receivePort)//接收的数据字节统计
     Q_PROPERTY(QString receiveMagCorner  READ receiveMagCorner WRITE setMagCornerStr NOTIFY receiveMagCornerChanged)//接收的数据字节统计
+//    Q_PROPERTY(quint8 data_send MEMBER m_data_send)
+//    Q_PROPERTY(quint8* data_send  READ readdata_send WRITE setdata_send NOTIFY data_sendChanged)//发送的数据
+
 public:
     struct Settings {//端口设定结构体
         QString name;
@@ -41,6 +44,7 @@ public:
     QString receivenumber();
     void setreceivenumber(QString receivenumber);
 
+
     QString receiveMagCorner();
     Q_INVOKABLE void setMagCornerStr(QString cornerStr);
 
@@ -51,6 +55,8 @@ public:
     Q_INVOKABLE void getPortInfo();
 
     Q_INVOKABLE void setMagCorner(int yawValue,int rollValue);
+    Q_INVOKABLE void DroneFrame_MakeAndSerialSend(quint8 Realdata[4],quint8 Realstatus[2],quint8 Command,quint8 CommandData[8],quint8 Heartbeat);//构建和发送无人机串口通信发送帧
+    Q_INVOKABLE void setRFaddr(QString addr1,QString addr2,QString addr3,QString channel);
 
 signals:
     void receivedataChanged();
@@ -63,13 +69,14 @@ signals:
 
 public slots:
     void receivefrom();//信号（收到数据激发的信号）响应函数
-
 private:
     QString m_receivedata;
     QString m_sendnumber,m_receivenumber;
     QStringList   m_portInfo;
     qint64 mag_corner;
     QString mag_cornerStr;
+//    quint8 m_data_send[18]={0,0,0};
+//    quint8 m_data_send=0;
 };
 
 #endif // SERIALTEST_H

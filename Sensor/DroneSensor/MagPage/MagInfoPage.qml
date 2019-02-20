@@ -1,12 +1,77 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 
+import RegisterSystemOpen 1.0
+
 ApplicationWindow {
     id: magInfoPage
-
-    width: 640
+    x: 350
+    y: 225
+    width: 480
     height: 320
 
     title: "磁力计-教学资料"
+
+
+    Button {
+        id: button_openppt
+        x: 46
+        y: 135
+        text: qsTr("教学PPT")
+
+        MouseArea{
+            id:mouse_openppt
+            anchors.rightMargin: 0
+            anchors.bottomMargin: 0
+            anchors.leftMargin: 0
+            anchors.topMargin: 0
+            anchors.fill: parent
+            onPressed: {
+                mySystemOpenReg.openFile("/Content resource/磁力计模组/教学资料/教学PPT/磁力计模组PPT.ppt");
+            }
+        }
+    }
+
+
+    MySystemOpen
+    {
+        id:mySystemOpenReg
+    }
+
+    Button {
+        id: button_openvideo
+        x: 190
+        y: 135
+        text: qsTr("教学视频")
+        MouseArea {
+            id: mouse_openvideo
+            anchors.leftMargin: 0
+            anchors.topMargin: 0
+            anchors.rightMargin: 0
+            anchors.fill: parent
+            anchors.bottomMargin: 0
+            onPressed: {
+                mySystemOpenReg.openFile("/Content resource/磁力计模组/教学资料/教学视频");
+            }
+        }
+    }
+
+        Button {
+            id: button_openotherfile
+            x: 332
+            y: 135
+            text: qsTr("其他资料")
+            MouseArea {
+                id: mouse_openotherfile
+                anchors.leftMargin: -1
+                anchors.topMargin: 0
+                anchors.rightMargin: 1
+                anchors.fill: parent
+                anchors.bottomMargin: 0
+                onPressed: {
+                    mySystemOpenReg.openFile("/Content resource/磁力计模组/教学资料/其他资料");
+                }
+            }
+        }
 
 }

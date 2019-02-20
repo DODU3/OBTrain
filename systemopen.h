@@ -16,6 +16,7 @@ public:
     Q_INVOKABLE void openKCF();
     Q_INVOKABLE void openHuman();
     Q_INVOKABLE void openPosture();
+    Q_INVOKABLE void openFile(QString relative_path);
 };
 
 #endif // SYSTEMOPEN_H

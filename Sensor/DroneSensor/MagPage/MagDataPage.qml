@@ -7,7 +7,8 @@ import "../../../Component"
 
 ApplicationWindow {
     id: magDataPage
-
+    x: 350
+    y: 250
     width: 640
     height: 320
 
@@ -15,6 +16,25 @@ ApplicationWindow {
 
     property real demoHeading
     property int realCompass
+
+    property real readAz: 0
+    property real angle: 0
+
+//    Compass {
+//        id: compass
+//        dataRate: 1
+//        active: true
+
+//        onReadingChanged: {
+//            readAz = reading.azimuth
+//            angle  = (readAz /(2*Math.PI))
+
+//            print("Compass: ", reading.azimuth) //for debug
+//            print("Angle: ", angle)             //for debug
+
+//            needle.update()
+//        }
+//    }
 
     Timer {
         //Timer for demo rotation of compass
@@ -28,35 +48,35 @@ ApplicationWindow {
         }
     }
 
-    Magnetometer {
-        id: mag
-        dataRate: 5
-        active:true
+//    Magnetometer {
+//        id: mag
+//        dataRate: 5
+//        active:true
 
-        onReadingChanged: {
-            console.log("Mag:", mag.reading.x, ",", mag.reading.y, ",", mag.reading.z);
-            console.log("Accel:", accel.reading.x, ",", accel.reading.y, ",", accel.reading.z);
+//        onReadingChanged: {
+//            console.log("Mag:", mag.reading.x, ",", mag.reading.y, ",", mag.reading.z);
+//            console.log("Accel:", accel.reading.x, ",", accel.reading.y, ",", accel.reading.z);
 
-            var accelVec = [accel.reading.x, accel.reading.y, accel.reading.z]
-            var magEast = crossProduct([mag.reading.x, mag.reading.y, mag.reading.z], accelVec)
-            var magNorth = crossProduct(accelVec, magEast)
+//            var accelVec = [accel.reading.x, accel.reading.y, accel.reading.z]
+//            var magEast = crossProduct([mag.reading.x, mag.reading.y, mag.reading.z], accelVec)
+//            var magNorth = crossProduct(accelVec, magEast)
 
-            magEast = normVec(magEast)
-            magNorth = normVec(magNorth)
+//            magEast = normVec(magEast)
+//            magNorth = normVec(magNorth)
 
-            var deviceHeading = [0., 1., -1.] //This is for portrait orientation on android
-            deviceHeading = normVec(deviceHeading)
+//            var deviceHeading = [0., 1., -1.] //This is for portrait orientation on android
+//            deviceHeading = normVec(deviceHeading)
 
-            var dotWithEast = dotProduct(deviceHeading, magEast)
-            var dotWithNorth = dotProduct(deviceHeading, magNorth)
-            var bearingRad = Math.atan2(dotWithEast, dotWithNorth)
-            var bearingDeg = bearingRad * 180. / Math.PI
-            console.log("bearingDeg:", bearingDeg);
+//            var dotWithEast = dotProduct(deviceHeading, magEast)
+//            var dotWithNorth = dotProduct(deviceHeading, magNorth)
+//            var bearingRad = Math.atan2(dotWithEast, dotWithNorth)
+//            var bearingDeg = bearingRad * 180. / Math.PI
+//            console.log("bearingDeg:", bearingDeg);
 
-            compassui.setBearing(bearingDeg)
-            realCompass = 1
-        }
-    }
+//            compassui.setBearing(bearingDeg)
+//            realCompass = 1
+//        }
+//    }
 
     Accelerometer
     {
