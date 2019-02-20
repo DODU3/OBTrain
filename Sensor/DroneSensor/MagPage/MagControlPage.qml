@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 
 import RegisterMyType 1.0
 
+
 ApplicationWindow {
     id: magCongrolPage
 
@@ -59,7 +60,7 @@ ApplicationWindow {
             anchors.fill: parent
             onPressed: {
 
-                myclassExposeByRegType.sendto("ff5580808080080002000000000000000000");
+//                myclassExposeByRegType.sendto("ff5580808080080002000000000000000000");
             }
         }
     }
@@ -138,5 +139,6 @@ ApplicationWindow {
     {
         id:myclassExposeByRegType
     }
+
 
 }

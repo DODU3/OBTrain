@@ -17,10 +17,10 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
 
-
     qmlRegisterType<SerialTest>("RegisterMyType", 1, 0, "MyClassType");
 
     qmlRegisterType<systemOpen>("RegisterSystemOpen", 1, 0, "MySystemOpen");
+
 
 
     QQmlApplicationEngine engine;

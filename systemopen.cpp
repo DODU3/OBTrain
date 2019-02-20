@@ -22,8 +22,28 @@ void systemOpen::openMagFlow()
     system("C:/Users/admin/Desktop/magFlow.ppt");
 }
 
-void systemOpen::openFaceDBW()
+void systemOpen::openFaceDet()
 {
-    system("D:/QTDev/OBTrainDev/OBTrain/VisionVoice/OB_Face/FaceRec.py");
+    system("C:/Users/Administrator/Desktop/dlibResNet_DBW/FaceDet.py");
 }
+
+void systemOpen::openFaceRec()
+{
+    system("C:/Users/Administrator/Desktop/dlibResNet_DBW/FaceRec.py");
+}
+void systemOpen::openKCF()
+{
+    system("D:/On-Bright/Tracking/KCF_UAV.exe");
+}
+
+void systemOpen::openHuman()
+{
+    system("D:/On-Bright/Platform/TensorFlow_test/x64/Release/TensorFlow_test.exe");
+}
+
+void systemOpen::openPosture()
+{
+    system("python D:/On-Bright/Posture/inceptionv1_opencv_predict.py");
+}
+
 

@@ -42,7 +42,7 @@ Page {
         anchors.right: image.left
         anchors.rightMargin: 12
         MouseArea{
-            id:mouseArea
+            id:mouseArea1
             anchors.fill: parent
             onPressed: {
                 page1.visible = true;
@@ -52,64 +52,73 @@ Page {
         }
     }
 
-    /*
     Button {
         id: button1
-        x: 164
-        y: 239
-        text: qsTr("简介")
-        MouseArea{
-            id:mouseArea
-            anchors.fill: parent
-            onPressed: {
-                page11.visible = true;
-                page11.stack = stack;
-                stack.push(page11);
-            }
-        }
-    }
-      */
-
-    Button {
-        id: button1
-        x: 88
+        x: 40
         y: 347
-        width: 119
+        width: 137
         height: 40
         text: qsTr("人体检测例程")
         anchors.right: image.left
         anchors.rightMargin: 12
+        MouseArea{
+            id:mouseArea2
+            anchors.fill: parent
+            onPressed: {
+                page10.visible = true;
+                page10.stack = stack;
+                stack.push(page10);
+            }
+        }
     }
 
     Button {
         id: button2
-        x: 88
+        x: 40
         y: 264
-        width: 119
+        width: 137
         height: 40
         text: qsTr("视觉跟踪例程")
         anchors.right: image.left
         anchors.rightMargin: 12
+        MouseArea{
+            id:mouseArea3
+            anchors.fill: parent
+            onPressed: {
+                page10.visible = true;
+                page10.stack = stack;
+                stack.push(page10);
+            }
+        }
     }
 
     Button {
         id: button3
-        x: 88
+        x: 40
         y: 433
-        width: 119
+        width: 137
         height: 40
         text: qsTr("姿态识别例程")
         anchors.right: image.left
         anchors.rightMargin: 12
+        MouseArea{
+            id:mouseArea4
+            anchors.fill: parent
+            onPressed: {
+                page10.visible = true;
+                page10.stack = stack;
+                stack.push(page10);
+            }
+        }
     }
 
     Image {
         id: image
         x: 219
-        y: 165
-        width: 382
-        height: 353
-        anchors.horizontalCenterOffset: 60
+        y: 141
+        width: 436
+        height: 373
+        anchors.horizontalCenterOffset: 80
         anchors.horizontalCenter: parent.horizontalCenter
         fillMode: Image.PreserveAspectFit
         source: "images/ML.jpg"
@@ -117,6 +126,12 @@ Page {
 
     Introduction {
         id: page1
+        visible: false
+        stack: stack
+    }
+
+    Vision_Examples{
+        id: page10
         visible: false
         stack: stack
     }
