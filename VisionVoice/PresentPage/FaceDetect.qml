@@ -48,21 +48,38 @@ Page {
         font.pixelSize: 26
     }
 
-    Button {
-        id: button
+    MouseArea{
         x: 299
         y: 305
-        text: qsTr("使用教程")
-        font.pixelSize: 16
-    }
+           // anchors.centerIn: parent
+            width: hp.width
+            height: hp.height
+            hoverEnabled: true
+            cursorShape: containsMouse ? (pressed ? Qt.ClosedHandCursor : Qt.OpenHandCursor) : Qt.ArrowCursor
 
-    Text {
-        id: element1
-        x: 405
-        y: 318
-        text: qsTr("（视频）")
-        font.pixelSize: 14
-    }
+            Text {
+                id: hp
+                text: "<a href='http://www.baidu.com'><h1>使用教程（视频）</h1></a>"
+                anchors.centerIn: parent
+                onLinkActivated: Qt.openUrlExternally(link)
+            }
+        }
+
+//    Button {
+//        id: button
+//        x: 299
+//        y: 305
+//        text: qsTr("使用教程")
+//        font.pixelSize: 16
+//    }
+
+//    Text {
+//        id: element1
+//        x: 405
+//        y: 318
+//        text: qsTr("（视频）")
+//        font.pixelSize: 14
+//    }
 
 
 }
