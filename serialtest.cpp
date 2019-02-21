@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <string>
 #include <QDateTime>
+#include <QQmlProperty>
 
 
 SerialTest::Settings currentsetting;//定义设定值结构体的结构体变量
@@ -289,23 +290,23 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
             if(ok && corner != mag_corner){
                 mag_corner = corner;
                 if(mag_corner <= 21 || mag_corner >= 338 ){
-                    mag_cornerStr = QString::number(mag_corner) + "° 北";
+                    setMagCornerStr(QString::number(mag_corner) + "° 北");
                 }else if (mag_corner >= 22 && mag_corner <= 66) {
-                    mag_cornerStr = QString::number(mag_corner) + "° 东北";
+                    setMagCornerStr(QString::number(mag_corner) + "° 东北");
                 }else if (mag_corner >= 67 && mag_corner <= 112) {
-                    mag_cornerStr = QString::number(mag_corner) + "° 东";
+                    setMagCornerStr(QString::number(mag_corner) + "° 东");
                 }else if (mag_corner >= 113 && mag_corner <= 156) {
-                    mag_cornerStr = QString::number(mag_corner) + "° 东南";
+                    setMagCornerStr(QString::number(mag_corner) + "° 东南");
                 }else if (mag_corner >= 157 && mag_corner <= 201) {
-                    mag_cornerStr = QString::number(mag_corner) + "° 南";
+                    setMagCornerStr(QString::number(mag_corner) + "° 南");
                 }else if (mag_corner >= 202 && mag_corner <= 247) {
-                    mag_cornerStr = QString::number(mag_corner) + "° 西南";
+                    setMagCornerStr(QString::number(mag_corner) + "° 西南");
                 }else if (mag_corner >= 248 && mag_corner <= 291) {
-                    mag_cornerStr = QString::number(mag_corner) + "° 西";
+                    setMagCornerStr(QString::number(mag_corner) + "° 西");
                 }else if (mag_corner >= 292 && mag_corner <= 337) {
-                    mag_cornerStr = QString::number(mag_corner) + "° 西北";
+                    setMagCornerStr(QString::number(mag_corner) + "° 西北");
                 }
-                std::cout<<" mag_cornerStr:" + mag_cornerStr.toStdString()<<std::endl;
+//                std::cout<<" mag_cornerStr:" + mag_cornerStr.toStdString()<<std::endl;
                 emit receiveMagCornerChanged();
             }
 
@@ -313,11 +314,9 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
 //        std::cout<<" receivedata" + receivedata.toStdString()<<std::endl;
         m_receivedata= receivedata;//将某次收到的数据进行累加，因为如果不累加的话每次有readyread就会触发此函数，会重置m_receivedata，覆盖之前收到的数据
         addSerialDataAll("Rx:" + receivedata);
-        //emit receivedataChanged();//发送消息触发receivedata()，更新当前收到的数据显示receivedata
+        emit receivedataChanged();//发送消息触发receivedata()，更新当前收到的数据显示receivedata
 
         qint64 testreadnumber=data.length();//接收数据字节数统计
-
-
 
         c_receivenumber=c_receivenumber+testreadnumber;
 
@@ -348,7 +347,19 @@ QString SerialTest::receiveMagCorner()//
 void SerialTest::setMagCornerStr(QString cornerStr)//
 {
     mag_cornerStr = cornerStr;
-    emit receiveMagCornerChanged();
+
+//    emit receiveMagCornerChanged();
+
+}
+
+QString SerialTest::getMagCornerStr()
+{
+    return mag_cornerStr;
+}
+
+qint64 SerialTest::getMagCorner()
+{
+    return mag_corner;
 }
 
 

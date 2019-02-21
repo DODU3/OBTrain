@@ -48,6 +48,8 @@ public:
 
     QString receiveMagCorner();
     Q_INVOKABLE void setMagCornerStr(QString cornerStr);
+    Q_INVOKABLE QString getMagCornerStr();
+    Q_INVOKABLE qint64 getMagCorner();
 
     Q_INVOKABLE void openAndSetPort(QString PortName,int BaudRateIndex,int DatabitsIndex,int ParityIndex,int StopbitsIndex,int FlowcontrolIndex);//打开并设定端口;
     Q_INVOKABLE void closePort();//关闭端口;

@@ -44,4 +44,15 @@ Item {
         font.pixelSize: 34
         text: qsTr("text")
     }
+
+    Timer {
+            //Timer for demo rotation of compass
+        interval: 200
+        running: true
+        repeat: true
+        onTriggered: {
+            label.text = myclassExposeByRegType.getMagCornerStr();
+            setBearing(myclassExposeByRegType.getMagCorner());
+        }
+    }
 }

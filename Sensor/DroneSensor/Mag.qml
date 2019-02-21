@@ -12,6 +12,8 @@ import "./MagPage"
 import RegisterMyType 1.0
 import RegisterSystemOpen 1.0
 
+
+
 Page {
 
     property StackView stack: null
@@ -101,16 +103,6 @@ Page {
 //                stack.push(page11);
             }
         }
-    }
-
-    Text {
-        id: element
-        x: 475
-        y: 166
-        width: 80
-        height: 40
-        text: myclassExposeByRegType.receiveMagCorner
-        font.pixelSize: 34
     }
 
 

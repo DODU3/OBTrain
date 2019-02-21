@@ -21,33 +21,6 @@ ApplicationWindow {
     property real readAz: 0
     property real angle: 0
 
-//    Compass {
-//        id: compass
-//        dataRate: 1
-//        active: true
-
-//        onReadingChanged: {
-//            readAz = reading.azimuth
-//            angle  = (readAz /(2*Math.PI))
-
-//            print("Compass: ", reading.azimuth) //for debug
-//            print("Angle: ", angle)             //for debug
-
-//            needle.update()
-//        }
-//    }
-
-    Timer {
-        //Timer for demo rotation of compass
-        interval: 5
-        running: true
-        repeat: true
-        onTriggered: {
-            demoHeading += 1
-            if (realCompass != 1)
-                compassui.setBearing(demoHeading)
-        }
-    }
 
     Magnetometer {
         id: mag
