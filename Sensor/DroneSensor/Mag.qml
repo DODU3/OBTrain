@@ -229,9 +229,20 @@ Page {
     }
 
 
+    CompassUi
+    {
+        id: compassui
+        x: 300
+        y: 200
+    }
 
 
-
+    CharViewPage
+    {
+        id:charview
+        x:700
+        y:200
+    }
 
 
     Component.onCompleted: {

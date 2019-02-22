@@ -6,6 +6,7 @@
 #include <string>
 #include <QDateTime>
 #include <QQmlProperty>
+#include <stdio.h>
 
 
 SerialTest::Settings currentsetting;//定义设定值结构体的结构体变量
@@ -18,7 +19,12 @@ QString m_serialSaveAndApp("");
 
 qint64 c_sendnumber,c_receivenumber;
 
+bool settingAddrFlag = false;
 
+int addr1 = 0;
+int addr2 = 0;
+int addr3 = 0;
+int addrch = 0;
 
 SerialTest::SerialTest(QSerialPort *parent):
     QSerialPort (parent),
@@ -167,7 +173,7 @@ void SerialTest::setRFaddr(QString addr1,QString addr2,QString addr3,QString cha
 //    command += strchannel;
 //        command += "0000";
 
-    QString command = "ff5500000000000029";
+    QString command = "ff5580808080080029";
     QString straddr1 ;
     QString straddr2 ;
     QString straddr3 ;
@@ -185,14 +191,14 @@ void SerialTest::setRFaddr(QString addr1,QString addr2,QString addr3,QString cha
     command += straddr1;
     command += straddr2;
     command += straddr3;
-    command += straddr1;
-    command += straddr2;
     command += straddr3;
+    command += straddr2;
+    command += straddr1;
     command += strchannel;
 
     command += "0000";
 
-    std::cout<<" value" + command.toStdString()<<std::endl;
+//    std::cout<<" value:" + command.toStdString()<<std::endl;
 
     sendto(command);
 
@@ -240,7 +246,7 @@ void SerialTest::sendto(QString sendmessage)//此函数由qml里的send按钮触
     c_sendnumber=c_sendnumber+testwritenumber-1;//发送数据字节数统计（减去回车符）
     setsendnumber(QString ::number(c_sendnumber));//更新发送的数据字节总数
 
-
+    addSerialDataAll("Tx:" + sendmessage);
 }
 
 void SerialTest::setsendnumber(QString sendnumber)//更新发送的数据字节总数，触发sendnumberChanged()的消息响应函数sendnumber()来更新显示
@@ -311,8 +317,23 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
             }
 
         }
+
+        else if(receivedata.mid(28,2) == "06"){
+                if(settingAddrFlag == true){
+                    settingAddrFlag = false;
+                    bool ok = false;
+                    addr1 = receivedata.mid(4,2).toInt(&ok, 16);
+                    addr2 = receivedata.mid(6,2).toInt(&ok, 16);
+                    addr3 = receivedata.mid(8,2).toInt(&ok, 16);
+                    addrch = receivedata.mid(16,2).toInt(&ok, 16);
+                }
+
+        }
 //        std::cout<<" receivedata" + receivedata.toStdString()<<std::endl;
         m_receivedata= receivedata;//将某次收到的数据进行累加，因为如果不累加的话每次有readyread就会触发此函数，会重置m_receivedata，覆盖之前收到的数据
+        if(receivedata.length() > 36){
+            receivedata = receivedata.mid(0, 36);
+        }
         addSerialDataAll("Rx:" + receivedata);
         emit receivedataChanged();//发送消息触发receivedata()，更新当前收到的数据显示receivedata
 
@@ -402,6 +423,36 @@ void SerialTest::addserialSaveAndApp(QString data)
 void SerialTest::clearserialSaveAndApp(void)
 {
     m_serialSaveAndApp.clear();
+}
+
+bool SerialTest::getsettingAddrFlag(void){
+    return settingAddrFlag;
+}
+
+void SerialTest::setsettingAddrFlag(bool trueorfalse){
+    settingAddrFlag = trueorfalse;
+}
+
+QString SerialTest::getaddr1(void){
+    return QString::number(addr1);
+}
+
+QString SerialTest::getaddr2(void){
+    return QString::number(addr2);
+}
+
+QString SerialTest::getaddr3(void){
+    return QString::number(addr3);
+}
+
+QString SerialTest::getaddrch(void){
+    return QString::number(addrch);
+}
+
+QString SerialTest::randomNumStr(int min, int max){
+    int Range = max - min;
+    int randa = rand();
+    return QString::number((randa % Range) + min);
 }
 
 ////////////////////5.关闭端口//////////////////////////////

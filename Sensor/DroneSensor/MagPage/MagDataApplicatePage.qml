@@ -7,6 +7,10 @@ import QtQuick.Dialogs 1.2
 //import "../MagPage"
 import RegisterDataFresh 1.0
 
+//import "."
+
+//import "./dataSaveCompleted.qml"
+
 ApplicationWindow {
     id: magDataApplicatePage
 
@@ -57,9 +61,14 @@ ApplicationWindow {
             //timer1.stop();
             mydataFresh.buttonSaveClick(textArea.text);
             //timer1.start();
+            datasavecompletedw.show();
         }
     }
 
+    DataSaveCompletedPage{
+        id:datasavecompletedw
+    }
+//    DataSaveCompleted2Page{
 
     ScrollView {
         x: 72
@@ -107,6 +116,17 @@ ApplicationWindow {
             textArea.text = myclassExposeByRegType.getserialSaveAndApp();
             textArea.cursorPosition = textArea.text.length;
 
+        }
+    }
+
+    Button {
+        id: button2
+        x: 392
+        y: 522
+        text: qsTr("打开保存文件夹")
+        enabled: true
+        onPressed: {
+            mydataFresh.buttonOpenFolderClick();
         }
     }
 

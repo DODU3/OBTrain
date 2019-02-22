@@ -176,5 +176,7 @@
         <file>VisionVoice/images/videoModule.jpg</file>
         <file>VisionVoice/images/Posture.png</file>
         <file>Sensor/DroneSensor/MagPage/MagProjectDevelopPage.qml</file>
+        <file>Component/CharViewPage.qml</file>
+        <file>Sensor/DroneSensor/MagPage/DataSaveCompletedPage.qml</file>
     </qresource>
 </RCC>

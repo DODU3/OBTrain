@@ -62,6 +62,13 @@ public:
     Q_INVOKABLE void DroneFrame_MakeAndSerialSend(quint8 Realdata[4],quint8 Realstatus[2],quint8 Command,quint8 CommandData[8],quint8 Heartbeat);//构建和发送无人机串口通信发送帧
     Q_INVOKABLE void setRFaddr(QString addr1,QString addr2,QString addr3,QString channel);
 
+    Q_INVOKABLE bool getsettingAddrFlag(void);
+    Q_INVOKABLE void setsettingAddrFlag(bool trueorfalse);
+    Q_INVOKABLE QString getaddr1(void);
+    Q_INVOKABLE QString getaddr2(void);
+    Q_INVOKABLE QString getaddr3(void);
+    Q_INVOKABLE QString getaddrch(void);
+    Q_INVOKABLE QString randomNumStr(int min, int max);
 
     Q_INVOKABLE QString getSerialDataAll(void);
     Q_INVOKABLE void addSerialDataAll(QString receivedata);

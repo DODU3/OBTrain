@@ -9,6 +9,7 @@
 #include <QQuickItem>
 #include <QMetaObject>
 #include <QCoreApplication>
+#include <QProcess>
 
 #include <QDateTime>
 
@@ -27,6 +28,11 @@ void dataFresh::freshBaseData()
 
 }
 
+QString dataFresh::getSaveFileName(void){
+//    qDebug() << savefilename;
+    return savefilename;
+}
+
 void dataFresh::buttonSaveClick(QString qs)
 {
 
@@ -35,7 +41,12 @@ void dataFresh::buttonSaveClick(QString qs)
 
     QString path = QCoreApplication::applicationDirPath();
     path.replace("/", "\\");
-    //qDebug() << path;
+    path.append("\\Content resource\\磁力计模组\\数据保存\\");
+    QDir dir(path);
+    if(!dir.exists()){
+        dir.mkpath(path);
+    }
+   //qDebug() << path;
     QString a = qs;
     a.replace(QString("\n"), QString("\r\n"));//windows only
 //    qDebug() << a;
@@ -45,7 +56,9 @@ void dataFresh::buttonSaveClick(QString qs)
 //                                                    tr("保存数据"),
 //                                                    "",
 //                                                    tr(".txt"));
-    QFile file(path + "\\Content resource\\磁力计模组\\数据保存\\" + "data_" + qs_currenttime + ".txt");
+    savefilename = path + "data_" + qs_currenttime + ".txt";
+    emit saveFileNameChanged();
+    QFile file(savefilename);
     if(file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         QTextStream out(&file);
@@ -71,6 +84,18 @@ void dataFresh::buttonStartClick()
     }
     delete object;
 }
+
+void dataFresh::buttonOpenFolderClick(){
+    QString path = QCoreApplication::applicationDirPath();
+    path.replace("/", "\\");
+    path.append("\\Content resource\\磁力计模组\\数据保存\\");
+    QDir dir(path);
+    if(!dir.exists()){
+        dir.mkpath(path);
+    }
+    QProcess::startDetached("explorer " + path);
+}
+
 bool dataFresh::getserialDataPrintFlag()
 {
     return serialDataPrintFlag;
