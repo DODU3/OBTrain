@@ -1,4 +1,4 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 
 import QtMultimedia 5.4
@@ -17,8 +17,8 @@ import RegisterSystemOpen 1.0
 Page {
 
     property StackView stack: null
-    width: 1280
-    height: 740
+    width: 1920
+    height: 1080
 
     background: Image {
         source: "../../images/background.png"
@@ -36,8 +36,10 @@ Page {
     ComboBox {
         id: comboBox
         objectName: "portComboBox"
-        x: 110
-        y: 78
+        x: 146
+        y: 48
+        font.bold: true
+        font.pointSize: 20
 
         model:comboModel.comboList
 
@@ -46,10 +48,12 @@ Page {
     QmlToggleButton{
         id: qmlToggleButton
         anchors.centerIn: parent
-        height: 26
-        anchors.verticalCenterOffset: -272
-        anchors.horizontalCenterOffset: -274
-        width: 80
+        height: 40
+        radius: 20
+        border.width: 1
+        anchors.verticalCenterOffset: -472
+        anchors.horizontalCenterOffset: -614
+        width: 106
         leftString: qsTr("打开")
         rightString: qsTr("关闭")
 //        onToggleLeft: label.text = qmlToggleButton.leftString
@@ -60,16 +64,20 @@ Page {
 
     Button {
         id: button7
-        x: 544
-        y: 78
+        x: 437
+        y: 48
         text: qsTr("配置无线地址")
+        font.bold: true
+        font.pointSize: 20
 
         MouseArea{
             id:mouseSetArea
+            anchors.rightMargin: 0
+            anchors.bottomMargin: 0
+            anchors.leftMargin: 0
+            anchors.topMargin: 0
             anchors.fill: parent
             onPressed: {
-//                rfsetpage.setX(350);
-//                rfsetpage.setY(200);
                 rfsetpage.show();
             }
         }
@@ -90,13 +98,19 @@ Page {
 
     Button {
         id: button1
-        x: 164
-        y: 196
+        x: 653
+        y: 50
         text: qsTr("教学资料")
+        font.bold: true
+        font.pointSize: 20
         MouseArea{
-            id:mouseArea
-            anchors.fill: parent
-            onPressed: {
+                    id:mouseArea
+                    anchors.rightMargin: -1
+                    anchors.bottomMargin: -2
+                    anchors.leftMargin: 1
+                    anchors.topMargin: 2
+                    anchors.fill: parent
+                    onPressed: {
                 maginfopage.show();
 //                page11.visible = true;
 //                page11.stack = stack;
@@ -106,88 +120,94 @@ Page {
     }
 
 
-    Button {
-        id: button3
-        x: 164
-        y: 277
-        text: qsTr("实时数据")
+//    Button {
+//        id: button3
+//        x: 164
+//        y: 277
+//        text: qsTr("实时数据")
 
-        MouseArea{
-            id:mouseFlowArea
-            anchors.fill: parent
-            onPressed: {
-                magdatapage.show();
-//                page12.visible = true;
-//                page12.stack = stack;
-//                stack.push(page12);
+//        MouseArea{
+//            id:mouseFlowArea
+//            anchors.fill: parent
+//            onPressed: {
+//                magdatapage.show();
+////                page12.visible = true;
+////                page12.stack = stack;
+////                stack.push(page12);
 
-            }
-        }
-    }
+//            }
+//        }
+//    }
 
-    Button {
-        id: button4
-        x: 164
-        y: 350
-        text: qsTr("数据保存与应用")
+//    Button {
+//        id: button4
+//        x: 164
+//        y: 350
+//        text: qsTr("数据保存与应用")
 
-        MouseArea{
-            id:mouseVideoArea
-            anchors.fill: parent
-            onPressed: {
-                magdataapplicatepage.show();
-//                page13.visible = true;
-//                page13.stack = stack;
-//                stack.push(page13);
-//                mySystemOpenReg.openProject()
-            }
-        }
-    }
+//        MouseArea{
+//            id:mouseVideoArea
+//            anchors.fill: parent
+//            onPressed: {
+//                magdataapplicatepage.show();
+////                page13.visible = true;
+////                page13.stack = stack;
+////                stack.push(page13);
+////                mySystemOpenReg.openProject()
+//            }
+//        }
+//    }
 
-    Button {
-        id: button5
-        x: 164
-        y: 431
-        text: qsTr("基本收发")
+//    Button {
+//        id: button5
+//        x: 164
+//        y: 431
+//        text: qsTr("基本收发")
 
-        MouseArea{
-            id:mouseVideo1Area
-            anchors.fill: parent
-            onPressed: {
-                magbasicrecandsendpage.show();
-//                page14.visible = true;
-//                page14.stack = stack;
-//                stack.push(page14);
-            }
-        }
-    }
+//        MouseArea{
+//            id:mouseVideo1Area
+//            anchors.fill: parent
+//            onPressed: {
+//                magbasicrecandsendpage.show();
+////                page14.visible = true;
+////                page14.stack = stack;
+////                stack.push(page14);
+//            }
+//        }
+//    }
 
-    Button {
-        id: button6
-        x: 164
-        y: 510
-        text: qsTr("实验操作")
+//    Button {
+//        id: button6
+//        x: 164
+//        y: 510
+//        text: qsTr("实验操作")
 
-        MouseArea{
-            id:mousecontrolArea
-            anchors.fill: parent
-            onPressed: {
-                magcongrolPage.show();
-//                page14.visible = true;
-//                page14.stack = stack;
-//                stack.push(page14);
-            }
-        }
-    }
+//        MouseArea{
+//            id:mousecontrolArea
+//            anchors.fill: parent
+//            onPressed: {
+//                magcongrolPage.show();
+////                page14.visible = true;
+////                page14.stack = stack;
+////                stack.push(page14);
+//            }
+//        }
+//    }
 
     Button {
         id: button2
-        x: 164
-        y: 598
+        x: 821
+        y: 48
         text: qsTr("工程实例")
+        font.bold: true
+        font.pointSize: 20
 
         MouseArea{
             id:mouseProjectArea
+            anchors.rightMargin: 0
+            anchors.bottomMargin: 0
+            anchors.leftMargin: 0
+            anchors.topMargin: 0
             anchors.fill: parent
             onPressed: {
 //                mySystemOpenReg.openProject()
@@ -232,8 +252,10 @@ Page {
     CompassUi
     {
         id: compassui
-        x: 300
-        y: 200
+        x: 146
+        y: 155
+        width: 400
+        height: 400
     }
 
 
@@ -241,7 +263,35 @@ Page {
     {
         id:charview
         x:700
-        y:200
+        y:155
+        visible: true
+    }
+
+    MagBasicRecAndSendPage{
+        id:magbasicrecandsendpage
+
+        x:1263
+        y:595
+        width: 400
+        height: 400
+    }
+
+    MagDataApplicatePage{
+        id:magdataapplicatepage
+
+        x:1263
+        y:155
+        width: 400
+        height: 400
+    }
+
+    MagControlPage{
+        id:magcongrolPage
+
+        x:146
+        y:595
+        width: 400
+        height: 400
     }
 
 
@@ -253,17 +303,7 @@ Page {
 
     }
 
-    MagControlPage{
-        id:magcongrolPage
-    }
 
-    MagBasicRecAndSendPage{
-        id:magbasicrecandsendpage
-    }
-
-    MagDataApplicatePage{
-        id:magdataapplicatepage
-    }
 
     MagDataPage{
         id:magdatapage

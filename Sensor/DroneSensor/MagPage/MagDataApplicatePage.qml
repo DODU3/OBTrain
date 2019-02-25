@@ -1,4 +1,4 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Dialogs 1.2
 //import ".."
@@ -11,19 +11,21 @@ import RegisterDataFresh 1.0
 
 //import "./dataSaveCompleted.qml"
 
-ApplicationWindow {
+Item {
     id: magDataApplicatePage
 
-    width: 800
-    height: 600
+    width: 400
+    height: 400
 
-    title: "磁力计-数据保存与应用"
+//    title: "电子罗盘-数据保存与应用"
 
     Button {
         id: button
-        x: 72
-        y: 522
+        x: 18
+        y: 273
         text: qsTr("开始打印")
+        font.bold: true
+        font.pointSize: 22
 
         onPressed: {
 //            textArea.append("aa"+"bb"+"cc");
@@ -51,9 +53,11 @@ ApplicationWindow {
 
     Button {
         id: button1
-        x: 232
-        y: 522
+        x: 191
+        y: 273
         text: qsTr("保存")
+        font.bold: true
+        font.pointSize: 22
         enabled: true
 
         onPressed: {
@@ -71,16 +75,23 @@ ApplicationWindow {
 //    DataSaveCompleted2Page{
 
     ScrollView {
-        x: 72
-        y: 65
-        width: 605
-        height: 433
+        x: 0
+        y: 0
+        width: 400
+        height: 284
         TextArea {
             id: textArea
-            placeholderText: qsTr("data")
-//            objectName: "MagDateAppPageText"
+            x: -10
+            y: -6
+            width: 396
+            height: 256
+            text: "电子罗盘-数据保存与应用"
+            font.family: "Times New Roman"
+            font.bold: true
+            placeholderText: qsTr("电子罗盘-数据保存与应用")
+            //            objectName: "MagDateAppPageText"
 //            font.pointSize: 9
-            font.pixelSize: 15
+            font.pixelSize: 20
             //text: myserialtest1.receivedata
             readOnly: true
             selectByKeyboard: true
@@ -121,9 +132,11 @@ ApplicationWindow {
 
     Button {
         id: button2
-        x: 392
-        y: 522
+        x: 18
+        y: 332
         text: qsTr("打开保存文件夹")
+        font.bold: true
+        font.pointSize: 22
         enabled: true
         onPressed: {
             mydataFresh.buttonOpenFolderClick();

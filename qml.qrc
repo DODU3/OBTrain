@@ -178,5 +178,8 @@
         <file>Sensor/DroneSensor/MagPage/MagProjectDevelopPage.qml</file>
         <file>Component/CharViewPage.qml</file>
         <file>Sensor/DroneSensor/MagPage/DataSaveCompletedPage.qml</file>
+        <file>VisionVoice/FaceGuidePage.qml</file>
+        <file>VisionVoice/PersonGuidePage.qml</file>
+        <file>Sensor/DroneSensor/MagGuide.qml</file>
     </qresource>
 </RCC>

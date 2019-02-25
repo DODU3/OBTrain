@@ -1,4 +1,4 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
 import Qt.labs.platform 1.0
@@ -8,8 +8,8 @@ import ".."
 
 Page {
 
-    width: 1280
-    height: 720
+    width: 1920
+    height: 1080
 
 
     property StackView stack: null

@@ -1,10 +1,10 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 import ".."
 
 Page {
-    width: 1280
-    height: 720
+    width: 1920
+    height: 1080
 
     property StackView stack: null
 
@@ -22,8 +22,8 @@ Page {
     }
 
     Button {
-        x: 126
-        y: 91
+        x: 439
+        y: 239
         width: 150
         height: 150
         text: qsTr("GPS")
@@ -41,8 +41,8 @@ Page {
 
     Button {
         id: button1
-        x: 401
-        y: 91
+        x: 711
+        y: 239
         width: 150
         height: 150
         text: qsTr("陀螺仪加速器")
@@ -60,8 +60,8 @@ Page {
 
     Button {
         id: button5
-        x: 704
-        y: 91
+        x: 1014
+        y: 239
         width: 150
         height: 150
         text: qsTr("气压计定高")
@@ -81,8 +81,8 @@ Page {
 
     Button {
         id: button3
-        x: 1001
-        y: 91
+        x: 1311
+        y: 239
         width: 150
         height: 150
         text: qsTr("超声避障")
@@ -100,8 +100,8 @@ Page {
 
     Button {
         id: button
-        x: 220
-        y: 398
+        x: 530
+        y: 546
         width: 200
         height: 200
         text: qsTr("磁力计")
@@ -119,10 +119,10 @@ Page {
 
     Button {
         id: button4
-        x: 565
-        y: 398
-        width: 150
-        height: 150
+        x: 875
+        y: 546
+        width: 219
+        height: 180
         text: qsTr("光流")
         transformOrigin: Item.Center
 
@@ -141,10 +141,10 @@ Page {
 
     Button {
         id: button2
-        x: 954
-        y: 398
-        width: 150
-        height: 150
+        x: 1264
+        y: 546
+        width: 202
+        height: 180
         text: qsTr("红外对位")
 
         onClicked: {
@@ -195,7 +195,7 @@ Page {
         stack: stack
     }
 
-    Mag {
+    MagGuide {
         id: page8
         visible: false
         stack: stack

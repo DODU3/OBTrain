@@ -1,4 +1,4 @@
-#include "serialtest.h"
+﻿#include "serialtest.h"
 #include<iostream>
 #include <QSerialPortInfo>
 #include <QQmlComponent>
@@ -13,7 +13,7 @@ SerialTest::Settings currentsetting;//定义设定值结构体的结构体变量
 QSerialPort serialtest;
 QString m_serialdataall("");
 qint64 mag_corner(0);
-QString mag_cornerStr("0° 北");
+QString mag_cornerStr("0\xc2\xb0 \xe5\x8c\x97");
 
 QString m_serialSaveAndApp("");
 
@@ -296,21 +296,21 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
             if(ok && corner != mag_corner){
                 mag_corner = corner;
                 if(mag_corner <= 21 || mag_corner >= 338 ){
-                    setMagCornerStr(QString::number(mag_corner) + "° 北");
+                    setMagCornerStr(QString::number(mag_corner) + "\xc2\xb0 \xe5\x8c\x97");
                 }else if (mag_corner >= 22 && mag_corner <= 66) {
-                    setMagCornerStr(QString::number(mag_corner) + "° 东北");
+                    setMagCornerStr(QString::number(mag_corner) + "\xc2\xb0 \xe4\xb8\x9c\xe5\x8c\x97");
                 }else if (mag_corner >= 67 && mag_corner <= 112) {
-                    setMagCornerStr(QString::number(mag_corner) + "° 东");
+                    setMagCornerStr(QString::number(mag_corner) + "\xc2\xb0 \xe4\xb8\x9c");
                 }else if (mag_corner >= 113 && mag_corner <= 156) {
-                    setMagCornerStr(QString::number(mag_corner) + "° 东南");
+                    setMagCornerStr(QString::number(mag_corner) + "\xc2\xb0 \xe4\xb8\x9c\xe5\x8d\x97");
                 }else if (mag_corner >= 157 && mag_corner <= 201) {
-                    setMagCornerStr(QString::number(mag_corner) + "° 南");
+                    setMagCornerStr(QString::number(mag_corner) + "\xc2\xb0 \xe5\x8d\x97");
                 }else if (mag_corner >= 202 && mag_corner <= 247) {
-                    setMagCornerStr(QString::number(mag_corner) + "° 西南");
+                    setMagCornerStr(QString::number(mag_corner) + "\xc2\xb0 \xe8\xa5\xbf\xe5\x8d\x97");
                 }else if (mag_corner >= 248 && mag_corner <= 291) {
-                    setMagCornerStr(QString::number(mag_corner) + "° 西");
+                    setMagCornerStr(QString::number(mag_corner) + "\xc2\xb0 \xe8\xa5\xbf");
                 }else if (mag_corner >= 292 && mag_corner <= 337) {
-                    setMagCornerStr(QString::number(mag_corner) + "° 西北");
+                    setMagCornerStr(QString::number(mag_corner) + "\xc2\xb0 \xe8\xa5\xbf\xe5\x8c\x97");
                 }
 //                std::cout<<" mag_cornerStr:" + mag_cornerStr.toStdString()<<std::endl;
                 emit receiveMagCornerChanged();

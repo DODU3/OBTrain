@@ -1,4 +1,4 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtMultimedia 5.4
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Styles 1.2
@@ -9,8 +9,8 @@ import ".."
 
 
 Page {
-    width: 1280
-    height: 740
+    width: 1920
+    height: 1080
 
     background: Image {
         source: "../images/background.png"
@@ -31,8 +31,8 @@ Page {
 
     Column{
         y:32
-        width: 1280
-        height: 700
+        width: 1920
+        height: 1080
 
         Rectangle{
             id:screen

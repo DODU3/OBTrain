@@ -1,29 +1,34 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 
 import RegisterSystemOpen 1.0
 
 ApplicationWindow {
     id: magInfoPage
-    x: 350
-    y: 225
-    width: 480
-    height: 320
+    x: 0
+    y: 0
+    width: 600
+    height: 100
 
     title: "磁力计-教学资料"
 
+    background: Image {
+        source: "../../../images/background.png"
+    }
 
     Button {
         id: button_openppt
-        x: 46
-        y: 135
+        x: 56
+        y: 30
         text: qsTr("教学PPT")
+        font.bold: true
+        font.pointSize: 20
 
         MouseArea{
             id:mouse_openppt
-            anchors.rightMargin: 0
+            anchors.rightMargin: -2
             anchors.bottomMargin: 0
-            anchors.leftMargin: 0
+            anchors.leftMargin: 2
             anchors.topMargin: 0
             anchors.fill: parent
             onPressed: {
@@ -40,16 +45,18 @@ ApplicationWindow {
 
     Button {
         id: button_openvideo
-        x: 190
-        y: 135
+        x: 225
+        y: 30
         text: qsTr("教学视频")
+        font.bold: true
+        font.pointSize: 20
         MouseArea {
             id: mouse_openvideo
             anchors.leftMargin: 0
-            anchors.topMargin: 0
+            anchors.topMargin: 1
             anchors.rightMargin: 0
             anchors.fill: parent
-            anchors.bottomMargin: 0
+            anchors.bottomMargin: -1
             onPressed: {
                 mySystemOpenReg.openFile("/Content resource/磁力计模组/教学资料/教学视频");
             }
@@ -58,16 +65,18 @@ ApplicationWindow {
 
         Button {
             id: button_openotherfile
-            x: 332
-            y: 135
+            x: 405
+            y: 30
             text: qsTr("其他资料")
+            font.bold: true
+            font.pointSize: 20
             MouseArea {
                 id: mouse_openotherfile
-                anchors.leftMargin: -1
-                anchors.topMargin: 0
-                anchors.rightMargin: 1
+                anchors.leftMargin: 0
+                anchors.topMargin: -1
+                anchors.rightMargin: 0
                 anchors.fill: parent
-                anchors.bottomMargin: 0
+                anchors.bottomMargin: 1
                 onPressed: {
                     mySystemOpenReg.openFile("/Content resource/磁力计模组/教学资料/其他资料");
                 }

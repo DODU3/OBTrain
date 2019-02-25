@@ -1,4 +1,4 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 
 import QtSensors 5.1
@@ -8,10 +8,10 @@ import "../../../Component"
 
 ApplicationWindow {
     id: magDataPage
-    x: 350
-    y: 250
-    width: 640
-    height: 320
+    x: 0
+    y: 0
+    width: 400
+    height: 400
 
     title: "磁力计-实时数据"
 

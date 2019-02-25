@@ -1,11 +1,11 @@
-import QtQuick 2.0
+﻿import QtQuick 2.0
 import QtQuick.Controls 2.2
 
 import RegisterMyType 1.0
 
 Item {
-    width: 320
-    height: 320
+    width: 400
+    height: 400
 
     id : compassui
 //    anchors.fill: parent
@@ -19,10 +19,13 @@ Item {
     }
 
     Item {
+        id: element
         //anchors.centerIn: parent
         anchors.fill: parent
         Image { id: background;
-            anchors.fill: parent
+            anchors.rightMargin: 0
+        anchors.bottomMargin: 136
+        anchors.fill: parent
             fillMode: Image.PreserveAspectFit
             source: "compass.svg";
 
@@ -40,16 +43,18 @@ Item {
 
     Label {
         id: label
-        x: 0
-        y: 35
-        width: 102
-        height: 34
-        font.pixelSize: 34
+        x: 74
+        y: 304
+        width: 253
+        height: 57
+        font.pixelSize: 60
         text: qsTr("text")
+        font.bold: true
+        font.family: "Times New Roman"
     }
 
     Timer {
-            //Timer for demo rotation of compass
+        //Timer for demo rotation of compass
         interval: 200
         running: true
         repeat: true

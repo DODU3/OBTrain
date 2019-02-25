@@ -1,4 +1,4 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 
 ApplicationWindow {
@@ -8,6 +8,10 @@ ApplicationWindow {
 
     width: 800
     height: 200
+
+    background: Image {
+        source: "../../../images/background.png"
+    }
 
     Label {
         id:label

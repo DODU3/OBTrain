@@ -1,11 +1,11 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 import ".."
 import "../../Component"
 
 Page {
-    width: 1280
-    height: 740
+    width: 1920
+    height: 1080
 
     property StackView stack: null
 

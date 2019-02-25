@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  *@file Page1.qml
  *@brief Page1
  *@version 1.0
@@ -21,8 +21,8 @@ Page {
 
     Page {
         id: mainView
-        width: 1280
-        height: 720
+        width: 1920
+        height: 1080
 
         background: Image {
             source: "../images/background.png"

@@ -1,4 +1,4 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 import "./Drone"
 import "./Sensor"
@@ -10,8 +10,8 @@ import "./MachineLearn"
 ApplicationWindow {
     id: xxxxxxxxxxxxxx
     visible: true
-    width: 1280
-    height: 720
+    width: 1920
+    height: 1080
 //    property alias page1Form: page1Form
     title: qsTr("人工智能科教培训平台")
 

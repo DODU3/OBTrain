@@ -1,4 +1,4 @@
-#include <QGuiApplication>
+﻿#include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <qqmlengine.h>
 #include <qqmlcontext.h>
@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-    QGuiApplication app(argc, argv);
+    QApplication  app(argc, argv);
 
 
     qmlRegisterType<SerialTest>("RegisterMyType", 1, 0, "MyClassType");

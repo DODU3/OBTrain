@@ -1,76 +1,88 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 
 import RegisterMyType 1.0
 
 
-ApplicationWindow {
+Item {
     id: magCongrolPage
-    x: 350
-    y: 325
-    width: 640
-    height: 320
+    width: 400
+    height: 400
+    antialiasing: false
+    z: 0
+    rotation: 0
+    transformOrigin: Item.Center
 
-    title: "磁力计-实验操作"
+//        title: "电子罗盘-实验操作"
 
 
     Label{
         id: label
         text: qsTr("X轴操作")
-        anchors.verticalCenterOffset: -101
-        anchors.horizontalCenterOffset: -216
-        height: 20
-        width: 84
+        font.bold: true
+        anchors.verticalCenterOffset: -56
+        anchors.horizontalCenterOffset: -128
+        height: 30
+        width: 110
         anchors.centerIn: parent
-        font.pixelSize: 20
+        font.pixelSize: 30
     }
 
     Label {
         id: label1
-        x: 62
-        y: 104
-        font.pixelSize: 20
+        x: 22
+        y: 54
+        width: 112
+        height: 35
+        font.pixelSize: 30
         text: qsTr("Z轴操作")
+        font.bold: true
     }
 
     Button {
         id: button
-        x: 40
-        y: 189
+        x: 22
+        y: 183
         text: qsTr("复位")
+        font.bold: true
+        font.pointSize: 22
 
-        MouseArea{
-            id:mouseResetArea
-            anchors.fill: parent
-            onPressed: {
-                slider.value = 0;
-                slider1.value = 0;
-                myclassExposeByRegType.sendto("ff5580808080080027000000000000000000");
-            }
-        }
+        //        MouseArea{
+//            id:mouseResetArea
+//            anchors.fill: parent
+//            onPressed: {
+//                slider.value = 0;
+//                slider1.value = 0;
+//                myclassExposeByRegType.sendto("ff5580808080080027000000000000000000");
+//            }
+//        }
     }
 
     Button {
         id: button1
-        x: 252
-        y: 189
+        x: 22
+        y: 258
         text: qsTr("磁力计校准")
+        font.bold: true
+        font.pointSize: 22
 
-        MouseArea{
-            id:mouseVerifyArea
-            anchors.fill: parent
-            onPressed: {
+        //        MouseArea{
+//            id:mouseVerifyArea
+//            anchors.fill: parent
+//            onPressed: {
 
-                myclassExposeByRegType.sendto("ff5580808080080002000000000000000000");
-            }
-        }
+//                myclassExposeByRegType.sendto("ff5580808080080002000000000000000000");
+//            }
+//        }
     }
 
     CheckBox {
         id: checkBox
-        x: 458
-        y: 189
+        x: 17
+        y: 338
         text: qsTr("倾角补偿")
+        font.pointSize: 22
+        font.bold: true
 
         checkState: allChildrenChecked ? Qt.Checked :
                        anyChildChecked ? Qt.PartiallyChecked : Qt.Unchecked
@@ -90,28 +102,28 @@ ApplicationWindow {
 
     Label {
         id: label2
-        x: 458
-        y: 49
-        width: 29
-        height: 20
-        font.pixelSize: 20
+        x: 343
+        y: 54
+        width: 49
+        height: 30
+        font.pixelSize: 30
         text: slider1.value + qsTr(" °")
     }
 
     Label {
         id: label3
-        x: 463
-        y: 104
-        width: 24
-        height: 20
-        font.pixelSize: 20
+        x: 343
+        y: 129
+        width: 51
+        height: 30
+        font.pixelSize: 30
         text: slider.value + qsTr(" °")
     }
 
     Slider {
         id: slider1
-        x: 202
-        y: 39
+        x: 140
+        y: 49
         stepSize: 1
         to: 90
         from: -90
@@ -125,8 +137,10 @@ ApplicationWindow {
 
     Slider {
         id: slider
-        x: 202
-        y: 94
+        x: 133
+        y: 124
+        width: 207
+        height: 40
         stepSize: 1
         to: 360
         value: 0

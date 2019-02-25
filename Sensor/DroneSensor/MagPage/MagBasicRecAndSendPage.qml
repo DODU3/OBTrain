@@ -1,34 +1,44 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 
 //import RegisterSerialTest 1.0
 //import RegisterMyType 1.0
 
-ApplicationWindow {
+Item {
     id: magBasicRecAndSendPage
 
-    width: 800
-    height: 600
+    width: 450
+    height: 400
 
-    title: "磁力计-基本收发"
-
+//    title: "电子罗盘-基本收发"
+//    background: Image {
+//        source: "../../../images/background.png"
+//    }
 
     ScrollView {
-        x: 72
-        y: 66
-        width: 526
-        height: 432
+        width: 450
+        height: 400
+
+
         TextArea {
             id: textArea
+            x: -10
+            y: 0
+            width: 450
+            height: 350
+            text: "电子罗盘-基本收发"
+            font.bold: true
             //objectName: "MagBasicRecAndSendText"
-            placeholderText: qsTr("data")
-//            text: myserialtest.receivedata
-            font.pixelSize: 15
+            placeholderText: qsTr("电子罗盘-基本收发")
+            //            text: myserialtest.receivedata
+            font.pixelSize: 20
             readOnly: true
             selectByKeyboard: true
             selectByMouse: true
         }
     }
+
+
 
 //    MySerialTest
 //    {

@@ -1,4 +1,4 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 import ".."
 
@@ -8,8 +8,8 @@ import RegisterSystemOpen 1.0
 
 Page {
 
-    width: 1280
-    height: 720
+    width: 1920
+    height: 1080
 
     property StackView stack: null
 
