@@ -13,6 +13,15 @@ SerialTest::Settings currentsetting;//定义设定值结构体的结构体变量
 QSerialPort serialtest;
 QString m_serialdataall("");
 qint64 mag_corner(0);
+qint64 mag_x(0);
+qint64 mag_y(0);
+qint64 mag_z(0);
+qint64 mag_user1(0);
+qint64 mag_user2(0);
+qint64 mag_user3(0);
+qint64 mag_user4(0);
+qint64 mag_user5(0);
+qint64 mag_user6(0);
 QString mag_cornerStr("0\xc2\xb0 \xe5\x8c\x97");
 
 QString m_serialSaveAndApp("");
@@ -285,6 +294,9 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
             if(z >= 32768){
                 z -= 65536;
             }
+            mag_x = x;
+            mag_y= y;
+            mag_z = z;
             QDateTime currentTime = QDateTime::currentDateTime();
             QString qs_currenttime = currentTime.toString("hh:mm:ss.zzz");
             addserialSaveAndApp(qs_currenttime + ":  " +
@@ -316,9 +328,7 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
                 emit receiveMagCornerChanged();
             }
 
-        }
-
-        else if(receivedata.mid(28,2) == "06"){
+        }else if(receivedata.mid(28,2) == "06"){
                 if(settingAddrFlag == true){
                     settingAddrFlag = false;
                     bool ok = false;
@@ -328,6 +338,32 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
                     addrch = receivedata.mid(16,2).toInt(&ok, 16);
                 }
 
+        }else if(receivedata.mid(28,2) == "ff"){
+            bool ok = false;
+            mag_user1 = (receivedata.mid(4,4).toInt(&ok, 16));
+            if(mag_user1 >= 32768){
+                mag_user1 -= 65536;
+            }
+            mag_user2 = (receivedata.mid(8,4).toInt(&ok, 16));
+            if(mag_user2 >= 32768){
+                mag_user2 -= 65536;
+            }
+            mag_user3 = (receivedata.mid(12,4).toInt(&ok, 16));
+            if(mag_user3 >= 32768){
+                mag_user3 -= 65536;
+            }
+            mag_user4 = (receivedata.mid(16,4).toInt(&ok, 16));
+            if(mag_user4 >= 32768){
+                mag_user4 -= 65536;
+            }
+            mag_user5 = (receivedata.mid(20,4).toInt(&ok, 16));
+            if(mag_user5 >= 32768){
+                mag_user5 -= 65536;
+            }
+            mag_user6 = (receivedata.mid(24,4).toInt(&ok, 16));
+            if(mag_user6 >= 32768){
+                mag_user6 -= 65536;
+            }
         }
 //        std::cout<<" receivedata" + receivedata.toStdString()<<std::endl;
         m_receivedata= receivedata;//将某次收到的数据进行累加，因为如果不累加的话每次有readyread就会触发此函数，会重置m_receivedata，覆盖之前收到的数据
@@ -381,6 +417,46 @@ QString SerialTest::getMagCornerStr()
 qint64 SerialTest::getMagCorner()
 {
     return mag_corner;
+}
+
+qint64 SerialTest::getMagX()
+{
+    return mag_x;
+}
+
+qint64 SerialTest::getMagY()
+{
+    return mag_y;
+}
+
+qint64 SerialTest::getMagZ()
+{
+    return mag_z;
+}
+
+qint64 SerialTest::getMagUser1()
+{
+    return mag_user1;
+}
+qint64 SerialTest::getMagUser2()
+{
+    return mag_user2;
+}
+qint64 SerialTest::getMagUser3()
+{
+    return mag_user3;
+}
+qint64 SerialTest::getMagUser4()
+{
+    return mag_user4;
+}
+qint64 SerialTest::getMagUser5()
+{
+    return mag_user5;
+}
+qint64 SerialTest::getMagUser6()
+{
+    return mag_user6;
 }
 
 

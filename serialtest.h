@@ -1,4 +1,4 @@
-#ifndef SERIALTEST_H
+﻿#ifndef SERIALTEST_H
 #define SERIALTEST_H
 #include <QObject>
 #include <QtSerialPort/QSerialPort>
@@ -49,7 +49,17 @@ public:
     QString receiveMagCorner();
     Q_INVOKABLE void setMagCornerStr(QString cornerStr);
     Q_INVOKABLE QString getMagCornerStr();
+
     Q_INVOKABLE qint64 getMagCorner();
+    Q_INVOKABLE qint64 getMagX();
+    Q_INVOKABLE qint64 getMagY();
+    Q_INVOKABLE qint64 getMagZ();
+    Q_INVOKABLE qint64 getMagUser1();
+    Q_INVOKABLE qint64 getMagUser2();
+    Q_INVOKABLE qint64 getMagUser3();
+    Q_INVOKABLE qint64 getMagUser4();
+    Q_INVOKABLE qint64 getMagUser5();
+    Q_INVOKABLE qint64 getMagUser6();
 
     Q_INVOKABLE void openAndSetPort(QString PortName,int BaudRateIndex,int DatabitsIndex,int ParityIndex,int StopbitsIndex,int FlowcontrolIndex);//打开并设定端口;
     Q_INVOKABLE void closePort();//关闭端口;

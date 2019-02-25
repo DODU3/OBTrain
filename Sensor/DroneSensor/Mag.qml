@@ -262,7 +262,7 @@ Page {
     CharViewPage
     {
         id:charview
-        x:700
+        x:550
         y:155
         visible: true
     }
