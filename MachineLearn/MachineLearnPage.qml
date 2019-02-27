@@ -29,10 +29,10 @@ Page {
         }
 
         Button {
-            x: 163
-            y: 285
-            width: 150
-            height: 150
+            x: 313
+            y: 134
+            width: 250
+            height: 250
             text: qsTr("模型构建")
 
             background: Image {
@@ -48,10 +48,10 @@ Page {
 
         Button {
             id: button1
-            x: 565
-            y: 285
-            width: 150
-            height: 150
+            x: 827
+            y: 134
+            width: 250
+            height: 250
             text: qsTr("数据训练集")
 
             background: Image {
@@ -68,10 +68,10 @@ Page {
 
         Button {
             id: button5
-            x: 950
-            y: 285
-            width: 150
-            height: 150
+            x: 1332
+            y: 134
+            width: 250
+            height: 250
             text: qsTr("训练验证")
 
             background: Image {

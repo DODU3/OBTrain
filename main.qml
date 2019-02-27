@@ -14,6 +14,7 @@ ApplicationWindow {
     height: 1080
 //    property alias page1Form: page1Form
     title: qsTr("人工智能科教培训平台")
+    visibility: "Maximized"
 
     SwipeView {
         id: swipeView
@@ -75,23 +76,30 @@ ApplicationWindow {
 
         TabButton {
             text: qsTr("无人机")
+            font.pointSize: 15
         }
         TabButton {
             text: qsTr("物联网")
+            font.pointSize: 15
         }
 
         TabButton {
             text: qsTr("机器人")
+            font.pointSize: 15
         }
         TabButton {
             text: qsTr("视觉语音")
+            font.pointSize: 15
         }
 
         TabButton {
             text: qsTr("机器学习")
+            font.pointSize: 15
         }
         TabButton {
             text: qsTr("传感模组")
+            font.pointSize: 15
+
         }
     }
 }

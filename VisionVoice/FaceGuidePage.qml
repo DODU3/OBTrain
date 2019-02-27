@@ -12,7 +12,7 @@ Page {
     height: 1080
 
     background: Image {
-        source: "./images/FaceGuidePage.png"
+        source: "./images/FaceGuidePage.jpg"
     }
 
     Button {

@@ -9,8 +9,12 @@ ApplicationWindow {
     y: 0
     width: 600
     height: 100
+    maximumHeight:100
+    minimumHeight:100
+    maximumWidth:600
+    minimumWidth:600
 
-    title: "磁力计-教学资料"
+    title: "电子罗盘-教学资料"
 
     background: Image {
         source: "../../../images/background.png"
@@ -24,17 +28,22 @@ ApplicationWindow {
         font.bold: true
         font.pointSize: 20
 
-        MouseArea{
-            id:mouse_openppt
-            anchors.rightMargin: -2
-            anchors.bottomMargin: 0
-            anchors.leftMargin: 2
-            anchors.topMargin: 0
-            anchors.fill: parent
-            onPressed: {
-                mySystemOpenReg.openFile("/Content resource/磁力计模组/教学资料/教学PPT/磁力计模组PPT.ppt");
-            }
+        onClicked:
+        {
+            mySystemOpenReg.openFile("/Content resource/磁力计模组/教学资料/教学PPT/磁力计模组PPT.ppt");
         }
+
+//        MouseArea{
+//            id:mouse_openppt
+//            anchors.rightMargin: -2
+//            anchors.bottomMargin: 0
+//            anchors.leftMargin: 2
+//            anchors.topMargin: 0
+//            anchors.fill: parent
+//            onPressed: {
+//                mySystemOpenReg.openFile("/Content resource/磁力计模组/教学资料/教学PPT/磁力计模组PPT.ppt");
+//            }
+//        }
     }
 
 

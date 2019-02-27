@@ -38,39 +38,39 @@ Page {
 
     }
 
-    ComboBox {
-        id: comboBox
-        objectName: "portComboBox"
-        x: 144
-        y: 166
+//    ComboBox {
+//        id: comboBox
+//        objectName: "portComboBox"
+//        x: 144
+//        y: 166
 
-        model:comboModel.comboList
+//        model:comboModel.comboList
 
-    }
+//    }
 
-    Button {
-        id: button
-        x: 321
-        y: 166
-        text: qsTr("Connect")
+//    Button {
+//        id: button
+//        x: 321
+//        y: 166
+//        text: qsTr("Connect")
 
-        onClicked: {
-            var portName;
-            var keys = Object.keys(comboBox);
-            for(var i = 0; i < keys.length; i++) {
-                var key = keys[i];
-//                console.log(key + ' : ' + comboBox[key]);
+//        onClicked: {
+//            var portName;
+//            var keys = Object.keys(comboBox);
+//            for(var i = 0; i < keys.length; i++) {
+//                var key = keys[i];
+////                console.log(key + ' : ' + comboBox[key]);
 
-                if (key === "currentIndex") {
-//                    console.log("key FOUND:" + comboModel.getElement(key));
-                    portName = comboModel.getElement(key);
-                    break;
-                }
-            }
-//            myclassExposeByRegType1.openAndSetPort(portName,3,3,0,0,0);
+//                if (key === "currentIndex") {
+////                    console.log("key FOUND:" + comboModel.getElement(key));
+//                    portName = comboModel.getElement(key);
+//                    break;
+//                }
+//            }
+////            myclassExposeByRegType1.openAndSetPort(portName,3,3,0,0,0);
 
-        }
-    }
+//        }
+//    }
 
     TextEdit {
         id: textEdit
@@ -98,13 +98,18 @@ Page {
         x: 164
         y: 270
         text: qsTr("简介")
-        MouseArea{
-            id:mouseArea
-            anchors.fill: parent
-            onPressed: {
+        onClicked:
+        {
 //                mySystemOpenReg1.openMagPresent()
-            }
         }
+
+//        MouseArea{
+//            id:mouseArea
+//            anchors.fill: parent
+//            onPressed: {
+////                mySystemOpenReg1.openMagPresent()
+//            }
+//        }
     }
 
     Button {
@@ -112,14 +117,18 @@ Page {
         x: 164
         y: 487
         text: qsTr("工程实例")
-
-        MouseArea{
-            id:mouseProjectArea
-            anchors.fill: parent
-            onPressed: {
+        onClicked:
+        {
 //                mySystemOpenReg1.openProject()
-            }
         }
+
+//        MouseArea{
+//            id:mouseProjectArea
+//            anchors.fill: parent
+//            onPressed: {
+////                mySystemOpenReg1.openProject()
+//            }
+//        }
     }
 
     Button {

@@ -29,10 +29,10 @@ Page {
         }
 
         Button {
-            x: 168
-            y: 98
-            width: 150
-            height: 150
+            x: 313
+            y: 134
+            width: 250
+            height: 250
             text: qsTr("移动机器人")
 
             background: Image {
@@ -50,10 +50,10 @@ Page {
 
         Button {
             id: button1
-            x: 565
-            y: 98
-            width: 150
-            height: 150
+            x: 827
+            y: 134
+            width: 250
+            height: 250
             text: qsTr("机械臂")
 
             background: Image {
@@ -69,10 +69,10 @@ Page {
 
         Button {
             id: button5
-            x: 956
-            y: 98
-            width: 150
-            height: 150
+            x: 1332
+            y: 134
+            width: 250
+            height: 250
             text: qsTr("眼手协作")
 
             background: Image {
@@ -88,10 +88,10 @@ Page {
 
         Button {
             id: button3
-            x: 168
-            y: 389
-            width: 150
-            height: 150
+            x: 313
+            y: 532
+            width: 250
+            height: 250
             text: qsTr("传感模组")
 
             background: Image {
@@ -107,10 +107,10 @@ Page {
 
         Button {
             id: button4
-            x: 565
-            y: 389
-            width: 150
-            height: 150
+            x: 827
+            y: 532
+            width: 250
+            height: 250
             text: qsTr("配件软硬接口")
             transformOrigin: Item.Center
 
@@ -129,10 +129,10 @@ Page {
 
         Button {
             id: button2
-            x: 956
-            y: 389
-            width: 150
-            height: 150
+            x: 1332
+            y: 526
+            width: 250
+            height: 250
             text: qsTr("APP实现")
 
             background: Image {

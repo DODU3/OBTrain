@@ -12,7 +12,7 @@ Page {
     height: 1080
 
     background: Image {
-        source: "./images/MagGuidePage.jpg"
+        source: "./images/GestureGuidePage.jpg"
     }
 
     Button {
@@ -26,29 +26,29 @@ Page {
 
     Button {
         id: button
-        x: 1505
-        y: 841
-        width: 185
-        height: 63
+        x: 1491
+        y: 879
+        width: 181
+        height: 52
         text: qsTr("继续>>>>")
         font.family: "华文楷体"
         display: AbstractButton.TextBesideIcon
         anchors.right: parent.horizontalCenter
-        anchors.rightMargin: -730
+        anchors.rightMargin: -712
         anchors.bottom: parent.verticalCenter
-        anchors.bottomMargin: -364
+        anchors.bottomMargin: -391
         spacing: 7
         font.pixelSize: 35
         focusPolicy: Qt.NoFocus
         onClicked: {
             stack.pop();
-            pageMag.stack = stack;
-            stack.push(pageMag);
+            pagePerson.stack = stack;
+            stack.push(pagePerson);
         }
     }
 
-    Mag {
-        id: pageMag
+    Person {
+        id: pagePerson
         visible: false
         stack: stack
     }

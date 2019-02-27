@@ -29,10 +29,10 @@ Page {
         }
 
         Button {
-            x: 160
-            y: 85
-            width: 150
-            height: 150
+            x: 313
+            y: 134
+            width: 250
+            height: 250
             text: qsTr("基础局部网")
 
             background: Image {
@@ -48,10 +48,10 @@ Page {
 
         Button {
             id: button1
-            x: 565
-            y: 85
-            width: 150
-            height: 150
+            x: 827
+            y: 134
+            width: 250
+            height: 250
             text: qsTr("基础全局网")
 
             background: Image {
@@ -67,10 +67,10 @@ Page {
 
         Button {
             id: button5
-            x: 927
-            y: 85
-            width: 150
-            height: 150
+            x: 1332
+            y: 134
+            width: 250
+            height: 250
             text: qsTr("节点协作")
 
             background: Image {
@@ -86,10 +86,10 @@ Page {
 
         Button {
             id: button3
-            x: 160
-            y: 392
-            width: 150
-            height: 150
+            x: 313
+            y: 532
+            width: 250
+            height: 250
             text: qsTr("传感模组")
 
             background: Image {
@@ -105,10 +105,10 @@ Page {
 
         Button {
             id: button4
-            x: 565
-            y: 392
-            width: 150
-            height: 150
+            x: 827
+            y: 532
+            width: 250
+            height: 250
             text: qsTr("配件软硬接口")
             transformOrigin: Item.Center
 
@@ -127,10 +127,10 @@ Page {
 
         Button {
             id: button2
-            x: 927
-            y: 392
-            width: 150
-            height: 150
+            x: 1332
+            y: 532
+            width: 250
+            height: 250
             text: qsTr("APP实现")
 
             background: Image {
@@ -176,6 +176,8 @@ Page {
         visible: false
     }
 }
+
+
 
 /*##^## Designer {
     D{i:0;autoSize:true;height:480;width:640}

@@ -15,7 +15,7 @@ Item {
     function setBearing(headingIn)
     {
         heading = headingIn
-        backRotation.angle = -heading
+        backRotation.angle = heading
     }
 
     Item {
@@ -33,9 +33,10 @@ Item {
                 id: backRotation
                 angle: 0
                 origin.x: background.width / 2; origin.y: background.height / 2;
-                Behavior on angle {
-                    SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
-                }
+//                Behavior on angle {
+//                    SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
+////                    SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
+//                }
             }
         }
 
@@ -55,7 +56,7 @@ Item {
 
     Timer {
         //Timer for demo rotation of compass
-        interval: 200
+        interval: 50
         running: true
         repeat: true
         onTriggered: {

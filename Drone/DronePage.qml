@@ -31,10 +31,10 @@ Page {
         }
 
         Button {
-            x: 166
-            y: 82
-            width: 150
-            height: 150
+            x: 313
+            y: 134
+            width: 250
+            height: 250
             text: qsTr("航拍机")
 
 
@@ -51,10 +51,10 @@ Page {
 
         Button {
             id: button1
-            x: 565
-            y: 82
-            width: 150
-            height: 150
+            x: 827
+            y: 134
+            width: 250
+            height: 250
             text: qsTr("巡航机")
 
             background: Image {
@@ -70,10 +70,10 @@ Page {
 
         Button {
             id: button5
-            x: 948
-            y: 82
-            width: 150
-            height: 150
+            x: 1332
+            y: 134
+            width: 250
+            height: 250
             text: qsTr("折叠机")
 
             background: Image {
@@ -89,10 +89,10 @@ Page {
 
         Button {
             id: button3
-            x: 166
-            y: 354
-            width: 150
-            height: 150
+            x: 313
+            y: 526
+            width: 250
+            height: 250
             text: qsTr("传感模组")
 
             background: Image {
@@ -108,10 +108,10 @@ Page {
 
         Button {
             id: button4
-            x: 565
-            y: 354
-            width: 150
-            height: 150
+            x: 827
+            y: 526
+            width: 250
+            height: 250
             text: qsTr("配件软硬接口")
             transformOrigin: Item.Center
 
@@ -130,10 +130,10 @@ Page {
 
         Button {
             id: button2
-            x: 948
-            y: 361
-            width: 150
-            height: 150
+            x: 1332
+            y: 526
+            width: 250
+            height: 250
             text: qsTr("APP实现")
 
             background: Image {

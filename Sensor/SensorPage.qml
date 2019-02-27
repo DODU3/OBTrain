@@ -33,10 +33,10 @@ Page {
         }
 
         Button {
-            x: 348
-            y: 118
-            width: 150
-            height: 150
+            x: 537
+            y: 134
+            width: 250
+            height: 250
             text: qsTr("无人机")
 
             background: Image {
@@ -53,10 +53,10 @@ Page {
 
         Button {
             id: button1
-            x: 786
-            y: 118
-            width: 150
-            height: 150
+            x: 1168
+            y: 134
+            width: 250
+            height: 250
             text: qsTr("物联网")
 
             background: Image {
@@ -72,10 +72,10 @@ Page {
 
         Button {
             id: button5
-            x: 348
-            y: 383
-            width: 150
-            height: 150
+            x: 537
+            y: 532
+            width: 250
+            height: 250
             text: qsTr("机器人")
 
             background: Image {
@@ -91,10 +91,10 @@ Page {
 
         Button {
             id: button4
-            x: 786
-            y: 383
-            width: 150
-            height: 150
+            x: 1168
+            y: 532
+            width: 250
+            height: 250
             text: qsTr("视觉语音")
             transformOrigin: Item.Center
 
@@ -133,6 +133,10 @@ Page {
         visible: false
     }
 }
+
+
+
+
 
 
 

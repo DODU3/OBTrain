@@ -13,7 +13,7 @@ ApplicationWindow {
     width: 400
     height: 400
 
-    title: "磁力计-实时数据"
+    title: "电子罗盘-实时数据"
 
     property real demoHeading
     property int realCompass

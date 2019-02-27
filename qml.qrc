@@ -181,5 +181,12 @@
         <file>VisionVoice/FaceGuidePage.qml</file>
         <file>VisionVoice/PersonGuidePage.qml</file>
         <file>Sensor/DroneSensor/MagGuide.qml</file>
+        <file>Sensor/DroneSensor/images/MagGuidePage.jpg</file>
+        <file>VisionVoice/images/FaceGuidePage.jpg</file>
+        <file>VisionVoice/images/GestureGuidePage.jpg</file>
+        <file>VisionVoice/images/PersonGuidePage.jpg</file>
+        <file>VisionVoice/GestureGuidePage.qml</file>
+        <file>Sensor/DroneSensor/MagPage/MagCalibrationPage.qml</file>
+        <file>Sensor/DroneSensor/images/Calibration.jpg</file>
     </qresource>
 </RCC>

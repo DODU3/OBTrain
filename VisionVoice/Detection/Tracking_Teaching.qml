@@ -1,4 +1,4 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 import "../../Component"
 
@@ -90,21 +90,25 @@ Page {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
         anchors.horizontalCenter: parent.horizontalCenter
-
-        MouseArea{
-            id:back_examples
-            x: 568
-            y: 647
-            width: 106
-            height: 40
-            anchors.horizontalCenterOffset: 0
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 0
-            anchors.horizontalCenter: parent.horizontalCenter
-            onPressed: {
-                stack.pop()
-            }
+        onClicked:
+        {
+            stack.pop()
         }
+
+//        MouseArea{
+//            id:back_examples
+//            x: 568
+//            y: 647
+//            width: 106
+//            height: 40
+//            anchors.horizontalCenterOffset: 0
+//            anchors.bottom: parent.bottom
+//            anchors.bottomMargin: 0
+//            anchors.horizontalCenter: parent.horizontalCenter
+//            onPressed: {
+//                stack.pop()
+//            }
+//        }
     }
 }
 

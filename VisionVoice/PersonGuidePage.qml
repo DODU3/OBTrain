@@ -12,7 +12,7 @@ Page {
     height: 1080
 
     background: Image {
-        source: "./images/PersonGuidePage.png"
+        source: "./images/PersonGuidePage.jpg"
     }
 
     Button {
@@ -42,13 +42,13 @@ Page {
         focusPolicy: Qt.NoFocus
         onClicked: {
             stack.pop();
-            pagePerson.stack = stack;
-            stack.push(pagePerson);
+            pageGesture.stack = stack;
+            stack.push(pageGesture);
         }
     }
 
-    Person {
-        id: pagePerson
+    GestureGuidePage {
+        id: pageGesture
         visible: false
         stack: stack
     }

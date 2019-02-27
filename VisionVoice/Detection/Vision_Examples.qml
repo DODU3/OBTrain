@@ -1,4 +1,4 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 import "../../Component"
 import "./"
@@ -71,13 +71,18 @@ Page {
         anchors.top: posture_recoginition.bottom
         anchors.topMargin: 25
 
-        MouseArea{
-            id:person_project
-            anchors.fill: parent
-            onPressed: {
-                system_open_visual_program.openHuman()
-            }
+        onClicked:
+        {
+            system_open_visual_program.openHuman();
         }
+
+//        MouseArea{
+//            id:person_project
+//            anchors.fill: parent
+//            onPressed: {
+//                system_open_visual_program.openHuman()
+//            }
+//        }
     }
 
     Button {
@@ -112,13 +117,18 @@ Page {
         anchors.top: camera_connect.bottom
         anchors.topMargin: 25
 
-        MouseArea{
-            id:tracking_project
-            anchors.fill: parent
-            onPressed: {
-                system_open_visual_program.openKCF()
-            }
+        onClicked:
+        {
+            system_open_visual_program.openKCF();
         }
+
+//        MouseArea{
+//            id:tracking_project
+//            anchors.fill: parent
+//            onPressed: {
+//                system_open_visual_program.openKCF()
+//            }
+//        }
     }
 
     Button {
@@ -129,13 +139,18 @@ Page {
         anchors.top: visual_tracking.bottom
         anchors.topMargin: 25
 
-        MouseArea{
-            id:posture_project
-            anchors.fill: parent
-            onPressed: {
-                system_open_visual_program.openPosture()
-            }
+        onClicked:
+        {
+            system_open_visual_program.openPosture();
         }
+
+//        MouseArea{
+//            id:posture_project
+//            anchors.fill: parent
+//            onPressed: {
+//                system_open_visual_program.openPosture()
+//            }
+//        }
     }
 
     Button {
@@ -146,15 +161,22 @@ Page {
         anchors.top: camera_connect_teaching.bottom
         anchors.topMargin: 25
 
-        MouseArea{
-            id:tracking_teaching_page
-            anchors.fill: parent
-            onPressed: {
-                page21.visible = true;
-                page21.stack = stack;
-                stack.push(page21);
-            }
+        onClicked:
+        {
+            page21.visible = true;
+            page21.stack = stack;
+            stack.push(page21);
         }
+
+//        MouseArea{
+//            id:tracking_teaching_page
+//            anchors.fill: parent
+//            onPressed: {
+//                page21.visible = true;
+//                page21.stack = stack;
+//                stack.push(page21);
+//            }
+//        }
     }
 
     Button {

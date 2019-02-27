@@ -30,7 +30,16 @@ Page {
         text: "<-"
         anchors.left: parent.left
         anchors.top: parent.top
-        onClicked: stack.pop()
+        onClicked: {
+            if(true === myclassExposeByRegType.getserialOpenFlag()){
+                //myclassExposeByRegType.closePort();
+                qmlToggleButton.toggleRight();
+//                qmlToggleButton.state = "right";
+//                qmlToggleButton.color = "#CCCCCC";
+
+            }
+            stack.pop()
+        }
     }
 
     ComboBox {
@@ -42,6 +51,21 @@ Page {
         font.pointSize: 20
 
         model:comboModel.comboList
+//        model: portlistmodel
+
+//        pressed: true
+//        down: true
+
+//        MouseArea{
+//            onPressed: {
+//                console.info("aa");
+//                myclassExposeByRegType.getPortInfo();
+//                comboModel.setComboList(myclassExposeByRegType.receivePort());
+//            }
+//        }
+        onActivated: {
+            console.info("aa");
+        }
 
     }
 
@@ -54,10 +78,18 @@ Page {
         anchors.verticalCenterOffset: -472
         anchors.horizontalCenterOffset: -614
         width: 106
-        leftString: qsTr("打开")
-        rightString: qsTr("关闭")
+//        leftString: qsTr("打开")
+//        rightString: qsTr("关闭")
+
 //        onToggleLeft: label.text = qmlToggleButton.leftString
 //        onToggleRight: label.text = qmlToggleButton.rightString
+//        onToggleLeft: {
+//            timerSend.start();
+//        }
+
+//        onToggleRight: {
+//            timerSend.stop();
+//        }
 
 
     }
@@ -70,17 +102,24 @@ Page {
         font.bold: true
         font.pointSize: 20
 
-        MouseArea{
-            id:mouseSetArea
-            anchors.rightMargin: 0
-            anchors.bottomMargin: 0
-            anchors.leftMargin: 0
-            anchors.topMargin: 0
-            anchors.fill: parent
-            onPressed: {
-                rfsetpage.show();
-            }
+        onClicked:
+        {
+            rfsetpage.show();
+//            rfsetpage.flags.Dialog;
+
         }
+
+//        MouseArea{
+//            id:mouseSetArea
+//            anchors.rightMargin: 0
+//            anchors.bottomMargin: 0
+//            anchors.leftMargin: 0
+//            anchors.topMargin: 0
+//            anchors.fill: parent
+//            onPressed: {
+//                rfsetpage.show();
+//            }
+//        }
     }
 
 
@@ -103,20 +142,26 @@ Page {
         text: qsTr("教学资料")
         font.bold: true
         font.pointSize: 20
-        MouseArea{
-                    id:mouseArea
-                    anchors.rightMargin: -1
-                    anchors.bottomMargin: -2
-                    anchors.leftMargin: 1
-                    anchors.topMargin: 2
-                    anchors.fill: parent
-                    onPressed: {
-                maginfopage.show();
-//                page11.visible = true;
-//                page11.stack = stack;
-//                stack.push(page11);
-            }
+
+        onClicked:
+        {
+            maginfopage.show();
         }
+
+//        MouseArea{
+//                    id:mouseArea
+//                    anchors.rightMargin: -1
+//                    anchors.bottomMargin: -2
+//                    anchors.leftMargin: 1
+//                    anchors.topMargin: 2
+//                    anchors.fill: parent
+//                    onPressed: {
+//                maginfopage.show();
+////                page11.visible = true;
+////                page11.stack = stack;
+////                stack.push(page11);
+//            }
+//        }
     }
 
 
@@ -202,26 +247,32 @@ Page {
         font.bold: true
         font.pointSize: 20
 
-        MouseArea{
-            id:mouseProjectArea
-            anchors.rightMargin: 0
-            anchors.bottomMargin: 0
-            anchors.leftMargin: 0
-            anchors.topMargin: 0
-            anchors.fill: parent
-            onPressed: {
-//                mySystemOpenReg.openProject()
-
-                magprojectdeveloppage.active;
-                magprojectdeveloppage.show();
-                //magprojectdeveloppage.x;
-            }
+        onClicked:
+        {
+            magprojectdeveloppage.active;
+            magprojectdeveloppage.show();
         }
+
+//        MouseArea{
+//            id:mouseProjectArea
+//            anchors.rightMargin: 0
+//            anchors.bottomMargin: 0
+//            anchors.leftMargin: 0
+//            anchors.topMargin: 0
+//            anchors.fill: parent
+//            onPressed: {
+////                mySystemOpenReg.openProject()
+
+//                magprojectdeveloppage.active;
+//                magprojectdeveloppage.show();
+//                //magprojectdeveloppage.x;
+//            }
+//        }
     }
 
     Connections {
         target: qmlToggleButton
-        onToggleLeft: {
+        onToggleRight: {
             myclassExposeByRegType.closePort();
 
         }
@@ -230,7 +281,7 @@ Page {
 
     Connections {
         target: qmlToggleButton
-        onToggleRight: {
+        onToggleLeft: {
             var portName;
             var keys = Object.keys(comboBox);
             for(var i = 0; i < keys.length; i++) {
@@ -267,22 +318,39 @@ Page {
         visible: true
     }
 
-    MagBasicRecAndSendPage{
-        id:magbasicrecandsendpage
-
-        x:1263
-        y:595
-        width: 400
+    Rectangle {
+        x:1262
+        y:594
+        width: 402
         height: 400
+        color: "#00000000"
+        border.width: 1
+
+        MagBasicRecAndSendPage{
+            id:magbasicrecandsendpage
+            x:2
+            y:2
+            width: 400
+            height: 400
+        }
     }
 
-    MagDataApplicatePage{
-        id:magdataapplicatepage
 
+    Rectangle {
         x:1263
         y:155
-        width: 400
+        width: 402
         height: 400
+        color: "#00000000"
+        border.width: 1
+
+        MagDataApplicatePage{
+            id:magdataapplicatepage
+            x:2
+            y:2
+            width: 400
+            height: 400
+        }
     }
 
     MagControlPage{
@@ -300,10 +368,26 @@ Page {
 //        myclassExposeByRegType.setMagCornerStr("0° 北")
         myclassExposeByRegType.getPortInfo();
         comboModel.setComboList(myclassExposeByRegType.receivePort());
+//        portlistmodel.append({"portnam" : "hello"});
+//        portlistmodel.append({"portnam" : "hel2lo"});
+//        portlistmodel.append("zark");
 
     }
 
+//    ListModel {
+//        id: portlistmodel
+//        ListElement {
+//            portnam: "COM1"
+//        }
+//    }
 
+//    ListView {
+//        anchors.fill: parent
+//        model: portlistmodel
+//        delegate: Row {
+//            Text { text: portname}
+//        }
+//    }
 
     MagDataPage{
         id:magdatapage
@@ -320,4 +404,20 @@ Page {
     MagProjectDevelopPage{
         id:magprojectdeveloppage
     }
+
+//    Timer {
+
+//        id:timerSend
+
+//        interval: 50
+////        running: true
+//        repeat: true
+
+//        onTriggered: {
+//            if(true === myclassExposeByRegType.getserialOpenFlag()){
+//                myclassExposeByRegType.sendto("ff5580808080080000000000000000000000");
+
+//            }
+//        }
+//    }
 }

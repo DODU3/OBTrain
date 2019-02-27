@@ -10,8 +10,12 @@ ApplicationWindow {
     y: 0
     width: 480
     height: 100
+    maximumHeight:100
+    minimumHeight:100
+    maximumWidth:480
+    minimumWidth:480
 
-    title: "磁力计-工程实例"
+    title: "电子罗盘-工程实例"
 
     background: Image {
         source: "../../../images/background.png"
@@ -25,17 +29,22 @@ ApplicationWindow {
         font.bold: true
         font.pointSize: 20
 
-        MouseArea{
-            id:mouse_openppt
-            anchors.rightMargin: 0
-            anchors.bottomMargin: 0
-            anchors.leftMargin: 0
-            anchors.topMargin: 0
-            anchors.fill: parent
-            onPressed: {
-                mySystemOpenReg.openFile("/Content resource/磁力计模组/Demo_Mag/Drone_Templates/Projects/Project.uvprojx");
-            }
+        onClicked:
+        {
+            mySystemOpenReg.openFile("/Content resource/磁力计模组/Demo_Mag/Drone_Templates/Projects/Project.uvprojx");
         }
+
+//        MouseArea{
+//            id:mouse_openppt
+//            anchors.rightMargin: 0
+//            anchors.bottomMargin: 0
+//            anchors.leftMargin: 0
+//            anchors.topMargin: 0
+//            anchors.fill: parent
+//            onPressed: {
+//                mySystemOpenReg.openFile("/Content resource/磁力计模组/Demo_Mag/Drone_Templates/Projects/Project.uvprojx");
+//            }
+//        }
     }
 
 

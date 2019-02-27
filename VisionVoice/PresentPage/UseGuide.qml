@@ -1,4 +1,4 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 
 import QtMultimedia 5.4
@@ -42,20 +42,28 @@ Page {
         y: 300
         text: qsTr("OB图传")
         font.pixelSize: 18
-        MouseArea{
-            id:mouseAreaVideo
-            visible: true
-            anchors.rightMargin: -30
-            anchors.bottomMargin: 0
-            anchors.leftMargin: 30
-            anchors.topMargin: 0
-            anchors.fill: parent
-            onPressed: {
-                page1.visible = true;
-                page1.stack = stack;
-                stack.push(page1);
-            }
+
+        onClicked:
+        {
+            page1.visible = true;
+            page1.stack = stack;
+            stack.push(page1);
         }
+
+//        MouseArea{
+//            id:mouseAreaVideo
+//            visible: true
+//            anchors.rightMargin: -30
+//            anchors.bottomMargin: 0
+//            anchors.leftMargin: 30
+//            anchors.topMargin: 0
+//            anchors.fill: parent
+//            onPressed: {
+//                page1.visible = true;
+//                page1.stack = stack;
+//                stack.push(page1);
+//            }
+//        }
     }
 
     Button {
@@ -64,15 +72,23 @@ Page {
         y: 300
         text: qsTr("人脸识别")
         font.pixelSize: 18
-        MouseArea{
-            id:mouseAreaUseFaceDetect
-            anchors.fill: parent
-            onPressed: {
-                page2.visible = true;
-                page2.stack = stack;
-                stack.push(page2);
-            }
+
+        onClicked:
+        {
+            page2.visible = true;
+            page2.stack = stack;
+            stack.push(page2);
         }
+
+//        MouseArea{
+//            id:mouseAreaUseFaceDetect
+//            anchors.fill: parent
+//            onPressed: {
+//                page2.visible = true;
+//                page2.stack = stack;
+//                stack.push(page2);
+//            }
+//        }
     }
 
     OBVideo {

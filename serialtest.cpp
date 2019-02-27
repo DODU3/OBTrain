@@ -7,7 +7,9 @@
 #include <QDateTime>
 #include <QQmlProperty>
 #include <stdio.h>
-
+#include <QPointF>
+#include <QTimer>
+#include <QtCore>
 
 SerialTest::Settings currentsetting;//定义设定值结构体的结构体变量
 QSerialPort serialtest;
@@ -26,14 +28,19 @@ QString mag_cornerStr("0\xc2\xb0 \xe5\x8c\x97");
 
 QString m_serialSaveAndApp("");
 
-qint64 c_sendnumber,c_receivenumber;
+static qint64 c_sendnumber,c_receivenumber;
 
-bool settingAddrFlag = false;
+static bool settingAddrFlag = false;
 
-int addr1 = 0;
-int addr2 = 0;
-int addr3 = 0;
-int addrch = 0;
+static int addr1 = 0;
+static int addr2 = 0;
+static int addr3 = 0;
+static int addrch = 0;
+
+static bool serialOpenFlag = false;
+static bool serialDrawClearFlag = false;
+
+static QTimer timerSend;
 
 SerialTest::SerialTest(QSerialPort *parent):
     QSerialPort (parent),
@@ -41,6 +48,9 @@ SerialTest::SerialTest(QSerialPort *parent):
     m_receivenumber("0"),
     m_sendnumber("0")
 {
+//    QTimer *timerSend = new QTimer(this);
+    timerSend.setInterval(50);
+    QObject::connect(&timerSend, SIGNAL(timeout()), this, SLOT(timersendtimeout()));
     QObject::connect(&serialtest, SIGNAL(readyRead()),this, SLOT(receivefrom()));//将端口收到数据产生的信号绑定receivefrom()函数;
 }
 
@@ -107,6 +117,11 @@ void SerialTest::openAndSetPort(QString PortName,
         {
             std::cout<<"set sucess"<<std::endl;
         }
+
+        serialDrawClearFlag = true;
+        serialOpenFlag = true;
+        clearSerialDataAll();
+        timerSend.start();
     }
 }
 
@@ -182,7 +197,8 @@ void SerialTest::setRFaddr(QString addr1,QString addr2,QString addr3,QString cha
 //    command += strchannel;
 //        command += "0000";
 
-    QString command = "ff5580808080080029";
+//    QString command = "ff5580808080080029";
+    QString command = "";
     QString straddr1 ;
     QString straddr2 ;
     QString straddr3 ;
@@ -205,19 +221,20 @@ void SerialTest::setRFaddr(QString addr1,QString addr2,QString addr3,QString cha
     command += straddr1;
     command += strchannel;
 
-    command += "0000";
+    command += "00";
 
 //    std::cout<<" value:" + command.toStdString()<<std::endl;
 
-    sendto(command);
-
+//    sendto(command);
+    sendCMD("29", "808080800800", command);
 }
 
 void SerialTest::setMagCorner(int yawValue,int rollValue)
 {
     QString yaw = QString("%1").arg(yawValue, 4, 16, QLatin1Char( '0' ));
     QString roll = QString("%1").arg(rollValue, 4, 16, QLatin1Char( '0' ));
-    QString command = "ff55000000000000280000";
+//    QString command = "ff55000000000000280000";
+    QString command = "0000";
     if(roll.length() >4){
         command += roll.mid(12,4);
     }else{
@@ -228,9 +245,10 @@ void SerialTest::setMagCorner(int yawValue,int rollValue)
     command += yaw;
     command += "000000";
 
-    std::cout<<" value" + command.toStdString()<<std::endl;
+//    std::cout<<" value" + command.toStdString()<<std::endl;
 
-    sendto(command);
+//    sendto(command);
+    sendCMD("28", "808080800800", command);
 
 }
 
@@ -240,22 +258,54 @@ QStringList SerialTest:: receivePort()
     return m_portInfo;
 }
 
+static quint8 heartbeat = 0;
+
 ////////////////////4.发送数据//////////////////////////////
 void SerialTest::sendto(QString sendmessage)//此函数由qml里的send按钮触发，sendmessage来源于qml文本框的当前文本，
 {
-    QString value =  sendmessage.mid(0);    // "FFFF"   <- just the hex values!
-//    std::cout<<" value" + value.toStdString()<<std::endl;
-    QByteArray data = QByteArray::fromHex(value.toLatin1());
-//    QByteArray data = sendmessage.toLocal8Bit()+'\r';//将QString转为QByteArray，并加上'\r'（回车符）,因为芯片要求在回车符之后再返回数据
+    if(true == serialOpenFlag){
+        heartbeat++;
+        QString heartbeatStr = QString("%1").arg(heartbeat, 2, 16, QLatin1Char( '0' ));
+        QString value =  sendmessage.mid(0, 34) + heartbeatStr;    // "FFFF"   <- just the hex values!
+//        std::cout<<" value" + value.toStdString()<<std::endl;
+        QByteArray data = QByteArray::fromHex(value.toLatin1());
+    //    QByteArray data = sendmessage.toLocal8Bit()+'\r';//将QString转为QByteArray，并加上'\r'（回车符）,因为芯片要求在回车符之后再返回数据
 
-    qint64 testwritenumber=serialtest.write(data);//写入数据
+        qint64 testwritenumber=serialtest.write(data);//写入数据
 
-    m_receivedata=m_receivedata+"\n";//加上换行符便于显示
+        m_receivedata=m_receivedata+"\n";//加上换行符便于显示
 
-    c_sendnumber=c_sendnumber+testwritenumber-1;//发送数据字节数统计（减去回车符）
-    setsendnumber(QString ::number(c_sendnumber));//更新发送的数据字节总数
+        c_sendnumber=c_sendnumber+testwritenumber-1;//发送数据字节数统计（减去回车符）
+        setsendnumber(QString ::number(c_sendnumber));//更新发送的数据字节总数
 
-    addSerialDataAll("Tx:" + sendmessage);
+//        addSerialDataAll("Tx:" + value);
+    }
+}
+
+static int CMDsendtime = 0;
+static QString CMDFormat;
+
+void SerialTest::sendCMD(QString cmd, QString data1, QString data2){
+
+    CMDFormat = "ff55" + data1.mid(0,12) + cmd.mid(0,2) + data2.mid(0,16);
+
+//    qDebug() << CMDFormat;
+    addSerialDataAll("Tx:" + CMDFormat);
+
+//    CMDFormat = QByteArray::fromHex(value.toLatin1());
+
+    CMDsendtime = 3;
+
+}
+
+void SerialTest::timersendtimeout(void){
+    if(CMDsendtime <= 0){
+        sendto("ff5580808080080000000000000000000000");
+    }
+    else{
+        CMDsendtime--;
+        sendto(CMDFormat);
+    }
 }
 
 void SerialTest::setsendnumber(QString sendnumber)//更新发送的数据字节总数，触发sendnumberChanged()的消息响应函数sendnumber()来更新显示
@@ -281,7 +331,7 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
     {
         if(receivedata.mid(28,2) == "01"){
             bool ok = false;
-            qint64 corner = (receivedata.mid(4,2).toInt(&ok, 16) * 256 + receivedata.mid(6,2).toInt(&ok, 16))/10;
+            qint64 corner = (receivedata.mid(4,4).toInt(&ok, 16))/10;
             int x = (receivedata.mid(8,4).toInt(&ok, 16));
             if(x >= 32768){
                 x -= 65536;
@@ -525,10 +575,31 @@ QString SerialTest::getaddrch(void){
     return QString::number(addrch);
 }
 
+
+qreal SerialTest::getQpointFX(QPointF pointf){
+    return pointf.x();
+}
+
+qreal SerialTest::getQpointFY(QPointF pointf){
+    return pointf.y();
+}
+
 QString SerialTest::randomNumStr(int min, int max){
     int Range = max - min;
     int randa = rand();
     return QString::number((randa % Range) + min);
+}
+
+bool SerialTest::getserialOpenFlag(void){
+    return serialOpenFlag;
+}
+
+bool SerialTest::getserialDrawClearFlag(void){
+    return serialDrawClearFlag;
+}
+
+void SerialTest::setserialDrawClearFlag(bool trueOrFalse){
+    serialDrawClearFlag = trueOrFalse;
 }
 
 ////////////////////5.关闭端口//////////////////////////////
@@ -536,6 +607,8 @@ void SerialTest::closePort()//由按钮出发
 {
     serialtest.close();
     std::cout<<"close port sucess"<<std::endl;
+    serialOpenFlag = false;
+    timerSend.stop();
 }
 
 

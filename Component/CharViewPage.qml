@@ -3,209 +3,970 @@ import QtCharts 2.0
 import QtQuick.Controls 2.2
 
 Item {
-    width: 600
+    width: 700
     height: 800
 
-    property int globalForJs: 0;
+    property int globalForJs: 1;
+    property int flag_chartupdata: 0;
+    property int value_Max_axisy: 20;
+    property int value_Min_axisy: -20;
+    property int temp_data: 0;
+    property int tem2p_data: 0;
+    property int tem3p_data: 0;
 
+    property int temp_data_max: 0;
+    property int temp_data_min: 0;
 
+    property int temp2_data_max: 0;
+    property int temp2_data_min: 0;
 
     ChartView{
-        title: "Spline"
-        width: 600
-        height: 420
+        id: chart
+        title: "实时数据"
+        width: 700
+        height: 488
         antialiasing: true
 
         ValueAxis {
             id: axisX
             min: 0
-            max: 1000
+            max: 200
             tickCount: 1
         }
 
         ValueAxis {
             id: axisy
-            min: 0
-            max: 1000
+            min: value_Min_axisy
+            max: value_Max_axisy
             tickCount: 1
         }
 
-        SplineSeries {
-            id:cornerLine
+        LineSeries {
+            id:angleLine
             axisX: axisX
             axisY: axisy
-            name: "Corner"
+            name: "Angle"
+            onClicked: {
+                var p = chart.mapToPosition(point);
+                var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
+                id_tooltip.x = p.x;
+                id_tooltip.y = p.y - id_tooltip.height;
+                id_tooltip.text = text;
+                id_tooltip.visible = true;
+
+            }
         }
-        SplineSeries {
+        LineSeries {
             id:xLine
             axisX: axisX
             axisY: axisy
             name: "X"
+            onClicked: {
+                var p = chart.mapToPosition(point);
+                var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
+                id_tooltip.x = p.x;
+                id_tooltip.y = p.y - id_tooltip.height;
+                id_tooltip.text = text;
+                id_tooltip.visible = true;
 
+            }
         }
-        SplineSeries {
+        LineSeries {
             id:yLine
             axisX: axisX
             axisY: axisy
             name: "Y"
+            onClicked: {
+                var p = chart.mapToPosition(point);
+                var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
+                id_tooltip.x = p.x;
+                id_tooltip.y = p.y - id_tooltip.height;
+                id_tooltip.text = text;
+                id_tooltip.visible = true;
 
+            }
         }
-        SplineSeries {
+        LineSeries {
             id:zLine
             axisX: axisX
             axisY: axisy
             name: "Z"
+            onClicked: {
+                var p = chart.mapToPosition(point);
+                var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
+                id_tooltip.x = p.x;
+                id_tooltip.y = p.y - id_tooltip.height;
+                id_tooltip.text = text;
+                id_tooltip.visible = true;
 
+            }
         }
-        SplineSeries {
+        LineSeries {
             id:user1Line
             axisX: axisX
             axisY: axisy
             name: "User1"
+            onClicked: {
+                var p = chart.mapToPosition(point);
+                var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
+                id_tooltip.x = p.x;
+                id_tooltip.y = p.y - id_tooltip.height;
+                id_tooltip.text = text;
+                id_tooltip.visible = true;
 
+            }
         }
-        SplineSeries {
+        LineSeries {
             id:user2Line
             axisX: axisX
             axisY: axisy
             name: "User2"
+            onClicked: {
+                var p = chart.mapToPosition(point);
+                var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
+                id_tooltip.x = p.x;
+                id_tooltip.y = p.y - id_tooltip.height;
+                id_tooltip.text = text;
+                id_tooltip.visible = true;
 
+            }
         }
-        SplineSeries {
+        LineSeries {
             id:user3Line
             axisX: axisX
             axisY: axisy
             name: "User3"
+            onClicked: {
+                var p = chart.mapToPosition(point);
+                var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
+                id_tooltip.x = p.x;
+                id_tooltip.y = p.y - id_tooltip.height;
+                id_tooltip.text = text;
+                id_tooltip.visible = true;
 
+            }
         }
-        SplineSeries {
+        LineSeries {
             id:user4Line
             axisX: axisX
             axisY: axisy
             name: "User4"
+            onClicked: {
+                var p = chart.mapToPosition(point);
+                var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
+                id_tooltip.x = p.x;
+                id_tooltip.y = p.y - id_tooltip.height;
+                id_tooltip.text = text;
+                id_tooltip.visible = true;
 
+            }
         }
-        SplineSeries {
+        LineSeries {
             id:user5Line
             axisX: axisX
             axisY: axisy
             name: "User5"
+            onClicked: {
+                var p = chart.mapToPosition(point);
+                var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
+                id_tooltip.x = p.x;
+                id_tooltip.y = p.y - id_tooltip.height;
+                id_tooltip.text = text;
+                id_tooltip.visible = true;
 
+            }
         }
-        SplineSeries {
+        LineSeries {
             id:user6Line
             axisX: axisX
             axisY: axisy
             name: "User6"
+            onClicked: {
+                var p = chart.mapToPosition(point);
+                var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
+                id_tooltip.x = p.x;
+                id_tooltip.y = p.y - id_tooltip.height;
+                id_tooltip.text = text;
+                id_tooltip.visible = true;
 
+            }
         }
 
         Timer {
             //Timer for demo rotation of compass
 
-            interval: 200
+            interval: 50
             running: true
             repeat: true
 
             onTriggered: {
-                cornerLine.append(globalForJs,myclassExposeByRegType.getMagCorner());
-                xLine.append(globalForJs,myclassExposeByRegType.getMagX());
-                yLine.append(globalForJs,myclassExposeByRegType.getMagY());
-                zLine.append(globalForJs,myclassExposeByRegType.getMagZ());
-                user1Line.append(globalForJs,myclassExposeByRegType.getMagUser1());
-                user2Line.append(globalForJs,myclassExposeByRegType.getMagUser2());
-                user3Line.append(globalForJs,myclassExposeByRegType.getMagUser3());
-                user4Line.append(globalForJs,myclassExposeByRegType.getMagUser4());
-                user5Line.append(globalForJs,myclassExposeByRegType.getMagUser5());
-                user6Line.append(globalForJs,myclassExposeByRegType.getMagUser6());
-
-                if(globalForJs > axisX.max){
-                    axisX.min+=200;
-                    axisX.max+=200;
-                }else{
-                    globalForJs +=200;; //This else is just to stop incrementing the variable unnecessarily
+                if(true === myclassExposeByRegType.getserialDrawClearFlag()){
+                    angleLine.clear();
+                    xLine.clear();
+                    yLine.clear();
+                    zLine.clear();
+                    user1Line.clear();
+                    user2Line.clear();
+                    user3Line.clear();
+                    user4Line.clear();
+                    user5Line.clear();
+                    user6Line.clear();
+                    globalForJs = 1;
+                    axisX.min = 0;
+                    axisX.max = 200;
+                    myclassExposeByRegType.setserialDrawClearFlag(false);
                 }
+
+
+
+//                console.log("angleLine: " + myclassExposeByRegType.getQpointFY(angleLine.at(globalForJs-1))+"   "+globalForJs);
+                if(true === myclassExposeByRegType.getserialOpenFlag())
+                {
+                    flag_chartupdata=0;
+
+                    temp_data=myclassExposeByRegType.getMagCorner();
+                    angleLine.append(globalForJs,temp_data);
+                    if(checkBox_angle.checkState == Qt.Checked)
+                    {
+                        angleLine.visible=true;
+                        //获取当前曲线显示区域的最大值最小值
+                        for(tem2p_data=axisX.min;tem2p_data<axisX.max;tem2p_data++)
+                        {
+                            tem3p_data=myclassExposeByRegType.getQpointFY(angleLine.at(tem2p_data));
+                            if(tem2p_data==axisX.min)
+                            {
+                                temp_data_max=tem3p_data;
+                                temp_data_min=tem3p_data;
+                            }
+                            else
+                            {
+                                if(tem3p_data>temp_data_max)
+                                {
+                                    temp_data_max=tem3p_data;
+                                }
+                                if(tem3p_data<temp_data_min)
+                                {
+                                    temp_data_min=tem3p_data;
+                                }
+                            }
+                        }
+
+                        //获取多条曲线的最大值最小值
+                        if(0==flag_chartupdata)
+                        {
+                            temp2_data_max=temp_data_max;
+                            temp2_data_min=temp_data_min;
+                            flag_chartupdata=1;
+                        }
+                        else
+                        {
+                            if(temp_data_max>temp2_data_max)
+                            {
+                                temp2_data_max=temp_data_max;
+                            }
+                            if(temp_data_min<temp2_data_min)
+                            {
+                                temp2_data_min=temp_data_min;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        angleLine.visible=false;
+                    }
+
+                    temp_data=myclassExposeByRegType.getMagX();
+                    xLine.append(globalForJs,temp_data);
+                    if(checkBox_xline.checkState == Qt.Checked)
+                    {
+                        xLine.visible=true;
+                        //获取当前曲线显示区域的最大值最小值
+                        for(tem2p_data=axisX.min;tem2p_data<axisX.max;tem2p_data++)
+                        {
+                            tem3p_data=myclassExposeByRegType.getQpointFY(xLine.at(tem2p_data));
+                            if(tem2p_data==axisX.min)
+                            {
+                                temp_data_max=tem3p_data;
+                                temp_data_min=tem3p_data;
+                            }
+                            else
+                            {
+                                if(tem3p_data>temp_data_max)
+                                {
+                                    temp_data_max=tem3p_data;
+                                }
+                                if(tem3p_data<temp_data_min)
+                                {
+                                    temp_data_min=tem3p_data;
+                                }
+
+                            }
+
+                        }
+
+                        //获取多条曲线的最大值最小值
+                        if(0==flag_chartupdata)
+                        {
+                            temp2_data_max=temp_data_max;
+                            temp2_data_min=temp_data_min;
+                            flag_chartupdata=1;
+                        }
+                        else
+                        {
+                            if(temp_data_max>temp2_data_max)
+                            {
+                                temp2_data_max=temp_data_max;
+                            }
+                            if(temp_data_min<temp2_data_min)
+                            {
+                                temp2_data_min=temp_data_min;
+                            }
+                        }
+                    }
+                    else
+                    {
+//                        xLine.clear();
+                        xLine.visible=false;
+                    }
+
+                    temp_data=myclassExposeByRegType.getMagY();
+                    yLine.append(globalForJs,temp_data);
+                    if(checkBox_yline.checkState == Qt.Checked)
+                    {
+                        yLine.visible=true;
+                        //获取当前曲线显示区域的最大值最小值
+                        for(tem2p_data=axisX.min;tem2p_data<axisX.max;tem2p_data++)
+                        {
+                            tem3p_data=myclassExposeByRegType.getQpointFY(yLine.at(tem2p_data));
+                            if(tem2p_data==axisX.min)
+                            {
+                                temp_data_max=tem3p_data;
+                                temp_data_min=tem3p_data;
+                            }
+                            else
+                            {
+                                if(tem3p_data>temp_data_max)
+                                {
+                                    temp_data_max=tem3p_data;
+                                }
+                                if(tem3p_data<temp_data_min)
+                                {
+                                    temp_data_min=tem3p_data;
+                                }
+                            }
+                        }
+
+                        //获取多条曲线的最大值最小值
+                        if(0==flag_chartupdata)
+                        {
+                            temp2_data_max=temp_data_max;
+                            temp2_data_min=temp_data_min;
+                            flag_chartupdata=1;
+                        }
+                        else
+                        {
+                            if(temp_data_max>temp2_data_max)
+                            {
+                                temp2_data_max=temp_data_max;
+                            }
+                            if(temp_data_min<temp2_data_min)
+                            {
+                                temp2_data_min=temp_data_min;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        yLine.visible=false;
+                    }
+
+                    temp_data=myclassExposeByRegType.getMagZ();
+                    zLine.append(globalForJs,temp_data);
+                    if(checkBox_zline.checkState == Qt.Checked)
+                    {
+                        zLine.visible=true;
+                        //获取当前曲线显示区域的最大值最小值
+                        for(tem2p_data=axisX.min;tem2p_data<axisX.max;tem2p_data++)
+                        {
+                            tem3p_data=myclassExposeByRegType.getQpointFY(zLine.at(tem2p_data));
+                            if(tem2p_data==axisX.min)
+                            {
+                                temp_data_max=tem3p_data;
+                                temp_data_min=tem3p_data;
+                            }
+                            else
+                            {
+                                if(tem3p_data>temp_data_max)
+                                {
+                                    temp_data_max=tem3p_data;
+                                }
+                                if(tem3p_data<temp_data_min)
+                                {
+                                    temp_data_min=tem3p_data;
+                                }
+
+                            }
+
+                        }
+
+                        //获取多条曲线的最大值最小值
+                        if(0==flag_chartupdata)
+                        {
+                            temp2_data_max=temp_data_max;
+                            temp2_data_min=temp_data_min;
+                            flag_chartupdata=1;
+                        }
+                        else
+                        {
+                            if(temp_data_max>temp2_data_max)
+                            {
+                                temp2_data_max=temp_data_max;
+                            }
+                            if(temp_data_min<temp2_data_min)
+                            {
+                                temp2_data_min=temp_data_min;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        zLine.visible=false;
+                    }
+
+                    user1Line.visible=true;
+                    temp_data=myclassExposeByRegType.getMagUser1();
+                    if(checkBox_user1.checkState == Qt.Checked)
+                    {
+                        user1Line.append(globalForJs,temp_data);
+                        //获取当前曲线显示区域的最大值最小值
+                        for(tem2p_data=axisX.min;tem2p_data<axisX.max;tem2p_data++)
+                        {
+                            tem3p_data=myclassExposeByRegType.getQpointFY(user1Line.at(tem2p_data));
+                            if(tem2p_data==axisX.min)
+                            {
+                                temp_data_max=tem3p_data;
+                                temp_data_min=tem3p_data;
+                            }
+                            else
+                            {
+                                if(tem3p_data>temp_data_max)
+                                {
+                                    temp_data_max=tem3p_data;
+                                }
+                                if(tem3p_data<temp_data_min)
+                                {
+                                    temp_data_min=tem3p_data;
+                                }
+
+                            }
+
+                        }
+
+                        //获取多条曲线的最大值最小值
+                        if(0==flag_chartupdata)
+                        {
+                            temp2_data_max=temp_data_max;
+                            temp2_data_min=temp_data_min;
+                            flag_chartupdata=1;
+                        }
+                        else
+                        {
+                            if(temp_data_max>temp2_data_max)
+                            {
+                                temp2_data_max=temp_data_max;
+                            }
+                            if(temp_data_min<temp2_data_min)
+                            {
+                                temp2_data_min=temp_data_min;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        user1Line.visible=false;
+                    }
+
+
+                    temp_data=myclassExposeByRegType.getMagUser2();
+                    user2Line.append(globalForJs,temp_data);
+                    if(checkBox_user2.checkState == Qt.Checked)
+                    {
+                        user2Line.visible=true;
+                        //获取当前曲线显示区域的最大值最小值
+                        for(tem2p_data=axisX.min;tem2p_data<axisX.max;tem2p_data++)
+                        {
+                            tem3p_data=myclassExposeByRegType.getQpointFY(user2Line.at(tem2p_data));
+                            if(tem2p_data==axisX.min)
+                            {
+                                temp_data_max=tem3p_data;
+                                temp_data_min=tem3p_data;
+                            }
+                            else
+                            {
+                                if(tem3p_data>temp_data_max)
+                                {
+                                    temp_data_max=tem3p_data;
+                                }
+                                if(tem3p_data<temp_data_min)
+                                {
+                                    temp_data_min=tem3p_data;
+                                }
+
+                            }
+
+                        }
+
+                        //获取多条曲线的最大值最小值
+                        if(0==flag_chartupdata)
+                        {
+                            temp2_data_max=temp_data_max;
+                            temp2_data_min=temp_data_min;
+                            flag_chartupdata=1;
+                        }
+                        else
+                        {
+                            if(temp_data_max>temp2_data_max)
+                            {
+                                temp2_data_max=temp_data_max;
+                            }
+                            if(temp_data_min<temp2_data_min)
+                            {
+                                temp2_data_min=temp_data_min;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        user2Line.visible=false;
+                    }
+
+                    temp_data=myclassExposeByRegType.getMagUser3();
+                    user3Line.append(globalForJs,temp_data);
+                    if(checkBox_user3.checkState == Qt.Checked)
+                    {
+                        user3Line.visible=true;
+                        //获取当前曲线显示区域的最大值最小值
+                        for(tem2p_data=axisX.min;tem2p_data<axisX.max;tem2p_data++)
+                        {
+                            tem3p_data=myclassExposeByRegType.getQpointFY(user3Line.at(tem2p_data));
+                            if(tem2p_data==axisX.min)
+                            {
+                                temp_data_max=tem3p_data;
+                                temp_data_min=tem3p_data;
+                            }
+                            else
+                            {
+                                if(tem3p_data>temp_data_max)
+                                {
+                                    temp_data_max=tem3p_data;
+                                }
+                                if(tem3p_data<temp_data_min)
+                                {
+                                    temp_data_min=tem3p_data;
+                                }
+
+                            }
+
+                        }
+
+                        //获取多条曲线的最大值最小值
+                        if(0==flag_chartupdata)
+                        {
+                            temp2_data_max=temp_data_max;
+                            temp2_data_min=temp_data_min;
+                            flag_chartupdata=1;
+                        }
+                        else
+                        {
+                            if(temp_data_max>temp2_data_max)
+                            {
+                                temp2_data_max=temp_data_max;
+                            }
+                            if(temp_data_min<temp2_data_min)
+                            {
+                                temp2_data_min=temp_data_min;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        user3Line.visible=false;
+                    }
+
+                    temp_data=myclassExposeByRegType.getMagUser4();
+                    user4Line.append(globalForJs,temp_data);
+                    if(checkBox_user4.checkState == Qt.Checked)
+                    {
+                        user4Line.visible=true;
+                        //获取当前曲线显示区域的最大值最小值
+                        for(tem2p_data=axisX.min;tem2p_data<axisX.max;tem2p_data++)
+                        {
+                            tem3p_data=myclassExposeByRegType.getQpointFY(user4Line.at(tem2p_data));
+                            if(tem2p_data==axisX.min)
+                            {
+                                temp_data_max=tem3p_data;
+                                temp_data_min=tem3p_data;
+                            }
+                            else
+                            {
+                                if(tem3p_data>temp_data_max)
+                                {
+                                    temp_data_max=tem3p_data;
+                                }
+                                if(tem3p_data<temp_data_min)
+                                {
+                                    temp_data_min=tem3p_data;
+                                }
+
+                            }
+
+                        }
+
+                        //获取多条曲线的最大值最小值
+                        if(0==flag_chartupdata)
+                        {
+                            temp2_data_max=temp_data_max;
+                            temp2_data_min=temp_data_min;
+                            flag_chartupdata=1;
+                        }
+                        else
+                        {
+                            if(temp_data_max>temp2_data_max)
+                            {
+                                temp2_data_max=temp_data_max;
+                            }
+                            if(temp_data_min<temp2_data_min)
+                            {
+                                temp2_data_min=temp_data_min;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        user4Line.visible=false;
+                    }
+
+                    temp_data=myclassExposeByRegType.getMagUser5();
+                    user5Line.append(globalForJs,temp_data);
+                    if(checkBox_user5.checkState == Qt.Checked)
+                    {
+                        user5Line.visible=true;
+                        //获取当前曲线显示区域的最大值最小值
+                        for(tem2p_data=axisX.min;tem2p_data<axisX.max;tem2p_data++)
+                        {
+                            tem3p_data=myclassExposeByRegType.getQpointFY(user5Line.at(tem2p_data));
+                            if(tem2p_data==axisX.min)
+                            {
+                                temp_data_max=tem3p_data;
+                                temp_data_min=tem3p_data;
+                            }
+                            else
+                            {
+                                if(tem3p_data>temp_data_max)
+                                {
+                                    temp_data_max=tem3p_data;
+                                }
+                                if(tem3p_data<temp_data_min)
+                                {
+                                    temp_data_min=tem3p_data;
+                                }
+
+                            }
+
+                        }
+
+                        //获取多条曲线的最大值最小值
+                        if(0==flag_chartupdata)
+                        {
+                            temp2_data_max=temp_data_max;
+                            temp2_data_min=temp_data_min;
+                            flag_chartupdata=1;
+                        }
+                        else
+                        {
+                            if(temp_data_max>temp2_data_max)
+                            {
+                                temp2_data_max=temp_data_max;
+                            }
+                            if(temp_data_min<temp2_data_min)
+                            {
+                                temp2_data_min=temp_data_min;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        user5Line.visible=false;
+                    }
+
+                    temp_data=myclassExposeByRegType.getMagUser6();
+                    user6Line.append(globalForJs,temp_data);
+                    if(checkBox_user6.checkState == Qt.Checked)
+                    {
+                        user6Line.visible=true;
+                        //获取当前曲线显示区域的最大值最小值
+                        for(tem2p_data=axisX.min;tem2p_data<axisX.max;tem2p_data++)
+                        {
+                            tem3p_data=myclassExposeByRegType.getQpointFY(user6Line.at(tem2p_data));
+                            if(tem2p_data==axisX.min)
+                            {
+                                temp_data_max=tem3p_data;
+                                temp_data_min=tem3p_data;
+                            }
+                            else
+                            {
+                                if(tem3p_data>temp_data_max)
+                                {
+                                    temp_data_max=tem3p_data;
+                                }
+                                if(tem3p_data<temp_data_min)
+                                {
+                                    temp_data_min=tem3p_data;
+                                }
+
+                            }
+
+                        }
+
+                        //获取多条曲线的最大值最小值
+                        if(0==flag_chartupdata)
+                        {
+                            temp2_data_max=temp_data_max;
+                            temp2_data_min=temp_data_min;
+                            flag_chartupdata=1;
+                        }
+                        else
+                        {
+                            if(temp_data_max>temp2_data_max)
+                            {
+                                temp2_data_max=temp_data_max;
+                            }
+                            if(temp_data_min<temp2_data_min)
+                            {
+                                temp2_data_min=temp_data_min;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        user6Line.visible=false;
+                    }
+                    if(flag_chartupdata)
+                    {
+                        globalForJs +=1; //This else is just to stop incrementing the variable unnecessarily
+
+                        if(globalForJs > axisX.max){
+                            axisX.min+=1;
+                            axisX.max+=1;
+                        }
+                    }
+                }
+
+                value_Max_axisy=temp2_data_max+100;
+                value_Min_axisy=temp2_data_min-100;
             }
         }
     }
 
     CheckBox {
-        id: checkBox
+        id: checkBox_angle
         x: 15
-        y: 443
+        y: 513
         text: qsTr("实时角度")
+        font.bold: true
+        font.pointSize: 20
         checkState: Qt.Checked
+
+        nextCheckState: function() {
+            if (checkState == Qt.Checked){
+                return Qt.Unchecked
+            }
+            else{
+                return Qt.Checked
+            }
+        }
     }
 
     CheckBox {
-        id: checkBox1
-        x: 171
-        y: 443
-        text: qsTr("X 轴")
+        id: checkBox_xline
+        x: 15
+        y: 567
+        text: qsTr("X轴原始数据")
+        font.bold: true
+        font.pointSize: 20
         checkState: Qt.Checked
+
+        nextCheckState: function() {
+            if (checkState == Qt.Checked){
+                return Qt.Unchecked
+            }
+            else{
+                return Qt.Checked
+            }
+        }
     }
 
     CheckBox {
-        id: checkBox2
-        x: 326
-        y: 443
-        text: qsTr("Y 轴")
+        id: checkBox_yline
+        x: 216
+        y: 567
+        text: qsTr("Y轴原始数据")
+        font.bold: true
+        font.pointSize: 20
         checkState: Qt.Checked
+
+        nextCheckState: function() {
+            if (checkState == Qt.Checked){
+                return Qt.Unchecked
+            }
+            else{
+                return Qt.Checked
+            }
+        }
     }
 
     CheckBox {
-        id: checkBox3
-        x: 481
-        y: 443
-        text: qsTr("Z 轴")
+        id: checkBox_zline
+        x: 417
+        y: 567
+        text: qsTr("Z轴原始数据")
+        font.bold: true
+        font.pointSize: 20
         checkState: Qt.Checked
+
+        nextCheckState: function() {
+            if (checkState == Qt.Checked){
+                return Qt.Unchecked
+            }
+            else{
+                return Qt.Checked
+            }
+        }
     }
 
     CheckBox {
-        id: checkBox4
-        x: 88
-        y: 509
-        text: qsTr("用户1")
-        checkState: Qt.Checked
+        id: checkBox_user1
+        x: 15
+        y: 641
+        text: qsTr("用户数据1")
+        font.bold: true
+        font.pointSize: 20
+        checkState: Qt.Unchecked
+
+        nextCheckState: function() {
+            if (checkState == Qt.Checked){
+                return Qt.Unchecked
+            }
+            else{
+                return Qt.Checked
+            }
+        }
     }
 
     CheckBox {
-        id: checkBox5
-        x: 250
-        y: 509
-        text: qsTr("用户2")
-        checkState: Qt.Checked
+        id: checkBox_user2
+        x: 198
+        y: 641
+        text: qsTr("用户数据2")
+        font.bold: true
+        font.pointSize: 20
+        checkState: Qt.Unchecked
+
+        nextCheckState: function() {
+            if (checkState == Qt.Checked){
+                return Qt.Unchecked
+            }
+            else{
+                return Qt.Checked
+            }
+        }
     }
 
     CheckBox {
-        id: checkBox6
-        x: 411
-        y: 509
-        text: qsTr("用户3")
-        checkState: Qt.Checked
+        id: checkBox_user3
+        x: 381
+        y: 641
+        text: qsTr("用户数据3")
+        font.bold: true
+        font.pointSize: 20
+        checkState: Qt.Unchecked
+
+        nextCheckState: function() {
+            if (checkState == Qt.Checked){
+                return Qt.Unchecked
+            }
+            else{
+                return Qt.Checked
+            }
+        }
     }
 
     CheckBox {
-        id: checkBox7
-        x: 88
-        y: 571
-        text: qsTr("用户4")
-        checkState: Qt.Checked
+        id: checkBox_user4
+        x: 15
+        y: 709
+        text: qsTr("用户数据4")
+        font.bold: true
+        font.pointSize: 20
+        checkState: Qt.Unchecked
+
+        nextCheckState: function() {
+            if (checkState == Qt.Checked){
+                return Qt.Unchecked
+            }
+            else{
+                return Qt.Checked
+            }
+        }
     }
 
     CheckBox {
-        id: checkBox8
-        x: 250
-        y: 571
-        text: qsTr("用户5")
-        checkState: Qt.Checked
+        id: checkBox_user5
+        x: 198
+        y: 709
+        text: qsTr("用户数据5")
+        font.bold: true
+        font.pointSize: 20
+        checkState: Qt.Unchecked
+
+        nextCheckState: function() {
+            if (checkState == Qt.Checked){
+                return Qt.Unchecked
+            }
+            else{
+                return Qt.Checked
+            }
+        }
     }
 
     CheckBox {
-        id: checkBox9
-        x: 411
-        y: 571
-        text: qsTr("用户6")
-        checkState: Qt.Checked
+        id: checkBox_user6
+        x: 381
+        y: 709
+        text: qsTr("用户数据6")
+        font.bold: true
+        font.pointSize: 20
+        checkState: Qt.Unchecked
+
+        nextCheckState: function() {
+            if (checkState == Qt.Checked){
+                return Qt.Unchecked
+            }
+            else{
+                return Qt.Checked
+            }
+        }
     }
+
+    ToolTip {
+        id: id_tooltip
+        contentItem: Text {
+            color: "black"
+            text: id_tooltip.text
+        }
+        background:  Rectangle {
+            border.color: "black"
+        }
+    }
+
 }

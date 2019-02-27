@@ -7,7 +7,7 @@
 #include <QQmlApplicationEngine>
 #include "portmodel.h"
 #include<iostream>
-
+#include <QPointF>
 
 
 class SerialTest : public QSerialPort
@@ -64,6 +64,7 @@ public:
     Q_INVOKABLE void openAndSetPort(QString PortName,int BaudRateIndex,int DatabitsIndex,int ParityIndex,int StopbitsIndex,int FlowcontrolIndex);//打开并设定端口;
     Q_INVOKABLE void closePort();//关闭端口;
     Q_INVOKABLE void sendto(QString sendmessage);//发送数据;
+    Q_INVOKABLE void sendCMD(QString cmd, QString data1, QString data2);
     Q_INVOKABLE void clearnumber();//数据统计清零;
     Q_INVOKABLE void getPortInfo();
 
@@ -88,6 +89,13 @@ public:
     Q_INVOKABLE void addserialSaveAndApp(QString receivedata);
     Q_INVOKABLE void clearserialSaveAndApp(void);
 
+    Q_INVOKABLE qreal getQpointFX(QPointF pointf);
+    Q_INVOKABLE qreal getQpointFY(QPointF pointf);
+	
+    Q_INVOKABLE bool getserialOpenFlag(void);
+    Q_INVOKABLE bool getserialDrawClearFlag(void);
+    Q_INVOKABLE void setserialDrawClearFlag(bool trueOrFalse);
+
 signals:
     void receivedataChanged();
 
@@ -99,6 +107,7 @@ signals:
 
 public slots:
     void receivefrom();//信号（收到数据激发的信号）响应函数
+    void timersendtimeout();
 private:
     QString m_receivedata;
     QString m_sendnumber,m_receivenumber;

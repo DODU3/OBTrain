@@ -1,4 +1,4 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 
 import QtMultimedia 5.4
@@ -52,16 +52,21 @@ Page {
         x: 64
         y: 186
         text: qsTr("简介")
-
-        MouseArea{
-            id:mouseArea
-            anchors.fill: parent
-            onPressed: {
-                page1.visible = true;
-                page1.stack = stack;
-                stack.push(page1);
-            }
+        onClicked:
+        {
+            page1.visible = true;
+            page1.stack = stack;
+            stack.push(page1);
         }
+//        MouseArea{
+//            id:mouseArea
+//            anchors.fill: parent
+//            onPressed: {
+//                page1.visible = true;
+//                page1.stack = stack;
+//                stack.push(page1);
+//            }
+//        }
     }
 
     Button {
@@ -78,32 +83,45 @@ Page {
         y: 400
         text: qsTr("视频")
 
-        MouseArea{
-            id:mouseVideo1Area
-            anchors.rightMargin: 0
-            anchors.bottomMargin: 19
-            anchors.leftMargin: 0
-            anchors.topMargin: -19
-            anchors.fill: parent
-            onPressed: {
-                page2.visible = true;
-                page2.stack = stack;
-                stack.push(page2);
-            }
+        onClicked:
+        {
+            page2.visible = true;
+            page2.stack = stack;
+            stack.push(page2);
         }
+
+//        MouseArea{
+//            id:mouseVideo1Area
+//            anchors.rightMargin: 0
+//            anchors.bottomMargin: 19
+//            anchors.leftMargin: 0
+//            anchors.topMargin: -19
+//            anchors.fill: parent
+//            onPressed: {
+//                page2.visible = true;
+//                page2.stack = stack;
+//                stack.push(page2);
+//            }
+//        }
     }
     Button {
         id: button3
         x: 64
         y: 500
         text: qsTr("人脸识别 ")
-        MouseArea{
-            id:mouseProjectArea
-            anchors.fill: parent
-            onPressed: {
-                mySystemOpenReg.openFaceDBW()
-            }
+
+        onClicked:
+        {
+            mySystemOpenReg.openFaceDBW();
         }
+
+//        MouseArea{
+//            id:mouseProjectArea
+//            anchors.fill: parent
+//            onPressed: {
+//                mySystemOpenReg.openFaceDBW()
+//            }
+//        }
     }
 
     ComboBox {
@@ -135,15 +153,23 @@ Page {
         x: 64
         y: 250
         text: qsTr("使用教程")
-        MouseArea{
-            id:mouseAreaUseGuide
-            anchors.fill: parent
-            onPressed: {
-                page3.visible = true;
-                page3.stack = stack;
-                stack.push(page3);
-            }
+
+        onClicked:
+        {
+            page3.visible = true;
+            page3.stack = stack;
+            stack.push(page3);
         }
+
+//        MouseArea{
+//            id:mouseAreaUseGuide
+//            anchors.fill: parent
+//            onPressed: {
+//                page3.visible = true;
+//                page3.stack = stack;
+//                stack.push(page3);
+//            }
+//        }
     }
 
     Button {

@@ -22,10 +22,10 @@ Page {
     }
 
     Button {
-        x: 439
-        y: 239
-        width: 150
-        height: 150
+        x: 191
+        y: 134
+        width: 250
+        height: 250
         text: qsTr("GPS")
 
         background: Image {
@@ -41,10 +41,10 @@ Page {
 
     Button {
         id: button1
-        x: 711
-        y: 239
-        width: 150
-        height: 150
+        x: 623
+        y: 134
+        width: 250
+        height: 250
         text: qsTr("陀螺仪加速器")
 
         onClicked: {
@@ -60,10 +60,10 @@ Page {
 
     Button {
         id: button5
-        x: 1014
-        y: 239
-        width: 150
-        height: 150
+        x: 1035
+        y: 134
+        width: 250
+        height: 250
         text: qsTr("气压计定高")
 
         onClicked: {
@@ -81,10 +81,10 @@ Page {
 
     Button {
         id: button3
-        x: 1311
-        y: 239
-        width: 150
-        height: 150
+        x: 1465
+        y: 134
+        width: 250
+        height: 250
         text: qsTr("超声避障")
 
         onClicked: {
@@ -100,11 +100,12 @@ Page {
 
     Button {
         id: button
-        x: 530
-        y: 546
-        width: 200
-        height: 200
-        text: qsTr("磁力计")
+        x: 445
+        y: 532
+        width: 250
+        height: 250
+        text: qsTr("电子罗盘")
+
 
         onClicked: {
             page8.visible = true;
@@ -119,10 +120,10 @@ Page {
 
     Button {
         id: button4
-        x: 875
-        y: 546
-        width: 219
-        height: 180
+        x: 866
+        y: 532
+        width: 250
+        height: 250
         text: qsTr("光流")
         transformOrigin: Item.Center
 
@@ -141,10 +142,10 @@ Page {
 
     Button {
         id: button2
-        x: 1264
-        y: 546
-        width: 202
-        height: 180
+        x: 1297
+        y: 532
+        width: 250
+        height: 250
         text: qsTr("红外对位")
 
         onClicked: {

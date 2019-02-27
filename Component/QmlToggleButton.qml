@@ -24,7 +24,7 @@ Rectangle {
         width: parent.width * 0.6
         radius: parent.radius
         color: rect.state == "left"? "#4040FF" : "#CCCCCC"
-        state: "left"
+        state: "right"
         anchors {
             top: parent.top
             bottom: parent.bottom

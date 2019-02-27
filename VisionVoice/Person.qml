@@ -1,4 +1,4 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 import ".."
 import "./Detection"
@@ -41,15 +41,23 @@ Page {
         text: qsTr("AI简介与机器学习")
         anchors.right: image.left
         anchors.rightMargin: 12
-        MouseArea{
-            id:mouseArea1
-            anchors.fill: parent
-            onPressed: {
-                page1.visible = true;
-                page1.stack = stack;
-                stack.push(page1);
-            }
+
+        onClicked:
+        {
+            page1.visible = true;
+            page1.stack = stack;
+            stack.push(page1);
         }
+
+//        MouseArea{
+//            id:mouseArea1
+//            anchors.fill: parent
+//            onPressed: {
+//                page1.visible = true;
+//                page1.stack = stack;
+//                stack.push(page1);
+//            }
+//        }
     }
 
     Button {
@@ -61,15 +69,23 @@ Page {
         text: qsTr("人体检测例程")
         anchors.right: image.left
         anchors.rightMargin: 12
-        MouseArea{
-            id:mouseArea2
-            anchors.fill: parent
-            onPressed: {
-                page10.visible = true;
-                page10.stack = stack;
-                stack.push(page10);
-            }
+
+        onClicked:
+        {
+            page10.visible = true;
+            page10.stack = stack;
+            stack.push(page10);
         }
+
+//        MouseArea{
+//            id:mouseArea2
+//            anchors.fill: parent
+//            onPressed: {
+//                page10.visible = true;
+//                page10.stack = stack;
+//                stack.push(page10);
+//            }
+//        }
     }
 
     Button {
@@ -81,15 +97,23 @@ Page {
         text: qsTr("视觉跟踪例程")
         anchors.right: image.left
         anchors.rightMargin: 12
-        MouseArea{
-            id:mouseArea3
-            anchors.fill: parent
-            onPressed: {
-                page10.visible = true;
-                page10.stack = stack;
-                stack.push(page10);
-            }
+
+        onClicked:
+        {
+            page10.visible = true;
+            page10.stack = stack;
+            stack.push(page10);
         }
+
+//        MouseArea{
+//            id:mouseArea3
+//            anchors.fill: parent
+//            onPressed: {
+//                page10.visible = true;
+//                page10.stack = stack;
+//                stack.push(page10);
+//            }
+//        }
     }
 
     Button {

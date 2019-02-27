@@ -43,12 +43,16 @@ Page {
         x: 51
         y: 148
         text: qsTr("简介")
-        MouseArea{
-            anchors.fill: parent
-            onClicked: {
-                fileDialog1.open()
-            }
+        onClicked:
+        {
+            fileDialog1.open();
         }
+//        MouseArea{
+//            anchors.fill: parent
+//            onClicked: {
+//                fileDialog1.open()
+//            }
+//        }
     }
 
 
@@ -58,15 +62,18 @@ Page {
         x: 51
         y: 251
         text: qsTr("工程实例")
-
-
-        MouseArea{
-            id:mouseArea
-            anchors.fill: parent
-            onPressed: {
-                console.debug(qsTr("点击了插件中的按钮"));
-            }
+        onClicked:
+        {
+            console.debug(qsTr("点击了插件中的按钮"));
         }
+
+//        MouseArea{
+//            id:mouseArea
+//            anchors.fill: parent
+//            onPressed: {
+//                console.debug(qsTr("点击了插件中的按钮"));
+//            }
+//        }
     }
 
     FileDialog {

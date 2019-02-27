@@ -23,8 +23,8 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<dataFresh>("RegisterDataFresh", 1, 0, "MyDataFresh");
 
-
     QQmlApplicationEngine engine;
+
     portModel combo;
     QQmlContext *ownContext = engine.rootContext();
     ownContext->setContextProperty("myModel", QVariant::fromValue(combo.comboList()));
@@ -35,7 +35,6 @@ int main(int argc, char *argv[])
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;
-
 
 
     return app.exec();

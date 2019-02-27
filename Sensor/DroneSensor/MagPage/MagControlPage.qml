@@ -18,10 +18,10 @@ Item {
 
     Label{
         id: label
-        text: qsTr("X轴操作")
+        text: qsTr("X轴控制")
         font.bold: true
-        anchors.verticalCenterOffset: -56
-        anchors.horizontalCenterOffset: -128
+        anchors.verticalCenterOffset: -131
+        anchors.horizontalCenterOffset: -121
         height: 30
         width: 110
         anchors.centerIn: parent
@@ -30,12 +30,12 @@ Item {
 
     Label {
         id: label1
-        x: 22
-        y: 54
+        x: 24
+        y: 127
         width: 112
         height: 35
         font.pixelSize: 30
-        text: qsTr("Z轴操作")
+        text: qsTr("Z轴控制")
         font.bold: true
     }
 
@@ -46,14 +46,21 @@ Item {
         text: qsTr("复位")
         font.bold: true
         font.pointSize: 22
-
-        //        MouseArea{
+        onClicked:
+        {
+            slider.value = 0;
+            slider1.value = 0;
+//                myclassExposeByRegType.sendto("ff5580808080080027000000000000000000");
+            myclassExposeByRegType.sendCMD("27", "808080800800", "0000000000000000");
+        }
+//                MouseArea{
 //            id:mouseResetArea
 //            anchors.fill: parent
 //            onPressed: {
 //                slider.value = 0;
 //                slider1.value = 0;
-//                myclassExposeByRegType.sendto("ff5580808080080027000000000000000000");
+////                myclassExposeByRegType.sendto("ff5580808080080027000000000000000000");
+//                myclassExposeByRegType.sendCMD("27", "808080800800", "0000000000000000");
 //            }
 //        }
     }
@@ -66,12 +73,27 @@ Item {
         font.bold: true
         font.pointSize: 22
 
-        //        MouseArea{
+        onClicked:
+        {
+            mymagcalibrationpage.show();
+//                mymagcalibrationpage.setX(400);
+//                mymagcalibrationpage.setY(150);
+
+//                myclassExposeByRegType.sendto("ff5580808080080002000000000000000000");
+            myclassExposeByRegType.sendCMD("02", "808080800800", "0000000000000000");
+            timera.start();
+        }
+//                MouseArea{
 //            id:mouseVerifyArea
 //            anchors.fill: parent
 //            onPressed: {
+//                mymagcalibrationpage.show();
+////                mymagcalibrationpage.setX(400);
+////                mymagcalibrationpage.setY(150);
 
-//                myclassExposeByRegType.sendto("ff5580808080080002000000000000000000");
+////                myclassExposeByRegType.sendto("ff5580808080080002000000000000000000");
+//               myclassExposeByRegType.sendCMD("02", "808080800800", "0000000000000000");
+//                timera.start();
 //            }
 //        }
     }
@@ -84,16 +106,17 @@ Item {
         font.pointSize: 22
         font.bold: true
 
-        checkState: allChildrenChecked ? Qt.Checked :
-                       anyChildChecked ? Qt.PartiallyChecked : Qt.Unchecked
+        checkState: Qt.Checked
 
         nextCheckState: function() {
             if (checkState == Qt.Checked){
-                myclassExposeByRegType.sendto("ff5580808080080002b00000000000000000");
+                //myclassExposeByRegType.sendto("ff558080808008002b000000000000000000");
+                myclassExposeByRegType.sendCMD("2b", "808080800800", "0000000000000000");
                 return Qt.Unchecked
             }
             else{
-                myclassExposeByRegType.sendto("ff5580808080080002b01000000000000000");
+//                myclassExposeByRegType.sendto("ff558080808008002b010000000000000000");
+                myclassExposeByRegType.sendCMD("2b", "808080800800", "0100000000000000");
                 return Qt.Checked
             }
         }
@@ -150,10 +173,32 @@ Item {
         }
     }
 
-//    MyClassType
-//    {
-//        id:myclassExposeByRegType
-//    }
+    Timer {
+
+        id:timera
+
+        interval: 45000
+//        running: true
+        repeat: false
+        triggeredOnStart: false
+
+        onTriggered: {
+            timera.stop();
+            mymagcalibrationpage.close();
+//            console.info("close");
+        }
+    }
+
+    MyClassType
+    {
+        id:myclassExposeByRegType
+    }
+
+    MagCalibrationPage{
+        id:mymagcalibrationpage
+        x: 400
+        y: 150
+    }
 
 
 }
