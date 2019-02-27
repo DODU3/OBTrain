@@ -17,6 +17,14 @@ Page {
         source: "../images/background.png"
     }
 
+    MyVlcPlayer{
+        id:myvlcplayer
+        x: 200
+        y: 100
+        height: 728
+        width: 1360
+    }
+
     Button {
         height: 32
         width: 120
@@ -26,16 +34,6 @@ Page {
         onClicked: stack.pop()
     }
 
-    Label{
-        id: label
-        text: qsTr("人脸识别")
-        anchors.verticalCenterOffset: -187
-        anchors.horizontalCenterOffset: 0
-        height: 26
-        width: 240
-        anchors.centerIn: parent
-        font.pixelSize: 20
-    }
 
     MyClassType
     {

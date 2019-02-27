@@ -188,5 +188,8 @@
         <file>VisionVoice/GestureGuidePage.qml</file>
         <file>Sensor/DroneSensor/MagPage/MagCalibrationPage.qml</file>
         <file>Sensor/DroneSensor/images/Calibration.jpg</file>
+        <file>Component/MyVlcPlayer.qml</file>
+        <file>Component/pause.png</file>
+        <file>Component/play.png</file>
     </qresource>
 </RCC>

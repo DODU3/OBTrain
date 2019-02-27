@@ -2,6 +2,7 @@
 import QtQuick.Controls 2.2
 import ".."
 import "./Detection"
+import "../Component"
 
 Page {
     id: page
@@ -12,6 +13,14 @@ Page {
     background: Image {
         source: "../images/background.png"
     }
+
+//    MyVlcPlayer{
+//        id:myvlcplayer
+//        x: 200
+//        y: 100
+//        height: 728
+//        width: 1360
+//    }
 
     Button {
         height: 32

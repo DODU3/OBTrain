@@ -5,6 +5,9 @@
 #include <qqml.h>
 #include <QStringList>
 
+#include <QmlVlc.h>
+#include <QmlVlc/QmlVlcConfig.h>
+
 #include "serialtest.h"
 #include "portmodel.h"
 #include "systemopen.h"
@@ -12,6 +15,13 @@
 
 int main(int argc, char *argv[])
 {
+    RegisterQmlVlc();
+    QmlVlcConfig& config = QmlVlcConfig::instance();
+    config.enableAdjustFilter( true );
+    config.enableMarqueeFilter( true );
+    config.enableLogoFilter( true );
+    config.enableDebug( true );
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QApplication  app(argc, argv);
