@@ -303,10 +303,10 @@ Page {
     CompassUi
     {
         id: compassui
-        x: 146
+        x: 136
         y: 155
-        width: 400
-        height: 400
+        width: 450
+        height: 450
     }
 
 

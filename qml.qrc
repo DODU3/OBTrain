@@ -154,7 +154,6 @@
         <file>Sensor/DroneSensor/MagPage/MagInfoPage.qml</file>
         <file>Component/RFSetPage.qml</file>
         <file>Component/CompassUi.qml</file>
-        <file>Component/compass.svg</file>
         <file>VisionVoice/Detection/Posture_Teaching.qml</file>
         <file>VisionVoice/Detection/Tracking_Teaching.qml</file>
         <file>VisionVoice/Detection/Vision_Examples.qml</file>
@@ -191,5 +190,6 @@
         <file>Component/MyVlcPlayer.qml</file>
         <file>Component/pause.png</file>
         <file>Component/play.png</file>
+        <file>Component/compass.svg</file>
     </qresource>
 </RCC>

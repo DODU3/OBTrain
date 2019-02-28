@@ -4,8 +4,8 @@ import QtQuick.Controls 2.2
 import RegisterMyType 1.0
 
 Item {
-    width: 400
-    height: 400
+    width: 500
+    height: 500
 
     id : compassui
 //    anchors.fill: parent
@@ -44,8 +44,8 @@ Item {
 
     Label {
         id: label
-        x: 74
-        y: 304
+        x: 70
+        y: 324
         width: 253
         height: 57
         font.pixelSize: 60
