@@ -7,13 +7,14 @@ CONFIG += c++11 big_resources
 # deprecated API to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
-include(deps/QmlVlc/QmlVlc.pri)
+#include(deps/QmlVlc/QmlVlc.pri)
+include(deps/QmlFFMPEG/deployment.pri)
 
 INCLUDEPATH += deps
 
-INCLUDEPATH +=E:/vlc-3.0.6/sdk/include
-LIBS += E:/vlc-3.0.6/sdk/lib/libvlc.lib
-LIBS += E:/vlc-3.0.6/sdk/lib/libvlccore.lib
+#INCLUDEPATH +=E:/vlc-3.0.6/sdk/include
+#LIBS += E:/vlc-3.0.6/sdk/lib/libvlc.lib
+#LIBS += E:/vlc-3.0.6/sdk/lib/libvlccore.lib
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.

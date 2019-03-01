@@ -17,13 +17,13 @@ Page {
         source: "../images/background.png"
     }
 
-    MyVlcPlayer{
-        id:myvlcplayer
-        x: 200
-        y: 100
-        height: 728
-        width: 1360
-    }
+//    MyVlcPlayer{
+//        id:myvlcplayer
+//        x: 200
+//        y: 100
+//        height: 728
+//        width: 1360
+//    }
 
     Button {
         height: 32

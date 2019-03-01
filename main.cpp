@@ -5,27 +5,29 @@
 #include <qqml.h>
 #include <QStringList>
 
-#include <QmlVlc.h>
-#include <QmlVlc/QmlVlcConfig.h>
+//#include <QmlVlc.h>
+//#include <QmlVlc/QmlVlcConfig.h>
 
 #include "serialtest.h"
 #include "portmodel.h"
 #include "systemopen.h"
 #include "datafresh.h"
+#include <QmlFFMPEG/XVideo.h>
 
 int main(int argc, char *argv[])
 {
-    RegisterQmlVlc();
-    QmlVlcConfig& config = QmlVlcConfig::instance();
-    config.enableAdjustFilter( true );
-    config.enableMarqueeFilter( true );
-    config.enableLogoFilter( true );
-    config.enableDebug( true );
+//    RegisterQmlVlc();
+//    QmlVlcConfig& config = QmlVlcConfig::instance();
+//    config.enableAdjustFilter( true );
+//    config.enableMarqueeFilter( true );
+//    config.enableLogoFilter( true );
+//    config.enableDebug( true );
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QApplication  app(argc, argv);
 
+    qmlRegisterType<XVideo>("XVideo", 1, 0, "XVideo");
 
     qmlRegisterType<SerialTest>("RegisterMyType", 1, 0, "MyClassType");
 

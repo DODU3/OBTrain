@@ -103,7 +103,7 @@ Page {
         Map {
             anchors.fill: parent
             plugin: mapPlugin
-            center: QtPositioning.coordinate(41.40338, 2.17403) // Oslo
+            center: QtPositioning.coordinate(23.40338, 122.17403) // Oslo
             zoomLevel: 14
         }
     }
