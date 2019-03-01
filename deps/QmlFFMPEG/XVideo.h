@@ -35,6 +35,8 @@ private:
      int nHeight;
      int nWidth;
      QString strVideoPath;
+     QImage default_Frame;
+     bool isStop;
 public slots:
      void slot_GetOneFrame(QImage *image);
 

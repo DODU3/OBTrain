@@ -189,5 +189,6 @@
         <file>Sensor/DroneSensor/images/Calibration.jpg</file>
         <file>Component/compass.svg</file>
         <file>Component/QmlVideo.qml</file>
+        <file>images/cameraConnect.png</file>
     </qresource>
 </RCC>

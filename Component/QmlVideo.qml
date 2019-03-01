@@ -17,15 +17,17 @@ Rectangle {
     property bool isPlaying: false;
     Rectangle {
         id: rectangle
-        x: 0
-        y: 728
-        width: 124
-        height: 72
-        color: "#ffffff"
+        x: 341
+        y: -85
+        width: 132
+        height: 41
+//        color: "#ffffff"
 
         Text{
             id:btn_text;
             anchors.centerIn: parent;
+            font.bold: true
+            font.pointSize: 22
             text: isPlaying ? qsTr("停止播放") : qsTr("开始播放");
         }
         MouseArea{
