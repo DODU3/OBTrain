@@ -1,7 +1,10 @@
 ﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtWebEngine 1.0
+import QtWebSockets 1.0
 import ".."
+
+import "../test.js" as Code
 
 Page {
 
@@ -25,8 +28,23 @@ Page {
         y: 80
         width: 1360;
         height: 720;
-        url: "E:/project/OBTrain/blockly/dobots/index.html"
+        url: "../module/blockly/dobots/index.html"
     }
+
+    Button {
+        id: button
+        x: 174
+        y: 34
+        text: qsTr("Button")
+
+        onClicked: {
+            var xxxx;
+            xxxx = Code.func();
+            console.log("xxxx:"+xxxx);
+           // qDebug() << "xxx:" <<xxxx;
+        }
+    }
+
 
 }
 

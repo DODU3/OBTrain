@@ -1,4 +1,4 @@
-QT += quick serialport qml multimedia multimediawidgets sensors charts widgets core gui network webview webengine
+QT += quick serialport qml multimedia multimediawidgets sensors charts widgets core gui network webview webengine websockets
 CONFIG += c++11 big_resources
 
 # The following define makes your compiler emit warnings if you use
@@ -30,7 +30,8 @@ SOURCES += \
 
 RESOURCES += \
     sensor.qrc \
-    qml.qrc
+    qml.qrc \
+    module.qrc
 
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
