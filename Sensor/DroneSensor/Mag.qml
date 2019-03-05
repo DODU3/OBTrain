@@ -5,9 +5,9 @@ import QtMultimedia 5.4
 
 import ".."
 import "../../Component"
-import "./PresentPage"
+//import "./PresentPage"
 import "./MagPage"
-
+import "./UartData"
 
 import RegisterMyType 1.0
 import RegisterSystemOpen 1.0
@@ -63,9 +63,9 @@ Page {
 //                comboModel.setComboList(myclassExposeByRegType.receivePort());
 //            }
 //        }
-        onActivated: {
-            console.info("aa");
-        }
+//        onActivated: {
+//            console.info("aa");
+//        }
 
     }
 
@@ -303,10 +303,10 @@ Page {
     CompassUi
     {
         id: compassui
-        x: 136
+        x: 146
         y: 155
-        width: 450
-        height: 450
+        width: 400
+        height: 400
     }
 
 
@@ -320,13 +320,13 @@ Page {
 
     Rectangle {
         x:1262
-        y:594
+        y:570
         width: 402
         height: 400
         color: "#00000000"
         border.width: 1
 
-        MagBasicRecAndSendPage{
+        DataBasicRecAndSendPage{
             id:magbasicrecandsendpage
             x:2
             y:2
@@ -338,7 +338,7 @@ Page {
 
     Rectangle {
         x:1263
-        y:155
+        y:130
         width: 402
         height: 400
         color: "#00000000"

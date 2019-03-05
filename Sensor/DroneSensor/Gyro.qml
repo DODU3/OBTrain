@@ -1,10 +1,20 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
-import ".."
 
+import "../../Component"
+import ".."
+import "./UartData"
+import "./IMUPage"
+
+
+import RegisterMyType 1.0
 
 Page {
 
+
+    width: 1920
+    height: 1080
+    font.pointSize: 20
 
     property StackView stack: null
 
@@ -18,17 +28,202 @@ Page {
         text: "<-"
         anchors.left: parent.left
         anchors.top: parent.top
-        onClicked: stack.pop()
+        onClicked: {
+            if(true === myclassExposeByRegType.getserialOpenFlag()){
+                //myclassExposeByRegType.closePort();
+                qmlToggleButton.toggleRight();
+//                qmlToggleButton.state = "right";
+//                qmlToggleButton.color = "#CCCCCC";
+
+            }
+            stack.pop()
+        }
     }
 
-    Label{
-        id: label
-        text: qsTr("陀螺仪加速器")
-        anchors.verticalCenterOffset: -252
-        anchors.horizontalCenterOffset: 0
-        height: 80
-        width: 240
-        anchors.centerIn: parent
-        font.pixelSize: 20
+    ComboBox {
+        id: comboBox
+        objectName: "portComboBox"
+        x: 146
+        y: 48
+        font.bold: true
+        font.pointSize: 20
+
+        model:comboModel.comboList
     }
+
+    QmlToggleButton{
+        id: qmlToggleButton
+        anchors.centerIn: parent
+        height: 40
+        radius: 20
+        border.width: 1
+        anchors.verticalCenterOffset: -472
+        anchors.horizontalCenterOffset: -614
+        width: 106
+    }
+
+    Button {
+        id: button7
+        x: 437
+        y: 48
+        text: qsTr("配置无线地址")
+        font.bold: true
+        font.pointSize: 20
+
+        onClicked:
+        {
+            rfsetpage.show();
+        }
+
+    }
+
+    Button {
+        id: button1
+        x: 653
+        y: 50
+        text: qsTr("教学资料")
+        font.bold: true
+        font.pointSize: 20
+
+        onClicked:
+        {
+            imuinfopage.show();
+        }
+
+    }
+
+    Button {
+        id: button2
+        x: 821
+        y: 48
+        text: qsTr("工程实例")
+        font.bold: true
+        font.pointSize: 20
+
+        onClicked:
+        {
+            imuprojectdeveloppage.active;
+            imuprojectdeveloppage.show();
+        }
+    }
+
+    Connections {
+        target: qmlToggleButton
+        onToggleRight: {
+            myclassExposeByRegType.closePort();
+
+        }
+
+    }
+
+    Connections {
+        target: qmlToggleButton
+        onToggleLeft: {
+            var portName;
+            var keys = Object.keys(comboBox);
+            for(var i = 0; i < keys.length; i++) {
+                var key = keys[i];
+
+                if (key === "currentIndex") {
+//                    console.log("key FOUND:" + comboBox[key]);
+                    portName = comboModel.getElement(comboBox[key]);
+
+                    break;
+                }
+            }
+            myclassExposeByRegType.openAndSetPort(portName,3,3,0,0,0);
+
+        }
+    }
+
+    Rectangle {
+        x:1262
+        y:570
+        width: 402
+        height: 400
+        color: "#00000000"
+        border.width: 1
+
+        DataBasicRecAndSendPage{
+            id:imubasicrecandsendpage
+            x:2
+            y:2
+            width: 400
+            height: 400
+        }
+    }
+
+    Rectangle {
+        x:1263
+        y:130
+        width: 400
+        height: 400
+        color: "#00000000"
+        border.width: 1
+
+        IMUDataApplicatePage{
+            id:imudataapplicatepage
+            x:2
+            y:2
+            width: 400
+            height: 400
+        }
+    }
+
+    Rectangle {
+//        id: page
+        x: 94
+        y: 136
+        width: 1100
+        height: 626
+        color: "#00000000"
+        border.color: "black"
+        // Toyplane entity
+        // Toyplane entity
+        Toyplane {
+            material: AdsMaterial {
+                effect: shadowMapEffect
+                diffuseColor: Qt.rgba(0.9, 0.5, 0.3, 1.0)
+                shininess: 75
+            }
+        }
+    }
+
+    Component.onCompleted: {
+
+        myclassExposeByRegType.getPortInfo();
+        comboModel.setComboList(myclassExposeByRegType.receivePort());
+//        console.log(positionSource.position.coordinate.latitude,
+//                    positionSource.position.coordinate.longitude)
+    }
+
+    Timer {
+        id:timer1
+        interval: 100
+        repeat: true
+        triggeredOnStart: false
+        running: true
+
+        onTriggered: {
+
+        }
+    }
+
+    MyClassType
+    {
+        id:myclassExposeByRegType
+    }
+
+    RFSetPage{
+        id:rfsetpage
+    }
+
+    IMUProjectDevelopPage{
+        id:imuprojectdeveloppage
+    }
+
+    IMUInfoPage{
+        id:imuinfopage
+    }
+
 }

@@ -121,13 +121,11 @@
         <file>Sensor/DroneSensor/Mag.qml</file>
         <file>Component/QmlToggleButton.qml</file>
         <file>Component/SwipeViewPage.qml</file>
-        <file>Sensor/DroneSensor/PresentPage/MagPresent.qml</file>
         <file>Sensor/DroneSensor/images/mag1.png.jpg</file>
         <file>Sensor/DroneSensor/images/corner.png</file>
         <file>Sensor/DroneSensor/images/earthMag.png</file>
         <file>Sensor/DroneSensor/images/EarthMagCa.png</file>
         <file>Sensor/DroneSensor/images/magVerify.png</file>
-        <file>Sensor/DroneSensor/PresentPage/MagFlow.qml</file>
         <file>Sensor/DroneSensor/images/flow.PNG</file>
         <file>Component/VideoPlayer.qml</file>
         <file>Component/VideoPlayerTest.qml</file>
@@ -148,8 +146,6 @@
         <file>VisionVoice/images/ML_Human.jpg</file>
         <file>VisionVoice/Detection/Introduction.qml</file>
         <file>Sensor/DroneSensor/MagPage/MagControlPage.qml</file>
-        <file>Sensor/DroneSensor/MagPage/MagBasicRecAndSendPage.qml</file>
-        <file>Sensor/DroneSensor/MagPage/MagDataApplicatePage.qml</file>
         <file>Sensor/DroneSensor/MagPage/MagDataPage.qml</file>
         <file>Sensor/DroneSensor/MagPage/MagInfoPage.qml</file>
         <file>Component/RFSetPage.qml</file>
@@ -176,7 +172,6 @@
         <file>VisionVoice/images/Posture.png</file>
         <file>Sensor/DroneSensor/MagPage/MagProjectDevelopPage.qml</file>
         <file>Component/CharViewPage.qml</file>
-        <file>Sensor/DroneSensor/MagPage/DataSaveCompletedPage.qml</file>
         <file>VisionVoice/FaceGuidePage.qml</file>
         <file>VisionVoice/PersonGuidePage.qml</file>
         <file>Sensor/DroneSensor/MagGuide.qml</file>
@@ -187,8 +182,266 @@
         <file>VisionVoice/GestureGuidePage.qml</file>
         <file>Sensor/DroneSensor/MagPage/MagCalibrationPage.qml</file>
         <file>Sensor/DroneSensor/images/Calibration.jpg</file>
+    	<file>Sensor/DroneSensor/MagPage/MagDataApplicatePage.qml</file>
+        <file>Sensor/DroneSensor/UartData/DataBasicRecAndSendPage.qml</file>
+        <file>Sensor/DroneSensor/UartData/DataSaveCompletedPage.qml</file>
+        <file>Sensor/DroneSensor/GPSPage/GPSDataApplicatePage.qml</file>
+        <file>Sensor/DroneSensor/GPSPage/GPSInfoPage.qml</file>
+        <file>Sensor/DroneSensor/GPSPage/GPSProjectDevelopPage.qml</file>
+        <file>Sensor/DroneSensor/images/GPSGuidePage.jpg</file>
+	<file>Sensor/DroneSensor/images/IMUGuidePage.jpg</file>
+        <file>Sensor/DroneSensor/GPSGuide.qml</file>
+        <file>Sensor/DroneSensor/GyroGuide.qml</file>
+	<file>Sensor/DroneSensor/IMUPage/IMUDataApplicatePage.qml</file>
+        <file>Sensor/DroneSensor/IMUPage/IMUInfoPage.qml</file>
+        <file>Sensor/DroneSensor/IMUPage/IMUProjectDevelopPage.qml</file>
+        <file>Sensor/DroneSensor/IMUPage/IMU3D.qml</file>
+	<file>Sensor/DroneSensor/IMUPage/AdsMaterial.qml</file>
+        <file>Sensor/DroneSensor/IMUPage/Toyplane.qml</file>
         <file>Component/compass.svg</file>
         <file>Component/QmlVideo.qml</file>
         <file>images/cameraConnect.png</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavcodec/avcodec.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavcodec/avdct.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavcodec/avfft.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavcodec/d3d11va.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavcodec/dirac.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavcodec/dv_profile.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavcodec/dxva2.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavcodec/jni.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavcodec/mediacodec.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavcodec/qsv.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavcodec/vaapi.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavcodec/vda.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavcodec/vdpau.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavcodec/version.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavcodec/videotoolbox.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavcodec/vorbis_parser.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavcodec/xvmc.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavdevice/avdevice.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavdevice/version.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavfilter/avfilter.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavfilter/avfiltergraph.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavfilter/buffersink.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavfilter/buffersrc.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavfilter/version.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavformat/avformat.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavformat/avio.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavformat/version.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/adler32.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/aes.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/aes_ctr.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/attributes.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/audio_fifo.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/avassert.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/avconfig.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/avstring.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/avutil.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/base64.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/blowfish.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/bprint.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/bswap.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/buffer.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/camellia.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/cast5.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/channel_layout.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/common.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/cpu.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/crc.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/des.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/dict.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/display.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/downmix_info.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/error.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/eval.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/ffversion.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/fifo.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/file.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/frame.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/hash.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/hmac.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/hwcontext.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/hwcontext_cuda.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/hwcontext_dxva2.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/hwcontext_qsv.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/hwcontext_vaapi.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/hwcontext_vdpau.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/imgutils.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/intfloat.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/intreadwrite.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/lfg.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/log.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/lzo.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/macros.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/mastering_display_metadata.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/mathematics.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/md5.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/mem.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/motion_vector.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/murmur3.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/opt.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/parseutils.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/pixdesc.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/pixelutils.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/pixfmt.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/random_seed.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/rational.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/rc4.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/replaygain.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/ripemd.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/samplefmt.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/sha.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/sha512.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/stereo3d.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/tea.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/threadmessage.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/time.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/timecode.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/timestamp.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/tree.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/twofish.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/version.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libavutil/xtea.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libpostproc/postprocess.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libpostproc/version.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libswresample/swresample.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libswresample/version.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libswscale/swscale.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include/libswscale/version.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/ac3_parser.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/adts_parser.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/avcodec.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/avdct.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/avfft.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/d3d11va.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/dirac.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/dv_profile.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/dxva2.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/jni.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/mediacodec.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/old_codec_ids.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/qsv.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/vaapi.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/vda.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/vdpau.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/version.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/videotoolbox.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/vorbis_parser.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavcodec/xvmc.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavdevice/avdevice.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavdevice/version.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavfilter/asrc_abuffer.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavfilter/avcodec.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavfilter/avfilter.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavfilter/avfiltergraph.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavfilter/buffersink.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavfilter/buffersrc.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavfilter/version.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavformat/avformat.cpp</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavformat/avformat.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavformat/avio.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavformat/version.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/adler32.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/aes.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/aes_ctr.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/attributes.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/audio_fifo.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/audioconvert.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/avassert.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/avconfig.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/avstring.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/avutil.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/base64.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/blowfish.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/bprint.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/bswap.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/buffer.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/camellia.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/cast5.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/channel_layout.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/common.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/cpu.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/crc.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/des.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/dict.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/display.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/downmix_info.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/encryption_info.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/error.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/eval.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/ffversion.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/fifo.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/file.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/frame.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/hash.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/hdr_dynamic_metadata.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/hmac.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/hwcontext.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/hwcontext_cuda.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/hwcontext_d3d11va.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/hwcontext_drm.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/hwcontext_dxva2.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/hwcontext_mediacodec.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/hwcontext_qsv.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/hwcontext_vaapi.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/hwcontext_vdpau.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/hwcontext_videotoolbox.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/imgutils.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/intfloat.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/intreadwrite.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/lfg.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/log.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/lzo.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/macros.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/mastering_display_metadata.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/mathematics.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/md5.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/mem.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/motion_vector.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/murmur3.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/old_pix_fmts.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/opt.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/parseutils.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/pixdesc.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/pixelutils.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/pixfmt.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/random_seed.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/rational.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/rc4.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/replaygain.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/ripemd.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/samplefmt.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/sha.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/sha512.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/spherical.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/stereo3d.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/tea.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/threadmessage.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/time.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/timecode.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/timestamp.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/tree.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/twofish.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/version.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libavutil/xtea.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libpostproc/postprocess.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libpostproc/version.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libswresample/swresample.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libswresample/version.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libswscale/swscale.h</file>
+        <file>deps/QmlFFMPEG/ffmpeg/include_/libswscale/version.h</file>
+        <file>deps/QmlFFMPEG/XVideo.cpp</file>
+        <file>deps/QmlFFMPEG/XVideo.h</file>
+        <file>deps/QmlFFMPEG/XVideoThread.cpp</file>
+        <file>deps/QmlFFMPEG/XVideoThread.h</file>
+        <file>datafresh.cpp</file>
+        <file>datafresh.h</file>
+        <file>main.cpp</file>
+        <file>portmodel.cpp</file>
+        <file>portmodel.h</file>
+        <file>serialtest.cpp</file>
+        <file>serialtest.h</file>
+        <file>systemopen.cpp</file>
+        <file>systemopen.h</file>
     </qresource>
 </RCC>

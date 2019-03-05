@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <QNetworkInterface>
 #include "XVideoThread.h"
-//#include <QWifiManager>
+
 
 void XVideo::SetSize(int width, int height)
 {
@@ -23,25 +23,6 @@ isStop(true)
     QString file = QString::fromUtf8(":/images/cameraConnect.png");
     default_Frame.load(file,"PNG");
     update();
-
-
-//    QString ipAddress;
-//    QList<QNetworkInterface> ipAddressesList = QNetworkInterface::allInterfaces();
-//    // use the first non-localhost IPv4 address
-//    for (int i = 0; i < ipAddressesList.size(); ++i) {
-////        qDebug() <<"NAMW :"<< ipAddressesList.at(i);
-//        qDebug()<<i<<ipAddressesList.at(i).name()<<ipAddressesList.at(i).hardwareAddress()<<ipAddressesList.at(i).humanReadableName();
-//    }
-//    qDebug() <<"NAMW :"<< QNetworkInterface::interfaceFromName("OB_720B-0000D2");
-//    for (int i = 0; i < ipAddressesList.size(); ++i) {
-//        if (ipAddressesList.at(i) != QHostAddress::LocalHost &&
-//            ipAddressesList.at(i).toIPv4Address()) {
-//            ipAddress = ipAddressesList.at(i).toString();
-//            qDebug()<<"ipAddress :"<<ipAddress;
-//            //break;
-//        }
-//    }
-
 
 }
 

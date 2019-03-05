@@ -30,7 +30,7 @@ Item {
         ValueAxis {
             id: axisX
             min: 0
-            max: 200
+            max: 100
             tickCount: 1
         }
 
@@ -46,6 +46,7 @@ Item {
             axisX: axisX
             axisY: axisy
             name: "Angle"
+            color: "red"
             onClicked: {
                 var p = chart.mapToPosition(point);
                 var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
@@ -61,6 +62,7 @@ Item {
             axisX: axisX
             axisY: axisy
             name: "X"
+            color: "blue"
             onClicked: {
                 var p = chart.mapToPosition(point);
                 var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
@@ -76,6 +78,7 @@ Item {
             axisX: axisX
             axisY: axisy
             name: "Y"
+            color: "brown"
             onClicked: {
                 var p = chart.mapToPosition(point);
                 var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
@@ -91,6 +94,7 @@ Item {
             axisX: axisX
             axisY: axisy
             name: "Z"
+            color: "green"
             onClicked: {
                 var p = chart.mapToPosition(point);
                 var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
@@ -106,6 +110,7 @@ Item {
             axisX: axisX
             axisY: axisy
             name: "User1"
+            color: "purple"
             onClicked: {
                 var p = chart.mapToPosition(point);
                 var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
@@ -121,6 +126,7 @@ Item {
             axisX: axisX
             axisY: axisy
             name: "User2"
+            color: "yellow"
             onClicked: {
                 var p = chart.mapToPosition(point);
                 var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
@@ -136,6 +142,7 @@ Item {
             axisX: axisX
             axisY: axisy
             name: "User3"
+            color: "pink"
             onClicked: {
                 var p = chart.mapToPosition(point);
                 var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
@@ -151,6 +158,7 @@ Item {
             axisX: axisX
             axisY: axisy
             name: "User4"
+            color: "orange"
             onClicked: {
                 var p = chart.mapToPosition(point);
                 var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
@@ -166,6 +174,7 @@ Item {
             axisX: axisX
             axisY: axisy
             name: "User5"
+            color: "grey"
             onClicked: {
                 var p = chart.mapToPosition(point);
                 var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
@@ -181,6 +190,7 @@ Item {
             axisX: axisX
             axisY: axisy
             name: "User6"
+            color: "black"
             onClicked: {
                 var p = chart.mapToPosition(point);
                 var text = qsTr("x: %1, y: %2").arg(Math.round(point.x)).arg(Math.round(point.y));
@@ -195,7 +205,7 @@ Item {
         Timer {
             //Timer for demo rotation of compass
 
-            interval: 50
+            interval: 100
             running: true
             repeat: true
 
@@ -213,7 +223,7 @@ Item {
                     user6Line.clear();
                     globalForJs = 1;
                     axisX.min = 0;
-                    axisX.max = 200;
+                    axisX.max = 100;
                     myclassExposeByRegType.setserialDrawClearFlag(false);
                 }
 
@@ -223,7 +233,18 @@ Item {
                 if(true === myclassExposeByRegType.getserialOpenFlag())
                 {
                     flag_chartupdata=0;
-
+                    if(axisX.min > 1){
+                        angleLine.pointRemoved(axisX.min-1);
+                        xLine.pointRemoved(axisX.min-1);
+                        yLine.pointRemoved(axisX.min-1);
+                        zLine.pointRemoved(axisX.min-1);
+                        user1Line.pointRemoved(axisX.min-1);
+                        user2Line.pointRemoved(axisX.min-1);
+                        user3Line.pointRemoved(axisX.min-1);
+                        user4Line.pointRemoved(axisX.min-1);
+                        user5Line.pointRemoved(axisX.min-1);
+                        user6Line.pointRemoved(axisX.min-1);
+                    }
                     temp_data=myclassExposeByRegType.getMagCorner();
                     angleLine.append(globalForJs,temp_data);
                     if(checkBox_angle.checkState == Qt.Checked)
@@ -325,7 +346,6 @@ Item {
                     }
                     else
                     {
-//                        xLine.clear();
                         xLine.visible=false;
                     }
 
@@ -433,11 +453,11 @@ Item {
                         zLine.visible=false;
                     }
 
-                    user1Line.visible=true;
                     temp_data=myclassExposeByRegType.getMagUser1();
+                    user1Line.append(globalForJs,temp_data);
                     if(checkBox_user1.checkState == Qt.Checked)
                     {
-                        user1Line.append(globalForJs,temp_data);
+                        user1Line.visible=true;
                         //获取当前曲线显示区域的最大值最小值
                         for(tem2p_data=axisX.min;tem2p_data<axisX.max;tem2p_data++)
                         {

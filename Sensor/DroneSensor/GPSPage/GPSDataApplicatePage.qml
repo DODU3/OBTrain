@@ -1,24 +1,18 @@
 ﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Dialogs 1.2
-//import ".."
-//import "../../../Component"
-//import "../PresentPage"
-//import "../MagPage"
+
+
 import RegisterDataFresh 1.0
 import "../UartData"
 
-//import "."
-
-//import "./dataSaveCompleted.qml"
-
 Item {
-    id: magDataApplicatePage
+    id: gpsDataApplicatePage
 
-    width: 400
+    width: 583
     height: 400
 
-//    title: "电子罗盘-数据保存与应用"
+//    title: "gps-数据保存与应用"
 
     Button {
         id: button
@@ -78,18 +72,18 @@ Item {
     ScrollView {
         x: 0
         y: 0
-        width: 400
+        width: 583
         height: 284
         TextArea {
             id: textArea
             x: -10
             y: -6
-            width: 396
+            width: 583
             height: 256
-            text: "电子罗盘-数据保存与应用"
+            text: "GPS-数据保存与应用"
             font.family: "Times New Roman"
             font.bold: true
-            placeholderText: qsTr("电子罗盘-数据保存与应用")
+            placeholderText: qsTr("GPS-数据保存与应用")
             //            objectName: "MagDateAppPageText"
 //            font.pointSize: 9
             font.pixelSize: 20

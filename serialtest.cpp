@@ -42,6 +42,9 @@ static bool serialDrawClearFlag = false;
 
 static QTimer timerSend;
 
+static double currentLon = 0, currentLat = 0;
+static int currentNorthSpeed = 0, currentEastSpeed = 0, currentSatelliteNum = 0, currentHdop = 0;
+
 SerialTest::SerialTest(QSerialPort *parent):
     QSerialPort (parent),
     m_receivedata("Receive Label"),
@@ -327,6 +330,10 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
     QString receivedata=data.toHex();//将QByteArray转为QString来显示
 
     QString subString = receivedata.mid(0,4);
+
+    QDateTime currentTime = QDateTime::currentDateTime();
+    QString qs_currenttime = currentTime.toString("hh:mm:ss.zzz");
+
     if(subString == "ff55")
     {
         if(receivedata.mid(28,2) == "01"){
@@ -347,8 +354,7 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
             mag_x = x;
             mag_y= y;
             mag_z = z;
-            QDateTime currentTime = QDateTime::currentDateTime();
-            QString qs_currenttime = currentTime.toString("hh:mm:ss.zzz");
+
             addserialSaveAndApp(qs_currenttime + ":  " +
                                 QString::number(corner) + ";  " +
                                 QString::number(x) + ";  " +
@@ -388,7 +394,48 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
                     addrch = receivedata.mid(16,2).toInt(&ok, 16);
                 }
 
-        }else if(receivedata.mid(28,2) == "ff"){
+        }
+        else if(receivedata.mid(28,2) == "05"){
+            //gps信息
+            bool ok = false;
+            int u16half = 1 << 15;
+            int u16 = 1 << 16;
+            long u32half = 1 << 31;
+            long u32 = 1 << 32;
+            int currentLonInt = receivedata.mid(4,8).toInt(&ok, 16);
+            if(currentLonInt >= (u32half)){
+                currentLonInt -= u32;
+            }
+            currentLon = ((double)currentLonInt / 1e7);
+            int currentLatInt = receivedata.mid(12,8).toInt(&ok, 16);
+            if(currentLatInt >= (u32half)){
+                currentLatInt -= (u32);
+            }
+            currentLat = ((double)currentLatInt / 1e7);
+            currentEastSpeed = receivedata.mid(20,4).toInt(&ok, 16);
+            if(currentEastSpeed >= u16half){
+                currentEastSpeed -= u16;
+            }
+            currentNorthSpeed = receivedata.mid(24,4).toInt(&ok, 16);
+            if(currentNorthSpeed >= u16half){
+                currentNorthSpeed -= u16;
+            }
+            currentSatelliteNum = receivedata.mid(30,2).toInt(&ok, 16);
+            currentHdop  = receivedata.mid(32,4).toInt(&ok, 16);
+//            QDateTime currentTime = QDateTime::currentDateTime();
+//            QString qs_currenttime = currentTime.toString("hh:mm:ss.zzz");
+            addserialSaveAndApp(qs_currenttime + ":  " +
+                                getCurrentLon() + ";  " +
+                                getCurrentLat() + ";  " +
+                                getCurrentSN() + ";  " +
+                                getCurrentNS() + ";  " +
+                                getCurrentES() + ";  " +
+                                getCurrentHDOP() + ";  ");//            qDebug() << (QString::number(currentLon) + "," + QString::number(currentLat) + "," +QString::number(currentEastSpeed)
+//                         +"," +QString::number(currentNorthSpeed) + "," +QString::number(currentSatelliteNum) + "," +QString::number(currentHdop));
+//            qDebug() << (1<<15);
+        }
+        else if(receivedata.mid(28,2) == "ff"){
+            //用户自定数据
             bool ok = false;
             mag_user1 = (receivedata.mid(4,4).toInt(&ok, 16));
             if(mag_user1 >= 32768){
@@ -601,6 +648,31 @@ bool SerialTest::getserialDrawClearFlag(void){
 void SerialTest::setserialDrawClearFlag(bool trueOrFalse){
     serialDrawClearFlag = trueOrFalse;
 }
+
+QString SerialTest::getCurrentLon(void){
+    return QString::number(currentLon, 'f', 7);
+}
+
+QString SerialTest::getCurrentLat(void){
+    return QString::number(currentLat, 'f', 7);
+}
+
+QString SerialTest::getCurrentNS(void){
+    return QString::number(currentNorthSpeed);
+}
+
+QString SerialTest::getCurrentES(void){
+    return QString::number(currentEastSpeed);
+}
+
+QString SerialTest::getCurrentSN(void){
+    return QString::number(currentSatelliteNum);
+}
+
+QString SerialTest::getCurrentHDOP(void){
+    return QString::number(currentHdop);
+}
+
 
 ////////////////////5.关闭端口//////////////////////////////
 void SerialTest::closePort()//由按钮出发

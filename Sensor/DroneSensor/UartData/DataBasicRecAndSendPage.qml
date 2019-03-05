@@ -1,8 +1,7 @@
 ﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 
-//import RegisterSerialTest 1.0
-//import RegisterMyType 1.0
+import RegisterMyType 1.0
 
 Item {
     id: magBasicRecAndSendPage
@@ -26,10 +25,10 @@ Item {
             y: 0
             width: 450
             height: 350
-            text: "电子罗盘-基本收发"
+            text: "串口数据基本收发"
             font.bold: true
             //objectName: "MagBasicRecAndSendText"
-            placeholderText: qsTr("电子罗盘-基本收发")
+            placeholderText: qsTr("串口数据基本收发")
             //            text: myserialtest.receivedata
             font.pixelSize: 20
             readOnly: true
@@ -39,11 +38,10 @@ Item {
     }
 
 
-
-//    MySerialTest
-//    {
-//        id:myserialtest
-//    }
+    MyClassType
+    {
+        id:myclassExposeByRegType
+    }
 
     Timer{
         id:timer1

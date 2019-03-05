@@ -96,6 +96,13 @@ public:
     Q_INVOKABLE bool getserialDrawClearFlag(void);
     Q_INVOKABLE void setserialDrawClearFlag(bool trueOrFalse);
 
+    Q_INVOKABLE QString getCurrentLon(void);
+    Q_INVOKABLE QString getCurrentLat(void);
+    Q_INVOKABLE QString getCurrentNS(void);
+    Q_INVOKABLE QString getCurrentES(void);
+    Q_INVOKABLE QString getCurrentSN(void);
+    Q_INVOKABLE QString getCurrentHDOP(void);
+
 signals:
     void receivedataChanged();
 

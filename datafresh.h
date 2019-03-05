@@ -11,7 +11,7 @@ public:
 
     Q_INVOKABLE void freshBaseData();
     Q_INVOKABLE void buttonSaveClick(QString qs);
-    Q_INVOKABLE void buttonStartClick();
+//    Q_INVOKABLE void buttonStartClick();
     Q_INVOKABLE void buttonOpenFolderClick();
 //    Q_INVOKABLE QString getSaveFileName(void);
 

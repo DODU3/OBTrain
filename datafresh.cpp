@@ -41,7 +41,7 @@ void dataFresh::buttonSaveClick(QString qs)
 
     QString path = QCoreApplication::applicationDirPath();
     path.replace("/", "\\");
-    path.append("\\Content resource\\磁力计模组\\数据保存\\");
+    path.append("\\Content resource\\GPS模组\\数据保存\\");
     QDir dir(path);
     if(!dir.exists()){
         dir.mkpath(path);
@@ -69,26 +69,24 @@ void dataFresh::buttonSaveClick(QString qs)
     }
 }
 
-void dataFresh::buttonStartClick()
-{
-    QQmlApplicationEngine engine;
-    QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/Sensor/DroneSensor/MagPage/MagDataApplicatePage.qml")));
-    QObject *object = component.create();
-    QObject *item = object->findChild<QObject*>("MagDateAppPageText");
+//void dataFresh::buttonStartClick()
+//{
+//    QQmlApplicationEngine engine;
+//    QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/Sensor/DroneSensor/GPSPage/GPSDataApplicatePage.qml")));
+//    QObject *object = component.create();
+//    QObject *item = object->findChild<QObject*>("MagDateAppPageText");
 
-//    qDebug() << QQmlProperty::read(object, "title");
-//    qDebug() << QQmlProperty::read(item, "placeholderText");
 
-    if(item){
-        item->setProperty("Text", QString("sss"));
-    }
-    delete object;
-}
+//    if(item){
+//        item->setProperty("Text", QString("sss"));
+//    }
+//    delete object;
+//}
 
 void dataFresh::buttonOpenFolderClick(){
     QString path = QCoreApplication::applicationDirPath();
     path.replace("/", "\\");
-    path.append("\\Content resource\\磁力计模组\\数据保存\\");
+    path.append("\\Content resource\\GPS模组\\数据保存\\");
     QDir dir(path);
     if(!dir.exists()){
         dir.mkpath(path);

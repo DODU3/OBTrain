@@ -1,5 +1,6 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
+import QtWebEngine 1.0
 import ".."
 
 Page {
@@ -19,13 +20,12 @@ Page {
         onClicked: stack.pop()
     }
 
-    Label{
-        id: label
-        text: qsTr("航拍机")
-        height: 80
-        width: 240
-        anchors.centerIn: parent
-        font.pixelSize: 20
+    WebEngineView {
+        x: 0
+        y: 80
+        width: 1360;
+        height: 720;
+        url: "E:/project/OBTrain/blockly/dobots/index.html"
     }
 
 }

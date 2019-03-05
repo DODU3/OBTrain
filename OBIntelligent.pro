@@ -1,4 +1,4 @@
-QT += quick serialport qml multimedia multimediawidgets sensors charts widgets core gui network
+QT += quick serialport qml multimedia multimediawidgets sensors charts widgets core gui network webview webengine
 CONFIG += c++11 big_resources
 
 # The following define makes your compiler emit warnings if you use
