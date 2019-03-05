@@ -107,15 +107,18 @@ Item {
         font.bold: true
 
         checkState: Qt.Checked
+//        checked: true
 
         nextCheckState: function() {
             if (checkState == Qt.Checked){
-                //myclassExposeByRegType.sendto("ff558080808008002b000000000000000000");
+//                myclassExposeByRegType.sendto("ff558080808008002b000000000000000001");
                 myclassExposeByRegType.sendCMD("2b", "808080800800", "0000000000000000");
                 return Qt.Unchecked
+//                checkBox.checkState = Qt.Unchecked
             }
             else{
-//                myclassExposeByRegType.sendto("ff558080808008002b010000000000000000");
+//                myclassExposeByRegType.sendto("ff558080808008002b010000000000000001");
+//                checkBox.checkState = Qt.Checked
                 myclassExposeByRegType.sendCMD("2b", "808080800800", "0100000000000000");
                 return Qt.Checked
             }

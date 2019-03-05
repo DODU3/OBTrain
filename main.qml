@@ -1,11 +1,11 @@
 ﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 import "./Drone"
-import "./Sensor"
 import "./Iot"
 import "./Robot"
 import "./VisionVoice"
 import "./MachineLearn"
+import "./Sensor"
 
 ApplicationWindow {
     id: xxxxxxxxxxxxxx

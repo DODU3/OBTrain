@@ -28,7 +28,9 @@ SOURCES += \
     systemopen.cpp \
     datafresh.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += \
+    sensor.qrc \
+    qml.qrc
 
 
 # Additional import path used to resolve QML modules in Qt Creator's code model

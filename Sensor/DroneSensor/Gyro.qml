@@ -170,25 +170,6 @@ Page {
         }
     }
 
-    Rectangle {
-//        id: page
-        x: 94
-        y: 136
-        width: 1100
-        height: 626
-        color: "#00000000"
-        border.color: "black"
-        // Toyplane entity
-        // Toyplane entity
-        Toyplane {
-            material: AdsMaterial {
-                effect: shadowMapEffect
-                diffuseColor: Qt.rgba(0.9, 0.5, 0.3, 1.0)
-                shininess: 75
-            }
-        }
-    }
-
     Component.onCompleted: {
 
         myclassExposeByRegType.getPortInfo();

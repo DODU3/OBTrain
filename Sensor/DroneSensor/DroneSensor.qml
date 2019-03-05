@@ -160,7 +160,7 @@ Page {
     }
 
 
-    GPS {
+    GPSGuide {
         id: page2
         visible: false
         stack: stack

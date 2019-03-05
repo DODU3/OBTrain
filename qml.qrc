@@ -65,68 +65,9 @@
         <file>VisionVoice/images/Model.png</file>
         <file>VisionVoice/images/PersonControl.png</file>
         <file>VisionVoice/images/VoiceVerify.png</file>
-        <file>Sensor/SensorPage.qml</file>
-        <file>Sensor/images/Drone.png</file>
-        <file>Sensor/images/Iot.png</file>
-        <file>Sensor/images/Robot.png</file>
-        <file>Sensor/images/VisionVoice.png</file>
-        <file>Sensor/DroneSensor/Barometers.qml</file>
-        <file>Sensor/DroneSensor/DroneSensor.qml</file>
-        <file>Sensor/DroneSensor/GPS.qml</file>
-        <file>Sensor/DroneSensor/Gyro.qml</file>
-        <file>Sensor/DroneSensor/Infrared.qml</file>
-        <file>Sensor/DroneSensor/OpticalFlow.qml</file>
-        <file>Sensor/DroneSensor/Ultrasonic.qml</file>
-        <file>Sensor/DroneSensor/images/Barometers.png</file>
-        <file>Sensor/DroneSensor/images/GPS.png</file>
-        <file>Sensor/DroneSensor/images/Gyro.png</file>
-        <file>Sensor/DroneSensor/images/Infrared.png</file>
-        <file>Sensor/DroneSensor/images/OpticalFlow.png</file>
-        <file>Sensor/DroneSensor/images/Ultrasonic.png</file>
-        <file>Sensor/IotSensor/Card.qml</file>
-        <file>Sensor/IotSensor/Infrared.qml</file>
-        <file>Sensor/IotSensor/IotSensor.qml</file>
-        <file>Sensor/IotSensor/Obox.qml</file>
-        <file>Sensor/IotSensor/Pannel.qml</file>
-        <file>Sensor/IotSensor/Socket.qml</file>
-        <file>Sensor/IotSensor/images/Card.png</file>
-        <file>Sensor/IotSensor/images/Infrared.png</file>
-        <file>Sensor/IotSensor/images/OBOX.png</file>
-        <file>Sensor/IotSensor/images/Pannel.png</file>
-        <file>Sensor/IotSensor/images/Socket.png</file>
-        <file>Sensor/RobotSensor/Camera.qml</file>
-        <file>Sensor/RobotSensor/Gyro.qml</file>
-        <file>Sensor/RobotSensor/Infrared.qml</file>
-        <file>Sensor/RobotSensor/QRC.qml</file>
-        <file>Sensor/RobotSensor/Radar.qml</file>
-        <file>Sensor/RobotSensor/RobotSensor.qml</file>
-        <file>Sensor/RobotSensor/Ultrasonic.qml</file>
-        <file>Sensor/RobotSensor/images/Camera.png</file>
-        <file>Sensor/RobotSensor/images/Gyro.png</file>
-        <file>Sensor/RobotSensor/images/Infrared.png</file>
-        <file>Sensor/RobotSensor/images/QRC.png</file>
-        <file>Sensor/RobotSensor/images/Radar.png</file>
-        <file>Sensor/RobotSensor/images/Ultrasonic.png</file>
-        <file>Sensor/VisionVoiceSensor/Binocular.qml</file>
-        <file>Sensor/VisionVoiceSensor/HandPrint.qml</file>
-        <file>Sensor/VisionVoiceSensor/StreamTrans.qml</file>
-        <file>Sensor/VisionVoiceSensor/VisionVoiceSensor.qml</file>
-        <file>Sensor/VisionVoiceSensor/VoiceVerify.qml</file>
-        <file>Sensor/VisionVoiceSensor/images/Binocular.png</file>
-        <file>Sensor/VisionVoiceSensor/images/HandPrint.png</file>
-        <file>Sensor/VisionVoiceSensor/images/StreamTrans.png</file>
-        <file>Sensor/VisionVoiceSensor/images/VoiceVerify.png</file>
         <file>SerialPortRefresh.js</file>
-        <file>Sensor/DroneSensor/images/mag.png</file>
-        <file>Sensor/DroneSensor/Mag.qml</file>
         <file>Component/QmlToggleButton.qml</file>
         <file>Component/SwipeViewPage.qml</file>
-        <file>Sensor/DroneSensor/images/mag1.png.jpg</file>
-        <file>Sensor/DroneSensor/images/corner.png</file>
-        <file>Sensor/DroneSensor/images/earthMag.png</file>
-        <file>Sensor/DroneSensor/images/EarthMagCa.png</file>
-        <file>Sensor/DroneSensor/images/magVerify.png</file>
-        <file>Sensor/DroneSensor/images/flow.PNG</file>
         <file>Component/VideoPlayer.qml</file>
         <file>Component/VideoPlayerTest.qml</file>
         <file>VisionVoice/images/face1.jpg</file>
@@ -145,9 +86,6 @@
         <file>VisionVoice/images/ML.jpg</file>
         <file>VisionVoice/images/ML_Human.jpg</file>
         <file>VisionVoice/Detection/Introduction.qml</file>
-        <file>Sensor/DroneSensor/MagPage/MagControlPage.qml</file>
-        <file>Sensor/DroneSensor/MagPage/MagDataPage.qml</file>
-        <file>Sensor/DroneSensor/MagPage/MagInfoPage.qml</file>
         <file>Component/RFSetPage.qml</file>
         <file>Component/CompassUi.qml</file>
         <file>VisionVoice/Detection/Posture_Teaching.qml</file>
@@ -170,34 +108,13 @@
         <file>VisionVoice/images/tracking_teaching2.png</file>
         <file>VisionVoice/images/videoModule.jpg</file>
         <file>VisionVoice/images/Posture.png</file>
-        <file>Sensor/DroneSensor/MagPage/MagProjectDevelopPage.qml</file>
         <file>Component/CharViewPage.qml</file>
         <file>VisionVoice/FaceGuidePage.qml</file>
         <file>VisionVoice/PersonGuidePage.qml</file>
-        <file>Sensor/DroneSensor/MagGuide.qml</file>
-        <file>Sensor/DroneSensor/images/MagGuidePage.jpg</file>
         <file>VisionVoice/images/FaceGuidePage.jpg</file>
         <file>VisionVoice/images/GestureGuidePage.jpg</file>
         <file>VisionVoice/images/PersonGuidePage.jpg</file>
         <file>VisionVoice/GestureGuidePage.qml</file>
-        <file>Sensor/DroneSensor/MagPage/MagCalibrationPage.qml</file>
-        <file>Sensor/DroneSensor/images/Calibration.jpg</file>
-    	<file>Sensor/DroneSensor/MagPage/MagDataApplicatePage.qml</file>
-        <file>Sensor/DroneSensor/UartData/DataBasicRecAndSendPage.qml</file>
-        <file>Sensor/DroneSensor/UartData/DataSaveCompletedPage.qml</file>
-        <file>Sensor/DroneSensor/GPSPage/GPSDataApplicatePage.qml</file>
-        <file>Sensor/DroneSensor/GPSPage/GPSInfoPage.qml</file>
-        <file>Sensor/DroneSensor/GPSPage/GPSProjectDevelopPage.qml</file>
-        <file>Sensor/DroneSensor/images/GPSGuidePage.jpg</file>
-	<file>Sensor/DroneSensor/images/IMUGuidePage.jpg</file>
-        <file>Sensor/DroneSensor/GPSGuide.qml</file>
-        <file>Sensor/DroneSensor/GyroGuide.qml</file>
-	<file>Sensor/DroneSensor/IMUPage/IMUDataApplicatePage.qml</file>
-        <file>Sensor/DroneSensor/IMUPage/IMUInfoPage.qml</file>
-        <file>Sensor/DroneSensor/IMUPage/IMUProjectDevelopPage.qml</file>
-        <file>Sensor/DroneSensor/IMUPage/IMU3D.qml</file>
-	<file>Sensor/DroneSensor/IMUPage/AdsMaterial.qml</file>
-        <file>Sensor/DroneSensor/IMUPage/Toyplane.qml</file>
         <file>Component/compass.svg</file>
         <file>Component/QmlVideo.qml</file>
         <file>images/cameraConnect.png</file>
@@ -443,5 +360,6 @@
         <file>serialtest.h</file>
         <file>systemopen.cpp</file>
         <file>systemopen.h</file>
+        <file>sensor.qrc</file>
     </qresource>
 </RCC>
