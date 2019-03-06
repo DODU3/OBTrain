@@ -1,4 +1,4 @@
-QT += quick serialport qml multimedia multimediawidgets sensors charts widgets core gui network webview webengine websockets
+QT += quick serialport qml multimedia multimediawidgets sensors charts widgets core gui network webview webengine websockets webchannel
 CONFIG += c++11 big_resources
 
 # The following define makes your compiler emit warnings if you use
@@ -49,6 +49,7 @@ HEADERS += \
     serialtest.h \
     portmodel.h \
     systemopen.h \
-    datafresh.h
+    datafresh.h \
+    websockettransport.h
 
 FORMS +=

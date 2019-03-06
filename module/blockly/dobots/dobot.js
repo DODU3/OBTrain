@@ -105,11 +105,14 @@
         //if (!code) {
         //    return;
         //}
+//        console.log("code" + code);
         this.jsApi.generalCode(code);
     },
     output:function(message){
-        if(this.jsApi != null)
+        if(this.jsApi != null){
             this.jsApi.generalLog(message);
+//            console.log(message);
+        }
         else{
             alert(message);
         }

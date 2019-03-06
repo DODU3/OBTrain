@@ -361,6 +361,5 @@
         <file>systemopen.cpp</file>
         <file>systemopen.h</file>
         <file>sensor.qrc</file>
-        <file>test.js</file>
     </qresource>
 </RCC>

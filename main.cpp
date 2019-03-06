@@ -5,12 +5,19 @@
 #include <qqml.h>
 #include <QStringList>
 #include <qtwebengineglobal.h>
+#include <QtWebView>
+#include <QWebSocketServer>
+#include <QCoreApplication>
+
 
 #include "serialtest.h"
 #include "portmodel.h"
 #include "systemopen.h"
 #include "datafresh.h"
 #include <QmlFFMPEG/XVideo.h>
+#include "websockettransport.h"
+
+
 
 int main(int argc, char *argv[])
 {
@@ -18,6 +25,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QApplication  app(argc, argv);
+
 
     QtWebEngine::initialize();
 
@@ -28,6 +36,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<systemOpen>("RegisterSystemOpen", 1, 0, "MySystemOpen");
 
     qmlRegisterType<dataFresh>("RegisterDataFresh", 1, 0, "MyDataFresh");
+
+    qmlRegisterType<WebSocketTransport>("io.decovar.WebSocketTransport", 1, 0, "WebSocketTransport");
 
     QQmlApplicationEngine engine;
 
