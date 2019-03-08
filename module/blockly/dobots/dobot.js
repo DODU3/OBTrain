@@ -3,6 +3,7 @@
     socket:null,
     showLine: 0,
     port:12345,
+    backend:null,
     init:function(){
         this.initSocket();
     },
@@ -35,7 +36,7 @@
                 // make dialog object accessible globally
                 $this.jsApi = channel.objects.jsApi;
                 $this.initJsApi();
-                $this.output("Dobot prepare already, can to edit!\n");
+                $this.output("OBDrone prepare already, can to edit!\n");
                 $this.jsApi.setCanStartWork();
                 setInterval(function(){
                     $this.generalCode()
@@ -105,14 +106,11 @@
         //if (!code) {
         //    return;
         //}
-//        console.log("code" + code);
         this.jsApi.generalCode(code);
     },
     output:function(message){
-        if(this.jsApi != null){
+        if(this.jsApi != null)
             this.jsApi.generalLog(message);
-//            console.log(message);
-        }
         else{
             alert(message);
         }

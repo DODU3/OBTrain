@@ -497,7 +497,7 @@ Code.initLanguage = function() {
 
   var categories = ['catLogic', 'catLoops', 'catMath', 'catText', 'catLists',
                     'catColour', 'catVariables', 'catFunctions', 
-                    'dobotConfig', 'dobotMotion', 'dobotBasic', 'dobotAttachment'];
+                    'dobotConfig', 'dobotMotion', 'dobotBasic'];
   for (var i = 0, cat; cat = categories[i]; i++) {
     document.getElementById(cat).setAttribute('name', MSG[cat]);
   }

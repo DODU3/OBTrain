@@ -1,0 +1,45 @@
+/*
+//2019-03-05 增加OB自定义块
+Blockly.Msg.OB_DRONE_LOCK = "无人机上锁";
+Blockly.Msg.OB_DRONE_LOCK_TOOLTIP = "给无人机上锁，关闭螺旋桨";
+Blockly.Msg.OB_DRONE_UNLOCK = "无人机解锁";
+Blockly.Msg.OB_DRONE_UNLOCK_TOOLTIP = "给无人机解锁，转动螺旋桨进入怠速状态";
+Blockly.Msg.OB_DRONE_CAL_GYRO = "校准陀螺仪";
+Blockly.Msg.OB_DRONE_CAL_GYRO_TOOLTIP = "校准陀螺仪，去除飞机水平倾角";
+Blockly.Msg.OB_DRONE_CAL_ACC = "校准加速计";
+Blockly.Msg.OB_DRONE_CAL_ACC_TOOLTIP = "校准加速计，去除飞机垂直倾角";
+Blockly.Msg.OB_DRONE_CAL_MAG = "校准电子罗盘";
+Blockly.Msg.OB_DRONE_CAL_MAG_TOOLTIP = "校准电子罗盘，去除周围磁场干扰";
+Blockly.Msg.OB_DRONE_AUTO_TAKEOFF = "自动起飞";
+Blockly.Msg.OB_DRONE_AUTO_TAKEOFF_TOOLTIP = "飞机自动起飞到1m的高度悬停";
+Blockly.Msg.OB_DRONE_AUTO_LANDING = "自动降落";
+Blockly.Msg.OB_DRONE_AUTO_LANDING_TOOLTIP = "飞机从空中自动降落导地面";
+Blockly.Msg.OB_DRONE_ALTITUDE_POSITION_CONTROL = "高度和位移控制";
+Blockly.Msg.OB_DRONE_ALTITUDE_POSITION_CONTROL_TOOLTIP = "对飞机的高度和位移进行控制";
+Blockly.Msg.OB_DRONE_RELA_ALTITUDE_SETTING = "高度增量（cm）";
+Blockly.Msg.OB_DRONE_RELA_POSITION_PITCH_SETTING = "前后位移增量（cm）";
+Blockly.Msg.OB_DRONE_RELA_POSITION_ROLL_SETTING = "左右位移增量（cm）";
+*/
+
+//增加OB 无人机自定义block
+
+Blockly.Blocks.OB_DRONE.HUE = 100;
+/*
+Blockly.Blocks['OB_Drone_Lock'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.OB_DRONE_LOCK);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.OB_DRONE.HUE);
+    this.setTooltip(Blockly.Msg.OB_DRONE_LOCK_TOOLTIP);
+//    this.setHelpUrl('http://www.dobot.cc/');
+  }
+};
+Blockly.Python['OB_Drone_Lock'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'dType.SetCmdEx("ff5580808080080003000000000000000001")\n';
+  return code;
+};
+*/

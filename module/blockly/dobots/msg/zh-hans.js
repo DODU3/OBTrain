@@ -24,5 +24,5 @@ var MSG = {
   dobotConfig: "配置",
   dobotMotion: "运动",
   dobotBasic: "基础",
-  dobotAttachment: "附加配件"
+  dobotAttachment: "附加配件"     
 };

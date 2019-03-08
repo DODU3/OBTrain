@@ -554,3 +554,47 @@ Blockly.Msg.DOBOT_HARDWARE = "硬件";
 Blockly.Msg.DOBOT_NEW = "V2";
 Blockly.Msg.DOBOT_OLD = "V1";
 Blockly.Msg.DOBOT_VERSION = "版本";
+
+
+//2019-03-05 增加OB自定义块
+Blockly.Msg.OB_DRONE_LOCK = "上锁";
+Blockly.Msg.OB_DRONE_LOCK_TOOLTIP = "给无人机上锁，关闭螺旋桨";
+Blockly.Msg.OB_DRONE_UNLOCK = "解锁";
+Blockly.Msg.OB_DRONE_UNLOCK_TOOLTIP = "给无人机解锁，转动螺旋桨进入怠速状态";
+Blockly.Msg.OB_DRONE_CAL_GYRO = "校准陀螺仪";
+Blockly.Msg.OB_DRONE_CAL_GYRO_TOOLTIP = "校准陀螺仪，去除飞机水平倾角";
+Blockly.Msg.OB_DRONE_CAL_ACC = "校准加速计";
+Blockly.Msg.OB_DRONE_CAL_ACC_TOOLTIP = "校准加速计，去除飞机垂直倾角";
+Blockly.Msg.OB_DRONE_CAL_MAG = "校准电子罗盘";
+Blockly.Msg.OB_DRONE_CAL_MAG_TOOLTIP = "校准电子罗盘，去除周围磁场干扰";
+Blockly.Msg.OB_DRONE_AUTO_TAKEOFF = "起飞";
+Blockly.Msg.OB_DRONE_AUTO_TAKEOFF_TOOLTIP = "飞机自动起飞到1m的高度悬停";
+Blockly.Msg.OB_DRONE_AUTO_LANDING = "降落";
+Blockly.Msg.OB_DRONE_AUTO_LANDING_TOOLTIP = "飞机从空中自动降落导地面";
+Blockly.Msg.OB_DRONE_ALTITUDE_POSITION_CONTROL = "高度和位移控制";
+Blockly.Msg.OB_DRONE_ALTITUDE_POSITION_CONTROL_TOOLTIP = "对飞机的高度和位移进行控制";
+Blockly.Msg.OB_DRONE_RELA_ALTITUDE_SETTING = "高度增量（cm）";
+Blockly.Msg.OB_DRONE_RELA_POSITION_PITCH_SETTING = "前后位移增量（cm）";
+Blockly.Msg.OB_DRONE_RELA_POSITION_ROLL_SETTING = "左右位移增量（cm）";
+
+Blockly.Msg.OB_DRONE_ANGLEUNIT = "角度";
+Blockly.Msg.OB_DRONE_CM = "厘米";
+Blockly.Msg.OB_DRONE_FLY_RISE = "上升";
+Blockly.Msg.OB_DRONE_FLY_RISE_TOOLTIP = "控制无人机向上飞行";
+Blockly.Msg.OB_DRONE_FLY_DOWN = "下降";
+Blockly.Msg.OB_DRONE_FLY_DOWN_TOOLTIP = "控制无人机向下飞行";
+Blockly.Msg.OB_DRONE_FLY_ONWARD = "前进";
+Blockly.Msg.OB_DRONE_FLY_ONWARD_TOOLTIP = "控制无人机向前飞行";
+Blockly.Msg.OB_DRONE_FLY_BACK = "后退";
+Blockly.Msg.OB_DRONE_FLY_BACK_TOOLTIP = "控制无人机向后飞行";
+Blockly.Msg.OB_DRONE_FLY_LEFT = "左侧飞";
+Blockly.Msg.OB_DRONE_FLY_LEFT_TOOLTIP = "控制无人机向左侧飞行";
+Blockly.Msg.OB_DRONE_FLY_RIGHT = "右侧飞";
+Blockly.Msg.OB_DRONE_FLY_RIGHT_TOOLTIP = "控制无人机向右侧飞行";
+Blockly.Msg.OB_DRONE_FLY_YAW_LEFT = "左偏航";
+Blockly.Msg.OB_DRONE_FLY_YAW_LEFT_TOOLTIP = "控制无人机向左转向";
+Blockly.Msg.OB_DRONE_FLY_YAW_RIGHT = "右偏航";
+Blockly.Msg.OB_DRONE_FLY_YAW_RIGHT_TOOLTIP = "控制无人机向右转向";
+
+
+

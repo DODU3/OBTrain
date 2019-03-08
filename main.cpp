@@ -16,7 +16,7 @@
 #include "datafresh.h"
 #include <QmlFFMPEG/XVideo.h>
 #include "websockettransport.h"
-
+#include "jsapiobject.h"
 
 
 int main(int argc, char *argv[])
@@ -38,6 +38,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<dataFresh>("RegisterDataFresh", 1, 0, "MyDataFresh");
 
     qmlRegisterType<WebSocketTransport>("io.decovar.WebSocketTransport", 1, 0, "WebSocketTransport");
+
+    qmlRegisterType<jsApiObject>("RegisterJsApiObject", 1, 0, "MyJsApiObject");
 
     QQmlApplicationEngine engine;
 

@@ -26,7 +26,8 @@ SOURCES += \
     serialtest.cpp \
     portmodel.cpp \
     systemopen.cpp \
-    datafresh.cpp
+    datafresh.cpp \
+    jsapiobject.cpp
 
 RESOURCES += \
     sensor.qrc \
@@ -50,6 +51,7 @@ HEADERS += \
     portmodel.h \
     systemopen.h \
     datafresh.h \
-    websockettransport.h
+    websockettransport.h \
+    jsapiobject.h
 
 FORMS +=
