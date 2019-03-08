@@ -202,7 +202,6 @@ Page {
         text: qsTr("新建")
 
         onClicked: {
-//            yy(myJsApiObject.Code);
         }
     }
 
