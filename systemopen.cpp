@@ -52,19 +52,9 @@ void systemOpen::openPosture()
 void systemOpen::openFile(QString relative_path)
 {
      QString path = QCoreApplication::applicationDirPath();
-//     path += "/Content resource/磁力计模组/教学资料/教学PPT/磁力计模组PPT.ppt";
      path += relative_path;
      path.replace("/","\\");//将地址中的"/"替换为"\"，因为在Windows下使用的是"\"。
      QProcess::startDetached("explorer "+path);//打开上面获取的目录
-
-
-//                    QString local_path = QString("D:\Qt\project\Test1\obtRAIN\Content resource\磁力计模组\教学资料\教学PPT\磁力计模组PPT"); //a.txt、a.exe、a.mp3、a.mp4、a.rmvb等
-//                    QString path = QString("file:///") + local_path;
-//                    QDesktopServices::openUrl(QUrl(path, QUrl::TolerantMode));
-
-//                    QString local_path = QString("E:/新建文件夹"); //a.txt、a.exe、a.mp3、a.mp4、a.rmvb等
-//                    QString path = QString("file:///") + local_path;
-//                    bool is_open = QDesktopServices::openUrl(QUrl(path, QUrl::TolerantMode));
 }
 
 

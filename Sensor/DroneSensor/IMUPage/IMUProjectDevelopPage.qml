@@ -31,7 +31,7 @@ ApplicationWindow {
 
         onClicked:
         {
-            mySystemOpenReg.openFile("/Content resource/IMU模组/Demo_IMU/Drone_Templates/Projects/Project.uvprojx");
+            mySystemOpenReg.openFile("/Content resource/IMU模组/Demo_Project/Drone_Templates/Projects/Project.uvprojx");
         }
 
     }

@@ -16,7 +16,8 @@ Item {
 
 //        title: "OB整机-实验操作"
 
-
+    property int temp_data: 0;
+    property int tem2p_data: 0;
 
     Button {
         id: button
@@ -49,7 +50,7 @@ Item {
     Button {
         id: button3
         x: 8
-        y: 684
+        y: 647
         text: qsTr("校准陀螺仪")
         font.bold: true
         font.pointSize: 22
@@ -64,7 +65,7 @@ Item {
     Button {
         id: button1
         x: 202
-        y: 684
+        y: 647
         text: qsTr("电子罗盘校准")
         font.bold: true
         font.pointSize: 22
@@ -215,7 +216,6 @@ Item {
         id:myclassExposeByRegType
     }
 
-
     CheckBox {
         id: checkBox_Control
         x: 15
@@ -230,9 +230,94 @@ Item {
                 return Qt.Unchecked
             }
             else{
+
+                if(checkBox_labupdate.checkState == Qt.Checked)
+                {
+                    checkBox_labupdate.checkState = Qt.Unchecked;
+                    timer.running=false;
+                    timer.repeat=false;
+                    if(true === myclassExposeByRegType.getserialOpenFlag())
+                    {
+                        myclassExposeByRegType.setMagCorner(0,0);
+                    }
+                }
+                  return Qt.Checked
+            }
+        }
+    }
+
+    CheckBox {
+        id: checkBox_labupdate
+        x: 15
+        y: 701
+        text: qsTr("同步无人机与试验台")
+        font.bold: true
+        font.pointSize: 20
+        checkState: Qt.Unchecked
+
+        nextCheckState: function() {
+            if (checkState == Qt.Checked){
+
+                timer.running=false;
+                timer.repeat=false;
+                if(true === myclassExposeByRegType.getserialOpenFlag())
+                {
+                    myclassExposeByRegType.setMagCorner(0,0);
+                }
+                return Qt.Unchecked
+            }
+            else{
+
+                if(checkBox_Control.checkState == Qt.Checked)
+                {
+                    checkBox_Control.checkState = Qt.Unchecked;
+                }
+                timer.running=true;
+                timer.repeat=true;
+
                 return Qt.Checked
             }
         }
     }
+
+
+
+    Timer {
+        //Timer for demo rotation of compass
+
+        interval: 100
+        running: true
+        repeat: true
+
+        onTriggered: {
+
+            if(true === myclassExposeByRegType.getserialDrawClearFlag()){
+
+                myclassExposeByRegType.setserialDrawClearFlag(false);
+            }
+
+            if(true === myclassExposeByRegType.getserialOpenFlag())
+            {
+
+                    //同步飞机和试验台动作
+                    if(checkBox_labupdate.checkState == Qt.Checked)
+                    {
+                        temp_data=myclassExposeByRegType.getAnglePitchNum();
+                        tem2p_data=myclassExposeByRegType.getAngleYawNum();
+                        if(tem2p_data<0)
+                        {
+                            tem2p_data+=360;
+                        }
+                        if((tem2p_data<270)&&(tem2p_data>0))
+                        {
+                            myclassExposeByRegType.setMagCorner(tem2p_data,temp_data);
+                        }
+
+                    }
+
+            }
+        }
+    }
+
 
 }

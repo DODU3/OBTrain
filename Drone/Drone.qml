@@ -79,8 +79,8 @@ Page {
     ComboBox {
         id: comboBox
         objectName: "portComboBox"
-        x: 261
-        y: 18
+        x: 777
+        y: 77
         font.bold: true
         font.pointSize: 20
 
@@ -106,12 +106,12 @@ Page {
     QmlToggleButton{
         id: qmlToggleButton
         anchors.centerIn: parent
-        x: 140
-        y: 18
+        x: 850
+        y: 77
         height: 40
         radius: 20
-        anchors.verticalCenterOffset: -502
-        anchors.horizontalCenterOffset: -446
+        anchors.verticalCenterOffset: -338
+        anchors.horizontalCenterOffset: 64
 
         border.width: 1
         width: 106
