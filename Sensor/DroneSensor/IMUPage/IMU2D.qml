@@ -33,6 +33,16 @@ Item {
         }
     }
 
+    Image {
+        id: imubackground
+
+        x: 40
+        y: 40
+        width: 320
+        height: 320
+        source: "../../../Component/timg.png"
+    }
+
     Text {
         id: element2
         x: 207

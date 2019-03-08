@@ -16,7 +16,8 @@ Item {
 
 //        title: "OB整机-实验操作"
 
-
+    property int temp_data: 0;
+    property int tem2p_data: 0;
 
     Button {
         id: button
@@ -49,7 +50,7 @@ Item {
     Button {
         id: button3
         x: 8
-        y: 684
+        y: 647
         text: qsTr("校准陀螺仪")
         font.bold: true
         font.pointSize: 22
@@ -64,7 +65,7 @@ Item {
     Button {
         id: button1
         x: 202
-        y: 684
+        y: 647
         text: qsTr("电子罗盘校准")
         font.bold: true
         font.pointSize: 22
@@ -115,7 +116,7 @@ Item {
         font.bold: true
         onClicked:
         {
-            myclassExposeByRegType.sendCMD("2c", "808080800800", "001E000000000000");//固定上升30cm
+            myclassExposeByRegType.sendCMD("2C", "808080800800", "001E000000000000");//固定上升30cm
         }
     }
 
@@ -128,7 +129,7 @@ Item {
         font.bold: true
         onClicked:
         {
-            myclassExposeByRegType.sendCMD("2c", "808080800800", "FFE2000000000000");//固定下降30cm
+            myclassExposeByRegType.sendCMD("2C", "808080800800", "FFE2000000000000");//固定下降30cm
         }
     }
 
@@ -141,7 +142,7 @@ Item {
         font.bold: true
         onClicked:
         {
-            myclassExposeByRegType.sendCMD("2c", "808080800800", "00000000FFE20000");
+            myclassExposeByRegType.sendCMD("2C", "808080800800", "00000000FFE20000");
         }
     }
 
@@ -154,7 +155,7 @@ Item {
         font.bold: true
         onClicked:
         {
-            myclassExposeByRegType.sendCMD("2c", "808080800800", "00000000001E0000");
+            myclassExposeByRegType.sendCMD("2C", "808080800800", "00000000001E0000");
         }
     }
 
@@ -167,7 +168,7 @@ Item {
         font.bold: true
         onClicked:
         {
-            myclassExposeByRegType.sendCMD("2c", "808080800800", "000000000000FFE2");
+            myclassExposeByRegType.sendCMD("2C", "808080800800", "000000000000001E");
         }
     }
 
@@ -180,7 +181,7 @@ Item {
         font.bold: true
         onClicked:
         {
-            myclassExposeByRegType.sendCMD("2c", "808080800800", "000000000000001E");
+            myclassExposeByRegType.sendCMD("2C", "808080800800", "000000000000FFE2");
         }
     }
 
@@ -193,7 +194,7 @@ Item {
         font.bold: true
         onClicked:
         {
-            myclassExposeByRegType.sendCMD("2c", "808080800800", "0000FFE200000000");
+            myclassExposeByRegType.sendCMD("2C", "808080800800", "0000FFE200000000");
         }
     }
 
@@ -206,7 +207,7 @@ Item {
         font.bold: true
         onClicked:
         {
-            myclassExposeByRegType.sendCMD("2c", "808080800800", "0000001E00000000");
+            myclassExposeByRegType.sendCMD("2C", "808080800800", "0000001E00000000");
         }
     }
 
@@ -214,7 +215,6 @@ Item {
     {
         id:myclassExposeByRegType
     }
-
 
     CheckBox {
         id: checkBox_Control
@@ -230,9 +230,96 @@ Item {
                 return Qt.Unchecked
             }
             else{
+
+                if(checkBox_labupdate.checkState == Qt.Checked)
+                {
+                    checkBox_labupdate.checkState = Qt.Unchecked;
+                    timer.running=false;
+                    timer.repeat=false;
+                    if(true === myclassExposeByRegType.getserialOpenFlag())
+                    {
+                        myclassExposeByRegType.setMagCorner(0,0);
+                    }
+                }
+                myclassExposeByRegType.setSerialSendRequest(true);
+                  return Qt.Checked
+            }
+        }
+    }
+
+    CheckBox {
+        id: checkBox_labupdate
+        x: 15
+        y: 701
+        text: qsTr("同步无人机与试验台")
+        font.bold: true
+        font.pointSize: 20
+        checkState: Qt.Unchecked
+
+        nextCheckState: function() {
+            if (checkState == Qt.Checked){
+
+                timer.running=false;
+                timer.repeat=false;
+                if(true === myclassExposeByRegType.getserialOpenFlag())
+                {
+                    myclassExposeByRegType.setMagCorner(0,0);
+                }
+                return Qt.Unchecked
+            }
+            else{
+
+                if(checkBox_Control.checkState == Qt.Checked)
+                {
+                    checkBox_Control.checkState = Qt.Unchecked;
+                }
+                myclassExposeByRegType.setSerialSendRequest(false);
+                timer.running=true;
+                timer.repeat=true;
+
                 return Qt.Checked
             }
         }
     }
+
+
+
+    Timer {
+        //Timer for demo rotation of compass
+
+        interval: 100
+        running: true
+        repeat: true
+
+        onTriggered: {
+
+//            if(true === myclassExposeByRegType.getserialDrawClearFlag()){
+
+//                myclassExposeByRegType.setserialDrawClearFlag(false);
+//            }
+
+            if(true === myclassExposeByRegType.getserialOpenFlag())
+            {
+
+                    //同步飞机和试验台动作
+                    if(checkBox_labupdate.checkState == Qt.Checked)
+                    {
+                        temp_data=myclassExposeByRegType.getAnglePitchNum();
+                        tem2p_data=myclassExposeByRegType.getAngleYawNum();
+                        if(tem2p_data<0)
+                        {
+                            tem2p_data+=360;
+                        }
+                        if((tem2p_data<270)&&(tem2p_data>0))
+                        {
+                            myclassExposeByRegType.setMagCorner(tem2p_data,temp_data);
+                        }
+
+                    }
+
+            }
+        }
+    }
+
 
 }

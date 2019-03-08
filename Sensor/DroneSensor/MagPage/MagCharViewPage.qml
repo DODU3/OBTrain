@@ -210,7 +210,7 @@ Item {
             repeat: true
 
             onTriggered: {
-                if(true === myclassExposeByRegType.getserialDrawClearFlag()){
+                if(true === myclassExposeByRegType.getserialDrawClearFlagMag()){
                     angleLine.clear();
                     xLine.clear();
                     yLine.clear();
@@ -224,7 +224,7 @@ Item {
                     globalForJs = 1;
                     axisX.min = 0;
                     axisX.max = 100;
-                    myclassExposeByRegType.setserialDrawClearFlag(false);
+                    myclassExposeByRegType.setserialDrawClearFlagMag(false);
                 }
 
 

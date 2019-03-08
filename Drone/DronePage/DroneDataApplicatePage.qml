@@ -64,7 +64,7 @@ Item {
         onPressed: {
             //fileDialog.open();
             //timer1.stop();
-            mydataFresh.buttonSaveClick("\\Content resource\\OB整机模组\\数据保存\\", textArea.text);
+            mydataFresh.buttonSaveClick("\\Content resource\\OB整机\\数据保存\\", textArea.text);
             //timer1.start();
             datasavecompletedw.show();
         }

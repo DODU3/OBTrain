@@ -22,12 +22,15 @@ INCLUDEPATH += deps
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        main.cpp \
     serialtest.cpp \
     portmodel.cpp \
-    systemopen.cpp \
+    jsapiobject.cpp \
     datafresh.cpp \
-    jsapiobject.cpp
+    jsapiobject.cpp \
+    main.cpp \
+    portmodel.cpp \
+    serialtest.cpp \
+    systemopen.cpp
 
 RESOURCES += \
     sensor.qrc \
@@ -50,9 +53,13 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     serialtest.h \
     portmodel.h \
-    systemopen.h \
-    datafresh.h \
     websockettransport.h \
-    jsapiobject.h
+    jsapiobject.h \
+    datafresh.h \
+    jsapiobject.h \
+    portmodel.h \
+    serialtest.h \
+    systemopen.h \
+    websockettransport.h
 
 FORMS +=

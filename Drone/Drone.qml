@@ -16,12 +16,6 @@ import RegisterJsApiObject 1.0
 
 Page {
 
-    function yy(code)
-    {
-        console.log("test :" + eval(code));
-//        eval(code);
-    }
-
     MyJsApiObject{
         id:myJsApiObject
 
@@ -79,8 +73,8 @@ Page {
     ComboBox {
         id: comboBox
         objectName: "portComboBox"
-        x: 261
-        y: 18
+        x: 777
+        y: 77
         font.bold: true
         font.pointSize: 20
 
@@ -106,12 +100,12 @@ Page {
     QmlToggleButton{
         id: qmlToggleButton
         anchors.centerIn: parent
-        x: 140
-        y: 18
+        x: 850
+        y: 77
         height: 40
         radius: 20
-        anchors.verticalCenterOffset: -502
-        anchors.horizontalCenterOffset: -446
+        anchors.verticalCenterOffset: -443
+        anchors.horizontalCenterOffset: 46
 
         border.width: 1
         width: 106
@@ -208,7 +202,6 @@ Page {
         text: qsTr("新建")
 
         onClicked: {
-            yy(myJsApiObject.Code);
         }
     }
 

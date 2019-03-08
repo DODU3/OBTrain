@@ -31,20 +31,8 @@ ApplicationWindow {
 
         onClicked:
         {
-            mySystemOpenReg.openFile("/Content resource/电子罗盘模组/Demo_Mag/Drone_Templates/Projects/Project.uvprojx");
+            mySystemOpenReg.openFile("/Content resource/电子罗盘模组/Demo_Project/Drone_Templates/Projects/Project.uvprojx");
         }
-
-//        MouseArea{
-//            id:mouse_openppt
-//            anchors.rightMargin: 0
-//            anchors.bottomMargin: 0
-//            anchors.leftMargin: 0
-//            anchors.topMargin: 0
-//            anchors.fill: parent
-//            onPressed: {
-//                mySystemOpenReg.openFile("/Content resource/电子罗盘模组/Demo_Mag/Drone_Templates/Projects/Project.uvprojx");
-//            }
-//        }
     }
 
 

@@ -40,7 +40,9 @@ static int addr3 = 0;
 static int addrch = 0;
 
 static bool serialOpenFlag = false;
-static bool serialDrawClearFlag = false;
+static bool serialDrawClearFlagMag = false;
+static bool serialDrawClearFlagIMU = false;
+static bool serialDrawClearFlagDrone = false;
 
 static QTimer timerSend;
 static bool SerialTestInited = false;
@@ -51,6 +53,8 @@ static int currentNorthSpeed = 0, currentEastSpeed = 0, currentSatelliteNum = 0,
 static int ACCX = 0, ACCY = 0, ACCZ = 0, GYROX = 0, GYROY = 0, GYROZ = 0;
 static double anglepitch = 0, angleroll = 0, angleyaw = 0;
 static double altitude = 0;
+
+static bool serialSendRequest = true;
 
 SerialTest::SerialTest(QSerialPort *parent):
     QSerialPort (parent),
@@ -139,7 +143,9 @@ void SerialTest::openAndSetPort(QString PortName,
             std::cout<<"set sucess"<<std::endl;
         }
 
-        serialDrawClearFlag = true;
+        serialDrawClearFlagMag = true;
+        serialDrawClearFlagIMU = true;
+        serialDrawClearFlagDrone = true;
         serialOpenFlag = true;
         clearSerialDataAll();
         timerSend.start();
@@ -315,7 +321,7 @@ void SerialTest::sendCMD(QString cmd, QString data1, QString data2){
 
 //    CMDFormat = QByteArray::fromHex(value.toLatin1());
 
-    CMDsendtime = 3;
+    CMDsendtime = 5;
 
 }
 
@@ -323,7 +329,9 @@ void SerialTest::timersendtimeout(void){
 //    QTime currentTime = QTime::currentTime();
 //    qDebug() << currentTime;
     if(CMDsendtime <= 0){
-        sendto("ff5580808080080000000000000000000000");
+        if(true == serialSendRequest){
+            sendto("ff5580808080080000000000000000000000");
+        }
     }
     else{
         CMDsendtime--;
@@ -530,7 +538,7 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
             int u16 = 1 << 16;
             int temp;
 
-            altitude = receivedata.mid(20,4).toInt(&ok, 16)*10;
+            altitude = receivedata.mid(20,4).toInt(&ok, 16);
 
             angleyaw = receivedata.mid(12,4).toInt(&ok, 16);
             if(angleyaw >= u16half){
@@ -797,12 +805,28 @@ bool SerialTest::getserialOpenFlag(void){
     return serialOpenFlag;
 }
 
-bool SerialTest::getserialDrawClearFlag(void){
-    return serialDrawClearFlag;
+bool SerialTest::getserialDrawClearFlagMag(void){
+    return serialDrawClearFlagMag;
 }
 
-void SerialTest::setserialDrawClearFlag(bool trueOrFalse){
-    serialDrawClearFlag = trueOrFalse;
+void SerialTest::setserialDrawClearFlagMag(bool trueOrFalse){
+    serialDrawClearFlagMag = trueOrFalse;
+}
+
+bool SerialTest::getserialDrawClearFlagIMU(void){
+    return serialDrawClearFlagIMU;
+}
+
+void SerialTest::setserialDrawClearFlagIMU(bool trueOrFalse){
+    serialDrawClearFlagIMU = trueOrFalse;
+}
+
+bool SerialTest::getserialDrawClearFlagDrone(void){
+    return serialDrawClearFlagDrone;
+}
+
+void SerialTest::setserialDrawClearFlagDrone(bool trueOrFalse){
+    serialDrawClearFlagDrone = trueOrFalse;
 }
 
 QString SerialTest::getCurrentLon(void){
@@ -877,6 +901,12 @@ double SerialTest::getOffsetY(void){
     return (100 * sin(anglepitch/180*3.141592654));
 //    return (100 * sin(300.0/1800*3.141592654));
 }
+
+void SerialTest::setSerialSendRequest(bool TrueOrFalse)
+{
+    serialSendRequest = TrueOrFalse;
+}
+
 
 ////////////////////5.关闭端口//////////////////////////////
 void SerialTest::closePort()//由按钮出发

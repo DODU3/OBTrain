@@ -166,7 +166,7 @@ Page {
         stack: stack
     }
 
-    Gyro {
+    GyroGuide {
         id: page3
         visible: false
         stack: stack

@@ -263,6 +263,28 @@ Item {
 //            }
 //        }
 
+            //同步飞机和试验台动作
+//        CheckBox {
+//            id: checkBox_labupdate
+//            x: 19
+//            y: -39
+//            text: qsTr("同步无人机与试验台")
+//            font.bold: true
+//            font.pointSize: 20
+//            checkState: Qt.Unchecked
+
+//            nextCheckState: function() {
+//                if (checkState == Qt.Checked){
+//                    return Qt.Unchecked
+//                }
+//                else{
+
+//                    return Qt.Checked
+//                }
+//            }
+//        }
+
+
         Timer {
             //Timer for demo rotation of compass
 
@@ -271,7 +293,7 @@ Item {
             repeat: true
 
             onTriggered: {
-                if(true === myclassExposeByRegType.getserialDrawClearFlag()){
+                if(true === myclassExposeByRegType.getserialDrawClearFlagDrone()){
                     altitude.clear();
                     pitch.clear();
                     roll.clear();
@@ -285,7 +307,7 @@ Item {
                     globalForJs = 1;
                     axisX.min = 0;
                     axisX.max = 100;
-                    myclassExposeByRegType.setserialDrawClearFlag(false);
+                    myclassExposeByRegType.setserialDrawClearFlagDrone(false);
                     label_altitude.text= "高度：0 cm";
                     label_pitch.text= "俯仰角：0°";
                     label_roll.text= "翻滚角：0°";
@@ -297,6 +319,17 @@ Item {
 //                console.log("angleLine: " + myclassExposeByRegType.getQpointFY(angleLine.at(globalForJs-1))+"   "+globalForJs);
                 if(true === myclassExposeByRegType.getserialOpenFlag())
                 {
+
+//                    //同步飞机和试验台动作
+//                    if(checkBox_labupdate.checkState == Qt.Checked)
+//                    {
+//                        temp_data=myclassExposeByRegType.getAnglePitchNum();
+//                        tem2p_data=myclassExposeByRegType.getAngleYawNum();
+//                        myclassExposeByRegType.setMagCorner(temp_data,tem2p_data);
+//                    }
+
+
+
                     flag_chartupdata=0;
                     if(axisX.min > 1){
                         altitude.pointRemoved(axisX.min-1);
@@ -469,6 +502,10 @@ Item {
                     }
 
                     temp_data=myclassExposeByRegType.getAngleYawNum();
+                    if(temp_data<0)
+                    {
+                        temp_data+=360;
+                    }
                     label_yaw.text= "偏航角："+temp_data+"°";
                     yaw.append(globalForJs,temp_data);
                     if(checkBox_yaw.checkState == Qt.Checked)

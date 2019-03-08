@@ -34,6 +34,7 @@ Page {
             if(true === myclassExposeByRegType.getserialOpenFlag()){
                 qmlToggleButton.toggleRight();
             }
+            myclassExposeByRegType.setSerialSendRequest(true);
             stack.pop()
         }
     }
