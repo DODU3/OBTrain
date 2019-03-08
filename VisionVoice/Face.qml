@@ -17,11 +17,6 @@ Page {
         source: "../images/background.png"
     }
 
-    QmlVideo{
-        id:qmlVideo
-        x: 373
-        y: 98
-    }
 
     Button {
         height: 32

@@ -8,9 +8,9 @@ CONFIG += c++11 big_resources
 DEFINES += QT_DEPRECATED_WARNINGS
 
 #include(deps/QmlVlc/QmlVlc.pri)
-include(deps/QmlFFMPEG/deployment.pri)
+#include(deps/QmlFFMPEG/deployment.pri)
 
-INCLUDEPATH += deps
+#INCLUDEPATH += deps
 
 #INCLUDEPATH +=E:/vlc-3.0.6/sdk/include
 #LIBS += E:/vlc-3.0.6/sdk/lib/libvlc.lib

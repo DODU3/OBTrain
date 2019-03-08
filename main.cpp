@@ -14,7 +14,6 @@
 #include "portmodel.h"
 #include "systemopen.h"
 #include "datafresh.h"
-#include <QmlFFMPEG/XVideo.h>
 #include "websockettransport.h"
 #include "jsapiobject.h"
 
@@ -26,10 +25,7 @@ int main(int argc, char *argv[])
 
     QApplication  app(argc, argv);
 
-
     QtWebEngine::initialize();
-
-    qmlRegisterType<XVideo>("XVideo", 1, 0, "XVideo");
 
     qmlRegisterType<SerialTest>("RegisterMyType", 1, 0, "MyClassType");
 

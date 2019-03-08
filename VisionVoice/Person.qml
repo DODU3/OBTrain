@@ -4,7 +4,6 @@ import ".."
 import "./Detection"
 import "../Component"
 
-import XVideo 1.0
 
 Page {
     id: page
@@ -117,11 +116,6 @@ Page {
         stack: stack
     }
 
-    QmlVideo{
-        id:qmlVideo
-        x: 373
-        y: 98
-    }
 
     Button {
         id: button4
