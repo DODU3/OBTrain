@@ -94,8 +94,12 @@ public:
     Q_INVOKABLE qreal getQpointFY(QPointF pointf);
 	
     Q_INVOKABLE bool getserialOpenFlag(void);
-    Q_INVOKABLE bool getserialDrawClearFlag(void);
-    Q_INVOKABLE void setserialDrawClearFlag(bool trueOrFalse);
+    Q_INVOKABLE bool getserialDrawClearFlagMag(void);
+    Q_INVOKABLE void setserialDrawClearFlagMag(bool trueOrFalse);
+    Q_INVOKABLE bool getserialDrawClearFlagIMU(void);
+    Q_INVOKABLE void setserialDrawClearFlagIMU(bool trueOrFalse);
+    Q_INVOKABLE bool getserialDrawClearFlagDrone(void);
+    Q_INVOKABLE void setserialDrawClearFlagDrone(bool trueOrFalse);
 
     Q_INVOKABLE QString getCurrentLon(void);
     Q_INVOKABLE QString getCurrentLat(void);
@@ -116,6 +120,8 @@ public:
 
     Q_INVOKABLE double getOffsetX(void);
     Q_INVOKABLE double getOffsetY(void);
+
+    Q_INVOKABLE void setSerialSendRequest(bool TrueOrFalse);
 
 signals:
     void receivedataChanged();
