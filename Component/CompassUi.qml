@@ -4,8 +4,8 @@ import QtQuick.Controls 2.2
 import RegisterMyType 1.0
 
 Item {
-    width: 500
-    height: 500
+    width: 400
+    height: 400
 
     id : compassui
 //    anchors.fill: parent
@@ -15,7 +15,7 @@ Item {
     function setBearing(headingIn)
     {
         heading = headingIn
-        backRotation.angle = heading
+        backRotation.angle = -heading
     }
 
     Item {
@@ -23,8 +23,14 @@ Item {
         //anchors.centerIn: parent
         anchors.fill: parent
         Image { id: background;
-            anchors.rightMargin: 0
-        anchors.bottomMargin: 136
+            anchors.leftMargin: 55
+        anchors.topMargin: 38
+            anchors.rightMargin: 55
+            anchors.bottomMargin: 68
+            //            anchors.leftMargin: 0
+//        anchors.topMargin: 48
+//            anchors.rightMargin: 0
+//        anchors.bottomMargin: 88
         anchors.fill: parent
             fillMode: Image.PreserveAspectFit
             source: "compass.svg";
@@ -42,21 +48,32 @@ Item {
 
     }
 
+    Image {
+        id: arrow
+        x: 169
+        y: 0
+        width: 52
+        height: 39
+        source: "arrow.png"
+    }
+
     Label {
         id: label
-        x: 70
-        y: 324
+        x: 74
+        y: 342
         width: 253
         height: 57
-        font.pixelSize: 60
+        font.pixelSize: 55
         text: qsTr("text")
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
         font.bold: true
         font.family: "Times New Roman"
     }
 
     Timer {
         //Timer for demo rotation of compass
-        interval: 50
+        interval: 100
         running: true
         repeat: true
         onTriggered: {

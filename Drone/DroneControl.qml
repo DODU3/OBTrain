@@ -4,10 +4,10 @@ import QtQuick.Controls 2.2
 import QtMultimedia 5.4
 
 import ".."
-import "../../Component"
-//import "./PresentPage"
-import "./MagPage"
-import "./UartData"
+import "../Component"
+import "./DronePage"
+import "../Sensor/DroneSensor/MagPage"
+import "../Sensor/DroneSensor/UartData"
 
 import RegisterMyType 1.0
 import RegisterSystemOpen 1.0
@@ -32,11 +32,7 @@ Page {
         anchors.top: parent.top
         onClicked: {
             if(true === myclassExposeByRegType.getserialOpenFlag()){
-                //myclassExposeByRegType.closePort();
                 qmlToggleButton.toggleRight();
-//                qmlToggleButton.state = "right";
-//                qmlToggleButton.color = "#CCCCCC";
-
             }
             stack.pop()
         }
@@ -51,22 +47,6 @@ Page {
         font.pointSize: 20
 
         model:comboModel.comboList
-//        model: portlistmodel
-
-//        pressed: true
-//        down: true
-
-//        MouseArea{
-//            onPressed: {
-//                console.info("aa");
-//                myclassExposeByRegType.getPortInfo();
-//                comboModel.setComboList(myclassExposeByRegType.receivePort());
-//            }
-//        }
-//        onActivated: {
-//            console.info("aa");
-//        }
-
     }
 
     QmlToggleButton{
@@ -78,20 +58,10 @@ Page {
         anchors.verticalCenterOffset: -472
         anchors.horizontalCenterOffset: -614
         width: 106
-//        leftString: qsTr("打开")
-//        rightString: qsTr("关闭")
+    }
 
-//        onToggleLeft: label.text = qmlToggleButton.leftString
-//        onToggleRight: label.text = qmlToggleButton.rightString
-//        onToggleLeft: {
-//            timerSend.start();
-//        }
-
-//        onToggleRight: {
-//            timerSend.stop();
-//        }
-
-
+    RFSetPage{
+        id:rfsetpage
     }
 
     Button {
@@ -114,7 +84,9 @@ Page {
         id:myclassExposeByRegType
     }
 
-
+    DroneInfoPage{
+        id:droneInfoPage
+    }
 
 
     Button {
@@ -127,10 +99,14 @@ Page {
 
         onClicked:
         {
-            maginfopage.show();
+            droneInfoPage.active;
+            droneInfoPage.show();
         }
     }
 
+    DroneProjectDevelopPage{
+        id:droneprojectdeveloppage
+    }
 
     Button {
         id: button2
@@ -142,8 +118,8 @@ Page {
 
         onClicked:
         {
-            magprojectdeveloppage.active;
-            magprojectdeveloppage.show();
+            droneprojectdeveloppage.active;
+            droneprojectdeveloppage.show();
         }
     }
 
@@ -177,19 +153,9 @@ Page {
     }
 
 
-    CompassUi
+    DroneCharViewPage
     {
-        id: compassui
-        x: 146
-        y: 155
-        width: 400
-        height: 400
-    }
-
-
-    MagCharViewPage
-    {
-        id:magcharview
+        id:dronecharview
         x:550
         y:155
         visible: true
@@ -221,8 +187,8 @@ Page {
         color: "#00000000"
         border.width: 1
 
-        MagDataApplicatePage{
-            id:magdataapplicatepage
+        DroneDataApplicatePage{
+            id:droneDataApplicatePage
             x:2
             y:2
             width: 400
@@ -230,42 +196,60 @@ Page {
         }
     }
 
-    MagControlPage{
-        id:magcongrolPage
 
-        x:146
-        y:595
-        width: 400
-        height: 400
-    }
 
 
     Component.onCompleted: {
-
-//        myclassExposeByRegType.setMagCornerStr("0° 北")
         myclassExposeByRegType.getPortInfo();
         comboModel.setComboList(myclassExposeByRegType.receivePort());
-//        portlistmodel.append({"portnam" : "hello"});
-//        portlistmodel.append({"portnam" : "hel2lo"});
-//        portlistmodel.append("zark");
+    }
 
+//    Rectangle {
+//        x:138
+//        y:130
+//        width: 402
+//        height: 800
+//        color: "#00000000"
+//        border.width: 1
+
+//        DroneControlPage{
+//            id:dronecongrolPage
+
+//            x:2
+//            y:2
+//            width: 400
+//            height: 800
+    //        }
+    //    }
+
+    DroneControlPage{
+        id:dronecongrolPage
+
+        x:138
+        y:130
+        width: 400
+        height: 800
+    }
+
+    Button {
+        id: button3
+        x: 975
+        y: 48
+        text: qsTr("进入模块化编程")
+        font.bold: true
+        font.pointSize: 20
+
+        onClicked: {
+            stack.pop();
+            pageDrone.stack = stack;
+            stack.push(pageDrone);
+        }
     }
 
 
-    MagDataPage{
-        id:magdatapage
+    Drone {
+        id: pageDrone
+        visible: false
+        stack: stack
     }
-
-    MagInfoPage{
-        id:maginfopage
-    }
-
-    RFSetPage{
-        id:rfsetpage
-    }
-
-    MagProjectDevelopPage{
-        id:magprojectdeveloppage
-    }
-
 }

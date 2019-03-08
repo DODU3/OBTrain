@@ -32,7 +32,8 @@ SOURCES += \
 RESOURCES += \
     sensor.qrc \
     qml.qrc \
-    module.qrc
+    module.qrc \
+    drone.qrc
 
 
 # Additional import path used to resolve QML modules in Qt Creator's code model

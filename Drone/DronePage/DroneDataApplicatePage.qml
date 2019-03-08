@@ -1,18 +1,24 @@
 ﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Dialogs 1.2
-
-
+//import ".."
+//import "../../../Component"
+//import "../PresentPage"
+//import "../MagPage"
 import RegisterDataFresh 1.0
-import "../UartData"
+import "../../Sensor/DroneSensor/UartData"
+
+//import "."
+
+//import "./dataSaveCompleted.qml"
 
 Item {
-    id: gpsDataApplicatePage
+    id: droneDataApplicatePage
 
-    width: 583
+    width: 400
     height: 400
 
-//    title: "gps-数据保存与应用"
+//    title: "OB整机-数据保存与应用"
 
     Button {
         id: button
@@ -58,7 +64,7 @@ Item {
         onPressed: {
             //fileDialog.open();
             //timer1.stop();
-            mydataFresh.buttonSaveClick("\\Content resource\\GPS模组\\数据保存\\", textArea.text);
+            mydataFresh.buttonSaveClick("\\Content resource\\OB整机模组\\数据保存\\", textArea.text);
             //timer1.start();
             datasavecompletedw.show();
         }
@@ -72,18 +78,18 @@ Item {
     ScrollView {
         x: 0
         y: 0
-        width: 583
+        width: 400
         height: 284
         TextArea {
             id: textArea
             x: -10
             y: -6
-            width: 583
+            width: 396
             height: 256
-            text: "GPS-数据保存与应用"
+            text: "OB整机-数据保存与应用"
             font.family: "Times New Roman"
             font.bold: true
-            placeholderText: qsTr("GPS-数据保存与应用")
+            placeholderText: qsTr("OB整机-数据保存与应用")
             //            objectName: "MagDateAppPageText"
 //            font.pointSize: 9
             font.pixelSize: 20
@@ -134,7 +140,7 @@ Item {
         font.pointSize: 22
         enabled: true
         onPressed: {
-            mydataFresh.buttonOpenFolderClick("\\Content resource\\GPS模组\\数据保存\\");
+            mydataFresh.buttonOpenFolderClick("\\Content resource\\OB整机\\数据保存\\");
         }
     }
 

@@ -33,7 +33,7 @@ QString dataFresh::getSaveFileName(void){
     return savefilename;
 }
 
-void dataFresh::buttonSaveClick(QString qs)
+void dataFresh::buttonSaveClick(QString qspath, QString qs)
 {
 
     QDateTime currentTime = QDateTime::currentDateTime();
@@ -41,7 +41,7 @@ void dataFresh::buttonSaveClick(QString qs)
 
     QString path = QCoreApplication::applicationDirPath();
     path.replace("/", "\\");
-    path.append("\\Content resource\\GPS模组\\数据保存\\");
+    path.append(qspath);
     QDir dir(path);
     if(!dir.exists()){
         dir.mkpath(path);
@@ -83,10 +83,10 @@ void dataFresh::buttonSaveClick(QString qs)
 //    delete object;
 //}
 
-void dataFresh::buttonOpenFolderClick(){
+void dataFresh::buttonOpenFolderClick(QString qspath){
     QString path = QCoreApplication::applicationDirPath();
     path.replace("/", "\\");
-    path.append("\\Content resource\\GPS模组\\数据保存\\");
+    path.append(qspath);
     QDir dir(path);
     if(!dir.exists()){
         dir.mkpath(path);

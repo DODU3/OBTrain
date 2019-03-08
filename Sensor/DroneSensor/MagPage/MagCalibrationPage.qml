@@ -9,7 +9,7 @@ ApplicationWindow {
     width: 1024
     height: 768
 
-    title: "磁力计校准教程"
+    title: "电子罗盘校准教程"
 
     background: Image {
         source: "../images/Calibration.jpg"

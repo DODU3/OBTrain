@@ -32,8 +32,8 @@ Page {
             if(true === myclassExposeByRegType.getserialOpenFlag()){
                 //myclassExposeByRegType.closePort();
                 qmlToggleButton.toggleRight();
-//                qmlToggleButton.state = "right";
-//                qmlToggleButton.color = "#CCCCCC";
+                //                qmlToggleButton.state = "right";
+                //                qmlToggleButton.color = "#CCCCCC";
 
             }
             stack.pop()
@@ -125,7 +125,7 @@ Page {
                 var key = keys[i];
 
                 if (key === "currentIndex") {
-//                    console.log("key FOUND:" + comboBox[key]);
+                    //                    console.log("key FOUND:" + comboBox[key]);
                     portName = comboModel.getElement(comboBox[key]);
 
                     break;
@@ -136,8 +136,18 @@ Page {
         }
     }
 
+    IMUCharViewPage
+    {
+        id:imucharview
+        x:600
+        y:131
+        width: 1100
+        height: 400
+        visible: true
+    }
+
     Rectangle {
-        x:1262
+        x:625
         y:570
         width: 402
         height: 400
@@ -153,10 +163,19 @@ Page {
         }
     }
 
-    Rectangle {
-        x:1263
-        y:130
+    IMUControlPage{
+        id:imucongrolPage
+
+        x:1231
+        y:364
         width: 400
+        height: 200
+    }
+
+    Rectangle {
+        x:1132
+        y:570
+        width: 583
         height: 400
         color: "#00000000"
         border.width: 1
@@ -165,28 +184,67 @@ Page {
             id:imudataapplicatepage
             x:2
             y:2
-            width: 400
+            width: 583
             height: 400
         }
+    }
+
+
+
+    Rectangle {
+        //        id: page
+        x: 118
+        y: 570
+        width: 400
+        height: 400
+        color: "#00000000"
+        border.color: "black"
+        // Toyplane entity
+        // Toyplane entity
+        //        Toyplane {
+        //            material: AdsMaterial {
+        //                effect: shadowMapEffect
+        //                diffuseColor: Qt.rgba(0.9, 0.5, 0.3, 1.0)
+        //                shininess: 75
+        //            }
+
+        IMU2D {
+            id: myimu2d
+            width: 400
+            height: 400
+
+        }
+    }
+
+    IMU2DHEADING
+    {
+        id: myimu2dheading
+        x: 118
+        y: 131
+        width: 400
+        height: 400
     }
 
     Component.onCompleted: {
 
         myclassExposeByRegType.getPortInfo();
         comboModel.setComboList(myclassExposeByRegType.receivePort());
-//        console.log(positionSource.position.coordinate.latitude,
-//                    positionSource.position.coordinate.longitude)
+        //        console.log(positionSource.position.coordinate.latitude,
+        //                    positionSource.position.coordinate.longitude)
     }
+
+
 
     Timer {
         id:timer1
         interval: 100
         repeat: true
         triggeredOnStart: false
-        running: true
+        running: false//true
 
         onTriggered: {
-
+            //            compassuiimu.setBearing(myclassExposeByRegType.getAngleYawNum());
+            //            console.log(myclassExposeByRegType.getAngleYawNum());
         }
     }
 
@@ -206,5 +264,9 @@ Page {
     IMUInfoPage{
         id:imuinfopage
     }
+
+
+
+
 
 }

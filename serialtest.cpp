@@ -11,8 +11,10 @@
 #include <QTimer>
 #include <QtCore>
 
+#include <math.h>
+
 SerialTest::Settings currentsetting;//定义设定值结构体的结构体变量
-QSerialPort serialtest;
+QSerialPort *serialtest;
 QString m_serialdataall("");
 qint64 mag_corner(0);
 qint64 mag_x(0);
@@ -41,9 +43,14 @@ static bool serialOpenFlag = false;
 static bool serialDrawClearFlag = false;
 
 static QTimer timerSend;
-
+static bool SerialTestInited = false;
 static double currentLon = 0, currentLat = 0;
 static int currentNorthSpeed = 0, currentEastSpeed = 0, currentSatelliteNum = 0, currentHdop = 0;
+//static QThread * threadSerialPort;
+
+static int ACCX = 0, ACCY = 0, ACCZ = 0, GYROX = 0, GYROY = 0, GYROZ = 0;
+static double anglepitch = 0, angleroll = 0, angleyaw = 0;
+static double altitude = 0;
 
 SerialTest::SerialTest(QSerialPort *parent):
     QSerialPort (parent),
@@ -51,10 +58,21 @@ SerialTest::SerialTest(QSerialPort *parent):
     m_receivenumber("0"),
     m_sendnumber("0")
 {
+    if(false == SerialTestInited)
+    {
+        SerialTestInited = true;
+
+        serialtest = new SerialTest;
 //    QTimer *timerSend = new QTimer(this);
-    timerSend.setInterval(50);
-    QObject::connect(&timerSend, SIGNAL(timeout()), this, SLOT(timersendtimeout()));
-    QObject::connect(&serialtest, SIGNAL(readyRead()),this, SLOT(receivefrom()));//将端口收到数据产生的信号绑定receivefrom()函数;
+        timerSend.setInterval(50);
+        timerSend.setTimerType(Qt::TimerType::PreciseTimer);
+        QObject::connect(&timerSend, SIGNAL(timeout()), this, SLOT(timersendtimeout()));
+        QObject::connect(serialtest, SIGNAL(readyRead()),this, SLOT(receivefrom()));//将端口收到数据产生的信号绑定receivefrom()函数;
+//        threadSerialPort = new QThread(this);
+//        serialtest->moveToThread(threadSerialPort);
+//        threadSerialPort->start();
+
+    }
 }
 
 //打开端口并设置:函数的参数（……Index由qml中combobox的currentIndex决定），由按钮触发
@@ -105,18 +123,18 @@ void SerialTest::openAndSetPort(QString PortName,
 
 
 ////////////////////2.设定当前端口名//////////////////////////////
-    serialtest.setPortName(currentsetting.name);
+    serialtest->setPortName(currentsetting.name);
 
 ////////////////////3.打开这一端口并按照当前设置信息进行设置//////////////////////////////
-    if (serialtest.open(QIODevice::ReadWrite))//打开这一端口
+    if (serialtest->open(QIODevice::ReadWrite))//打开这一端口
     {
         std::cout<<"open port sucess"<<std::endl;
 
-        if(serialtest.setBaudRate(currentsetting.baudRate)//设置各项信息
-                && serialtest.setDataBits(currentsetting.dataBits)
-                && serialtest.setParity(currentsetting.parity)
-                && serialtest.setStopBits(currentsetting.stopBits)
-                && serialtest.setFlowControl(currentsetting.flowControl))
+        if(serialtest->setBaudRate(currentsetting.baudRate)//设置各项信息
+                && serialtest->setDataBits(currentsetting.dataBits)
+                && serialtest->setParity(currentsetting.parity)
+                && serialtest->setStopBits(currentsetting.stopBits)
+                && serialtest->setFlowControl(currentsetting.flowControl))
         {
             std::cout<<"set sucess"<<std::endl;
         }
@@ -274,7 +292,7 @@ void SerialTest::sendto(QString sendmessage)//此函数由qml里的send按钮触
         QByteArray data = QByteArray::fromHex(value.toLatin1());
     //    QByteArray data = sendmessage.toLocal8Bit()+'\r';//将QString转为QByteArray，并加上'\r'（回车符）,因为芯片要求在回车符之后再返回数据
 
-        qint64 testwritenumber=serialtest.write(data);//写入数据
+        qint64 testwritenumber=serialtest->write(data);//写入数据
 
         m_receivedata=m_receivedata+"\n";//加上换行符便于显示
 
@@ -302,6 +320,8 @@ void SerialTest::sendCMD(QString cmd, QString data1, QString data2){
 }
 
 void SerialTest::timersendtimeout(void){
+//    QTime currentTime = QTime::currentTime();
+//    qDebug() << currentTime;
     if(CMDsendtime <= 0){
         sendto("ff5580808080080000000000000000000000");
     }
@@ -325,7 +345,7 @@ QString SerialTest::sendnumber()//响应sendnumberChanged()消息
 ////////////////////4.接收数据//////////////////////////////
 void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑定），当串口收到数据此消息被激活（对于串口，每发送出去一个字节，都会将此字节返回，触发readyread消息，当芯片有特殊指令时，收到的信息更多，比如对sim900，发送0000，芯片就会受到0000，但是发送AT，会受到 AT OK）
 {
-    QByteArray data = serialtest.readAll();//读取所有收到的数据
+    QByteArray data = serialtest->readAll();//读取所有收到的数据
 
     QString receivedata=data.toHex();//将QByteArray转为QString来显示
 
@@ -333,11 +353,14 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
 
     QDateTime currentTime = QDateTime::currentDateTime();
     QString qs_currenttime = currentTime.toString("hh:mm:ss.zzz");
+//    qDebug() << qs_currenttime;
+
+    bool ok = false;
 
     if(subString == "ff55")
     {
         if(receivedata.mid(28,2) == "01"){
-            bool ok = false;
+//            bool ok = false;
             qint64 corner = (receivedata.mid(4,4).toInt(&ok, 16))/10;
             int x = (receivedata.mid(8,4).toInt(&ok, 16));
             if(x >= 32768){
@@ -387,7 +410,7 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
         }else if(receivedata.mid(28,2) == "06"){
                 if(settingAddrFlag == true){
                     settingAddrFlag = false;
-                    bool ok = false;
+//                    bool ok = false;
                     addr1 = receivedata.mid(4,2).toInt(&ok, 16);
                     addr2 = receivedata.mid(6,2).toInt(&ok, 16);
                     addr3 = receivedata.mid(8,2).toInt(&ok, 16);
@@ -397,7 +420,7 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
         }
         else if(receivedata.mid(28,2) == "05"){
             //gps信息
-            bool ok = false;
+//            bool ok = false;
             int u16half = 1 << 15;
             int u16 = 1 << 16;
             long u32half = 1 << 31;
@@ -433,8 +456,136 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
                                 getCurrentHDOP() + ";  ");//            qDebug() << (QString::number(currentLon) + "," + QString::number(currentLat) + "," +QString::number(currentEastSpeed)
 //                         +"," +QString::number(currentNorthSpeed) + "," +QString::number(currentSatelliteNum) + "," +QString::number(currentHdop));
 //            qDebug() << (1<<15);
+        }else if(receivedata.mid(28,2) == "02")
+        {
+            //接收到IMU模组数据模块1
+            int u16half = 1 << 15;
+            int u16 = 1 << 16;
+            ACCX = receivedata.mid(4,4).toInt(&ok, 16);
+            if(ACCX >= u16half){
+                ACCX -= u16;
+            }
+            ACCY = receivedata.mid(8,4).toInt(&ok, 16);
+            if(ACCY >= u16half){
+                ACCY -= u16;
+            }
+            ACCZ = receivedata.mid(12,4).toInt(&ok, 16);
+            if(ACCZ >= u16half){
+                ACCZ -= u16;
+            }
+            GYROX = receivedata.mid(16,4).toInt(&ok, 16);
+            if(GYROX >= u16half){
+                GYROX -= u16;
+            }
+            GYROY = receivedata.mid(20,4).toInt(&ok, 16);
+            if(GYROY >= u16half){
+                GYROY -= u16;
+            }
+            GYROZ = receivedata.mid(24,4).toInt(&ok, 16);
+            if(GYROZ >= u16half){
+                GYROZ -= u16;
+            }
+            addserialSaveAndApp(qs_currenttime + ":  " +
+                                QString::number(ACCX) + ";  " +
+                                QString::number(ACCY) + ";  " +
+                                QString::number(ACCZ) + ";  " +
+                                QString::number(GYROX) + ";  " +
+                                QString::number(GYROY) + ";  " +
+                                QString::number(GYROZ) + ";  ");//            qDebug() << (QString::number(currentLon) + "," + QString::number(currentLat) + "," +QString::number(currentEastSpeed)
+
+//            qDebug() << ACCX << ACCY << ACCZ << GYROX <<GYROY<<GYROZ;
+
+        }else if(receivedata.mid(28,2) == "03")
+        {
+
+            //接收到IMU模组数据模块2
+            int u16half = 1 << 15;
+            int u16 = 1 << 16;
+            anglepitch = receivedata.mid(4,4).toInt(&ok, 16);
+            if(anglepitch >= u16half){
+                anglepitch -= u16;
+            }
+            anglepitch = anglepitch / 10.0;
+            angleroll = receivedata.mid(8,4).toInt(&ok, 16);
+            if(angleroll >= u16half){
+                angleroll -= u16;
+            }
+            angleroll = angleroll / 10.0;
+            angleyaw = receivedata.mid(12,4).toInt(&ok, 16);
+            if(angleyaw >= u16half){
+                angleyaw -= u16;
+            }
+            angleyaw = (angleyaw/10.0 - 180);
+            addserialSaveAndApp(qs_currenttime + ":  " +
+                                getAnglePitch() + ";  " +
+                                getAngleRoll() + ";  " +
+                                getAngleYaw() + ";  ");//            qDebug() << (QString::number(currentLon) + "," + QString::number(currentLat) + "," +QString::number(currentEastSpeed)
+//            qDebug() << anglepitch << angleroll << angleyaw;
         }
-        else if(receivedata.mid(28,2) == "ff"){
+        else if(receivedata.mid(28,2) == "00")
+        {
+            //接收到无人机整机数据帧
+
+            int u16half = 1 << 15;
+            int u16 = 1 << 16;
+            int temp;
+
+            altitude = receivedata.mid(20,4).toInt(&ok, 16)*10;
+
+            angleyaw = receivedata.mid(12,4).toInt(&ok, 16);
+            if(angleyaw >= u16half){
+               angleyaw -= u16;
+            }
+            angleyaw = angleyaw/10.0;
+            if(angleyaw<0)
+            {
+                angleyaw+=360;
+
+            }
+
+//            angleyaw = (angleyaw/10.0 - 180);
+
+            temp=receivedata.mid(30,2).toInt(&ok, 16);
+            if(temp==1)
+            {
+                anglepitch = receivedata.mid(32,4).toInt(&ok, 16);
+                if(anglepitch >= u16half){
+                    anglepitch -= u16;
+                }
+                anglepitch = anglepitch / 10.0;
+            }
+            else if(temp==2)
+            {
+                angleroll = receivedata.mid(32,4).toInt(&ok, 16);
+                if(angleroll >= u16half){
+                    angleroll -= u16;
+                }
+                angleroll = angleroll / 10.0;
+            }
+//            else if(temp==3)
+//            {
+//                altitude = receivedata.mid(32,4).toInt(&ok, 16);
+//                if(altitude >= u16half){
+//                    altitude -= u16;
+//                }
+//            }
+//            else if(temp==5)
+//            {
+//                angleyaw = receivedata.mid(32,4).toInt(&ok, 16);
+//                if(angleyaw >= u16half){
+//                     angleyaw -= u16;
+//                }
+//                angleyaw = (angleyaw/10.0 - 180);
+//            }
+
+            addserialSaveAndApp(qs_currenttime + ":  " +
+                                        getAnglePitch() + ";  " +
+                                        getAngleRoll() + ";  " +
+                                        getAngleYaw() + ";  ");//            qDebug() << (QString::number(currentLon) + "," + QString::number(currentLat) + "," +QString::number(currentEastSpeed)
+        //            qDebug() << anglepitch << angleroll << angleyaw;
+        }
+        else if(receivedata.mid(28,2) == "ff")
+        {
             //用户自定数据
             bool ok = false;
             mag_user1 = (receivedata.mid(4,4).toInt(&ok, 16));
@@ -575,6 +726,11 @@ QString SerialTest::getSerialDataAll()
 }
 void SerialTest::addSerialDataAll(QString data)
 {
+//    qDebug() << m_serialdataall.size();
+    if(m_serialdataall.size() > 3000)
+    {
+        m_serialdataall.remove(0, data.size()+2);
+    }
     m_serialdataall.append(data + '\n');
 
     //emit receivedataChanged();
@@ -673,11 +829,59 @@ QString SerialTest::getCurrentHDOP(void){
     return QString::number(currentHdop);
 }
 
+QString SerialTest::getAnglePitch(void){
+    return QString::number(anglepitch, 'f', 1);
+}
+
+QString SerialTest::getAngleRoll(void){
+    return QString::number(angleroll, 'f', 1);
+}
+
+
+
+QString SerialTest::getAngleYaw(void){
+//    qDebug() << angleyaw/10.0;
+    return QString::number(angleyaw, 'f', 1);
+}
+
+double SerialTest::getAnglePitchNum(void){
+//    qDebug() << angleyaw/10.0;
+    return (anglepitch);
+}
+
+double SerialTest::getAngleRollNum(void){
+//    qDebug() << angleyaw/10.0;
+    return (angleroll);
+}
+
+double SerialTest::getAngleYawNum(void){
+//    qDebug() << angleyaw/10.0;
+    return (angleyaw);
+}
+
+QString SerialTest::getAltitude(void){
+    return QString::number(altitude, 'f', 1);
+}
+
+double SerialTest::getAltitudeNum(void){
+    return (altitude);
+}
+
+double SerialTest::getOffsetX(void){
+    return (100 * sin(angleroll/180*3.141592654));
+//    return (100 * sin(300.0/1800*3.141592654));
+}
+
+double SerialTest::getOffsetY(void){
+//    qDebug() << sin(3.141592654/2);
+    return (100 * sin(anglepitch/180*3.141592654));
+//    return (100 * sin(300.0/1800*3.141592654));
+}
 
 ////////////////////5.关闭端口//////////////////////////////
 void SerialTest::closePort()//由按钮出发
 {
-    serialtest.close();
+    serialtest->close();
     std::cout<<"close port sucess"<<std::endl;
     serialOpenFlag = false;
     timerSend.stop();
@@ -690,4 +894,13 @@ void SerialTest::clearnumber()//由按钮出发
 {
     c_sendnumber=0;
     c_receivenumber=0;
+}
+
+SerialTest::~SerialTest()
+{
+//    serialtest->close();
+//    serialtest->deleteLater();
+//    threadSerialPort->exit();
+//    threadSerialPort->wait();
+//    threadSerialPort->deleteLater();
 }

@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Drone/images/APP.png</file>
+        <file>Drone/images/Cruiser.png</file>
+        <file>Drone/images/Doubler.png</file>
+        <file>Drone/images/Drone.png</file>
+        <file>Drone/images/DroneGuidePage.jpg</file>
+        <file>Drone/images/Interface.png</file>
+        <file>Drone/images/Model.png</file>
+        <file>Drone/APP.qml</file>
+        <file>Drone/Cruiser.qml</file>
+        <file>Drone/Doubler.qml</file>
+        <file>Drone/Drone.qml</file>
+        <file>Drone/DroneControl.qml</file>
+        <file>Drone/DroneGuide.qml</file>
+        <file>Drone/DronePage.qml</file>
+        <file>Drone/Interface.qml</file>
+        <file>Drone/Model.qml</file>
+        <file>Drone/DronePage/APP.png</file>
+        <file>Drone/DronePage/DroneCharViewPage.qml</file>
+        <file>Drone/DronePage/DroneControlPage.qml</file>
+        <file>Drone/DronePage/DroneDataApplicatePage.qml</file>
+        <file>Drone/DronePage/DroneInfoPage.qml</file>
+        <file>Drone/DronePage/DroneProjectDevelopPage.qml</file>
+    </qresource>
+</RCC>

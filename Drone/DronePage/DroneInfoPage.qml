@@ -4,7 +4,7 @@ import QtQuick.Controls 2.2
 import RegisterSystemOpen 1.0
 
 ApplicationWindow {
-    id: imuInfoPage
+    id: droneInfoPage
     x: 0
     y: 0
     width: 600
@@ -14,7 +14,7 @@ ApplicationWindow {
     maximumWidth:600
     minimumWidth:600
 
-    title: "IMU-教学资料"
+    title: "整机-教学资料"
 
     background: Image {
         source: "../../../images/background.png"
@@ -30,7 +30,7 @@ ApplicationWindow {
 
         onClicked:
         {
-            mySystemOpenReg.openFile("/Content resource/IMU模组/教学资料/教学PPT/IMU模组PPT.pptx");
+            mySystemOpenReg.openFile("/Content resource/OB整机/教学资料/教学PPT/OB整机PPT.ppt");
         }
     }
 
@@ -55,7 +55,7 @@ ApplicationWindow {
             anchors.fill: parent
             anchors.bottomMargin: -1
             onPressed: {
-                mySystemOpenReg.openFile("/Content resource/IMU模组/教学资料/教学视频");
+                mySystemOpenReg.openFile("/Content resource/OB整机/教学资料/教学视频");
             }
         }
     }
@@ -75,7 +75,7 @@ ApplicationWindow {
                 anchors.fill: parent
                 anchors.bottomMargin: 1
                 onPressed: {
-                    mySystemOpenReg.openFile("/Content resource/IMU模组/教学资料/其他资料");
+                    mySystemOpenReg.openFile("/Content resource/OB整机/教学资料/其他资料");
                 }
             }
         }

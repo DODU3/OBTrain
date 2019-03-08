@@ -31,20 +31,9 @@ ApplicationWindow {
 
         onClicked:
         {
-            mySystemOpenReg.openFile("/Content resource/倾角测量模组/Demo_Mag/Drone_Templates/Projects/Project.uvprojx");
+            mySystemOpenReg.openFile("/Content resource/IMU模组/Demo_IMU/Drone_Templates/Projects/Project.uvprojx");
         }
 
-//        MouseArea{
-//            id:mouse_openppt
-//            anchors.rightMargin: 0
-//            anchors.bottomMargin: 0
-//            anchors.leftMargin: 0
-//            anchors.topMargin: 0
-//            anchors.fill: parent
-//            onPressed: {
-//                mySystemOpenReg.openFile("/Content resource/磁力计模组/Demo_Mag/Drone_Templates/Projects/Project.uvprojx");
-//            }
-//        }
     }
 
 
@@ -68,7 +57,7 @@ ApplicationWindow {
             anchors.fill: parent
             anchors.bottomMargin: -2
             onPressed: {
-                mySystemOpenReg.openFile("/Content resource/倾角测量模组/教学资料/教学视频/开发操作视频.mp4");
+                mySystemOpenReg.openFile("/Content resource/IMU模组/教学资料/教学视频/开发操作视频.mp4");
             }
         }
     }

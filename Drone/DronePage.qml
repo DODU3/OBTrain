@@ -149,7 +149,7 @@ Page {
 
     }
 
-    Drone {
+    DroneGuide {
         id: page1
         visible: false
     }

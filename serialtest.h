@@ -31,6 +31,7 @@ public:
         QSerialPort::FlowControl flowControl;
     };
     SerialTest(QSerialPort *parent = 0);
+    ~SerialTest();
 
     Q_INVOKABLE QStringList receivePort();
 
@@ -102,6 +103,19 @@ public:
     Q_INVOKABLE QString getCurrentES(void);
     Q_INVOKABLE QString getCurrentSN(void);
     Q_INVOKABLE QString getCurrentHDOP(void);
+
+    Q_INVOKABLE QString getAnglePitch(void);
+    Q_INVOKABLE QString getAngleRoll(void);
+    Q_INVOKABLE QString getAngleYaw(void);
+    Q_INVOKABLE double getAnglePitchNum(void);
+    Q_INVOKABLE double getAngleRollNum(void);
+    Q_INVOKABLE double getAngleYawNum(void);
+
+    Q_INVOKABLE QString getAltitude(void);
+    Q_INVOKABLE double getAltitudeNum(void);
+
+    Q_INVOKABLE double getOffsetX(void);
+    Q_INVOKABLE double getOffsetY(void);
 
 signals:
     void receivedataChanged();

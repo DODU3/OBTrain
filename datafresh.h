@@ -10,9 +10,9 @@ public:
     dataFresh();
 
     Q_INVOKABLE void freshBaseData();
-    Q_INVOKABLE void buttonSaveClick(QString qs);
+    Q_INVOKABLE void buttonSaveClick(QString qspath, QString qs);
 //    Q_INVOKABLE void buttonStartClick();
-    Q_INVOKABLE void buttonOpenFolderClick();
+    Q_INVOKABLE void buttonOpenFolderClick(QString qspath);
 //    Q_INVOKABLE QString getSaveFileName(void);
 
     Q_PROPERTY(bool serialDataPrintFlag  READ getserialDataPrintFlag WRITE setserialDataPrintFlag)

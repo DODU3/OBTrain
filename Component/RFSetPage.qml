@@ -229,7 +229,7 @@ ApplicationWindow {
         y: 99
         width: 81
         height: 20
-        text: qsTr("22")
+        text: qsTr("176")
         clip: false
         font.bold: true
         font.pixelSize: 25
@@ -246,7 +246,7 @@ ApplicationWindow {
         y: 99
         width: 80
         height: 20
-        text: qsTr("32")
+        text: qsTr("34")
         font.bold: true
         font.pixelSize: 25
         validator: IntValidator{bottom: 0; top: 255;}
@@ -270,7 +270,7 @@ ApplicationWindow {
         y: 146
         width: 87
         height: 24
-        text: qsTr("0")
+        text: qsTr("36")
         font.bold: true
         font.pixelSize: 25
         validator: IntValidator{bottom: 0; top: 80;}
@@ -283,7 +283,7 @@ ApplicationWindow {
         y: 99
         width: 80
         height: 20
-        text: qsTr("12")
+        text: qsTr("117")
         font.bold: true
         font.pixelSize: 25
         //validator: RegExpValidator{regExp: /[0-2][0-9][0-9]/}

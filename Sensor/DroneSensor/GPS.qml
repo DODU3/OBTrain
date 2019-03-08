@@ -286,7 +286,7 @@ Page {
             thdopx.text = myclassExposeByRegType.getCurrentHDOP();
 //            mlat += 0.000001;
 //            mlon += 0.000001;
-//            myposition.center = QtPositioning.coordinate(myclassExposeByRegType.getCurrentLat(), myclassExposeByRegType.getCurrentLon());
+            myposition.center = QtPositioning.coordinate(myclassExposeByRegType.getCurrentLat(), myclassExposeByRegType.getCurrentLon());
         }
     }
 

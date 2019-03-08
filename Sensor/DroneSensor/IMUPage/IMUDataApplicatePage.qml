@@ -9,10 +9,10 @@ import "../UartData"
 Item {
     id: imuDataApplicatePage
 
-    width: 400
+    width: 583
     height: 400
 
-//    title: "gps-数据保存与应用"
+//    title: "imu-数据保存与应用"
 
     Button {
         id: button
@@ -58,7 +58,7 @@ Item {
         onPressed: {
             //fileDialog.open();
             //timer1.stop();
-            mydataFresh.buttonSaveClick(textArea.text);
+            mydataFresh.buttonSaveClick("\\Content resource\\IMU模组\\数据保存\\", textArea.text);
             //timer1.start();
             datasavecompletedw.show();
         }
@@ -134,7 +134,7 @@ Item {
         font.pointSize: 22
         enabled: true
         onPressed: {
-            mydataFresh.buttonOpenFolderClick();
+            mydataFresh.buttonOpenFolderClick("\\Content resource\\IMU模组\\数据保存\\");
         }
     }
 

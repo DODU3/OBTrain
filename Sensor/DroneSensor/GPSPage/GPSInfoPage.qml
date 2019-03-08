@@ -30,7 +30,7 @@ ApplicationWindow {
 
         onClicked:
         {
-            mySystemOpenReg.openFile("/Content resource/磁力计模组/教学资料/教学PPT/磁力计模组PPT.ppt");
+            mySystemOpenReg.openFile("/Content resource/GPS模组/教学资料/教学PPT/GPS模组PPT.pptx");
         }
 
 //        MouseArea{
@@ -41,7 +41,7 @@ ApplicationWindow {
 //            anchors.topMargin: 0
 //            anchors.fill: parent
 //            onPressed: {
-//                mySystemOpenReg.openFile("/Content resource/磁力计模组/教学资料/教学PPT/磁力计模组PPT.ppt");
+//                mySystemOpenReg.openFile("/Content resource/磁力计模组/教学资料/教学PPT/磁力计模组PPT.pptx");
 //            }
 //        }
     }
@@ -67,7 +67,7 @@ ApplicationWindow {
             anchors.fill: parent
             anchors.bottomMargin: -1
             onPressed: {
-                mySystemOpenReg.openFile("/Content resource/磁力计模组/教学资料/教学视频");
+                mySystemOpenReg.openFile("/Content resource/GPS模组/教学资料/教学视频");
             }
         }
     }
@@ -87,7 +87,7 @@ ApplicationWindow {
                 anchors.fill: parent
                 anchors.bottomMargin: 1
                 onPressed: {
-                    mySystemOpenReg.openFile("/Content resource/磁力计模组/教学资料/其他资料");
+                    mySystemOpenReg.openFile("/Content resource/GPS模组/教学资料/其他资料");
                 }
             }
         }

@@ -5,7 +5,7 @@ import QtQuick.Controls 2.2
 import RegisterSystemOpen 1.0
 
 ApplicationWindow {
-    id: magprojectdeveloppage
+    id: droneprojectdeveloppage
     x: 0
     y: 0
     width: 480
@@ -15,7 +15,7 @@ ApplicationWindow {
     maximumWidth:480
     minimumWidth:480
 
-    title: "电子罗盘-工程实例"
+    title: "OB整机-工程实例"
 
     background: Image {
         source: "../../../images/background.png"
@@ -31,20 +31,8 @@ ApplicationWindow {
 
         onClicked:
         {
-            mySystemOpenReg.openFile("/Content resource/电子罗盘模组/Demo_Mag/Drone_Templates/Projects/Project.uvprojx");
+            mySystemOpenReg.openFile("/Content resource/OB整机/Demo_Project/Drone_Templates/Projects/Project.uvprojx");
         }
-
-//        MouseArea{
-//            id:mouse_openppt
-//            anchors.rightMargin: 0
-//            anchors.bottomMargin: 0
-//            anchors.leftMargin: 0
-//            anchors.topMargin: 0
-//            anchors.fill: parent
-//            onPressed: {
-//                mySystemOpenReg.openFile("/Content resource/电子罗盘模组/Demo_Mag/Drone_Templates/Projects/Project.uvprojx");
-//            }
-//        }
     }
 
 
@@ -68,7 +56,7 @@ ApplicationWindow {
             anchors.fill: parent
             anchors.bottomMargin: -2
             onPressed: {
-                mySystemOpenReg.openFile("/Content resource/电子罗盘模组/教学资料/教学视频/开发操作视频.mp4");
+                mySystemOpenReg.openFile("/Content resource/OB整机/教学资料/教学视频/开发操作视频.mp4");
             }
         }
     }

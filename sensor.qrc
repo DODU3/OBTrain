@@ -81,5 +81,15 @@
         <file>Sensor/VisionVoiceSensor/VisionVoiceSensor.qml</file>
         <file>Sensor/VisionVoiceSensor/VoiceVerify.qml</file>
         <file>Sensor/SensorPage.qml</file>
+        <file>Sensor/DroneSensor/MagPage/MagCharViewPage.qml</file>
+        <file>Sensor/DroneSensor/IMUPage/AdsMaterial.qml</file>
+        <file>Sensor/DroneSensor/IMUPage/IMU2D.qml</file>
+        <file>Sensor/DroneSensor/IMUPage/IMU2DHEADING.qml</file>
+        <file>Sensor/DroneSensor/IMUPage/IMU3D.qml</file>
+        <file>Sensor/DroneSensor/IMUPage/IMUCharViewPage.qml</file>
+        <file>Sensor/DroneSensor/IMUPage/IMUControlPage.qml</file>
+        <file>Sensor/DroneSensor/IMUPage/Toyplane.qml</file>
+        <file>Sensor/DroneSensor/images/IMUGuidePage.png</file>
+        <file>Sensor/DroneSensor/images/earthMag.png</file>
     </qresource>
 </RCC>
