@@ -315,8 +315,8 @@ Page {
                 }
 
                 myposition.center = QtPositioning.coordinate(mlat, mlon);
-                tlatitudex.text = mlat.toLocaleString('f', 2);
-                tlongitudex.text = mlon.toLocaleString('f', 2);
+                tlatitudex.text = mlat.toFixed(7).toLocaleString();
+                tlongitudex.text = mlon.toFixed(7).toLocaleString();
     //            if(myclassExposeByRegType.getCurrentSN() > 8)
     //            {
     //                myposition.center = QtPositioning.coordinate(myclassExposeByRegType.getCurrentLat(), myclassExposeByRegType.getCurrentLon());
