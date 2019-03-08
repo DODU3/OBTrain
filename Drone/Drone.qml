@@ -16,12 +16,6 @@ import RegisterJsApiObject 1.0
 
 Page {
 
-    function yy(code)
-    {
-        console.log("test :" + eval(code));
-//        eval(code);
-    }
-
     MyJsApiObject{
         id:myJsApiObject
 
@@ -208,7 +202,6 @@ Page {
         text: qsTr("新建")
 
         onClicked: {
-            yy(myJsApiObject.Code);
         }
     }
 
