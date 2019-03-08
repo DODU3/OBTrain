@@ -104,8 +104,8 @@ Page {
         y: 77
         height: 40
         radius: 20
-        anchors.verticalCenterOffset: -338
-        anchors.horizontalCenterOffset: 64
+        anchors.verticalCenterOffset: -443
+        anchors.horizontalCenterOffset: 46
 
         border.width: 1
         width: 106

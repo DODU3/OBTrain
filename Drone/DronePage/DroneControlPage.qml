@@ -168,7 +168,7 @@ Item {
         font.bold: true
         onClicked:
         {
-            myclassExposeByRegType.sendCMD("2c", "808080800800", "000000000000FFE2");
+            myclassExposeByRegType.sendCMD("2c", "808080800800", "000000000000001E");
         }
     }
 
@@ -181,7 +181,7 @@ Item {
         font.bold: true
         onClicked:
         {
-            myclassExposeByRegType.sendCMD("2c", "808080800800", "000000000000001E");
+            myclassExposeByRegType.sendCMD("2c", "808080800800", "000000000000FFE2");
         }
     }
 
