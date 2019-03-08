@@ -241,6 +241,7 @@ Item {
                         myclassExposeByRegType.setMagCorner(0,0);
                     }
                 }
+                myclassExposeByRegType.setSerialSendRequest(true);
                   return Qt.Checked
             }
         }
@@ -272,6 +273,7 @@ Item {
                 {
                     checkBox_Control.checkState = Qt.Unchecked;
                 }
+                myclassExposeByRegType.setSerialSendRequest(false);
                 timer.running=true;
                 timer.repeat=true;
 
@@ -291,10 +293,10 @@ Item {
 
         onTriggered: {
 
-            if(true === myclassExposeByRegType.getserialDrawClearFlag()){
+//            if(true === myclassExposeByRegType.getserialDrawClearFlag()){
 
-                myclassExposeByRegType.setserialDrawClearFlag(false);
-            }
+//                myclassExposeByRegType.setserialDrawClearFlag(false);
+//            }
 
             if(true === myclassExposeByRegType.getserialOpenFlag())
             {

@@ -248,7 +248,7 @@ Item {
             repeat: true
 
             onTriggered: {
-                if(true === myclassExposeByRegType.getserialDrawClearFlag()){
+                if(true === myclassExposeByRegType.getserialDrawClearFlagIMU()){
                     angleLinePitch.clear();
                     angleLineRoll.clear();
                     angleLineYaw.clear();
@@ -264,7 +264,7 @@ Item {
                     globalForJs = 1;
                     axisX.min = 0;
                     axisX.max = 100;
-                    myclassExposeByRegType.setserialDrawClearFlag(false);
+                    myclassExposeByRegType.setserialDrawClearFlagIMU(false);
                 }
 
 

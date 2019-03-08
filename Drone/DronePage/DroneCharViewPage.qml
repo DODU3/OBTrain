@@ -293,7 +293,7 @@ Item {
             repeat: true
 
             onTriggered: {
-                if(true === myclassExposeByRegType.getserialDrawClearFlag()){
+                if(true === myclassExposeByRegType.getserialDrawClearFlagDrone()){
                     altitude.clear();
                     pitch.clear();
                     roll.clear();
@@ -307,7 +307,7 @@ Item {
                     globalForJs = 1;
                     axisX.min = 0;
                     axisX.max = 100;
-                    myclassExposeByRegType.setserialDrawClearFlag(false);
+                    myclassExposeByRegType.setserialDrawClearFlagDrone(false);
                     label_altitude.text= "高度：0 cm";
                     label_pitch.text= "俯仰角：0°";
                     label_roll.text= "翻滚角：0°";

@@ -69,7 +69,7 @@ Item {
         id: button1
         x: 141
         y: 126
-        text: qsTr("倾角测量模组校准")
+        text: qsTr("三轴姿态测量单元校准")
         font.bold: true
         font.pointSize: 22
 

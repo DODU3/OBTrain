@@ -351,5 +351,6 @@
         <file>Component/arrow.png</file>
         <file>Component/plane2d.png</file>
         <file>Component/qipao.png</file>
+        <file>Component/timg.png</file>
     </qresource>
 </RCC>

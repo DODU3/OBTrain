@@ -24,6 +24,7 @@ Page {
     property StackView stack: null
     property double mlat: 23.1663297;
     property double mlon: 113.4446837;
+    property int timecnt: 0;
 
     background: Image {
         source: "../../images/background.png"
@@ -278,15 +279,56 @@ Page {
         running: true
 
         onTriggered: {
-            tlatitudex.text = myclassExposeByRegType.getCurrentLat();
-            tlongitudex.text = myclassExposeByRegType.getCurrentLon();
-            teastspeedx.text = myclassExposeByRegType.getCurrentES();
-            tnorthspeedx.text = myclassExposeByRegType.getCurrentNS();
-            tsatellitenumx.text = myclassExposeByRegType.getCurrentSN();
-            thdopx.text = myclassExposeByRegType.getCurrentHDOP();
-//            mlat += 0.000001;
-//            mlon += 0.000001;
-            myposition.center = QtPositioning.coordinate(myclassExposeByRegType.getCurrentLat(), myclassExposeByRegType.getCurrentLon());
+            if(true === myclassExposeByRegType.getserialOpenFlag())
+            {
+    //            tlatitudex.text = myclassExposeByRegType.getCurrentLat();
+    //            tlongitudex.text = myclassExposeByRegType.getCurrentLon();
+                teastspeedx.text = myclassExposeByRegType.getCurrentES();
+                tnorthspeedx.text = myclassExposeByRegType.getCurrentNS();
+                tsatellitenumx.text = myclassExposeByRegType.getCurrentSN();
+                thdopx.text = myclassExposeByRegType.getCurrentHDOP();
+                timecnt++;
+                if(timecnt > 400)
+                {
+                    timecnt = 0;
+                }
+
+                if(timecnt < 100)
+                {
+                    mlat += 0.000005;
+    //                mlon += 0.000005;
+                }
+                else if(timecnt < 200)
+                {
+    //                mlat -= 0.000005;
+                    mlon += 0.000005;
+                }
+                else if(timecnt < 300)
+                {
+                    mlat -= 0.000005;
+    //                mlon -= 0.000005;
+                }
+                else if(timecnt < 400)
+                {
+    //                mlat -= 0.000005;
+                    mlon -= 0.000005;
+                }
+
+                myposition.center = QtPositioning.coordinate(mlat, mlon);
+//                tlatitudex.text = mlat.toString();
+//                tlongitudex.text = mlon.toString();
+    //            if(myclassExposeByRegType.getCurrentSN() > 8)
+    //            {
+    //                myposition.center = QtPositioning.coordinate(myclassExposeByRegType.getCurrentLat(), myclassExposeByRegType.getCurrentLon());
+    //                myposition.color = "blue";
+    //                tfixedx.text = "已定位";
+    //            }
+    //            else
+    //            {
+    //                myposition.color = "gray";
+    //                tfixedx.text = "未定位";
+    //            }
+            }
         }
     }
 
