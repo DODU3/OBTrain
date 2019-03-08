@@ -1,10 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
-        <file>Page1Form.ui.qml</file>
-        <file>Page2Form.ui.qml</file>
-        <file>main.qml</file>
-        <file>qtquickcontrols2.conf</file>
         <file>images/background.png</file>
         <file>Iot/APP.qml</file>
         <file>Iot/BasicNet.qml</file>
@@ -52,7 +47,6 @@
         <file>VisionVoice/images/Model.png</file>
         <file>VisionVoice/images/PersonControl.png</file>
         <file>VisionVoice/images/VoiceVerify.png</file>
-        <file>SerialPortRefresh.js</file>
         <file>Component/QmlToggleButton.qml</file>
         <file>Component/SwipeViewPage.qml</file>
         <file>Component/VideoPlayer.qml</file>
@@ -338,19 +332,11 @@
         <file>deps/QmlFFMPEG/XVideo.h</file>
         <file>deps/QmlFFMPEG/XVideoThread.cpp</file>
         <file>deps/QmlFFMPEG/XVideoThread.h</file>
-        <file>datafresh.cpp</file>
-        <file>datafresh.h</file>
-        <file>main.cpp</file>
-        <file>portmodel.cpp</file>
-        <file>portmodel.h</file>
-        <file>serialtest.cpp</file>
-        <file>serialtest.h</file>
-        <file>systemopen.cpp</file>
-        <file>systemopen.h</file>
-        <file>sensor.qrc</file>
         <file>Component/arrow.png</file>
         <file>Component/plane2d.png</file>
         <file>Component/qipao.png</file>
         <file>Component/timg.png</file>
+        <file>SerialPortRefresh.js</file>
+        <file>main.qml</file>
     </qresource>
 </RCC>
