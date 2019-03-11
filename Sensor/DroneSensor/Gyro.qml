@@ -1,6 +1,8 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 
+import QtQuick.Scene3D 2.0
+
 import "../../Component"
 import ".."
 import "./UartData"
@@ -139,9 +141,9 @@ Page {
     IMUCharViewPage
     {
         id:imucharview
-        x:600
+        x:118
         y:131
-        width: 1100
+        width: 1600
         height: 400
         visible: true
     }
@@ -208,21 +210,22 @@ Page {
         //                shininess: 75
         //            }
 
-        IMU2D {
-            id: myimu2d
+//        IMU2D {
+//            id: myimu2d
+//            width: 400
+//            height: 400
+
+//        }
+        Scene3D{
+            id: scene3d
+//            aspects: "input"
             width: 400
             height: 400
+            Toyplane3d {
+                id:toyplane3d
 
+            }
         }
-    }
-
-    IMU2DHEADING
-    {
-        id: myimu2dheading
-        x: 118
-        y: 131
-        width: 400
-        height: 400
     }
 
     Component.onCompleted: {
@@ -237,14 +240,17 @@ Page {
 
     Timer {
         id:timer1
-        interval: 100
+        interval: 500
         repeat: true
         triggeredOnStart: false
-        running: false//true
+        running: true
 
         onTriggered: {
             //            compassuiimu.setBearing(myclassExposeByRegType.getAngleYawNum());
             //            console.log(myclassExposeByRegType.getAngleYawNum());
+            toyplane3d.setPitch(myclassExposeByRegType.getAnglePitchNum());
+            toyplane3d.setRoll(myclassExposeByRegType.getAngleRollNum());
+            toyplane3d.setYaw(myclassExposeByRegType.getAngleYawNum());
         }
     }
 

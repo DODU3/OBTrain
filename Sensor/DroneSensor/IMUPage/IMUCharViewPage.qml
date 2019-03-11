@@ -3,7 +3,7 @@ import QtCharts 2.0
 import QtQuick.Controls 2.2
 
 Item {
-    width: 1100
+    width: 1600
     height: 400
 
     property int globalForJs: 1;
@@ -25,7 +25,7 @@ Item {
         x: 0
         y: 0
         title: "实时数据"
-        width: 570
+        width: 1061
         height: 400
         antialiasing: true
 
@@ -935,7 +935,7 @@ Item {
 
     CheckBox {
         id: checkBox_anglepitch
-        x: 576
+        x: 1076
         y: 6
         text: qsTr("俯仰角")
         font.bold: true
@@ -955,7 +955,7 @@ Item {
 
     CheckBox {
         id: checkBox_angleroll
-        x: 752
+        x: 1252
         y: 8
         text: qsTr("横滚角")
         font.bold: true
@@ -973,7 +973,7 @@ Item {
 
     CheckBox {
         id: checkBox_angleyaw
-        x: 925
+        x: 1425
         y: 8
         text: qsTr("偏航角")
         font.bold: true
@@ -991,7 +991,7 @@ Item {
 
     CheckBox {
         id: checkBox_xline
-        x: 576
+        x: 1076
         y: 52
         text: qsTr("X轴角速度")
         font.bold: true
@@ -1010,7 +1010,7 @@ Item {
 
     CheckBox {
         id: checkBox_yline
-        x: 750
+        x: 1250
         y: 52
         text: qsTr("Y轴角速度")
         font.bold: true
@@ -1029,7 +1029,7 @@ Item {
 
     CheckBox {
         id: checkBox_zline
-        x: 924
+        x: 1424
         y: 52
         text: qsTr("Z轴角速度")
         font.bold: true
@@ -1049,7 +1049,7 @@ Item {
 
     CheckBox {
         id: checkBox_xline1
-        x: 576
+        x: 1076
         y: 98
         text: qsTr("X轴加速度")
         font.bold: true
@@ -1067,7 +1067,7 @@ Item {
 
     CheckBox {
         id: checkBox_yline1
-        x: 750
+        x: 1250
         y: 98
         text: qsTr("Y轴加速度")
         font.bold: true
@@ -1085,7 +1085,7 @@ Item {
 
     CheckBox {
         id: checkBox_zline1
-        x: 924
+        x: 1424
         y: 98
         text: qsTr("Z轴加速度")
         font.bold: true
@@ -1103,7 +1103,7 @@ Item {
 
     CheckBox {
         id: checkBox_user1
-        x: 576
+        x: 1076
         y: 144
         text: qsTr("用户数据1")
         font.bold: true
@@ -1122,7 +1122,7 @@ Item {
 
     CheckBox {
         id: checkBox_user2
-        x: 750
+        x: 1250
         y: 144
         text: qsTr("用户数据2")
         font.bold: true
@@ -1141,7 +1141,7 @@ Item {
 
     CheckBox {
         id: checkBox_user3
-        x: 924
+        x: 1424
         y: 144
         text: qsTr("用户数据3")
         font.bold: true
@@ -1160,7 +1160,7 @@ Item {
 
     CheckBox {
         id: checkBox_user4
-        x: 576
+        x: 1076
         y: 197
         text: qsTr("用户数据4")
         font.bold: true
@@ -1179,7 +1179,7 @@ Item {
 
     CheckBox {
         id: checkBox_user5
-        x: 750
+        x: 1250
         y: 197
         text: qsTr("用户数据5")
         font.bold: true
@@ -1198,7 +1198,7 @@ Item {
 
     CheckBox {
         id: checkBox_user6
-        x: 924
+        x: 1424
         y: 197
         text: qsTr("用户数据6")
         font.bold: true

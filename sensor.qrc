@@ -87,5 +87,6 @@
         <file>Sensor/DroneSensor/IMUPage/IMUCharViewPage.qml</file>
         <file>Sensor/DroneSensor/IMUPage/IMUControlPage.qml</file>
         <file>Sensor/DroneSensor/images/earthMag.png</file>
+        <file>Sensor/DroneSensor/IMUPage/Toyplane3d.qml</file>
     </qresource>
 </RCC>
