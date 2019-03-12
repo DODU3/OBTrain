@@ -141,9 +141,9 @@ Page {
     IMUCharViewPage
     {
         id:imucharview
-        x:118
+        x:600
         y:131
-        width: 1600
+        width: 1100
         height: 400
         visible: true
     }
@@ -210,22 +210,21 @@ Page {
         //                shininess: 75
         //            }
 
-//        IMU2D {
-//            id: myimu2d
-//            width: 400
-//            height: 400
-
-//        }
-        Scene3D{
-            id: scene3d
-//            aspects: "input"
+        IMU2D {
+            id: myimu2d
             width: 400
             height: 400
-            Toyplane3d {
-                id:toyplane3d
 
-            }
         }
+    }
+
+    IMU2DHEADING
+    {
+        id: myimu2dheading
+        x: 118
+        y: 131
+        width: 400
+        height: 400
     }
 
     Component.onCompleted: {
@@ -240,17 +239,14 @@ Page {
 
     Timer {
         id:timer1
-        interval: 500
+        interval: 100
         repeat: true
         triggeredOnStart: false
-        running: true
+        running: false//true
 
         onTriggered: {
             //            compassuiimu.setBearing(myclassExposeByRegType.getAngleYawNum());
             //            console.log(myclassExposeByRegType.getAngleYawNum());
-            toyplane3d.setPitch(myclassExposeByRegType.getAnglePitchNum());
-            toyplane3d.setRoll(myclassExposeByRegType.getAngleRollNum());
-            toyplane3d.setYaw(myclassExposeByRegType.getAngleYawNum());
         }
     }
 
