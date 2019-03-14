@@ -104,6 +104,5 @@
         <file>Component/timg.png</file>
         <file>SerialPortRefresh.js</file>
         <file>main.qml</file>
-        <file>Component/toyplane.obj</file>
     </qresource>
 </RCC>
