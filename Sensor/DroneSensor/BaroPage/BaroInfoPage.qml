@@ -4,7 +4,7 @@ import QtQuick.Controls 2.2
 import RegisterSystemOpen 1.0
 
 ApplicationWindow {
-    id: droneInfoPage
+    id: baroInfoPage
     x: 0
     y: 0
     width: 600
@@ -14,7 +14,7 @@ ApplicationWindow {
     maximumWidth:600
     minimumWidth:600
 
-    title: "整机-教学资料"
+    title: "气压计-教学资料"
 
     background: Image {
         source: "../../../images/background.png"
@@ -30,7 +30,7 @@ ApplicationWindow {
 
         onClicked:
         {
-            mySystemOpenReg.openFile("/Content_resource/OB整机/教学资料/教学PPT/OB整机PPT.ppt");
+            mySystemOpenReg.openFile("/Content_resource/气压计模组/教学资料/教学PPT/气压计模组PPT.ppt");
         }
     }
 
@@ -47,17 +47,10 @@ ApplicationWindow {
         text: qsTr("教学视频")
         font.bold: true
         font.pointSize: 20
-        MouseArea {
-            id: mouse_openvideo
-            anchors.leftMargin: 0
-            anchors.topMargin: 1
-            anchors.rightMargin: 0
-            anchors.fill: parent
-            anchors.bottomMargin: -1
-            onPressed: {
-                mySystemOpenReg.openFile("/Content_resource/OB整机/教学资料/教学视频");
-            }
+        onPressed: {
+            mySystemOpenReg.openFile("/Content_resource/气压计模组/教学资料/教学视频");
         }
+
     }
 
         Button {
@@ -67,16 +60,9 @@ ApplicationWindow {
             text: qsTr("其他资料")
             font.bold: true
             font.pointSize: 20
-            MouseArea {
-                id: mouse_openotherfile
-                anchors.leftMargin: 0
-                anchors.topMargin: -1
-                anchors.rightMargin: 0
-                anchors.fill: parent
-                anchors.bottomMargin: 1
-                onPressed: {
-                    mySystemOpenReg.openFile("/Content_resource/OB整机/教学资料/其他资料");
-                }
+
+            onPressed: {
+                mySystemOpenReg.openFile("/Content_resource/气压计模组/教学资料/其他资料");
             }
         }
 

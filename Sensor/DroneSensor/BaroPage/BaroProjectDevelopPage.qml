@@ -5,7 +5,7 @@ import QtQuick.Controls 2.2
 import RegisterSystemOpen 1.0
 
 ApplicationWindow {
-    id: imuprojectdeveloppage
+    id: baroprojectdeveloppage
     x: 0
     y: 0
     width: 480
@@ -15,7 +15,7 @@ ApplicationWindow {
     maximumWidth:480
     minimumWidth:480
 
-    title: "IMU-工程实例"
+    title: "气压计-工程实例"
 
     background: Image {
         source: "../../../images/background.png"
@@ -31,7 +31,7 @@ ApplicationWindow {
 
         onClicked:
         {
-            mySystemOpenReg.openFile("/Content_resource/IMU模组/Demo_Project/Drone_Templates/Projects/Project.uvprojx");
+            mySystemOpenReg.openFile("/Content_resource/气压计模组/Demo_Project/Drone_Templates/Projects/Project.uvprojx");
         }
 
     }
@@ -49,16 +49,8 @@ ApplicationWindow {
         text: qsTr("开发操作视频")
         font.bold: true
         font.pointSize: 20
-        MouseArea {
-            id: mouse_openvideo
-            anchors.leftMargin: 1
-            anchors.topMargin: 2
-            anchors.rightMargin: -1
-            anchors.fill: parent
-            anchors.bottomMargin: -2
-            onPressed: {
-                mySystemOpenReg.openFile("/Content_resource/IMU模组/教学资料/教学视频/开发操作视频.mp4");
-            }
+        onPressed: {
+            mySystemOpenReg.openFile("/Content_resource/气压计模组/教学资料/教学视频/开发操作视频.mp4");
         }
     }
 

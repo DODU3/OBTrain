@@ -22,7 +22,7 @@ Page {
     }
 
     Button {
-        x: 191
+        x: 313
         y: 134
         width: 250
         height: 250
@@ -41,7 +41,7 @@ Page {
 
     Button {
         id: button1
-        x: 623
+        x: 827
         y: 134
         width: 250
         height: 250
@@ -60,7 +60,7 @@ Page {
 
     Button {
         id: button5
-        x: 1035
+        x: 1332
         y: 134
         width: 250
         height: 250
@@ -81,8 +81,8 @@ Page {
 
     Button {
         id: button3
-        x: 1465
-        y: 134
+        x: 1332
+        y: 532
         width: 250
         height: 250
         text: qsTr("超声避障")
@@ -100,7 +100,7 @@ Page {
 
     Button {
         id: button
-        x: 445
+        x: 313
         y: 532
         width: 250
         height: 250
@@ -120,7 +120,7 @@ Page {
 
     Button {
         id: button4
-        x: 866
+        x: 827
         y: 532
         width: 250
         height: 250
@@ -140,25 +140,6 @@ Page {
 
 
 
-    Button {
-        id: button2
-        x: 1297
-        y: 532
-        width: 250
-        height: 250
-        text: qsTr("红外对位")
-
-        onClicked: {
-            page7.visible = true;
-            page7.stack = stack;
-            stack.push(page7)
-        }
-
-        background: Image {
-            source: "images/Infrared.png"
-        }
-    }
-
 
     GPSGuide {
         id: page2
@@ -172,7 +153,7 @@ Page {
         stack: stack
     }
 
-    Barometers {
+    BarometersGuide {
         id: page4
         visible: false
         stack: stack
@@ -186,12 +167,6 @@ Page {
 
     OpticalFlow {
         id: page6
-        visible: false
-        stack: stack
-    }
-
-    Infrared {
-        id: page7
         visible: false
         stack: stack
     }

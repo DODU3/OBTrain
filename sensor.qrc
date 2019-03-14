@@ -38,7 +38,6 @@
         <file>Sensor/DroneSensor/GPSGuide.qml</file>
         <file>Sensor/DroneSensor/Gyro.qml</file>
         <file>Sensor/DroneSensor/GyroGuide.qml</file>
-        <file>Sensor/DroneSensor/Infrared.qml</file>
         <file>Sensor/DroneSensor/Mag.qml</file>
         <file>Sensor/DroneSensor/MagGuide.qml</file>
         <file>Sensor/DroneSensor/OpticalFlow.qml</file>
@@ -87,5 +86,11 @@
         <file>Sensor/DroneSensor/IMUPage/IMUCharViewPage.qml</file>
         <file>Sensor/DroneSensor/IMUPage/IMUControlPage.qml</file>
         <file>Sensor/DroneSensor/images/earthMag.png</file>
+        <file>Sensor/DroneSensor/BaroPage/BaroCharViewPage.qml</file>
+        <file>Sensor/DroneSensor/BaroPage/BaroDataApplicatePage.qml</file>
+        <file>Sensor/DroneSensor/BaroPage/BaroInfoPage.qml</file>
+        <file>Sensor/DroneSensor/BaroPage/BaroProjectDevelopPage.qml</file>
+        <file>Sensor/DroneSensor/BarometersGuide.qml</file>
+        <file>Sensor/DroneSensor/images/BaroGuidePage.jpg</file>
     </qresource>
 </RCC>

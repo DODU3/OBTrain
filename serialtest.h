@@ -100,6 +100,9 @@ public:
     Q_INVOKABLE void setserialDrawClearFlagIMU(bool trueOrFalse);
     Q_INVOKABLE bool getserialDrawClearFlagDrone(void);
     Q_INVOKABLE void setserialDrawClearFlagDrone(bool trueOrFalse);
+    Q_INVOKABLE bool getserialDrawClearFlagBaro(void);
+    Q_INVOKABLE void setserialDrawClearFlagBaro(bool trueOrFalse);
+
 
     Q_INVOKABLE QString getCurrentLon(void);
     Q_INVOKABLE QString getCurrentLat(void);
@@ -122,6 +125,13 @@ public:
     Q_INVOKABLE double getOffsetY(void);
 
     Q_INVOKABLE void setSerialSendRequest(bool TrueOrFalse);
+
+    Q_INVOKABLE QString getPressure(void);
+    Q_INVOKABLE QString getHeight(void);
+    Q_INVOKABLE QString getTemperature(void);
+    Q_INVOKABLE int getPressureNum(void);
+    Q_INVOKABLE int getHeightNum(void);
+    Q_INVOKABLE double getTemperatureNum(void);
 
 signals:
     void receivedataChanged();

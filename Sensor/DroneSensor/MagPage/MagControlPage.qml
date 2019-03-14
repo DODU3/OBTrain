@@ -81,6 +81,7 @@ Item {
 
 //                myclassExposeByRegType.sendto("ff5580808080080002000000000000000000");
             myclassExposeByRegType.sendCMD("02", "808080800800", "0000000000000000");
+            timera.timett = 45;
             timera.start();
         }
 //                MouseArea{
@@ -177,14 +178,26 @@ Item {
 
         id:timera
 
-        interval: 45000
+        property int timett: 44
+
+        interval: 1000
 //        running: true
-        repeat: false
+        repeat: true
         triggeredOnStart: false
 
         onTriggered: {
-            timera.stop();
-            mymagcalibrationpage.close();
+            timett--;
+            if(timett < 0)
+            {
+                mymagcalibrationpage.timet = 44;
+                timera.stop();
+                mymagcalibrationpage.close();
+            }
+            else
+            {
+                mymagcalibrationpage.timet = timett;
+            }
+
 //            console.info("close");
         }
     }
@@ -196,8 +209,8 @@ Item {
 
     MagCalibrationPage{
         id:mymagcalibrationpage
-        x: 400
-        y: 150
+        x: 850
+        y: 550
     }
 
 

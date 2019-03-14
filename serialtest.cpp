@@ -43,6 +43,7 @@ static bool serialOpenFlag = false;
 static bool serialDrawClearFlagMag = false;
 static bool serialDrawClearFlagIMU = false;
 static bool serialDrawClearFlagDrone = false;
+static bool serialDrawClearFlagBaro = false;
 
 static QTimer timerSend;
 static bool SerialTestInited = false;
@@ -53,6 +54,9 @@ static int currentNorthSpeed = 0, currentEastSpeed = 0, currentSatelliteNum = 0,
 static int ACCX = 0, ACCY = 0, ACCZ = 0, GYROX = 0, GYROY = 0, GYROZ = 0;
 static double anglepitch = 0, angleroll = 0, angleyaw = 0;
 static double altitude = 0;
+
+static int pressure = 0, height = 0;
+static double temperature = 0;
 
 static bool serialSendRequest = true;
 
@@ -146,6 +150,7 @@ void SerialTest::openAndSetPort(QString PortName,
         serialDrawClearFlagMag = true;
         serialDrawClearFlagIMU = true;
         serialDrawClearFlagDrone = true;
+        serialDrawClearFlagBaro = true;
         serialOpenFlag = true;
         clearSerialDataAll();
         timerSend.start();
@@ -503,7 +508,8 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
 
 //            qDebug() << ACCX << ACCY << ACCZ << GYROX <<GYROY<<GYROZ;
 
-        }else if(receivedata.mid(28,2) == "03")
+        }
+        else if(receivedata.mid(28,2) == "03")
         {
 
             //接收到IMU模组数据模块2
@@ -591,6 +597,31 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
                                         getAngleRoll() + ";  " +
                                         getAngleYaw() + ";  ");//            qDebug() << (QString::number(currentLon) + "," + QString::number(currentLat) + "," +QString::number(currentEastSpeed)
         //            qDebug() << anglepitch << angleroll << angleyaw;
+        }
+        else if(receivedata.mid(28,2) == "04"){
+            //气压计信息
+//            bool ok = false;
+            int u16half = 1 << 15;
+            int u16 = 1 << 16;
+            long u32half = 1 << 31;
+            long u32 = 1 << 32;
+            pressure = receivedata.mid(4,8).toInt(&ok, 16);
+            if(pressure >= (u32half)){
+                pressure -= u32;
+            }
+            height = receivedata.mid(12,4).toInt(&ok, 16);
+            if(height >= u16half){
+               height -= u16;
+            }
+            temperature = receivedata.mid(16,4).toInt(&ok, 16);
+            if(temperature >= u16half){
+               temperature -= u16;
+            }
+            temperature /= 10.0;
+            addserialSaveAndApp(qs_currenttime + ":  " +
+                                        getPressure() + ";  " +
+                                        getHeight() + ";  " +
+                                        getTemperature() + ";  ");
         }
         else if(receivedata.mid(28,2) == "ff")
         {
@@ -829,6 +860,14 @@ void SerialTest::setserialDrawClearFlagDrone(bool trueOrFalse){
     serialDrawClearFlagDrone = trueOrFalse;
 }
 
+bool SerialTest::getserialDrawClearFlagBaro(void){
+    return serialDrawClearFlagBaro;
+}
+
+void SerialTest::setserialDrawClearFlagBaro(bool trueOrFalse){
+    serialDrawClearFlagBaro = trueOrFalse;
+}
+
 QString SerialTest::getCurrentLon(void){
     return QString::number(currentLon, 'f', 7);
 }
@@ -907,6 +946,29 @@ void SerialTest::setSerialSendRequest(bool TrueOrFalse)
     serialSendRequest = TrueOrFalse;
 }
 
+QString SerialTest::getPressure(void){
+    return QString::number(pressure);
+}
+
+QString SerialTest::getHeight(void){
+    return QString::number(height);
+}
+
+QString SerialTest::getTemperature(void){
+    return QString::number(temperature, 'f', 1);
+}
+
+int SerialTest::getPressureNum(void){
+    return (pressure);
+}
+
+int SerialTest::getHeightNum(void){
+    return (height);
+}
+
+double SerialTest::getTemperatureNum(void){
+    return (temperature);
+}
 
 ////////////////////5.关闭端口//////////////////////////////
 void SerialTest::closePort()//由按钮出发

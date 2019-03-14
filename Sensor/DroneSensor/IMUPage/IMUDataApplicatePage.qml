@@ -58,7 +58,7 @@ Item {
         onPressed: {
             //fileDialog.open();
             //timer1.stop();
-            mydataFresh.buttonSaveClick("\\Content resource\\IMU模组\\数据保存\\", textArea.text);
+            mydataFresh.buttonSaveClick("\\Content_resource\\IMU模组\\数据保存\\", textArea.text);
             //timer1.start();
             datasavecompletedw.show();
         }
@@ -134,7 +134,7 @@ Item {
         font.pointSize: 22
         enabled: true
         onPressed: {
-            mydataFresh.buttonOpenFolderClick("\\Content resource\\IMU模组\\数据保存\\");
+            mydataFresh.buttonOpenFolderClick("\\Content_resource\\IMU模组\\数据保存\\");
         }
     }
 

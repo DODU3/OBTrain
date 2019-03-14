@@ -31,7 +31,7 @@ ApplicationWindow {
 
         onClicked:
         {
-            mySystemOpenReg.openFile("/Content resource/电子罗盘模组/Demo_Project/Drone_Templates/Projects/Project.uvprojx");
+            mySystemOpenReg.openFile("/Content_resource/电子罗盘模组/Demo_Project/Drone_Templates/Projects/Project.uvprojx");
         }
     }
 
@@ -56,7 +56,7 @@ ApplicationWindow {
             anchors.fill: parent
             anchors.bottomMargin: -2
             onPressed: {
-                mySystemOpenReg.openFile("/Content resource/电子罗盘模组/教学资料/教学视频/开发操作视频.mp4");
+                mySystemOpenReg.openFile("/Content_resource/电子罗盘模组/教学资料/教学视频/开发操作视频.mp4");
             }
         }
     }
