@@ -5,6 +5,7 @@ import QtWebSockets 1.0
 import QtWebChannel 1.0
 import QtWebView 1.1
 import ".."
+import QtQuick.Window 2.0
 
 import "../Component"
 
@@ -12,22 +13,57 @@ import io.decovar.WebSocketTransport 1.0
 
 import RegisterJsApiObject 1.0
 
+import "../test.js" as Code
 //import "../test.js" as test
-
+import QtQuick.Dialogs 1.2
+import liam.Openfile 1.0
 Page {
 
     MyJsApiObject{
         id:myJsApiObject
 
         WebChannel.id: "jsApi"
-
+        function saveBlockly(path,saveText) {
+            console.log("save text:"+saveText);
+            console.log("save path:"+path);
+            openxblocklyfile.savefile(path,saveText);//readfile一定要小写
+        }
     }
+
+    function func(xxx123) {
+        'use strict';
+    //    var code = '(function(){ return this; }())';
+
+    //    var result = eval.call( null, code );
+
+        //console.log(window.eval(xxx123)); // true sloppy mode
+
+//        var sl = new Function(xxx123);
+//        console.log(sl() !== undefined); // true, sloppy mode
+//        console.log("xxxx:"+xxx123);
+
+//        try {
+//            var value = eval(xxx123);
+//        }
+//        catch (error) {
+//            throw new Error("Could not get value of " + xxx123 + " (" + error.message + ")");
+//        }
+
+
+        print("xxxx");
+    }
+
 
     property StackView stack: null
 
     background: Image {
         source: "../images/background.png"
     }
+
+    Openfile {
+        id: openxblocklyfile
+    }
+
 
     Button {
         height: 32
@@ -46,6 +82,16 @@ Page {
         height: 364
         text: myJsApiObject.Code
         font.pointSize: 15
+    }
+
+    Window
+    {
+        x: 100
+        y: 100
+        width: 100
+        height: 100
+
+
     }
 
     Text {
@@ -202,6 +248,14 @@ Page {
         text: qsTr("新建")
 
         onClicked: {
+            if(openxblocklyfile.getfilename().length>2)
+            {
+                 console.log("just save")
+                 myJsApiObject.onSave(openxblocklyfile.getfilename());//直接保存好，再新建
+            }
+
+            openxblocklyfile.setfilename("");
+            myJsApiObject.onClear("new")
         }
     }
 
@@ -212,8 +266,63 @@ Page {
         text: qsTr("打开")
         onPressed:
         {
+            console.log("qml open")
+            fds.open();
 
         }
+    }
+
+
+    FileDialog {
+           id:savefile
+           title: "保存文件"
+           folder: shortcuts.desktop
+           selectExisting: false
+           selectFolder: false
+           selectMultiple: false
+           nameFilters: ["blockly文件 (*.blockly)"]
+           onAccepted: {
+               var path = savefile.fileUrl.toString();
+               path = path.replace(/^(file:\/{3})/,"");
+               console.log(path);
+                openxblocklyfile.setfilename(path);
+               //发送信号，得到web送过来的xml text数据,然后再调用C++保存。
+                myJsApiObject.onSave(path);
+           }
+
+           onRejected: {
+              // labels.text = "";
+               console.log("Canceled");
+               Qt.quit();
+           }
+    }
+
+    FileDialog {
+           id:fds
+           title: "打开文件"
+           folder: shortcuts.desktop
+           selectExisting: true
+           selectFolder: false
+           selectMultiple: false
+           nameFilters: ["json文件 (*.blockly)"]
+           onAccepted: {
+
+               console.log("You chose: " + fds.fileUrl);
+               var path = fds.fileUrl.toString();
+               path = path.replace(/^(file:\/{3})/,"");
+               console.log(path)
+               openxblocklyfile.setfilename(path);
+              var senddata= openxblocklyfile.readfile(path);//readfile一定要小写
+
+              // console.log()
+               myJsApiObject.onOpen(senddata);
+           }
+
+           onRejected: {
+              // labels.text = "";
+               console.log("Canceled");
+               Qt.quit();
+           }
     }
 
     Button {
@@ -221,6 +330,19 @@ Page {
         x: 269
         y: 77
         text: qsTr("存储")
+        onPressed:
+        {
+            if(openxblocklyfile.getfilename().length>2)
+            {
+                 console.log("just save")
+                 someObject.onSave(openxblocklyfile.getfilename());//直接保存
+            }
+            else
+            {
+                 console.log("begin save")
+                  savefile.open();
+            }
+        }
     }
 
     Button {
@@ -228,6 +350,11 @@ Page {
         x: 384
         y: 77
         text: qsTr("另存为")
+        onPressed:
+        {
+            console.log("saveas save")
+            savefile.open();
+        }
     }
 
     Button {
@@ -237,7 +364,8 @@ Page {
         text: qsTr("开始")
 
         onClicked: {
-            myJsApiObject.jsOnstart();
+//            myJsApiObject.jsOnstart();
+            func(myJsApiObject.Code);
         }
     }
 

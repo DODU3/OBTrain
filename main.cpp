@@ -16,7 +16,7 @@
 #include "datafresh.h"
 #include "websockettransport.h"
 #include "jsapiobject.h"
-
+#include "openfile.h"
 
 int main(int argc, char *argv[])
 {
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<WebSocketTransport>("io.decovar.WebSocketTransport", 1, 0, "WebSocketTransport");
 
     qmlRegisterType<jsApiObject>("RegisterJsApiObject", 1, 0, "MyJsApiObject");
-
+    qmlRegisterType<Openfile>("liam.Openfile", 1, 0, "Openfile");
     QQmlApplicationEngine engine;
 
     portModel combo;

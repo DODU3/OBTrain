@@ -30,7 +30,8 @@ SOURCES += \
     main.cpp \
     portmodel.cpp \
     serialtest.cpp \
-    systemopen.cpp
+    systemopen.cpp \
+    openfile.cpp
 
 RESOURCES += \
     sensor.qrc \
@@ -60,6 +61,7 @@ HEADERS += \
     portmodel.h \
     serialtest.h \
     systemopen.h \
-    websockettransport.h
+    websockettransport.h \
+    openfile.h
 
 FORMS +=

@@ -17,7 +17,7 @@ public:
     Q_INVOKABLE void generalLog(QString someLog);
     Q_INVOKABLE void generalCode(QString someCode);
     Q_INVOKABLE void runBlockly(QString code);
-    Q_INVOKABLE void saveBlockly(QString name, QString txt);
+  //  Q_INVOKABLE void saveBlockly(QString name, QString txt);
     Q_INVOKABLE void loadUrl(QString url);
 
     Q_INVOKABLE QString receiveLog();

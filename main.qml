@@ -7,6 +7,7 @@ import "./VisionVoice"
 import "./MachineLearn"
 import "./Sensor"
 
+
 ApplicationWindow {
     id: xxxxxxxxxxxxxx
     visible: true

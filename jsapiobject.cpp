@@ -29,12 +29,12 @@ void jsApiObject::runBlockly(QString code)
     m_Code = code;
     emit CodeChanged();
 }
-
+/*
 void jsApiObject::saveBlockly(QString name, QString txt)
 {
 
 }
-
+*/
 void jsApiObject::loadUrl(QString url)
 {
 
