@@ -52,9 +52,9 @@ public:
     Q_INVOKABLE QString getMagCornerStr();
 
     Q_INVOKABLE qint64 getMagCorner();
-    Q_INVOKABLE qint64 getMagX();
-    Q_INVOKABLE qint64 getMagY();
-    Q_INVOKABLE qint64 getMagZ();
+    Q_INVOKABLE QString getMagX();
+    Q_INVOKABLE QString getMagY();
+    Q_INVOKABLE QString getMagZ();
     Q_INVOKABLE qint64 getMagUser1();
     Q_INVOKABLE qint64 getMagUser2();
     Q_INVOKABLE qint64 getMagUser3();
@@ -73,6 +73,10 @@ public:
     Q_INVOKABLE void setMagCorner(int yawValue,int rollValue);
     Q_INVOKABLE void DroneFrame_MakeAndSerialSend(quint8 Realdata[4],quint8 Realstatus[2],quint8 Command,quint8 CommandData[8],quint8 Heartbeat);//构建和发送无人机串口通信发送帧
     Q_INVOKABLE void setRFaddr(QString addr1,QString addr2,QString addr3,QString channel);
+    Q_INVOKABLE void setLabAngle(QString angle_Roll,QString angle_Yaw);
+    Q_INVOKABLE void setCurrentPage(int current_page);
+    Q_INVOKABLE int getCurrentPage(void);
+    Q_INVOKABLE void setUltrasonicLowpassfliter(QString value_freq,QString value_confficent);
 
     Q_INVOKABLE bool getsettingAddrFlag(void);
     Q_INVOKABLE void setsettingAddrFlag(bool trueorfalse);
@@ -80,7 +84,7 @@ public:
     Q_INVOKABLE QString getaddr2(void);
     Q_INVOKABLE QString getaddr3(void);
     Q_INVOKABLE QString getaddrch(void);
-    Q_INVOKABLE QString randomNumStr(int min, int max);
+    Q_INVOKABLE QString randomNumStr(int min, int max, bool setseed);
 
     Q_INVOKABLE QString getSerialDataAll(void);
     Q_INVOKABLE void addSerialDataAll(QString receivedata);
@@ -114,9 +118,26 @@ public:
     Q_INVOKABLE QString getAnglePitch(void);
     Q_INVOKABLE QString getAngleRoll(void);
     Q_INVOKABLE QString getAngleYaw(void);
+    Q_INVOKABLE QString getGgyrox(void);
+    Q_INVOKABLE QString getGgyroy(void);
+    Q_INVOKABLE QString getGgyroz(void);
     Q_INVOKABLE double getAnglePitchNum(void);
     Q_INVOKABLE double getAngleRollNum(void);
     Q_INVOKABLE double getAngleYawNum(void);
+
+    Q_INVOKABLE QString getAccX(void);
+    Q_INVOKABLE QString getAccY(void);
+    Q_INVOKABLE QString getAccZ(void);
+    Q_INVOKABLE QString getAccAngleX(void);
+    Q_INVOKABLE QString getAccAngleY(void);
+    Q_INVOKABLE double getOffsetX_Acc(void);
+    Q_INVOKABLE double getOffsetY_Acc(void);
+
+    Q_INVOKABLE QString getHeigth_Ultrasonic_lowpass(void);
+    Q_INVOKABLE QString getHeigth_Ultrasonic_nofliter(void);
+    Q_INVOKABLE QString getHeigth_Ultrasonic_time(void);
+    Q_INVOKABLE QString getHeigth_Ultrasonic_alpha(void);
+
 
     Q_INVOKABLE QString getAltitude(void);
     Q_INVOKABLE double getAltitudeNum(void);
@@ -126,12 +147,32 @@ public:
 
     Q_INVOKABLE void setSerialSendRequest(bool TrueOrFalse);
 
-    Q_INVOKABLE QString getPressure(void);
-    Q_INVOKABLE QString getHeight(void);
-    Q_INVOKABLE QString getTemperature(void);
-    Q_INVOKABLE int getPressureNum(void);
-    Q_INVOKABLE int getHeightNum(void);
-    Q_INVOKABLE double getTemperatureNum(void);
+    Q_INVOKABLE QString getpressureRaw(void);
+    Q_INVOKABLE QString getpressureFilter(void);
+    Q_INVOKABLE QString getSlideDepth(void);
+    Q_INVOKABLE QString getpressureHeight(void);
+//    Q_INVOKABLE QString getTemperature(void);
+    Q_INVOKABLE int getpressureRawNum(void);
+    Q_INVOKABLE int getpressureFilterNum(void);
+//    Q_INVOKABLE double getTemperatureNum(void);
+
+    Q_INVOKABLE QString getopticalflowspeedx(void);
+    Q_INVOKABLE QString getopticalflowspeedy(void);
+    Q_INVOKABLE QString getopticalflowsumx(void);
+    Q_INVOKABLE QString getopticalflowsumy(void);
+
+
+    Q_INVOKABLE void setPlatformYawAngle(int yawValue,int yawRateValue);
+    Q_INVOKABLE void setPlatformRollAngle(int rollValue,int rollRateValue);
+
+    Q_INVOKABLE void setBaroSlideDepth(int slidedepth);
+
+    Q_INVOKABLE void saveGPSData(void);
+
+    Q_INVOKABLE void setOptDistance(int distance);
+
+
+    Q_INVOKABLE void clearTIMESet(void);
 
 signals:
     void receivedataChanged();

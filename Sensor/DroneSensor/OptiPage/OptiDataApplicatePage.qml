@@ -7,12 +7,12 @@ import RegisterDataFresh 1.0
 import "../UartData"
 
 Item {
-    id: imuDataApplicatePage
+    id: optiDataApplicatePage
 
     width: 583
     height: 400
 
-//    title: "imu-数据保存与应用"
+//    title: "光流-数据保存与应用"
 
     Button {
         id: button
@@ -58,7 +58,7 @@ Item {
         onPressed: {
             //fileDialog.open();
             //timer1.stop();
-            mydataFresh.buttonSaveClick("\\Content_resource\\IMU模组\\数据保存\\", textArea.text);
+            mydataFresh.buttonSaveClick("\\Content_resource\\光流模组\\数据保存\\", textArea.text);
             //timer1.start();
             datasavecompletedw.show();
         }
@@ -80,10 +80,10 @@ Item {
             y: -6
             width: 583
             height: 256
-            text: "IMU-数据保存与应用"
+//            text: "气压计-数据保存与应用"
             font.family: "Times New Roman"
             font.bold: true
-            placeholderText: qsTr("IMU-数据保存与应用")
+            placeholderText: qsTr("光流-数据保存与应用")
             //            objectName: "MagDateAppPageText"
 //            font.pointSize: 9
             font.pixelSize: 20
@@ -134,7 +134,7 @@ Item {
         font.pointSize: 22
         enabled: true
         onPressed: {
-            mydataFresh.buttonOpenFolderClick("\\Content_resource\\IMU模组\\数据保存\\");
+            mydataFresh.buttonOpenFolderClick("\\Content_resource\\光流模组\\数据保存\\");
         }
     }
 

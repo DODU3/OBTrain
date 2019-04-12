@@ -21,9 +21,6 @@
         <file>Sensor/DroneSensor/images/magVerify.png</file>
         <file>Sensor/DroneSensor/images/OpticalFlow.png</file>
         <file>Sensor/DroneSensor/images/Ultrasonic.png</file>
-        <file>Sensor/DroneSensor/IMUPage/IMUDataApplicatePage.qml</file>
-        <file>Sensor/DroneSensor/IMUPage/IMUInfoPage.qml</file>
-        <file>Sensor/DroneSensor/IMUPage/IMUProjectDevelopPage.qml</file>
         <file>Sensor/DroneSensor/MagPage/MagCalibrationPage.qml</file>
         <file>Sensor/DroneSensor/MagPage/MagControlPage.qml</file>
         <file>Sensor/DroneSensor/MagPage/MagDataApplicatePage.qml</file>
@@ -81,10 +78,6 @@
         <file>Sensor/VisionVoiceSensor/VoiceVerify.qml</file>
         <file>Sensor/SensorPage.qml</file>
         <file>Sensor/DroneSensor/MagPage/MagCharViewPage.qml</file>
-        <file>Sensor/DroneSensor/IMUPage/IMU2D.qml</file>
-        <file>Sensor/DroneSensor/IMUPage/IMU2DHEADING.qml</file>
-        <file>Sensor/DroneSensor/IMUPage/IMUCharViewPage.qml</file>
-        <file>Sensor/DroneSensor/IMUPage/IMUControlPage.qml</file>
         <file>Sensor/DroneSensor/images/earthMag.png</file>
         <file>Sensor/DroneSensor/BaroPage/BaroCharViewPage.qml</file>
         <file>Sensor/DroneSensor/BaroPage/BaroDataApplicatePage.qml</file>
@@ -92,5 +85,19 @@
         <file>Sensor/DroneSensor/BaroPage/BaroProjectDevelopPage.qml</file>
         <file>Sensor/DroneSensor/BarometersGuide.qml</file>
         <file>Sensor/DroneSensor/images/BaroGuidePage.jpg</file>
+        <file>Sensor/DroneSensor/Acc.qml</file>
+        <file>Sensor/DroneSensor/UltrasonicPage/UltrasonicInfoPage.qml</file>
+        <file>Sensor/DroneSensor/UltrasonicPage/UltrasonicProjectDevelopPage.qml</file>
+        <file>Sensor/DroneSensor/UltrasonicPage/UltrasonicInfoPage_Tips.qml</file>
+        <file>Sensor/DroneSensor/BaroPage/BarometerInfoPage_Tips.qml</file>
+        <file>Sensor/DroneSensor/OptiPage/OptiDataApplicatePage.qml</file>
+        <file>Sensor/DroneSensor/OptiPage/OptiInfoPage.qml</file>
+        <file>Sensor/DroneSensor/OptiPage/OptiProjectDevelopPage.qml</file>
+        <file>Sensor/DroneSensor/AccPage/AccInfoPage.qml</file>
+        <file>Sensor/DroneSensor/AccPage/AccInfoPage_Tips.qml</file>
+        <file>Sensor/DroneSensor/AccPage/AccProjectDevelopPage.qml</file>
+        <file>Sensor/DroneSensor/GyroPage/GyroInfoPage.qml</file>
+        <file>Sensor/DroneSensor/GyroPage/GyroProjectDevelopPage.qml</file>
+        <file>Sensor/DroneSensor/AccPage/IMU2D.qml</file>
     </qresource>
 </RCC>

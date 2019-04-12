@@ -28,7 +28,7 @@ ApplicationWindow {
         font.bold: true
         font.pointSize: 20
 
-        onClicked:
+        onPressed:
         {
             mySystemOpenReg.openFile("/Content_resource/OB整机/教学资料/教学PPT/OB整机PPT.ppt");
         }
@@ -47,16 +47,10 @@ ApplicationWindow {
         text: qsTr("教学视频")
         font.bold: true
         font.pointSize: 20
-        MouseArea {
-            id: mouse_openvideo
-            anchors.leftMargin: 0
-            anchors.topMargin: 1
-            anchors.rightMargin: 0
-            anchors.fill: parent
-            anchors.bottomMargin: -1
+
             onPressed: {
                 mySystemOpenReg.openFile("/Content_resource/OB整机/教学资料/教学视频");
-            }
+
         }
     }
 
@@ -67,17 +61,11 @@ ApplicationWindow {
             text: qsTr("其他资料")
             font.bold: true
             font.pointSize: 20
-            MouseArea {
-                id: mouse_openotherfile
-                anchors.leftMargin: 0
-                anchors.topMargin: -1
-                anchors.rightMargin: 0
-                anchors.fill: parent
-                anchors.bottomMargin: 1
+
                 onPressed: {
                     mySystemOpenReg.openFile("/Content_resource/OB整机/教学资料/其他资料");
                 }
-            }
+
         }
 
 }

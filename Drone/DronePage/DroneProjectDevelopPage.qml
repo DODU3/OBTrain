@@ -29,7 +29,7 @@ ApplicationWindow {
         font.bold: true
         font.pointSize: 20
 
-        onClicked:
+        onPressed:
         {
             mySystemOpenReg.openFile("/Content_resource/OB整机/Demo_Project/Drone_Templates/Projects/Project.uvprojx");
         }
@@ -48,17 +48,10 @@ ApplicationWindow {
         text: qsTr("开发操作视频")
         font.bold: true
         font.pointSize: 20
-        MouseArea {
-            id: mouse_openvideo
-            anchors.leftMargin: 1
-            anchors.topMargin: 2
-            anchors.rightMargin: -1
-            anchors.fill: parent
-            anchors.bottomMargin: -2
+
             onPressed: {
                 mySystemOpenReg.openFile("/Content_resource/OB整机/教学资料/教学视频/开发操作视频.mp4");
             }
-        }
     }
 
 }

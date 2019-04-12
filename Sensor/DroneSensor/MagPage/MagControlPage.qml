@@ -53,16 +53,7 @@ Item {
 //                myclassExposeByRegType.sendto("ff5580808080080027000000000000000000");
             myclassExposeByRegType.sendCMD("27", "808080800800", "0000000000000000");
         }
-//                MouseArea{
-//            id:mouseResetArea
-//            anchors.fill: parent
-//            onPressed: {
-//                slider.value = 0;
-//                slider1.value = 0;
-////                myclassExposeByRegType.sendto("ff5580808080080027000000000000000000");
-//                myclassExposeByRegType.sendCMD("27", "808080800800", "0000000000000000");
-//            }
-//        }
+
     }
 
     Button {
@@ -84,19 +75,6 @@ Item {
             timera.timett = 45;
             timera.start();
         }
-//                MouseArea{
-//            id:mouseVerifyArea
-//            anchors.fill: parent
-//            onPressed: {
-//                mymagcalibrationpage.show();
-////                mymagcalibrationpage.setX(400);
-////                mymagcalibrationpage.setY(150);
-
-////                myclassExposeByRegType.sendto("ff5580808080080002000000000000000000");
-//               myclassExposeByRegType.sendCMD("02", "808080800800", "0000000000000000");
-//                timera.start();
-//            }
-//        }
     }
 
     CheckBox {

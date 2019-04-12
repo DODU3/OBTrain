@@ -4,7 +4,7 @@ import QtQuick.Controls 2.2
 import RegisterSystemOpen 1.0
 
 ApplicationWindow {
-    id: magInfoPage
+    id: ultrasonicInfoPage
     x: 0
     y: 0
     width: 600
@@ -14,10 +14,15 @@ ApplicationWindow {
     maximumWidth:600
     minimumWidth:600
 
-    title: "磁力计-教学资料"
+    title: "超声波-教学资料"
 
     background: Image {
         source: "../../../images/background.png"
+    }
+
+    MySystemOpen
+    {
+        id:mySystemOpenReg
     }
 
     Button {
@@ -30,16 +35,11 @@ ApplicationWindow {
 
         onPressed:
         {
-            mySystemOpenReg.openFile("/Content_resource/磁力计模组/教学资料/教学PPT/磁力计模组PPT.ppt");
+            mySystemOpenReg.openFile("/Content_resource/超声波模组/教学资料/教学PPT/超声波模组PPT.ppt");
+
         }
-
     }
 
-
-    MySystemOpen
-    {
-        id:mySystemOpenReg
-    }
 
     Button {
         id: button_openvideo
@@ -48,9 +48,8 @@ ApplicationWindow {
         text: qsTr("教学视频")
         font.bold: true
         font.pointSize: 20
-
-            onPressed: {
-                mySystemOpenReg.openFile("/Content_resource/磁力计模组/教学资料/教学视频");
+        onPressed: {
+                mySystemOpenReg.openFile("/Content_resource/超声波模组/教学资料/教学视频");
             }
     }
 
@@ -61,9 +60,8 @@ ApplicationWindow {
             text: qsTr("其他资料")
             font.bold: true
             font.pointSize: 20
-
                 onPressed: {
-                    mySystemOpenReg.openFile("/Content_resource/磁力计模组/教学资料/其他资料");
+                    mySystemOpenReg.openFile("/Content_resource/超声波模组/教学资料/其他资料");
                 }
         }
 

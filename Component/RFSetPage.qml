@@ -350,10 +350,10 @@ ApplicationWindow {
         font.bold: true
         font.pointSize: 20
         onPressed: {
-            textEdit_set_rfaddr1.text = myclassExposeByRegType.randomNumStr(0, 255);
-            textEdit_set_rfaddr2.text = myclassExposeByRegType.randomNumStr(0, 255);
-            textEdit_set_rfaddr3.text = myclassExposeByRegType.randomNumStr(0, 255);
-            textEdit_set_rfch.text = myclassExposeByRegType.randomNumStr(0, 80);
+            textEdit_set_rfaddr1.text = myclassExposeByRegType.randomNumStr(0, 255, 1);
+            textEdit_set_rfaddr2.text = myclassExposeByRegType.randomNumStr(0, 255, 0);
+            textEdit_set_rfaddr3.text = myclassExposeByRegType.randomNumStr(0, 255, 0);
+            textEdit_set_rfch.text = myclassExposeByRegType.randomNumStr(0, 80, 0);
         }
     }
 

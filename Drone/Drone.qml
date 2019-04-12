@@ -125,21 +125,6 @@ Page {
         font.pointSize: 20
 
         model:comboModel.comboList
-//        model: portlistmodel
-
-//        pressed: true
-//        down: true
-
-//        MouseArea{
-//            onPressed: {
-//                console.info("aa");
-//                myclassExposeByRegType.getPortInfo();
-//                comboModel.setComboList(myclassExposeByRegType.receivePort());
-//            }
-//        }
-//        onActivated: {
-//            console.info("aa");
-//        }
 
     }
 

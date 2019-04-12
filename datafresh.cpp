@@ -37,11 +37,13 @@ void dataFresh::buttonSaveClick(QString qspath, QString qs)
 {
 
     QDateTime currentTime = QDateTime::currentDateTime();
-    QString qs_currenttime = currentTime.toString("hh_mm_ss");
+    QString filename = currentTime.toString("hh_mm_ss");
+    QString foldername = currentTime.toString("yyyy_MM_dd");
 
     QString path = QCoreApplication::applicationDirPath();
     path.replace("/", "\\");
     path.append(qspath);
+    path += foldername + "\\";
     QDir dir(path);
     if(!dir.exists()){
         dir.mkpath(path);
@@ -56,7 +58,7 @@ void dataFresh::buttonSaveClick(QString qspath, QString qs)
 //                                                    tr("保存数据"),
 //                                                    "",
 //                                                    tr(".txt"));
-    savefilename = path + "data_" + qs_currenttime + ".txt";
+    savefilename = path + "data_" + filename + ".txt";
     emit saveFileNameChanged();
     QFile file(savefilename);
     if(file.open(QIODevice::WriteOnly | QIODevice::Text))

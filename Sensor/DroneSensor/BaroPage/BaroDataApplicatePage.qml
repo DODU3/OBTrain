@@ -9,15 +9,15 @@ import "../UartData"
 Item {
     id: baroDataApplicatePage
 
-    width: 583
-    height: 400
+    width: 400
+    height: 740
 
 //    title: "气压计-数据保存与应用"
 
     Button {
         id: button
-        x: 18
-        y: 273
+        x: 8
+        y: 626
         text: qsTr("开始打印")
         font.bold: true
         font.pointSize: 22
@@ -48,8 +48,8 @@ Item {
 
     Button {
         id: button1
-        x: 191
-        y: 273
+        x: 181
+        y: 626
         text: qsTr("保存")
         font.bold: true
         font.pointSize: 22
@@ -72,14 +72,14 @@ Item {
     ScrollView {
         x: 0
         y: 0
-        width: 583
-        height: 284
+        width: 400
+        height: 600
         TextArea {
             id: textArea
             x: -10
             y: -6
-            width: 583
-            height: 256
+            width: 400
+            height: 597
             text: "气压计-数据保存与应用"
             font.family: "Times New Roman"
             font.bold: true
@@ -96,16 +96,16 @@ Item {
         }
     }
 
-    FileDialog{
-        id: fileDialog
-        title: qsTr("文件保存")
-        nameFilters: "*.txt"
-        selectExisting: false
-        //fileMode: FileDialog.SaveFile
-        onAccepted: {
+//    FileDialog{
+//        id: fileDialog
+//        title: qsTr("文件保存")
+//        nameFilters: "*.txt"
+//        selectExisting: false
+//        //fileMode: FileDialog.SaveFile
+//        onAccepted: {
 
-        }
-    }
+//        }
+//    }
 
     MyDataFresh{
         id:mydataFresh
@@ -127,8 +127,8 @@ Item {
 
     Button {
         id: button2
-        x: 18
-        y: 332
+        x: 8
+        y: 685
         text: qsTr("打开保存文件夹")
         font.bold: true
         font.pointSize: 22

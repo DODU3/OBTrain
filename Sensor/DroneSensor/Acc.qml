@@ -1,10 +1,11 @@
 ﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Dialogs 1.2
-import "../Component"
+import "../../Component"
 import ".."
-import "../Sensor/DroneSensor/UartData"
-import "./DronePage"
+import "./UartData"
+import "./AccPage"
+
 
 import RegisterMyType 1.0
 import RegisterDataFresh 1.0
@@ -21,7 +22,7 @@ Page {
     property int cnt_timer: 0;
 
     background: Image {
-        source: "../images/background.png"
+        source: "../../images/background.png"
     }
 
     Button {
@@ -88,7 +89,7 @@ Page {
 
         onClicked:
         {
-            droneinfopage.show();
+            accinfopage.show();
         }
 
     }
@@ -103,8 +104,8 @@ Page {
 
         onClicked:
         {
-            droneprojectdeveloppage.active;
-            droneprojectdeveloppage.show();
+            accprojectdeveloppage.active;
+            accprojectdeveloppage.show();
         }
     }
 
@@ -134,23 +135,159 @@ Page {
             }
             myclassExposeByRegType.openAndSetPort(portName,3,3,0,0,0);
 
-
         }
     }
 
-    MyClassType
-    {
-        id:myclassExposeByRegType
+    Button {
+        id: button_reset_lab
+        x: 132
+        y: 568
+        text: qsTr("实验1-1：实验台复位")
+        font.bold: true
+        font.pointSize: 22
+        onClicked:
+        {
+            myclassExposeByRegType.sendCMD("27", "808080800800", "0000000000000000");
+        }
+    }
+
+    Button {
+        id: button_cal_acc
+        x: 132
+        y: 623
+        text: qsTr("实验1-2：加速度计校准")
+        font.bold: true
+        font.pointSize: 22
+
+        onClicked:
+        {
+            myclassExposeByRegType.sendCMD("01", "808080800800", "0000000000000000");
+        }
+    }
+
+
+    TextInput {
+        id: textEdit_set_lab_angle_X
+        x: 598
+        y: 680
+        width: 71
+        height: 38
+        text: qsTr("0")
+        clip: false
+        font.bold: true
+        font.pixelSize: 30
+        validator: IntValidator{bottom: -85; top: 85;}
+        focus: true
+    }
+
+
+    Button {
+        id: button_set_lab_angle_X
+        x: 132
+        y: 677
+        text: qsTr("实验1-3：设置实验台角度（°）")
+        font.bold: true
+        font.pointSize: 22
+
+        onClicked:
+        {
+            //myclassExposeByRegType.setMagCorner(0,textEdit_set_lab_angle_X.text);
+            myclassExposeByRegType.setLabAngle(textEdit_set_lab_angle_X.text,"0");
+        }
+    }
+
+
+    Button {
+        id: button_set_lab_acc
+        x: 821
+        y: 568
+        text: qsTr("实验2：运动加速度对角度测量的影响")
+        font.bold: true
+        font.pointSize: 22
+        onPressed: {
+
+            imuinfopage_tips.show();
+            myclassExposeByRegType.sendCMD("27", "808080800800", "0000000000000000");
+            cnt_timer=0;
+            timer_set_lab_acc.start();
+
+            //开始打印
+            mydataFresh.serialDataPrintFlag = true;
+            button_save.enabled = false;
+            button_print.text = qsTr("停止打印");
+            myclassExposeByRegType.clearserialSaveAndApp();
+            timer_print.start();
+        }
+    }
+
+    Timer {
+
+        id:timer_set_lab_acc
+
+        interval: 1000
+//        running: true
+        repeat: true
+        triggeredOnStart: false
+        onTriggered: {
+
+            cnt_timer+=1;
+            if(cnt_timer==3)
+            {
+                //myclassExposeByRegType.setMagCorner(180,0);
+                myclassExposeByRegType.setPlatformYawAngle(200, 200);
+            }
+            else if(cnt_timer==7)
+            {
+                //myclassExposeByRegType.setMagCorner(0,0);
+                myclassExposeByRegType.setPlatformYawAngle(0, 200);
+            }
+            else if(cnt_timer==11)
+            {
+                //myclassExposeByRegType.setMagCorner(180,0);
+                myclassExposeByRegType.setPlatformYawAngle(200, 200);
+            }
+            else if(cnt_timer==15)
+            {
+                //myclassExposeByRegType.setMagCorner(0,0);
+                myclassExposeByRegType.setPlatformYawAngle(0, 200);
+            }
+            else if(cnt_timer>=19)
+            {
+                timer_set_lab_acc.stop();
+                imuinfopage_tips.close();
+                if(mydataFresh.serialDataPrintFlag == true){
+                    mydataFresh.serialDataPrintFlag = false;
+                    button_save.enabled = true;
+                    button_print.text = qsTr("开始打印");
+                    timer_print.stop();
+                }
+            }
+        }
     }
 
     MyDataFresh{
         id:mydataFresh
     }
 
+    Button {
+        id: button_read_acc
+        x: 132
+        y: 730
+        text: qsTr("实验1-4：获取三轴加速度计数据")
+        font.bold: true
+        font.pointSize: 22
+        onPressed: {
+
+            textEdit_read_acc_X.text = myclassExposeByRegType.getAccX();
+            textEdit_read_acc_Y.text = myclassExposeByRegType.getAccY();
+            textEdit_read_acc_Z.text = myclassExposeByRegType.getAccZ();
+        }
+    }
+
     Label {
         id: textEdit_read_acc_X
-        x: 256
-        y: 614
+        x: 293
+        y: 789
         width: 80
         height: 26
         text: qsTr("0")
@@ -160,8 +297,8 @@ Page {
 
     Label {
         id: textEdit_read_acc_Y
-        x: 256
-        y: 666
+        x: 293
+        y: 841
         width: 86
         height: 26
         text: qsTr("0")
@@ -171,8 +308,8 @@ Page {
 
     Label {
         id: textEdit_read_acc_Z
-        x: 256
-        y: 707
+        x: 293
+        y: 882
         width: 91
         height: 33
         text: qsTr("0")
@@ -191,8 +328,8 @@ Page {
         font.bold: true
         anchors.centerIn: parent
         font.pixelSize: 30
-        anchors.verticalCenterOffset: 87
-        anchors.horizontalCenterOffset: -804
+        anchors.verticalCenterOffset: 262
+        anchors.horizontalCenterOffset: -767
     }
 
     Label {
@@ -205,8 +342,8 @@ Page {
         font.bold: true
         anchors.centerIn: parent
         font.pixelSize: 30
-        anchors.horizontalCenterOffset: -805
-        anchors.verticalCenterOffset: 136
+        anchors.horizontalCenterOffset: -768
+        anchors.verticalCenterOffset: 311
     }
 
     Label {
@@ -219,16 +356,16 @@ Page {
         font.bold: true
         anchors.centerIn: parent
         font.pixelSize: 30
-        anchors.verticalCenterOffset: 179
-        anchors.horizontalCenterOffset: -805
+        anchors.verticalCenterOffset: 354
+        anchors.horizontalCenterOffset: -768
     }
 
 
     Rectangle {
-        x:779
-        y:122
-        width: 715
-        height: 816
+        x:821
+        y:124
+        width: 583
+        height: 400
         color: "#00000000"
         border.width: 1
 
@@ -252,13 +389,14 @@ Page {
         color: "#00000000"
         border.color: "black"
 
-        DRONE2D {
-//            id: mydrone2d
+        IMU2D {
+            id: myimu2d
             width: 400
             height: 400
 
         }
     }
+
 //    Component.onCompleted: {
 
 //        myclassExposeByRegType.getPortInfo();
@@ -267,33 +405,47 @@ Page {
 //    }
 
 
-//    MyClassType
-//    {
-//        id:myclassExposeByRegType
-//    }
+    MyClassType
+    {
+        id:myclassExposeByRegType
+    }
 
     RFSetPage{
         id:rfsetpage
     }
 
-    DroneProjectDevelopPage{
-        id:droneprojectdeveloppage
+    AccProjectDevelopPage{
+        id:accprojectdeveloppage
     }
 
-    DroneInfoPage{
-        id:droneinfopage
+    AccInfoPage{
+        id:accinfopage
     }
 
-//    AccInfoPage_Tips{
-//        id:accinfopage_tips
-//    }
+    AccInfoPage_Tips{
+        id:accinfopage_tips
+    }
 
+    states: [
+        State {
+            name: "State1"
+        },
+        State {
+            name: "State2"
+
+            PropertyChanges {
+                target: button_set_lab_acc
+                x: 1329
+                y: 599
+            }
+        }
+    ]
 
 
     Button {
         id: button_print
-        x: 799
-        y: 878
+        x: 834
+        y: 472
         text: qsTr("开始打印")
         font.bold: true
         font.pointSize: 22
@@ -312,7 +464,6 @@ Page {
                 button_print.text = qsTr("停止打印");
                 myclassExposeByRegType.clearserialSaveAndApp();
                 timer_print.start();
-                cnt_timer = 0;
             }
         }
 
@@ -321,15 +472,15 @@ Page {
 
     Button {
         id: button_save
-        x: 989
-        y: 878
+        x: 1001
+        y: 472
         text: qsTr("保存")
         font.bold: true
         font.pointSize: 22
         enabled: true
 
         onPressed: {
-            mydataFresh.buttonSaveClick("\\Content_resource\\OB整机\\数据保存\\", textArea.text);
+            mydataFresh.buttonSaveClick("\\Content_resource\\IMU模组\\数据保存\\", textArea.text);
             datasavecompletedw.show();
         }
     }
@@ -339,20 +490,20 @@ Page {
     }
 
     ScrollView {
-        x: 799
-        y: 143
-        width: 675
-        height: 729
+        x: 841
+        y: 139
+        width: 546
+        height: 279
         TextArea {
             id: textArea
             x: -3
             y: -6
             width: 546
-            height: 719
+            height: 321
             text: ""
             font.family: "Times New Roman"
             font.bold: true
-            placeholderText: qsTr("整机-数据保存与应用")
+            placeholderText: qsTr("加速度计-三轴数据保存与应用")
             //            objectName: "MagDateAppPageText"
 //            font.pointSize: 9
             font.pixelSize: 20
@@ -365,27 +516,27 @@ Page {
         }
     }
 
+//    FileDialog{
+//        id: fileDialog
+//        title: qsTr("文件保存")
+//        nameFilters: "*.txt"
+//        selectExisting: false
+//        //fileMode: FileDialog.SaveFile
+//        onAccepted: {
+
+//        }
+//    }
+
 
     Timer{
         id:timer_print
-        interval: 500
+        interval: 200
         repeat: true
         triggeredOnStart: false
 
-
         onTriggered: {
 
-            cnt_timer++;
-            if(cnt_timer>=40)
-            {
-                if(mydataFresh.serialDataPrintFlag == true){
-                    mydataFresh.serialDataPrintFlag = false;
-                    button_save.enabled = true;
-                    button_print.text = qsTr("开始打印");
-                    timer_print.stop();
-                }
-            }
-           if(myclassExposeByRegType.getCurrentPage() === 7)
+           if(myclassExposeByRegType.getCurrentPage() === 1)
            {
                 textArea.text = myclassExposeByRegType.getserialSaveAndApp();
                 textArea.cursorPosition = textArea.text.length;
@@ -394,45 +545,22 @@ Page {
         }
     }
 
-    Timer{
-        id:timer_fresh
-        interval: 300
-        repeat: true
-        triggeredOnStart: false
-
-        running: true
-        onTriggered: {
-
-           if(myclassExposeByRegType.getCurrentPage() === 7)
-           {
-               textEdit_read_acc_X.text = myclassExposeByRegType.getAccX();
-               textEdit_read_acc_Y.text = myclassExposeByRegType.getAccY();
-               textEdit_read_acc_Z.text = myclassExposeByRegType.getAccZ();
-               textEdit_read_acc_X1.text = myclassExposeByRegType.getGgyrox();
-               textEdit_read_acc_Y1.text = myclassExposeByRegType.getGgyroy();
-               textEdit_read_acc_Z1.text = myclassExposeByRegType.getGgyroz();
-           }
-
-        }
-
-    }
-
     Button {
         id: button_open
         x: 1148
-        y: 878
+        y: 472
         text: qsTr("打开保存文件夹")
         font.bold: true
         font.pointSize: 22
         enabled: true
         onPressed: {
-            mydataFresh.buttonOpenFolderClick("\\Content_resource\\OB整机\\数据保存\\");
+            mydataFresh.buttonOpenFolderClick("\\Content_resource\\IMU模组\\数据保存\\");
         }
     }
 
     Image {
         id: refresh_button
-        source: "../Component/refresh.png"
+        source: "../../Component/refresh.png"
         x: 84
         y: 50
         height: 38
@@ -445,177 +573,4 @@ Page {
             }
         }
     }
-
-    Label {
-        id: textEdit_read_acc_X1
-        x: 579
-        y: 614
-        width: 80
-        height: 26
-        text: qsTr("0")
-        font.bold: true
-        font.pixelSize: 30
-    }
-
-    Label {
-        id: textEdit_read_acc_Y1
-        x: 579
-        y: 660
-        width: 86
-        height: 26
-        text: qsTr("0")
-        font.bold: true
-        font.pixelSize: 30
-    }
-
-    Label {
-        id: textEdit_read_acc_Z1
-        x: 579
-        y: 707
-        width: 91
-        height: 33
-        text: qsTr("0")
-        font.bold: true
-        font.pixelSize: 30
-    }
-
-    Label {
-        id: label_read_acc_X1
-        x: 17
-        y: 15
-        width: 122
-        height: 26
-        text: qsTr("X轴分量Gx：")
-        anchors.verticalCenterOffset: 87
-        font.bold: true
-        anchors.horizontalCenterOffset: -480
-        anchors.centerIn: parent
-        font.pixelSize: 30
-    }
-
-    Label {
-        id: label_read_acc_Y1
-        x: 13
-        y: 19
-        width: 120
-        height: 32
-        text: qsTr("Y轴分量Gy：")
-        anchors.verticalCenterOffset: 136
-        font.bold: true
-        anchors.horizontalCenterOffset: -481
-        anchors.centerIn: parent
-        font.pixelSize: 30
-    }
-
-    Label {
-        id: label_read_acc_Z1
-        x: 7
-        y: 11
-        width: 120
-        height: 24
-        text: qsTr("Z轴分量Gz：")
-        anchors.verticalCenterOffset: 179
-        font.bold: true
-        anchors.horizontalCenterOffset: -481
-        anchors.centerIn: parent
-        font.pixelSize: 30
-    }
-
-    Label {
-        id: label_read_acc_X2
-        x: 2
-        y: -2
-        width: 122
-        height: 26
-        text: qsTr("加速度计：")
-        anchors.verticalCenterOffset: 46
-        font.bold: true
-        anchors.horizontalCenterOffset: -804
-        anchors.centerIn: parent
-        font.pixelSize: 30
-    }
-
-    Label {
-        id: label_read_acc_X3
-        x: 9
-        y: -1
-        width: 122
-        height: 26
-        text: qsTr("陀螺仪：")
-        anchors.verticalCenterOffset: 46
-        font.bold: true
-        anchors.horizontalCenterOffset: -480
-        anchors.centerIn: parent
-        font.pixelSize: 30
-    }
-
-    Button {
-        id: button_cal_acc
-        x: 95
-        y: 867
-        width: 133
-        height: 80
-        text: qsTr("传感器\n校准")
-        font.bold: true
-        font.pointSize: 22
-
-        onClicked:
-        {
-            myclassExposeByRegType.sendCMD("01", "808080800800", "0000000000000000");
-        }
-    }
-
-    Slider {
-        id: sliderspeed1
-        x: 84
-        y: 809
-        width: 626
-        height: 40
-        stepSize: 1
-        to: 25
-        from: -25
-        value: 0
-
-    }
-    Label {
-        id: label5
-        x: 95
-        y: 773
-        width: 325
-        height: 30
-        text: qsTr("实验平台角度：") + sliderspeed1.value + qsTr(" °")
-        font.pixelSize: 30
-        font.bold: true
-    }
-
-    Button {
-        id: buttonstartwork
-        x: 271
-        y: 867
-        width: 123
-        height: 80
-        text: qsTr("实验平台\n角度设置")
-        font.bold: true
-        font.pointSize: 22
-        onClicked: {
-            myclassExposeByRegType.setPlatformRollAngle(-sliderspeed1.value.toLocaleString(), 15);
-
-        }
-    }
-
-    Button {
-        id: button3
-        x: 437
-        y: 867
-        width: 123
-        height: 80
-        text: qsTr("实验平台\n复位")
-        font.bold: true
-        font.pointSize: 22
-        onClicked: {
-            myclassExposeByRegType.setPlatformRollAngle(0, 20);
-            sliderspeed1.value = 0;
-        }
-    }
-
 }

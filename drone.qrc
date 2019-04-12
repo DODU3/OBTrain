@@ -23,5 +23,7 @@
         <file>Drone/DronePage/DroneInfoPage.qml</file>
         <file>Drone/DronePage/DroneProjectDevelopPage.qml</file>
         <file>test.js</file>
+        <file>Drone/DronePage/DRONE2D.qml</file>
+        <file>Drone/DronePage/DRONEHEADING.qml</file>
     </qresource>
 </RCC>

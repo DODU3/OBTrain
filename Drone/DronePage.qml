@@ -8,6 +8,7 @@
 import QtQuick 2.8
 import QtQuick.Controls 2.1
 
+import RegisterMyType 1.0
 
 Page {
 
@@ -43,6 +44,7 @@ Page {
             }
 
             onClicked: {
+                myclassExposeByRegType.setCurrentPage(7);//打开无人机整机界面
                 page1.visible = true;
                 page1.stack = stack;
                 stack.push(page1)
@@ -149,7 +151,12 @@ Page {
 
     }
 
-    DroneGuide {
+    MyClassType
+    {
+        id:myclassExposeByRegType
+    }
+
+    DroneControl {
         id: page1
         visible: false
     }

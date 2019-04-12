@@ -206,7 +206,7 @@ Item {
             //Timer for demo rotation of compass
 
             interval: 100
-            running: true
+            running: false//true
             repeat: true
 
             onTriggered: {

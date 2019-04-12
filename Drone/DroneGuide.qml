@@ -44,6 +44,7 @@ Page {
             stack.pop();
             pageDrone.stack = stack;
             stack.push(pageDrone);
+            myclassExposeByRegType.setCurrentPage(7);//打开无人机整机界面
         }
     }
 

@@ -16,7 +16,7 @@ Item {
         id: plane2d
 
         x: 40
-        y: 0
+        y: 28
         width: 320
         height: 320
 
@@ -42,24 +42,27 @@ Item {
         onTriggered: {
 //            imu2dimage.x = 175 + myclassExposeByRegType.getOffsetX();
 //            imu2dimage.y = 175 + myclassExposeByRegType.getOffsetY();
-            imuRotation.angle = myclassExposeByRegType.getAngleYawNum();
-            yawtext.text = myclassExposeByRegType.getAngleYaw();
+            if(myclassExposeByRegType.getCurrentPage() === 7)
+            {
+                imuRotation.angle = myclassExposeByRegType.getAngleYawNum();
+                yawtext.text = myclassExposeByRegType.getAngleYaw();
+            }
             //            console.log(myclassExposeByRegType.getOffsetX(), myclassExposeByRegType.getOffsetY());
         }
     }
 
     Text {
         id: element
-        x: 86
-        y: 342
+        x: 119
+        y: 362
         text: qsTr("偏航角：")
         font.pixelSize: 30
     }
 
     Text {
         id: yawtext
-        x: 212
-        y: 342
+        x: 245
+        y: 362
         text: qsTr("0°")
         font.pixelSize: 30
     }

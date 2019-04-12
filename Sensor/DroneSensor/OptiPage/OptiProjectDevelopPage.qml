@@ -5,7 +5,7 @@ import QtQuick.Controls 2.2
 import RegisterSystemOpen 1.0
 
 ApplicationWindow {
-    id: magprojectdeveloppage
+    id: optiprojectdeveloppage
     x: 0
     y: 0
     width: 480
@@ -15,7 +15,7 @@ ApplicationWindow {
     maximumWidth:480
     minimumWidth:480
 
-    title: "磁力计-工程实例"
+    title: "光流-工程实例"
 
     background: Image {
         source: "../../../images/background.png"
@@ -29,10 +29,11 @@ ApplicationWindow {
         font.bold: true
         font.pointSize: 20
 
-        onPressed:
+        onClicked:
         {
-            mySystemOpenReg.openFile("/Content_resource/磁力计模组/Demo_Project/Drone_Templates/Projects/Project.uvprojx");
+            mySystemOpenReg.openFile("/Content_resource/光流模组/Demo_Project/Drone_Templates/Projects/Project.uvprojx");
         }
+
     }
 
 
@@ -48,10 +49,9 @@ ApplicationWindow {
         text: qsTr("开发操作视频")
         font.bold: true
         font.pointSize: 20
-
-            onPressed: {
-                mySystemOpenReg.openFile("/Content_resource/磁力计模组/教学资料/教学视频/开发操作视频.mp4");
-            }
+        onPressed: {
+            mySystemOpenReg.openFile("/Content_resource/光流模组/教学资料/教学视频/开发操作视频.mp4");
+        }
     }
 
 }

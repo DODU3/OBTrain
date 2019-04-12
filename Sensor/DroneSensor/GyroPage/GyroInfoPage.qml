@@ -4,7 +4,7 @@ import QtQuick.Controls 2.2
 import RegisterSystemOpen 1.0
 
 ApplicationWindow {
-    id: magInfoPage
+    id: gyroInfoPage
     x: 0
     y: 0
     width: 600
@@ -14,7 +14,7 @@ ApplicationWindow {
     maximumWidth:600
     minimumWidth:600
 
-    title: "磁力计-教学资料"
+    title: "陀螺仪-教学资料"
 
     background: Image {
         source: "../../../images/background.png"
@@ -28,11 +28,10 @@ ApplicationWindow {
         font.bold: true
         font.pointSize: 20
 
-        onPressed:
+        onClicked:
         {
-            mySystemOpenReg.openFile("/Content_resource/磁力计模组/教学资料/教学PPT/磁力计模组PPT.ppt");
+            mySystemOpenReg.openFile("/Content_resource/陀螺仪模组/教学资料/教学PPT/陀螺仪模组PPT.ppt");
         }
-
     }
 
 
@@ -50,7 +49,7 @@ ApplicationWindow {
         font.pointSize: 20
 
             onPressed: {
-                mySystemOpenReg.openFile("/Content_resource/磁力计模组/教学资料/教学视频");
+                mySystemOpenReg.openFile("/Content_resource/陀螺仪模组/教学资料/教学视频");
             }
     }
 
@@ -63,8 +62,9 @@ ApplicationWindow {
             font.pointSize: 20
 
                 onPressed: {
-                    mySystemOpenReg.openFile("/Content_resource/磁力计模组/教学资料/其他资料");
+                    mySystemOpenReg.openFile("/Content_resource/陀螺仪模组/教学资料/其他资料");
                 }
+
         }
 
 }

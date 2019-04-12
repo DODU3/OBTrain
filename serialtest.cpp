@@ -10,8 +10,9 @@
 #include <QPointF>
 #include <QTimer>
 #include <QtCore>
-
+#include<stdlib.h>
 #include <math.h>
+#include <QThread>
 
 SerialTest::Settings currentsetting;//定义设定值结构体的结构体变量
 QSerialPort *serialtest;
@@ -45,20 +46,46 @@ static bool serialDrawClearFlagIMU = false;
 static bool serialDrawClearFlagDrone = false;
 static bool serialDrawClearFlagBaro = false;
 
-static QTimer timerSend;
+//static QTimer timerSend;
 static bool SerialTestInited = false;
 static double currentLon = 0, currentLat = 0;
 static int currentNorthSpeed = 0, currentEastSpeed = 0, currentSatelliteNum = 0, currentHdop = 0;
-//static QThread * threadSerialPort;
+static QThread * threadSerialPort;
 
 static int ACCX = 0, ACCY = 0, ACCZ = 0, GYROX = 0, GYROY = 0, GYROZ = 0;
+static double Angle_Acc_X = 0, Angle_Acc_Y;
+
+static int Heigth_Ultrasonic_lowpass = 0, Heigth_Ultrasonic_nofliter = 0;
+static double Heigth_Ultrasonic_time = 0;
+static double Heigth_Ultrasonic_alpha = 0;
+
 static double anglepitch = 0, angleroll = 0, angleyaw = 0;
 static double altitude = 0;
+static int TIMEcnt = 0;
+static int TIMEINT = 0;
 
-static int pressure = 0, height = 0;
-static double temperature = 0;
+static int pressureRaw = 0, pressureFilter = 0;
+static int slideDepth = 8;
+static int pressureHeight = 0;
+
+static int opticalflowspeedx = 0, opticalflowspeedy = 0;
+static int opticalflowsumx = 0, opticalflowsumy = 0;
 
 static bool serialSendRequest = true;
+
+static int flag_currentPage = 0;//标识符，指示当前页面序号
+//1：加速度计模组界面
+//2：陀螺仪模组界面
+//3：GPS模组界面
+//4：气压计模组界面
+//5：超声波模组界面
+//6：电子罗盘模组界面
+//7：无人机整机界面
+//8：人脸识别界面
+//9：人形跟随界面
+//10：姿态识别界面
+//11：光流
+
 
 SerialTest::SerialTest(QSerialPort *parent):
     QSerialPort (parent),
@@ -70,11 +97,11 @@ SerialTest::SerialTest(QSerialPort *parent):
     {
         SerialTestInited = true;
 
-        serialtest = new SerialTest;
+        serialtest = new QSerialPort;
 //    QTimer *timerSend = new QTimer(this);
-        timerSend.setInterval(50);
-        timerSend.setTimerType(Qt::TimerType::PreciseTimer);
-        QObject::connect(&timerSend, SIGNAL(timeout()), this, SLOT(timersendtimeout()));
+//        timerSend.setInterval(50);
+//        timerSend.setTimerType(Qt::TimerType::PreciseTimer);
+//        QObject::connect(&timerSend, SIGNAL(timeout()), this, SLOT(timersendtimeout()));
         QObject::connect(serialtest, SIGNAL(readyRead()),this, SLOT(receivefrom()));//将端口收到数据产生的信号绑定receivefrom()函数;
 //        threadSerialPort = new QThread(this);
 //        serialtest->moveToThread(threadSerialPort);
@@ -145,6 +172,7 @@ void SerialTest::openAndSetPort(QString PortName,
                 && serialtest->setFlowControl(currentsetting.flowControl))
         {
             std::cout<<"set sucess"<<std::endl;
+//            threadSerialPort->start();
         }
 
         serialDrawClearFlagMag = true;
@@ -153,14 +181,16 @@ void SerialTest::openAndSetPort(QString PortName,
         serialDrawClearFlagBaro = true;
         serialOpenFlag = true;
         clearSerialDataAll();
-        timerSend.start();
+        QString pagenumber = QString("%1").arg(flag_currentPage, 2, 16, QLatin1Char( '0' ));
+        sendCMD("2c", "808080800800", pagenumber+"00000000000000");
+//        timerSend.start();
     }
 }
 
 
 void SerialTest::getPortInfo()
 {
-//    m_portInfo.clear();
+    m_portInfo.clear();
     const auto infos = QSerialPortInfo::availablePorts();
     for (const QSerialPortInfo &info : infos){
         std::cout<<" port name" + info.portName().toStdString()<<std::endl;
@@ -261,11 +291,106 @@ void SerialTest::setRFaddr(QString addr1,QString addr2,QString addr3,QString cha
     sendCMD("29", "808080800800", command);
 }
 
+
+void SerialTest::setCurrentPage(int current_page)
+{
+    flag_currentPage=current_page;
+}
+
+int SerialTest::getCurrentPage(void)
+{
+    return flag_currentPage;
+}
+
+
+
+
+void SerialTest::setUltrasonicLowpassfliter(QString value_freq,QString value_confficent)
+{
+
+    QString command = "";
+    QString strvalue_freq;
+    QString stvalue_confficent;
+
+    bool ok;
+    int dec;
+    float temp_float;
+
+    dec=value_freq.toInt(&ok,10);
+    if(0!=dec)
+    {
+        dec=1000/dec;//转换为周期，单位是ms
+        if(dec>1000)
+        {
+            dec=1000;
+        }
+        else if(dec<10)
+        {
+            dec=10;
+        }
+    }
+    else {
+        dec=50;
+    }
+    strvalue_freq = QString("%1").arg(dec, 4, 16, QLatin1Char( '0' ));
+
+
+    temp_float=value_confficent.toFloat();
+//    temp_float=value_confficent.toDouble();
+    temp_float=temp_float*10000;
+    dec=temp_float;
+    if(dec>9999)
+    {
+        dec=9999;
+    }
+    else if(dec<1)
+    {
+        dec=1;
+    }
+
+    stvalue_confficent = QString("%1").arg(dec, 4, 16, QLatin1Char( '0' ));
+    command += strvalue_freq;
+    command += stvalue_confficent;
+    command += "0000000000";
+
+//    std::cout<<" value" + command.toStdString()<<std::endl;
+    sendCMD("2e", "808080800800", command);
+}
+
+void SerialTest::setLabAngle(QString angle_Roll,QString angle_Yaw)
+{
+
+//    QString command = "ff55000000000000280000";
+
+    QString command = "0000";
+    QString strangle_Roll;
+    QString strangle_Yaw;
+
+    bool ok;
+    int dec;
+
+    dec=angle_Roll.toInt(&ok,10); //dec=255 ; ok=rue
+    strangle_Roll = QString("%1").arg(dec, 4, 16, QLatin1Char( '0' ));
+    dec=angle_Yaw.toInt(&ok,10); //dec=255 ; ok=rue
+    strangle_Yaw = QString("%1").arg(dec, 4, 16, QLatin1Char( '0' ));
+    if(strangle_Roll.length() >4){
+        command += strangle_Roll.mid(12,4);
+    }else{
+        command += strangle_Roll;
+    }
+    command += strangle_Yaw;
+    command += "000000";
+
+//    std::cout<<" value" + command.toStdString()<<std::endl;
+    sendCMD("28", "808080800800", command);
+}
+
+
 void SerialTest::setMagCorner(int yawValue,int rollValue)
 {
     QString yaw = QString("%1").arg(yawValue, 4, 16, QLatin1Char( '0' ));
     QString roll = QString("%1").arg(rollValue, 4, 16, QLatin1Char( '0' ));
-//    QString command = "ff55000000000000280000";
+//    QString command = "ff55000020000000280000";
     QString command = "0000";
     if(roll.length() >4){
         command += roll.mid(12,4);
@@ -278,12 +403,92 @@ void SerialTest::setMagCorner(int yawValue,int rollValue)
     command += "000000";
 
 //    std::cout<<" value" + command.toStdString()<<std::endl;
-
 //    sendto(command);
     sendCMD("28", "808080800800", command);
 
 }
 
+
+void SerialTest::setPlatformYawAngle(int yawValue,int yawRateValue)
+{
+    QString yaw = QString("%1").arg(yawValue, 4, 16, QLatin1Char( '0' ));
+    QString yawrate = QString("%1").arg(yawRateValue, 2, 16, QLatin1Char( '0' ));
+    QString command1 = "0000";
+
+    command1 += yawrate;
+
+    command1 += "000000";
+
+    QString command2 = "00000000";
+
+    command2 += yaw;
+    command2 += "0000";
+
+//    std::cout<<" value" + command2.toStdString()<<std::endl;
+
+//    sendto(command);
+    sendCMD("28", command1, command2);
+
+}
+
+void SerialTest::setPlatformRollAngle(int rollValue,int rollRateValue)
+{
+    QString roll = QString("%1").arg(rollValue, 4, 16, QLatin1Char( '0' ));
+    QString rollrate = QString("%1").arg(rollRateValue, 2, 16, QLatin1Char( '0' ));
+    QString command1 = "00";
+
+    command1 += rollrate;
+
+    command1 += "00000000";
+
+    QString command2 = "0000";
+
+    if(roll.length() >4){
+        command2 += roll.mid(12,4);
+    }else{
+        command2 += roll;
+
+    }
+    command2 += "00000000";
+
+//    std::cout<<" value" + command2.toStdString()<<std::endl;
+
+//    sendto(command);
+    sendCMD("28", command1, command2);
+
+}
+
+void SerialTest:: setBaroSlideDepth(int slidedepth)
+{
+    QString yawrateStr = QString("%1").arg(slidedepth, 2, 16, QLatin1Char( '0' ));
+    QString command1 = "808080800800";
+
+    QString command2 = "";
+
+    command2 += yawrateStr;
+    command2 += "00000000000000";
+
+//    std::cout<<" value" + command.toStdString()<<std::endl;
+
+//    sendto(command);
+    sendCMD("31", command1, command2);
+}
+
+void SerialTest:: setOptDistance(int distance)
+{
+    QString distanceStr = QString("%1").arg(distance, 2, 16, QLatin1Char( '0' ));
+    QString command1 = "808080800800";
+
+    QString command2 = "";
+
+    command2 += distanceStr;
+    command2 += "00000000000000";
+
+//    std::cout<<" value" + command.toStdString()<<std::endl;
+
+//    sendto(command);
+    sendCMD("30", command1, command2);
+}
 
 QStringList SerialTest:: receivePort()
 {
@@ -314,34 +519,35 @@ void SerialTest::sendto(QString sendmessage)//此函数由qml里的send按钮触
     }
 }
 
-static int CMDsendtime = 0;
+//static int CMDsendtime = 0;
 static QString CMDFormat;
 
 void SerialTest::sendCMD(QString cmd, QString data1, QString data2){
 
     CMDFormat = "ff55" + data1.mid(0,12) + cmd.mid(0,2) + data2.mid(0,16);
 
-//    qDebug() << CMDFormat;
+    qDebug() << CMDFormat;
     addSerialDataAll("Tx:" + CMDFormat);
 
 //    CMDFormat = QByteArray::fromHex(value.toLatin1());
 
-    CMDsendtime = 5;
+//    CMDsendtime = 1;
+    sendto(CMDFormat);
 
 }
 
 void SerialTest::timersendtimeout(void){
 //    QTime currentTime = QTime::currentTime();
 //    qDebug() << currentTime;
-    if(CMDsendtime <= 0){
-        if(true == serialSendRequest){
-            sendto("ff5580808080080000000000000000000000");
-        }
-    }
-    else{
-        CMDsendtime--;
-        sendto(CMDFormat);
-    }
+//    if(CMDsendtime <= 0){
+//        if(true == serialSendRequest){
+//            sendto("ff5580808080080000000000000000000000");
+//        }
+//    }
+//    else{
+//        CMDsendtime--;
+//        sendto(CMDFormat);
+//    }
 }
 
 void SerialTest::setsendnumber(QString sendnumber)//更新发送的数据字节总数，触发sendnumberChanged()的消息响应函数sendnumber()来更新显示
@@ -361,12 +567,13 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
     QByteArray data = serialtest->readAll();//读取所有收到的数据
 
     QString receivedata=data.toHex();//将QByteArray转为QString来显示
-
+//    qDebug() << receivedata;
     QString subString = receivedata.mid(0,4);
 
     QDateTime currentTime = QDateTime::currentDateTime();
-    QString qs_currenttime = currentTime.toString("hh:mm:ss.zzz");
+    QString qs_currenttime = currentTime.toString("ss.zzz");
 //    qDebug() << qs_currenttime;
+
 
     bool ok = false;
 
@@ -391,12 +598,16 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
             mag_y= y;
             mag_z = z;
 
-            addserialSaveAndApp(qs_currenttime + ":  " +
-                                QString::number(corner) + ";  " +
-                                QString::number(x) + ";  " +
-                                QString::number(y) + ";  " +
-                                QString::number(z) + ";  ");
-           // qDebug() << corner << "  " << x << "  " << y << "  " << z << "  ";
+            if(6==flag_currentPage)
+            {
+                addserialSaveAndApp( "MxMyMz: " +
+                                    QString::number(corner,'f',1) + " " +
+                                    QString::number(x) + " " +
+                                    QString::number(y) + " " +
+                                    QString::number(z) + " ");
+                           // qDebug() << corner << "  " << x << "  " << y << "  " << z << "  ";
+            }
+
             if(ok && corner != mag_corner){
                 mag_corner = corner;
                 if(mag_corner <= 21 || mag_corner >= 338 ){
@@ -460,15 +671,16 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
             currentHdop  = receivedata.mid(32,4).toInt(&ok, 16);
 //            QDateTime currentTime = QDateTime::currentDateTime();
 //            QString qs_currenttime = currentTime.toString("hh:mm:ss.zzz");
-            addserialSaveAndApp(qs_currenttime + ":  " +
-                                getCurrentLon() + ";  " +
-                                getCurrentLat() + ";  " +
-                                getCurrentSN() + ";  " +
-                                getCurrentNS() + ";  " +
-                                getCurrentES() + ";  " +
-                                getCurrentHDOP() + ";  ");//            qDebug() << (QString::number(currentLon) + "," + QString::number(currentLat) + "," +QString::number(currentEastSpeed)
-//                         +"," +QString::number(currentNorthSpeed) + "," +QString::number(currentSatelliteNum) + "," +QString::number(currentHdop));
-//            qDebug() << (1<<15);
+
+//            if(3==flag_currentPage)
+//            {
+//                addserialSaveAndApp("GPS_Data: " +
+//                                getCurrentLon() + " " +
+//                                getCurrentLat() + " ");
+//                //            qDebug() << (QString::number(currentLon) + "," + QString::number(currentLat) + "," +QString::number(currentEastSpeed)
+////                         +"," +QString::number(currentNorthSpeed) + "," +QString::number(currentSatelliteNum) + "," +QString::number(currentHdop));
+////            qDebug() << (1<<15);
+//            }
         }else if(receivedata.mid(28,2) == "02")
         {
             //接收到IMU模组数据模块1
@@ -486,6 +698,22 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
             if(ACCZ >= u16half){
                 ACCZ -= u16;
             }
+
+            float temp;
+            temp=atan((double)ACCX/sqrtf(ACCY*ACCY+ACCZ*ACCZ))*180/3.1415926;
+            temp-=Angle_Acc_X;
+            if(temp>0.2||temp<-0.2)
+            {
+                Angle_Acc_X+=temp;
+            }
+            temp=atan((double)ACCY/sqrtf(ACCX*ACCX+ACCZ*ACCZ))*180/3.1415926;
+            temp-=Angle_Acc_Y;
+            if(temp>0.2||temp<-0.2)
+            {
+
+                Angle_Acc_Y+=temp;
+            }
+
             GYROX = receivedata.mid(16,4).toInt(&ok, 16);
             if(GYROX >= u16half){
                 GYROX -= u16;
@@ -498,20 +726,59 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
             if(GYROZ >= u16half){
                 GYROZ -= u16;
             }
-            addserialSaveAndApp(qs_currenttime + ":  " +
-                                QString::number(ACCX) + ";  " +
-                                QString::number(ACCY) + ";  " +
-                                QString::number(ACCZ) + ";  " +
-                                QString::number(GYROX) + ";  " +
-                                QString::number(GYROY) + ";  " +
-                                QString::number(GYROZ) + ";  ");//            qDebug() << (QString::number(currentLon) + "," + QString::number(currentLat) + "," +QString::number(currentEastSpeed)
 
-//            qDebug() << ACCX << ACCY << ACCZ << GYROX <<GYROY<<GYROZ;
+            if(0 == TIMEINT)
+            {
+                TIMEINT = receivedata.mid(32,4).toInt(&ok, 16);
+            }
+            TIMEcnt = receivedata.mid(32,4).toInt(&ok, 16) - TIMEINT;
+            if(1==flag_currentPage)
+            {
+                addserialSaveAndApp("AxAyAz; " +
+                                    QString::number((double)ACCX/512,'f',4) + "  " +
+                                    QString::number((double)ACCY/512,'f',4) + "  " +
+                                    QString::number((double)ACCZ/512,'f',4) + "  " );
+                //            qDebug() << (QString::number(currentLon) + "," + QString::number(currentLat) + "," +QString::number(currentEastSpeed)
 
+
+            }
+            else if(2==flag_currentPage){
+                addserialSaveAndApp(QString::number(TIMEcnt*0.05,'f',2)/*qs_currenttime*/ + ";  " +
+                                    QString::number(GYROZ* 0.061035,'f',6) + ";  ");
+                //            qDebug() << (QString::number(currentLon) + "," + QString::number(currentLat) + "," +QString::number(currentEastSpeed)
+            }
+
+
+
+        }
+        else if(receivedata.mid(28,2) == "08")
+        {
+            //接收到超声波模组数据
+            int u16half = 1 << 15;
+            int u16 = 1 << 16;
+            Heigth_Ultrasonic_nofliter = receivedata.mid(4,4).toInt(&ok, 16);
+            if(Heigth_Ultrasonic_nofliter >= u16half){
+                Heigth_Ultrasonic_nofliter = 1;
+            }
+
+            Heigth_Ultrasonic_lowpass = receivedata.mid(8,4).toInt(&ok, 16);
+            if(Heigth_Ultrasonic_lowpass >= u16half){
+                Heigth_Ultrasonic_lowpass = 1;
+            }
+            Heigth_Ultrasonic_time = Heigth_Ultrasonic_lowpass/170.0;// / 340 * 2
+
+            Heigth_Ultrasonic_alpha = receivedata.mid(16,4).toInt(&ok, 16) / 10000.0;
+
+            if(5==flag_currentPage)
+            {
+                addserialSaveAndApp("Ultrasonic_Data: " +
+                                getHeigth_Ultrasonic_nofliter() + " " +
+                                getHeigth_Ultrasonic_lowpass());
+//            qDebug() << Heigth_Ultrasonic_nofliter << Heigth_Ultrasonic_lowpass;
+            }
         }
         else if(receivedata.mid(28,2) == "03")
         {
-
             //接收到IMU模组数据模块2
             int u16half = 1 << 15;
             int u16 = 1 << 16;
@@ -530,12 +797,14 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
                 angleyaw -= u16;
             }
             angleyaw = (angleyaw/10.0 - 180);
-            addserialSaveAndApp(qs_currenttime + ":  " +
-                                getAnglePitch() + ";  " +
-                                getAngleRoll() + ";  " +
-                                getAngleYaw() + ";  ");//            qDebug() << (QString::number(currentLon) + "," + QString::number(currentLat) + "," +QString::number(currentEastSpeed)
+
+//            addserialSaveAndApp(qs_currenttime + ";  " +
+//                                getAnglePitch() + ";  " +
+//                                getAngleRoll() + ";  " +
+//                                getAngleYaw() + ";  ");//            qDebug() << (QString::number(currentLon) + "," + QString::number(currentLat) + "," +QString::number(currentEastSpeed)
 //            qDebug() << anglepitch << angleroll << angleyaw;
         }
+
         else if(receivedata.mid(28,2) == "00")
         {
             //接收到无人机整机数据帧
@@ -556,8 +825,6 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
                 angleyaw+=360;
 
             }
-
-//            angleyaw = (angleyaw/10.0 - 180);
 
             temp=receivedata.mid(30,2).toInt(&ok, 16);
             if(temp==1)
@@ -592,11 +859,73 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
 //                angleyaw = (angleyaw/10.0 - 180);
 //            }
 
-            addserialSaveAndApp(qs_currenttime + ":  " +
-                                        getAnglePitch() + ";  " +
-                                        getAngleRoll() + ";  " +
-                                        getAngleYaw() + ";  ");//            qDebug() << (QString::number(currentLon) + "," + QString::number(currentLat) + "," +QString::number(currentEastSpeed)
+            if(7==flag_currentPage)
+            {
+            addserialSaveAndApp("Drone_Data:" +
+                                        getAnglePitch() + " " +
+                                        getAngleRoll() + " " +
+                                        getAngleYaw() + " ");//            qDebug() << (QString::number(currentLon) + "," + QString::number(currentLat) + "," +QString::number(currentEastSpeed)
         //            qDebug() << anglepitch << angleroll << angleyaw;
+            }
+        }
+
+        else if(receivedata.mid(28,2) == "0b")
+        {
+            //无人机整机实验设计数据
+            int u16half = 1 << 15;
+            int u16 = 1 << 16;
+            ACCX = receivedata.mid(4,4).toInt(&ok, 16);
+            if(ACCX >= u16half){
+                ACCX -= u16;
+            }
+            ACCY = receivedata.mid(8,4).toInt(&ok, 16);
+            if(ACCY >= u16half){
+                ACCY -= u16;
+            }
+            ACCZ = receivedata.mid(12,4).toInt(&ok, 16);
+            if(ACCZ >= u16half){
+                ACCZ -= u16;
+            }
+
+            float temp;
+            temp=atan((double)ACCX/sqrtf(ACCY*ACCY+ACCZ*ACCZ))*180/3.1415926;
+            temp-=Angle_Acc_X;
+            if(temp>0.2||temp<-0.2)
+            {
+                Angle_Acc_X+=temp;
+            }
+            temp=atan((double)ACCY/sqrtf(ACCX*ACCX+ACCZ*ACCZ))*180/3.1415926;
+            temp-=Angle_Acc_Y;
+            if(temp>0.2||temp<-0.2)
+            {
+
+                Angle_Acc_Y+=temp;
+            }
+
+            GYROX = receivedata.mid(16,4).toInt(&ok, 16);
+            if(GYROX >= u16half){
+                GYROX -= u16;
+            }
+            GYROY = receivedata.mid(20,4).toInt(&ok, 16);
+            if(GYROY >= u16half){
+                GYROY -= u16;
+            }
+            GYROZ = receivedata.mid(24,4).toInt(&ok, 16);
+            if(GYROZ >= u16half){
+                GYROZ -= u16;
+            }
+
+            if(7==flag_currentPage){
+                addserialSaveAndApp(/*"AxAyAzGxGyGz " +*/
+                                    QString::number(ACCX/512.0,'f',4) + "  " +
+                                    QString::number(ACCY/512.0,'f',4) + "  " +
+                                    QString::number(ACCZ/512.0,'f',4) + "  " +
+                                    QString::number(GYROX* 0.0001,'f',4) + "  " +
+                                    QString::number(GYROY* 0.0001,'f',4) + "  " +
+                                    QString::number(GYROZ* 0.0001,'f',4) + "  ");
+//                qDebug() <<  QString::number(ACCX/512.0,'f',4);
+                //            qDebug() << (QString::number(currentLon) + "," + QString::number(currentLat) + "," +QString::number(currentEastSpeed)
+            }
         }
         else if(receivedata.mid(28,2) == "04"){
             //气压计信息
@@ -605,23 +934,56 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
             int u16 = 1 << 16;
             long u32half = 1 << 31;
             long u32 = 1 << 32;
-            pressure = receivedata.mid(4,8).toInt(&ok, 16);
-            if(pressure >= (u32half)){
-                pressure -= u32;
+            pressureRaw = receivedata.mid(4,8).toInt(&ok, 16);
+            if(pressureRaw >= (u32half)){
+                pressureRaw -= u32;
             }
-            height = receivedata.mid(12,4).toInt(&ok, 16);
-            if(height >= u16half){
-               height -= u16;
+            pressureFilter = receivedata.mid(12,8).toInt(&ok, 16);
+            if(pressureFilter >= u32half){
+               pressureFilter -= u32;
             }
-            temperature = receivedata.mid(16,4).toInt(&ok, 16);
-            if(temperature >= u16half){
-               temperature -= u16;
+            slideDepth = receivedata.mid(20,2).toInt(&ok, 16);
+//            qDebug()<<(slideDepth);
+            pressureHeight = receivedata.mid(22,4).toInt(&ok, 16);
+            if(pressureHeight >= u16half){
+               pressureHeight -= u16;
             }
-            temperature /= 10.0;
-            addserialSaveAndApp(qs_currenttime + ":  " +
-                                        getPressure() + ";  " +
-                                        getHeight() + ";  " +
-                                        getTemperature() + ";  ");
+            if(4==flag_currentPage)
+            {
+                addserialSaveAndApp("Barometric_Data: " +
+                                        getpressureRaw() + " " +
+                                        getpressureFilter() + " ");
+            }
+        }
+        else if(receivedata.mid(28,2) == "09"){
+            //光流信息
+//            bool ok = false;
+            int u16half = 1 << 15;
+            int u16 = 1 << 16;
+            opticalflowspeedx = receivedata.mid(4,4).toInt(&ok, 16);
+            if(opticalflowspeedx >= (u16half)){
+                opticalflowspeedx -= u16;
+            }
+            opticalflowspeedy = receivedata.mid(8,4).toInt(&ok, 16);
+            if(opticalflowspeedy >= (u16half)){
+                opticalflowspeedy -= u16;
+            }
+            opticalflowsumx = receivedata.mid(12,4).toInt(&ok, 16);
+            if(opticalflowsumx >= (u16half)){
+                opticalflowsumx -= u16;
+            }
+            opticalflowsumy = receivedata.mid(16,4).toInt(&ok, 16);
+            if(opticalflowsumy >= (u16half)){
+                opticalflowsumy -= u16;
+            }
+            if(11==flag_currentPage)
+            {
+//                addserialSaveAndApp("OpticalFlow_Data: " +
+//                                    getopticalflowspeedx() + " " +
+//                                    getopticalflowspeedy() + " " +
+//                                    getopticalflowsumx() + " " +
+//                                    getopticalflowsumy() + " ");
+            }
         }
         else if(receivedata.mid(28,2) == "ff")
         {
@@ -654,10 +1016,10 @@ void SerialTest::receivefrom()//由readyRead()消息出发（在前边进行绑�
         }
 //        std::cout<<" receivedata" + receivedata.toStdString()<<std::endl;
         m_receivedata= receivedata;//将某次收到的数据进行累加，因为如果不累加的话每次有readyread就会触发此函数，会重置m_receivedata，覆盖之前收到的数据
-        if(receivedata.length() > 36){
-            receivedata = receivedata.mid(0, 36);
-        }
-        addSerialDataAll("Rx:" + receivedata);
+//        if(receivedata.length() > 36){
+//            receivedata = receivedata.mid(0, 36);
+//        }
+//        addSerialDataAll("Rx:" + receivedata);
         emit receivedataChanged();//发送消息触发receivedata()，更新当前收到的数据显示receivedata
 
         qint64 testreadnumber=data.length();//接收数据字节数统计
@@ -706,19 +1068,19 @@ qint64 SerialTest::getMagCorner()
     return mag_corner;
 }
 
-qint64 SerialTest::getMagX()
+QString SerialTest::getMagX()
 {
-    return mag_x;
+    return QString::number(mag_x);
 }
 
-qint64 SerialTest::getMagY()
+QString SerialTest::getMagY()
 {
-    return mag_y;
+    return QString::number(mag_y);
 }
 
-qint64 SerialTest::getMagZ()
+QString SerialTest::getMagZ()
 {
-    return mag_z;
+    return QString::number(mag_z);
 }
 
 qint64 SerialTest::getMagUser1()
@@ -826,8 +1188,16 @@ qreal SerialTest::getQpointFY(QPointF pointf){
     return pointf.y();
 }
 
-QString SerialTest::randomNumStr(int min, int max){
+QString SerialTest::randomNumStr(int min, int max, bool setseed){
+//    QTime t= QTime::currentTime();
+    if(setseed)
+    {
+        srand( (unsigned)time( 0 ) );
+    }
+//    sleep(200);
+//    qsrand(t.msec()+t.second()*1000);
     int Range = max - min;
+//    srand((unsigned int)time(NULL));
     int randa = rand();
     return QString::number((randa % Range) + min);
 }
@@ -900,12 +1270,75 @@ QString SerialTest::getAngleRoll(void){
     return QString::number(angleroll, 'f', 1);
 }
 
-
-
 QString SerialTest::getAngleYaw(void){
 //    qDebug() << angleyaw/10.0;
     return QString::number(angleyaw, 'f', 1);
 }
+
+QString SerialTest::getAccAngleX(void){
+    return QString::number(Angle_Acc_X, 'f', 1);
+}
+
+QString SerialTest::getAccAngleY(void){
+    return QString::number(Angle_Acc_Y, 'f', 1);
+}
+
+
+QString SerialTest::getAccX(void){
+    return QString::number((double)ACCX/512, 'f', 4);
+}
+QString SerialTest::getAccY(void){
+    return QString::number((double)ACCY/512, 'f', 4);
+}
+QString SerialTest::getAccZ(void){
+    return QString::number((double)ACCZ/512, 'f', 4);
+}
+
+QString SerialTest::getHeigth_Ultrasonic_lowpass(void){
+    return QString::number(Heigth_Ultrasonic_lowpass);
+}
+QString SerialTest::getHeigth_Ultrasonic_nofliter(void){
+    return QString::number(Heigth_Ultrasonic_nofliter);
+}
+
+QString SerialTest::getHeigth_Ultrasonic_time(void){
+    return QString::number(Heigth_Ultrasonic_time, 'f', 3);
+}
+
+QString SerialTest::getHeigth_Ultrasonic_alpha(void){
+    return QString::number(Heigth_Ultrasonic_alpha, 'f', 4);
+}
+
+QString SerialTest::getGgyrox(void){
+    if(7==flag_currentPage)
+    {
+        return QString::number(GYROX* 0.0001, 'f', 4);
+    }
+    else {
+        return QString::number(GYROX* 0.061035, 'f', 4);
+    }
+}
+
+QString SerialTest::getGgyroy(void){
+    if(7==flag_currentPage)
+    {
+        return QString::number(GYROY* 0.0001, 'f', 4);
+    }
+    else {
+        return QString::number(GYROY* 0.061035, 'f', 4);
+    }
+}
+
+QString SerialTest::getGgyroz(void){
+    if(7==flag_currentPage)
+    {
+        return QString::number(GYROZ* 0.0001, 'f', 4);
+    }
+    else {
+        return QString::number(GYROZ* 0.061035, 'f', 4);
+    }
+}
+
 
 double SerialTest::getAnglePitchNum(void){
 //    qDebug() << angleyaw/10.0;
@@ -941,34 +1374,83 @@ double SerialTest::getOffsetY(void){
 //    return (100 * sin(300.0/1800*3.141592654));
 }
 
+
+double SerialTest::getOffsetX_Acc(void){
+    return (100 * sin(Angle_Acc_X/180*3.141592654));
+//    return (100 * sin(300.0/1800*3.141592654));
+}
+
+double SerialTest::getOffsetY_Acc(void){
+//    qDebug() << sin(3.141592654/2);
+    return (100 * sin(Angle_Acc_Y/180*3.141592654));
+//    return (100 * sin(300.0/1800*3.141592654));
+}
+
 void SerialTest::setSerialSendRequest(bool TrueOrFalse)
 {
     serialSendRequest = TrueOrFalse;
 }
 
-QString SerialTest::getPressure(void){
-    return QString::number(pressure);
+QString SerialTest::getpressureRaw(void){
+    return QString::number(pressureRaw);
 }
 
-QString SerialTest::getHeight(void){
-    return QString::number(height);
+QString SerialTest::getpressureFilter(void){
+    return QString::number(pressureFilter);
 }
 
-QString SerialTest::getTemperature(void){
-    return QString::number(temperature, 'f', 1);
+QString SerialTest::getSlideDepth(void){
+    return QString::number(slideDepth);
+}
+QString SerialTest::getpressureHeight(void){
+    return QString::number(pressureHeight);
+}
+//QString SerialTest::getTemperature(void){
+//    return QString::number(temperature, 'f', 1);
+//}
+
+int SerialTest::getpressureRawNum(void){
+    return (pressureRaw);
 }
 
-int SerialTest::getPressureNum(void){
-    return (pressure);
+int SerialTest::getpressureFilterNum(void){
+    return (pressureFilter);
 }
 
-int SerialTest::getHeightNum(void){
-    return (height);
+//double SerialTest::getTemperatureNum(void){
+//    return (temperature);
+//}
+
+QString SerialTest::getopticalflowspeedx(void){
+    return QString::number(opticalflowspeedx);
 }
 
-double SerialTest::getTemperatureNum(void){
-    return (temperature);
+QString SerialTest::getopticalflowspeedy(void){
+    return QString::number(opticalflowspeedy);
 }
+
+QString SerialTest::getopticalflowsumx(void){
+    return QString::number(opticalflowsumx);
+}
+
+QString SerialTest::getopticalflowsumy(void){
+    return QString::number(opticalflowsumy);
+}
+
+void SerialTest::saveGPSData(void)
+{
+    if(3==flag_currentPage)
+    {
+        addserialSaveAndApp("GPS_Data: " +
+                        getCurrentLon() + " " +
+                        getCurrentLat() + " ");
+    }
+}
+
+void SerialTest::clearTIMESet(void){
+    TIMEINT = 0;
+}
+
 
 ////////////////////5.关闭端口//////////////////////////////
 void SerialTest::closePort()//由按钮出发
@@ -976,7 +1458,8 @@ void SerialTest::closePort()//由按钮出发
     serialtest->close();
     std::cout<<"close port sucess"<<std::endl;
     serialOpenFlag = false;
-    timerSend.stop();
+//    threadSerialPort->quit();
+//    timerSend.stop();
 }
 
 

@@ -102,16 +102,16 @@ Item {
         }
     }
 
-    FileDialog{
-        id: fileDialog
-        title: qsTr("文件保存")
-        nameFilters: "*.txt"
-        selectExisting: false
-        //fileMode: FileDialog.SaveFile
-        onAccepted: {
+//    FileDialog{
+//        id: fileDialog
+//        title: qsTr("文件保存")
+//        nameFilters: "*.txt"
+//        selectExisting: false
+//        //fileMode: FileDialog.SaveFile
+//        onAccepted: {
 
-        }
-    }
+//        }
+//    }
 
     MyDataFresh{
         id:mydataFresh

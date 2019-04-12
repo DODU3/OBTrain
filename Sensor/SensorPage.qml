@@ -38,6 +38,7 @@ Page {
             width: 250
             height: 250
             text: qsTr("无人机")
+            display: AbstractButton.IconOnly
 
             background: Image {
                 source: "images/Drone.png"
@@ -58,6 +59,7 @@ Page {
             width: 250
             height: 250
             text: qsTr("物联网")
+            display: AbstractButton.IconOnly
 
             background: Image {
                 source: "images/Iot.png"
@@ -77,6 +79,7 @@ Page {
             width: 250
             height: 250
             text: qsTr("机器人")
+            display: AbstractButton.IconOnly
 
             background: Image {
                 source: "images/Robot.png"
@@ -96,6 +99,7 @@ Page {
             width: 250
             height: 250
             text: qsTr("视觉语音")
+            display: AbstractButton.IconOnly
             transformOrigin: Item.Center
 
             background: Image {
@@ -107,6 +111,42 @@ Page {
                 page4.stack = stack;
                 stack.push(page4)
             }
+        }
+
+        Text {
+            id: element1
+            x: 610
+            y: 793
+            text: qsTr("机器人")
+            font.pixelSize: 40
+            font.bold: true
+        }
+
+        Text {
+            id: element2
+            x: 1218
+            y: 793
+            text: qsTr("视觉语音")
+            font.pixelSize: 40
+            font.bold: true
+        }
+
+        Text {
+            id: element3
+            x: 1244
+            y: 410
+            text: qsTr("物联网")
+            font.pixelSize: 40
+            font.bold: true
+        }
+
+        Text {
+            id: element4
+            x: 610
+            y: 401
+            text: qsTr("无人机")
+            font.pixelSize: 40
+            font.bold: true
         }
     }
 
@@ -132,7 +172,13 @@ Page {
         height: 1080
         visible: false
     }
+
+
 }
+
+
+
+
 
 
 

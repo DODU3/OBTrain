@@ -77,8 +77,11 @@ Item {
         running: true
         repeat: true
         onTriggered: {
-            label.text = myclassExposeByRegType.getMagCornerStr();
-            setBearing(myclassExposeByRegType.getMagCorner());
+            if(myclassExposeByRegType.getCurrentPage() === 6)
+            {
+                label.text = myclassExposeByRegType.getMagCornerStr();
+                setBearing(myclassExposeByRegType.getMagCorner());
+            }
         }
     }
 }

@@ -45,34 +45,34 @@ Item {
 
     Text {
         id: element2
-        x: 207
-        y: 362
-        text: qsTr("横滚角：")
-        font.pixelSize: 30
+        x: 203
+        y: 367
+        text: qsTr("Y轴夹角：")
+        font.pixelSize: 25
     }
 
     Text {
         id: rolltext
-        x: 317
-        y: 362
+        x: 313
+        y: 367
         text: qsTr("0°")
-        font.pixelSize: 30
+        font.pixelSize: 25
     }
 
     Text {
         id: element
-        x: 15
-        y: 362
-        text: qsTr("俯仰角：")
-        font.pixelSize: 30
+        x: 8
+        y: 365
+        text: qsTr("X轴夹角：")
+        font.pixelSize: 25
     }
 
     Text {
         id: pitchtext
-        x: 124
-        y: 362
+        x: 118
+        y: 366
         text: qsTr("0°")
-        font.pixelSize: 30
+        font.pixelSize: 25
     }
 
     Timer{
@@ -82,12 +82,19 @@ Item {
         running: true
 
         onTriggered: {
-            imu2dimage.x = 175 + myclassExposeByRegType.getOffsetX();
-            imu2dimage.y = 175 + myclassExposeByRegType.getOffsetY();
-            pitchtext.text = myclassExposeByRegType.getAnglePitch();
-            rolltext.text = myclassExposeByRegType.getAngleRoll();
-//            imuRotation.angle = myclassExposeByRegType.getAngleYaw();
-//            console.log(myclassExposeByRegType.getOffsetX(), myclassExposeByRegType.getOffsetY());
+//            imu2dimage.x = 175 + myclassExposeByRegType.getOffsetX();
+//            imu2dimage.y = 175 + myclassExposeByRegType.getOffsetY();
+//            pitchtext.text = myclassExposeByRegType.getAnglePitch();
+//            rolltext.text = myclassExposeByRegType.getAngleRoll();
+            if(myclassExposeByRegType.getCurrentPage() === 1)
+            {
+                //使用三轴加速计得到水平两轴的倾角
+                imu2dimage.x = 175 - myclassExposeByRegType.getOffsetX_Acc();
+                imu2dimage.y = 175 + myclassExposeByRegType.getOffsetY_Acc();
+                pitchtext.text = myclassExposeByRegType.getAccAngleX();
+                rolltext.text = myclassExposeByRegType.getAccAngleY();
+            }
+
         }
     }
 

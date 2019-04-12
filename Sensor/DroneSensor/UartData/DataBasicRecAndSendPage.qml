@@ -48,6 +48,7 @@ Item {
         interval: 500
         repeat: true
         triggeredOnStart: false
+        running: false
 
         onTriggered: {
 
@@ -56,7 +57,7 @@ Item {
         }
     }
 
-    Component.onCompleted: {
-        timer1.start();
-    }
+//    Component.onCompleted: {
+////        timer1.start();
+//    }
 }
